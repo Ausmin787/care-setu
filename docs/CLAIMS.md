@@ -37,7 +37,7 @@ or owner confirmation recorded as a D-entry. "It's in the deck" is not evidence.
 | C-020 | Languages supported: Hindi, English, Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada | Deck p.22 | — (only languages staff actually speak) | pending | — |
 | C-021 | Founder and co-founder bios and photos | Deck p.3–4 | Supplied by founders in their own deck | pending (confirm the text and photo consent for web use) | — |
 | C-022 | Brand tagline "Connecting Care. Empowering Lives." | Logo, deck | Owner's own brand line | approved | Brand |
-| C-023 | Logo mark (supplied JPEG, rebuilt as SVG) | Sasanka, 2026-09-23 | D-014 | pending (owner confirms reconstruction, Q4) | Brand |
+| C-023 | Logo mark (supplied JPEG, rebuilt as SVG) | Sasanka, 2026-09-23 | D-014; rebuilt and verified D-018 | pending (owner confirms reconstruction, Q4) | Brand |
 
 **Adding rows:** new copy that states a fact gets a row *before* it is written into a page.
 IDs are never reused.

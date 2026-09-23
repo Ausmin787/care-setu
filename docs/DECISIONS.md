@@ -153,7 +153,7 @@ In addition to Home, Services, About, Contact and Payments, Phase 1 includes:
 the brief's growth idea.
 **Rejected:** Keeping to exactly five pages (loses SEO and the partner channel the deck relies on).
 
-## D-014 · 2026-09-23 · Logo: hand-constructed SVG from the supplied JPEG, owner-confirmed
+## D-014 · 2026-09-23 · Logo: hand-constructed SVG from the supplied JPEG, owner-confirmed *(colour values partially superseded by D-018; the approach stands)*
 The canonical mark is the one Sasanka supplied (`brand/logo-source-whatsapp-2026-09-14.jpeg`,
 500×500 JPEG): a lime rounded square holding a four-arm cross (white, olive, blue pills) with a
 heart in a white centre, the "CARE SETU" wordmark and the tagline "CONNECTING CARE. EMPOWERING
@@ -248,3 +248,40 @@ prompts were not exercised (no commit or push was attempted); COMPLIANCE.md rows
 knowledge, not primary sources (each is marked for lawyer/CA verification).
 **Files:** everything listed above; `~/.claude/hooks/jev-skill-router.config.json`;
 `~/.claude/projects/C--Users-Sasanka/memory/{project_care_setu.md, MEMORY.md, project_tool_stack.md}`.
+
+## D-018 · 2026-09-23 · Logo rebuilt as vector and verified against the source *(partially supersedes D-014: colour values only)*
+The supplied logo is rebuilt as `brand/logo.svg` (lockup, text as outlines), `logo-mark.svg`
+(tile) and `logo-mono.svg` (a one-colour knockout **proposal**, not in the source). All three come
+from the reproducible generator `brand/build_logo.py`. `brand/verify_logo.py` re-checks them
+against the JPEG. Measured construction: two identical round-capped plus crosses (60-unit bars,
+80-unit reach), a white one behind offset 38 units left, and a coloured one in front with an olive
+heart in the white centre square. Full detail in `docs/BRAND.md`.
+**Colour values (supersede D-014's single-pixel samples):** lime `#9BCC3C` (was `#99CC3F`), olive
+`#6D9620`, blue `#0F8FCC`, wordmark `#138AB2` (was ≈`#0E8CB5`; a genuinely darker teal than the
+arms, exact value uncertain), tagline `#363636` (approximate). These are medians of eroded region
+interiors. Still provisional until the owners confirm (Q4).
+**Fonts:** wordmark most likely Open Sans Bold, +0.02 em. Tagline Open Sans, +0.288 em, weight
+assumed Regular. Open Sans is bundled in `brand/fonts/` under SIL OFL 1.1 with its licence.
+**Interpretation choices** (flagged for Q4): crosses clipped to the tile; text centred on the tile
+axis; heart centred on the front cross.
+**Size floor:** full mark ≥ 24 px. A 16 px favicon needs a simplified variant, which is left to the owners.
+Also added `.gitattributes` (LF line endings; the first commit warned of CRLF conversion).
+**Why:** D-014 asked for a clean vector that doesn't break when zoomed. Measuring from the pixels,
+rather than eyeballing, is what makes "faithful" checkable.
+**Rejected:** auto-trace (reproduces JPEG artifacts); Segoe UI or Arial for the wordmark (lower
+fit); keeping the source's off-centre text and the white cross spilling past the tile (flagged, not
+silently kept); an in-house 16 px favicon simplification (a design decision for the owners).
+**Verified:** headless-Chrome render on the source's 500×500 frame vs the JPEG, colour-class
+agreement on interior pixels. Mark 100.00%, heart 100.00%, wordmark 99.88%, tagline 100.00%
+(mean abs RGB error 5.1 / 9.1 / 19.4 / 13.8). The 400% side-by-side and difference image were
+inspected by eye; only anti-aliasing outlines remain. The mark was rendered at 16/20/24/32/48/64/512
+px on light and dark grounds; the lockup and mono were rendered on light and dark.
+**Two errors caught by looking, not by the numbers:** (1) the first heart was drawn with its tangent
+points swapped (two dots on a stalk), yet scored 98% "olive agreement" because the heart is a tiny
+share of olive pixels. A dedicated heart region now guards it. (2) The first tagline fit (width-only)
+drifted letter by letter. A least-squares fit of all 31 letter centres (RMS 0.30 px) replaced it.
+**Not verified:** exact brand hexes and fonts (source is a 500 px JPEG; owners, Q4); print output
+(no CMYK or physical test); `logo-mono.svg` is untested with owners and is a proposal; SVG rendering
+was checked in Chrome only (not Safari/Firefox).
+**Files:** `brand/{build_logo.py, verify_logo.py, logo.svg, logo-mark.svg, logo-mono.svg, fonts/}`,
+`docs/BRAND.md`, `.gitattributes`.

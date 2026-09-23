@@ -1,0 +1,9 @@
+# Normalise line endings to LF in the repo and working tree (Windows autocrlf otherwise
+# converts to CRLF; string-marker edits assuming LF then fail — Blueprint §19.5 #10).
+* text=auto eol=lf
+
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.ttf binary
+*.woff2 binary

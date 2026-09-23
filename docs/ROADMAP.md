@@ -10,16 +10,18 @@ and report (AGENT-OPS §2).
 - [x] Local git repo (`main`), nothing committed (D-015)
 - [x] Jev private-list entry + project memory (D-010, D-017)
 - [x] Verified: docs-check, 5 break tests, hook suite 19/19 (D-017)
-- [ ] First commit, only on Sasanka's go-ahead
+- [x] First commit, on Sasanka's go-ahead (3c3bb9a)
 **Verify:** `node .claude/hooks/docs-check.mjs` exit 0; context-head break test exits 1; each hook
 negative-tested (blocked case → exit 2, benign → 0).
 
 ## Stage 1 — Owner round + brand
 - [ ] Sasanka sends `OWNER-QUESTIONS.md` to the founders; answers → D-entries
-- [ ] Hand-built logo SVG (`brand/logo.svg`, `logo-mark.svg`, `logo-mono.svg`) per D-014
-- [ ] `BRAND.md`: measured hexes, size floor, clear space, contrast table vs likely grounds (Blueprint §15.1)
+- [x] Hand-built logo SVG (`brand/logo.svg`, `logo-mark.svg`, `logo-mono.svg`) per D-014 (D-018)
+- [x] `BRAND.md`: measured hexes, fonts, size floor, clear space, interpretation choices (D-018)
+- [ ] Contrast table of mark colours vs the Stage 2 grounds (needs the design direction first)
+- [ ] Owners confirm reconstruction, hexes, fonts, mono proposal, favicon variant (Q4)
 **Verify:** overlay the SVG render on the source JPEG at 400% (pixel diff, report the numbers);
-render at 16/32/64/512 px; owners confirm (Q4).
+render at 16/32/64/512 px; owners confirm (Q4). Done except owner confirmation (D-018).
 
 ## Stage 2 — Design direction (Blueprint Phase 0–2)
 - [ ] §2 factual brief (facts only), read the canonical tool list file (§1.6)

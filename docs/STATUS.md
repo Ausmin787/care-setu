@@ -1,7 +1,7 @@
 # Project Status
 **Updated:** 2026-09-23 · **Docs version: v0.2** · **Decision head: D-018**
-**Stage:** 1 — owner round + brand. Stage 0 committed (3c3bb9a). Logo rebuilt as verified vector (D-018: mark/heart/tagline 100%, wordmark 99.88% interior match), uncommitted. No app code, no remote repo.
-**Next:** Sasanka sends `docs/OWNER-QUESTIONS.md` + `brand/logo.svg` to the founders (Q4: confirm reconstruction, hexes, fonts, mono proposal, favicon). Then Stage 2 design research.
+**Stage:** 1 done except owner confirmation. Stage 0 committed (3c3bb9a); logo rebuilt as verified vector and committed (5670282, D-018). No app code, no remote repo.
+**Next (new session):** Stage 2 design research. Read `~/.claude/FRONTEND-MASTER-BLUEPRINT.md` in full + the tool-list file first; deliver 2–3 sample-grounded directions (D-009). In parallel, Sasanka sends `docs/OWNER-QUESTIONS.md` + `brand/logo.svg` to the founders (Q4).
 **Then:** Stage 2 design research (D-009) → Stage 3 scaffold → Stage 4 pages one at a time → Stage 5 hardening (see ROADMAP).
 **Blocked on owners:** hosting/DB (Q1), domain (Q2), real contact details (Q3), LLP/KYC (Q5), live service lines (Q6), claim evidence (Q10).
 **Not connected:** Refero MCP (D-009). No Docker on this machine (D-002).

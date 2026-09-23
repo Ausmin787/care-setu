@@ -285,3 +285,28 @@ drifted letter by letter. A least-squares fit of all 31 letter centres (RMS 0.30
 was checked in Chrome only (not Safari/Firefox).
 **Files:** `brand/{build_logo.py, verify_logo.py, logo.svg, logo-mark.svg, logo-mono.svg, fonts/}`,
 `docs/BRAND.md`, `.gitattributes`.
+
+## D-019 · 2026-09-23 · Code-graph memory (gbrain): deferred to Stage 3/4, code only, as a measured trial
+Sasanka raised using a code-graph/brain tool (gbrain, Graphify-style) so the agent forgets less as the
+project grows. Decision:
+- **Not now.** There are zero code files, only ~20 docs. Same finding as Hungry Anna D-056 (324 docs
+  vs 26 code files), where Graphify's free AST half barely applied.
+- **Scope when adopted: code navigation only** (callers, definitions, change impact). Decisions and
+  constraints stay with context-head + INVARIANTS, which give a *checked, complete* list at every
+  session start. Semantic search can only return "probably relevant" and can silently miss the
+  decision that should block a change.
+- **Trigger:** after the Stage 3 scaffold and the first Stage 4 pages exist.
+- **Adoption gate, all required:**
+  (1) confirm where gbrain computes embeddings. If content leaves the machine, it needs Sasanka's
+      explicit approval (the project is private, D-010).
+  (2) The brain is derived from the repo automatically and never hand-edited; repo docs stay the
+      source of truth. This avoids the doc drift seen in churn, loan and RFM.
+  (3) A measured trial: ~10 code questions with known answers, answered with and without gbrain.
+      Keep it only if it clearly wins, and record the numbers in a D-entry either way.
+- State found 2026-09-23: gbrain v0.42.65 installed on this machine with a local PGLite engine,
+  4 pages, never synced; v0.52.2 available. The embedding provider was **not** checked.
+**Why:** The two kinds of forgetting need different tools: a verified index for decisions, a graph
+for code structure. Only the second is a gap, and it opens only once code exists.
+**Rejected:** Indexing now (nothing to graph; token cost on docs); using the brain for decisions
+(replaces a completeness guarantee with a probabilistic search); rejecting it outright (it does
+cover a real gap once the codebase grows).

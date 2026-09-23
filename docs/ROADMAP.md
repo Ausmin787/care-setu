@@ -38,6 +38,8 @@ render at 16/32/64/512 px; owners confirm (Q4). Done except owner confirmation (
 - [ ] Security headers + test, Vitest, ESLint, CI workflow (only once clean)
 - [ ] Auth library choice → D-entry (context7-verified)
 - [ ] `impeccable init` (writes PRODUCT.md), README setup instructions
+- [ ] After the first Stage 4 pages: gbrain trial per D-019 (embedding privacy check → index code from
+      the repo → 10 known-answer questions with/without → keep or drop, recorded as a D-entry)
 **Verify:** green (lint, typecheck, test, build); CI green on first push (push needs permission).
 
 ## Stage 4 — Pages, one at a time (check-in after each)

@@ -73,3 +73,4 @@ cited decision is the authority. Read it before acting on an edge case.
 - **Data retention periods and grievance officer** (Q13). (D-012)
 - **Payment gateway choice for go-live**. (D-003)
 - **Design direction** — Stage 2. (D-009)
+- **Code-graph memory (gbrain)** — trial at Stage 3/4, code navigation only, after the privacy check on embeddings and a 10-question measured test. Never for decisions. (D-019)

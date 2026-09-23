@@ -1,0 +1,35 @@
+# Secrets: only .env.example is committed (D-002, bash-guards.mjs)
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local dev database (PGlite data dir, D-002) and any exports
+.pglite/
+data/
+backups/
+*.dump
+*.backup
+
+# Design research captures: third-party material, never committed (Blueprint §1.5)
+refs/
+
+# Tool working dirs
+.impeccable/
+.claude/settings.local.json
+.claude-flow/
+.swarm/
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

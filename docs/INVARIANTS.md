@@ -54,6 +54,7 @@ cited decision is the authority. Read it before acting on an edge case.
 24. **Agent reports are evidence, not truth.** Spot-check load-bearing claims. Platform and legal claims need a current primary-source citation. (D-016)
 25. **Open owner questions are never answered by a default.** Build behind configuration and keep the question open. (D-016)
 26. **"Green" means build + lint + typecheck + tests all pass.** Lint and tsc don't parse CSS. (D-016)
+27. **The design direction is "Setu Lines"** (`DESIGN.md`): line colours only on lines/stations/badges, lime always ink-cased, one coloured control (`#0D7CB1`), Anek type, enquiry = one question per page with an emergency note. Changing any of this needs a new D-entry. (D-020)
 
 ---
 
@@ -72,5 +73,4 @@ cited decision is the authority. Read it before acting on an edge case.
 - **Revenue split** — provisional ~80/20, founders + CA. (D-005)
 - **Data retention periods and grievance officer** (Q13). (D-012)
 - **Payment gateway choice for go-live**. (D-003)
-- **Design direction** — Stage 2. (D-009)
 - **Code-graph memory (gbrain)** — trial at Stage 3/4, code navigation only, after the privacy check on embeddings and a 10-question measured test. Never for decisions. (D-019)

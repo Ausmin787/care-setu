@@ -42,3 +42,19 @@ Template:
 - Downloaded: Open Sans VF + OFL from github.com/google/fonts (free).
 - Not verified: exact owner hexes/fonts, print, non-Chrome renderers.
 - Next: commit Stage 1 (needs permission); send OWNER-QUESTIONS + logo to founders; Stage 2.
+
+## 2026-09-25 · Stage 2 · Design research → "Setu Lines" locked
+- Read the Frontend Master Blueprint in full (incl. §19) and the tool list. Claude in Chrome dropped
+  3 times (once before starting, twice mid-session); retried each time.
+- Flows studied: Portea (3-step modal, service-page skeleton), Care24 (Hindi recruitment band), Elder
+  (one-question-per-screen enquiry, stepped through to the postcode step; stopped before personal data),
+  Pristyn Care (hero form, journey), NHS service manual (question pages, confirmation, buttons), Mobbin.
+- Look: Refero (health cliché confirmed; Brainfish, Basis Theory, V–A–C Sreda, Uber taken), Delhi Metro
+  map (Commons), Design Spells Transit trip view, Cue Kit specs, Google Fonts (Anek verified).
+- Sasanka picked A · Setu Lines + Anek (D-020). Captures in refs/ (gitignored). Contrast computed for
+  every token pair; action blue derived (#0D7CB1). Comp published as an artifact (1440px render checked once).
+- Reviews: impeccable detect (URL scan, 1440 + 390): 10 findings; Taste pre-flight: 6 more. All recorded
+  with decisions in the Stage 2 plan; fixes deferred to Stage 4 at Sasanka's request.
+- Blueprint updated with permission: §13 Flows section, §1.5 both-reviewers rule, §14 ledger row, §19 notes.
+- Not verified: a true 390px screenshot; image-to-code image generation (not run).
+- Next: owners review the comp (Sasanka shares it); Stage 3 decides dark mode (finding 13).

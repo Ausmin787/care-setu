@@ -310,3 +310,40 @@ for code structure. Only the second is a gap, and it opens only once code exists
 **Rejected:** Indexing now (nothing to graph; token cost on docs); using the brain for decisions
 (replaces a completeness guarantee with a probabilistic search); rejecting it outright (it does
 cover a real gap once the codebase grows).
+
+## D-020 · 2026-09-25 · Design direction locked: "Setu Lines"; Anek type family; derived action blue
+Stage 2 research ran in Claude in Chrome (D-009) across home-care sites (Portea, Care24, Elder,
+Pristyn Care), the NHS digital service manual, Mobbin, Refero, Recent, Cue Kit, Design Spells and
+Google Fonts. Sasanka picked **A · Setu Lines** from three sample-grounded options (the recommended one):
+- **Direction:** hospital-to-home drawn as a transit/wayfinding network. The logo's arm colours
+  (lime, olive, blue) are service *lines*, Hospital and Home are stations. Swiss grid / diagram
+  archetype on a white ground with ink type. Colours appear only on lines, stations and badges.
+  Full plan, sample ledger and tokens: `docs/plans/stage-2-design.md`; system: `DESIGN.md`.
+- **Flows (apply to every page):** enquiry = one question per page in Elder's order with NHS rules
+  (why-we-ask hint, "not sure", back link, left "Continue", "Question n of 6", check answers,
+  confirmation with reference and next steps, no invented SLA); an emergency interruption ("Home care
+  is not emergency care. Call 112"); pay page = summary list + one Pay button, result only from the
+  verified webhook (D-003/D-004).
+- **Type:** Anek Latin + Anek Devanagari (Ek Type, OFL, Google Fonts), one voice for English now and
+  Hindi later (D-008). This is a recorded exception to Blueprint §6.5 (Best Free Fonts has no
+  Devanagari face), approved by Sasanka.
+- **Action colour:** `#0D7CB1`, the brand blue ×0.87, because white on the brand blue `#0F8FCC` is only
+  3.61:1 (AA needs 4.5). Lime on white is 1.89:1, so lime lines are always ink-cased and never carry
+  meaning alone. All provisional until the owners confirm hexes (Q4).
+- **Signature motion (built in Stage 4):** "line isolate": the chosen service line lights end to end
+  while the others ghost. Draw-on is deliberately not the signature (Hungry Anna /visit used it).
+**Why:** It's the only option native to the subject ("setu" = bridge; Delhi NCR's metro grammar; the
+logo's cross already reads as crossing lines). It needs no photography (C-014), and it differs from the
+last ledger project on 6 of 7 axes.
+**Rejected:** B "Care sheet" (only 4/7 axes; repeats Hungry Anna's printed/stamped idiom); C "Asked and
+answered" (the genre-accepted editorial look); the health genre cliché of cream + serif + pill
+(Refero Alden/Ease/Hims); a Best Free Fonts Latin face with a separate Devanagari face later.
+**Verified:** contrast of every token pair computed (ink/canvas 16.78, muted 7.22, action 4.63,
+ink/lime 8.87); Anek's width axis loads at 75 (headless Chrome render of the comp at 1440px); NHS
+button values read from the published `nhsuk-frontend` CSS; static comp published for review
+(https://claude.ai/artifact/83S7EtQCudvEKQoNaYyK3v).
+**Reviewed:** `impeccable detect` (1440 + 390, 10 findings) and the Taste pre-flight check; every finding has a
+recorded decision in `docs/plans/stage-2-design.md` (fixes land in Stage 4; the comp stays as sent to owners).
+**Not verified:** a true 360/390px screenshot (mobile styles written; headless Chrome can't go below ~500px); Refero MCP not connected (free site used); Mobbin Health sites/Flows Pro-locked; the
+`image-to-code` skill's image-generation step was not run (structure was extracted from captures);
+Chrome dropped twice mid-session. Owner copy, service set (Q6), hours (Q12) are all still open.

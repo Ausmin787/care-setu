@@ -58,3 +58,7 @@ Template:
 - Blueprint updated with permission: §13 Flows section, §1.5 both-reviewers rule, §14 ledger row, §19 notes.
 - Not verified: a true 390px screenshot; image-to-code image generation (not run).
 - Next: owners review the comp (Sasanka shares it); Stage 3 decides dark mode (finding 13).
+- Later the same day: verified the Taste and image-to-code skills are byte-identical to leonxlnx/taste-skill;
+  synced Impeccable to GitHub main (skill 4.4.0, engine 0.1.6, SHA256-verified, no hooks). Re-scan gave the
+  same 10 findings. Mistake: stopping the scan server killed every python.exe (blueprint §19.5 #26).
+- Waiting on: owners' feedback on the comp (Sasanka shares it). No changes → Stage 3 scaffold.

@@ -1,12 +1,12 @@
 import { IconCircleArrowRightFilled, IconPhoneCallFilled } from "@tabler/icons-react";
-import { services, t } from "@/lib/content";
+import { lines, t } from "@/lib/content";
 import { LiveTrip } from "@/components/motion/LiveTrip";
 import s from "./Trip.module.css";
 
 // Design Spells #332, Transit trip view (refs/designspells-transit-trip/): a trip is legs; a leg is one
 // continuous rounded spine headed by its badge; stations are small white discs inset in the spine;
 // a walk link between legs is a column of dots with an icon and a bold label.
-const careLine = services[0];
+const careLine = lines[0];
 
 type Stop = { title: string; text: string };
 

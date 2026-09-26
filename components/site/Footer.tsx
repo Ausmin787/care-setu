@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { services, t } from "@/lib/content";
+import { FooterWordmark } from "@/components/motion/FooterWordmark";
+import { lines, t } from "@/lib/content";
 import s from "./Footer.module.css";
 
 const L = t.footer.links;
@@ -15,17 +16,17 @@ const links: { href: string; label: string; draft?: boolean }[] = [
   { href: "/refunds", label: L.refunds, draft: true },
 ];
 
-// The footer is the network legend: every line listed as on a metro map.
+// The footer is the network legend: every line listed as on a metro map. It closes on the wordmark (D-023).
 export function Footer() {
   return (
     <footer className={`${s.foot} wrap`}>
       <div className={s.legend}>
         <h2>{t.footer.legendTitle}</h2>
         <ul>
-          {services.map((svc) => (
-            <li key={svc.slug} data-line={svc.line}>
+          {lines.map((l) => (
+            <li key={l.slug} data-line={l.line}>
               <span className={s.ln} />
-              {svc.name}
+              {l.name}
             </li>
           ))}
           <li>
@@ -42,6 +43,9 @@ export function Footer() {
           </Link>
         ))}
       </nav>
+      <div className={s.wordmark}>
+        <FooterWordmark text="care setu" />
+      </div>
       {/* Legal name and copyright holder wait on Q5 (LLP status). */}
       <p className={s.legal}>{t.footer.legal}</p>
     </footer>

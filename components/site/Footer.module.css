@@ -1,15 +1,19 @@
+/* Ink ground (D-023) so the wordmark's gradient can glow; the hairline parts it from the partner band above. */
 .foot {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 40px;
-  padding-block: 56px 40px;
+  padding-block: 56px 32px;
+  background: var(--c-ink);
+  color: #fff;
+  border-top: 1px solid rgb(255 255 255 / 0.18);
 }
 .legend {
   display: grid;
   gap: 14px;
   max-width: 440px;
   padding: 22px 24px;
-  border: 2px solid var(--c-ink);
+  border: 2px solid #fff;
   border-radius: 4px;
 }
 .legend h2 {
@@ -67,16 +71,20 @@
   padding: 1px 6px;
   font-size: 14px;
   font-weight: 700;
-  border: 2px solid var(--c-ink);
+  border: 2px solid #fff;
   border-radius: 4px;
+}
+.wordmark {
+  grid-column: 1 / -1;
+  padding-top: 24px;
 }
 .legal {
   grid-column: 1 / -1;
   margin: 0;
   padding-top: 16px;
-  border-top: 1px solid var(--c-line);
+  border-top: 1px solid rgb(255 255 255 / 0.18);
   font-size: 16px;
-  color: var(--c-muted);
+  color: rgb(255 255 255 / 0.72);
 }
 
 @media (max-width: 900px) {

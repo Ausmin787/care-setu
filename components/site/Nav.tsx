@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IconMenu2, IconPhoneFilled } from "@tabler/icons-react";
 import { LogoMark } from "@/components/LogoMark";
-import { config, t } from "@/lib/content";
+import { config, phoneDisplay, t } from "@/lib/content";
 import s from "./Nav.module.css";
 
 const links = [
@@ -25,11 +25,11 @@ export function Nav() {
         ))}
       </nav>
       <div className={s.right}>
-        {/* Phone shows only once the owners publish a real number (Q3, D-007). */}
+        {/* Phone shows only when the owners have published a real number (Q3 answered in D-024). */}
         {config.phone && (
           <a className={s.phone} href={`tel:${config.phone}`}>
             <IconPhoneFilled aria-hidden="true" />
-            {config.phone}
+            {phoneDisplay}
           </a>
         )}
         <Link className="btn sm" href="/contact">

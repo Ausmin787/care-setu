@@ -54,7 +54,7 @@ cited decision is the authority. Read it before acting on an edge case.
 24. **Agent reports are evidence, not truth.** Spot-check load-bearing claims. Platform and legal claims need a current primary-source citation. (D-016)
 25. **Open owner questions are never answered by a default.** Build behind configuration and keep the question open. (D-016)
 26. **"Green" means build + lint + typecheck + tests all pass.** Lint and tsc don't parse CSS. (D-016)
-27. **The design direction is "Setu Lines"** (`DESIGN.md`): line colours only on lines/stations/badges (plus small accents inside the one hero illustration), lime always ink-cased, one coloured control (`#0D7CB1`), Anek type, enquiry = one question per page with an emergency note. The Home hero is the illustrated care scene, light mode only, and the signature motion is the "live trip". Changing any of this needs a new D-entry. (D-020, D-021)
+27. **The design direction is "Setu Lines"** (`DESIGN.md`): line colours only on lines/stations/badges (plus small accents inside the one hero illustration and the moving fill of the footer wordmark), lime always ink-cased, one coloured control (`#0D7CB1`), Anek type, enquiry = one question per page with an emergency note. The Home hero is the illustrated care scene, light mode only, and the signature motion is the "live trip". Changing any of this needs a new D-entry. (D-020, D-021, D-023)
 
 ---
 
@@ -62,11 +62,9 @@ cited decision is the authority. Read it before acting on an edge case.
 
 - **Hosting, database host, email provider, and account ownership** — owners (Q1). (D-002)
 - **Domain** — is `caresetu.com` owned? Until confirmed, no domain appears in copy (Q2). (D-007)
-- **Real phone, email, WhatsApp, address** — every deck contact is a placeholder (Q3). (D-007)
+- **Who receives new-query alerts** (the rest of Q12 was answered in D-024: 2-hour callback, 7 AM – 10 PM). (D-006, D-024)
 - **Logo reconstruction + exact brand hexes + brand fonts** — owner confirmation (Q4). (D-014)
 - **Legal entity (LLP) status** — gates gateway KYC, footer legal name, copyright holder (Q5). (D-003)
-- **Which service lines are live at launch.** Medicine delivery (e-pharmacy rules), vaccination, teleconsultation (Telemedicine Practice Guidelines 2020) and equipment EMI (needs a lending partner) carry regulatory prerequisites (Q6). (D-013)
-- **Service area** within Delhi NCR (Q7). (D-013)
 - **Quote/payment policy**: advance vs full, refunds, cancellations (Q8). (D-004, D-012)
 - **Promotion rules** (Q9). (D-013)
 - **Evidence for any deck claim** (Q10). (D-007)

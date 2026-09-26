@@ -1,29 +1,92 @@
 {
-  "_note": "Example lines only (Q6 decides the launch set). Copy is draft; no claims beyond describing the service.",
-  "lines": [
+  "_note": "Launch services (D-024), grouped into three lines (D-025). Owners' own descriptions with quality claims removed (C-033). Draft copy until the owners approve (Q15).",
+  "catalogue": [
     {
-      "slug": "home-nursing",
+      "slug": "care-at-home",
       "number": "01",
       "line": "lime",
-      "name": "Home nursing",
-      "when": "A parent is coming home after surgery or a long stay and needs wound care, injections or a drip at home.",
-      "covers": "Visits or shifts by a nurse, following the treating doctor's instructions."
+      "name": "Care at home",
+      "whoLabel": "Who comes",
+      "services": [
+        {
+          "slug": "nurse",
+          "name": "Nurse at Home",
+          "who": "A nurse",
+          "text": "Nursing care in the patient's own home, following the treating doctor's advice."
+        },
+        {
+          "slug": "gda",
+          "name": "GDA at Home",
+          "who": "An attendant",
+          "text": "A general duty attendant (GDA) for the patient's daily care and assistance at home."
+        },
+        {
+          "slug": "procedures",
+          "name": "Nursing procedures",
+          "who": "A nurse",
+          "text": "Dressing, injections, catheter care and other procedures, done at home."
+        },
+        {
+          "slug": "icu",
+          "name": "ICU care at home",
+          "who": "A care team",
+          "text": "A critical care set-up at home, with the staff and equipment it needs."
+        }
+      ]
     },
     {
-      "slug": "physiotherapy",
+      "slug": "visits-and-tests",
       "number": "02",
       "line": "blue",
-      "name": "Physiotherapy and rehab",
-      "when": "After a fracture, a stroke or a joint replacement, when getting to a clinic is hard.",
-      "covers": "Sessions at home with a physiotherapist, planned around the doctor's advice."
+      "name": "Visits and tests",
+      "whoLabel": "Who comes",
+      "services": [
+        {
+          "slug": "doctor",
+          "name": "Doctor at Home",
+          "who": "A doctor",
+          "text": "A doctor's consultation at home, for patients who can't easily get to a clinic."
+        },
+        {
+          "slug": "physiotherapy",
+          "name": "Physiotherapy",
+          "who": "A physiotherapist",
+          "text": "A rehabilitation plan made for the patient, to help them move and recover at home."
+        },
+        {
+          "slug": "lab-samples",
+          "name": "Lab sample collection",
+          "who": "A sample collector",
+          "text": "Samples collected at home, so there is no trip to the lab."
+        }
+      ]
     },
     {
       "slug": "equipment",
       "number": "03",
       "line": "olive",
-      "name": "Equipment on rent",
-      "when": "The doctor has asked for a hospital bed, oxygen or a wheelchair at home.",
-      "covers": "Delivery and set-up of the equipment the plan needs, for as long as it is needed."
+      "name": "Equipment",
+      "whoLabel": "How it works",
+      "services": [
+        {
+          "slug": "rent",
+          "name": "Rent equipment",
+          "who": "Delivered and set up",
+          "text": "Hospital beds, oxygen concentrators, wheelchairs and monitors, short or long term, delivered and set up at home."
+        },
+        {
+          "slug": "buy",
+          "name": "Buy equipment",
+          "who": "Delivered and installed",
+          "text": "Buy medical equipment outright, with delivery, installation and after-sales support."
+        },
+        {
+          "slug": "sell-back",
+          "name": "Sell equipment back",
+          "who": "We pick it up",
+          "text": "No longer need it? Sell it back to us and we collect it from your home."
+        }
+      ]
     }
   ]
 }

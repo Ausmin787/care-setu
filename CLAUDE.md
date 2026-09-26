@@ -1,7 +1,7 @@
 # Care Setu — website (Phase 1)
 
-Home-healthcare startup, Delhi NCR. Founders: Vishwanath Pratap Singh "Shiva" (founder), Ayush
-Srivastava, Aashish Singh. **Sasanka is the tech lead**; the founders are the owners. Phase 1 is a
+Home-healthcare startup, Delhi NCR. Founders: Vishwanath Pratap Singh "Shiva" and Dr Saurabh
+Chauhan (founders, D-024), Ayush Srivastava, Aashish Singh. **Sasanka is the tech lead**; the founders are the owners. Phase 1 is a
 marketing + transactional website; the apps are future scope (D-001).
 
 @docs/STATUS.md

@@ -416,3 +416,101 @@ does. The policy lives in `lib/security.ts`, used by `proxy.ts` and `next.config
 little from dynamic rendering, and it keeps one strict policy on every page instead of a weaker one on some.
 **Rejected:** `'unsafe-inline'` scripts (defeats the CSP); experimental SRI hash mode (experimental, and it
 doesn't cover inline scripts); a nonce on only the Contact/Pay routes (two policies to reason about).
+
+## D-023 · 2026-09-26 · Web wordmark in Unbounded; ink footer with a moving "care setu" wordmark (partially supersedes D-020/D-021: wordmark face, colour-only-on-lines, one moving signature)
+Sasanka found the nav "CARE SETU" generic and asked for a distinct face, plus Spectrum.Life's footer: a huge
+wordmark filled with a slowly moving, grainy gradient. Both requests contradicted recorded rules. The conflict was
+named before building, and Sasanka chose from AskUserQuestion options:
+- **Web wordmark = Unbounded 800** (OFL, Google Fonts via `next/font`, self-hosted): uppercase "CARE SETU" in the
+  nav lockup (Sasanka's follow-up the same day; 20px, +0.01em, 16px on mobile, measured to fit at 381px), lowercase
+  "care setu" in the footer. It replaces Open Sans 700 on the website only: `brand/` logo files are untouched, and
+  the logo's own fonts stay an open owner question (Q4). **Provisional until the owners confirm.** Sasanka picked
+  this over the recommended Anek Latin width 125 and over Parkinsans (comparison sheet rendered in headless Chrome).
+- **Footer on ink, with the wordmark filling its width.** Inside the letters, the logo's line colours (action blue →
+  brand blue → lime → a pale core) drift through a domain-warped field with film grain. Spectrum's mechanics were
+  read from its source (PIXI displacement filter over a grainy texture, map scale on a 9 s yoyo, masked by a
+  wordmark SVG). Ours is a small hand-written WebGL shader with the text drawn into a mask texture: no PIXI, no
+  textures fetched. It runs only while on screen, draws one still frame under reduced motion, and falls back to a
+  static CSS gradient clipped to the text (no JS or no WebGL). It is decorative and `aria-hidden`.
+- **Rules relaxed:** the line colours may also fill this one footer wordmark (D-021 allowed only the hero
+  illustration); the footer becomes a second ink block. The "live trip" stays the signature motion; the footer
+  drift is ambient, off-screen it doesn't run.
+**Why:** The nav name was the logo file's generic face, and the footer gave the brand no closing moment. Spectrum's
+footer is a trust-brand reference already in the ledger (the D-021 hero came from it). Taking its mechanics but
+recolouring to our lines keeps it ours: Spectrum's violet palette was declined because it is their brand and
+purple-to-blue is a Blueprint §0.1 slop tell.
+**Rejected:** Anek Latin width 125 (recommended; keeps one family); Parkinsans; Spectrum's purple; blue-only
+gradient; PIXI.js (a ~450 KB dependency for one effect); a CSS-only blob drift (can't warp like the displacement map).
+**Built as:** `components/motion/FooterWordmark.tsx` (+ module CSS), `components/site/Footer.*`, nav wordmark in
+`components/site/Nav.*`, font in `app/layout.tsx`. The effect creates its own canvas per mount: React StrictMode's
+double mount otherwise handed the second mount the context the first cleanup had lost (caught in dev).
+**Verified (2026-09-26):** green (lint, typecheck, tests, build); nav wordmark computes to Unbounded in Chrome;
+headless Chrome (SwiftShader WebGL) at 1440 and 520: the wordmark spans the column, frames 10 s apart differ
+(drift confirmed), no horizontal overflow at 1440; server HTML has the text fallback and 0 `data-live`.
+**Not verified:** reduced motion *emulated* (Playwright MCP not connected this session; structural only: the loop
+is gated on `prefers-reduced-motion`); a real phone/Safari or a true 360/390 px render; GPU cost on a low-end
+Android; `impeccable detect` and the Taste pre-flight on the new footer; owner approval of the wordmark face (Q4).
+
+## D-024 · 2026-09-26 · Owner answers: contact details, response time, service area, launch services, a fourth founder
+The owners answered through Sasanka (2026-09-26) and pointed to their own prototype site
+(`care-setu.netlify.app`, read in Chrome the same day) for the service list. Sasanka confirmed each reading in an
+AskUserQuestion round:
+- **Contact (Q3):** phone and WhatsApp **+91 84489 12820** (their site says "Call or WhatsApp"); email
+  **care.setu.1@gmail.com**; office **4B Grover Chamber, Karol Bagh, Delhi 110005** (as given: "4b Grover chamber
+  karolbagh 110005"; only capitalisation and the city name, which the PIN code fixes, were added).
+- **Response time (Q12, partly):** "We call back within 2 hours, every day 7 AM – 10 PM". The 2 hours is the
+  owner's answer; the hours come from their site. A 2-hour promise outside those hours would be untrue, so the two
+  always appear together. Who receives the alert email is still open.
+- **Service area (Q7):** Noida and Delhi ("More cities coming soon" on their site). Replaces "Delhi NCR" in copy.
+- **Launch services (Q6):** the eight on their site: Nurse at Home, GDA (attendant) at Home, Doctor at Home,
+  Physiotherapy, Lab Sample Collection, ICU Care at Home, Nursing Procedures, Medical Equipment (rent, buy,
+  buyback). The Q6 note's regulated items (e-pharmacy, vaccination, teleconsultation, EMI) are not among them.
+- **Founders:** their site lists **Saurabh Chauhan** (a doctor) as a founder, alongside Vishwanath Pratap Singh;
+  Ayush Srivastava and Aashish Singh as before. Recorded in the docs; nothing about founders ships until C-021.
+**Not carried over from their site:** "10+ partner hospitals", "2 cities / 8 services" stat chips, "verified &
+trained", "background-checked", "sourced from multiple hospitals", "transparent pricing / no hidden charges",
+"hospital-grade equipment". Each is a claim with no evidence yet (D-007, Q10); they stay off until they have it.
+**Why:** These are owner-supplied facts, which the claims register accepts as evidence when recorded as a D-entry.
+**Rejected:** showing "within 2 hours" without the hours; keeping "Delhi NCR"; holding ICU care and doctor visits
+back as "coming soon" (Sasanka took the owner's list as the launch list).
+**Watch:** lab sample collection normally runs through a licensed lab; ICU care at home needs trained
+critical-care staff and equipment on call. Worth confirming with the owners before go-live, but not a gate.
+
+## D-025 · 2026-09-26 · Services page: the "line catalogue"; eight services grouped into three lines
+Sasanka picked the structure in two AskUserQuestion rounds. The first offered three of seven structures dealt by
+`impeccable concept-seed` (build-your-list, line map, first days home); he picked the line map, then asked whether
+the tool-list sites had been checked for how companies show many services without a mess. They had not; the
+research ran next (Mobbin sections "services" / "home care" / "treatments", Recent Health filter, Superpower) and
+the second round confirmed the merged structure:
+- **Grouping (Apollo Home Care's split by kind of need):** Line 01 Care at home (lime): Nurse at Home, GDA at
+  Home, Nursing procedures, ICU care at home. Line 02 Visits and tests (blue): Doctor at Home, Physiotherapy, Lab
+  sample collection. Line 03 Equipment (olive): Rent, Buy, Sell back. The lines stop being one service each;
+  Home's services index, the trip's care leg and the footer legend now show the three lines.
+- **Page (Superpower "What we test", measured at 1280px):** a sticky left rail (~260px) with the three lines and
+  their counts; per line a heading (badge, name, count) over quiet rows `service | who comes | +` that open to one
+  plain sentence, "Talk to us" and a small grey note. Our twist: each line's rows hang on its coloured spine with
+  station discs (the Home trip's language). Rows are native `<details>`: no JS, all closed by default.
+- **Hero:** title, the area, the callback promise with its hours (C-031), the phone, one "Talk to us", the
+  emergency note. No separate "how it works" section (Home's trip already has it; Sasanka dislikes repeated sections).
+- **Copy:** the owners' one line per service, with quality words removed ("trained", "experienced", "accurate",
+  "safely", "fair price", "partner hospitals") until they have evidence (C-015, Q10). Draft until the owners approve.
+**Why:** Eight services in one flat grid is the genre's default (both owner-supplied sites use it) and reads as a
+wall. Grouping into three lines keeps the logo's line system meaningful, and the catalogue pattern keeps every
+detail one tap away without showing it all at once.
+**Rejected:** build-your-list (dealt as the lead; a tick list that can't yet submit anywhere); first days home (its
+order would be invented); the plain line map (loses the rail and the quiet rows); Apollo/owner-site card grids with
+icon medallions and pill buttons (Blueprint §19.3); split by stays/visits/equipment.
+**Built as:** `app/services/page.tsx` + `page.module.css` (server component, native `<details>`), data in
+`content/services.json` `catalogue` (typed `lines` in `lib/content.ts`), copy in `en.json` `servicesPage`.
+**Reviewed:** `impeccable detect` at 1440 and 390: no findings from this page (the footer wordmark's CSS gradient
+fallback, kept per D-023; the nav logotype at 4.0:1, waived per D-021). Taste pre-flight: three fails fixed (the
+en-dash in "7 AM – 10 PM" became "to"; "Ask about X" became "Talk to us about X", one label per intent; line badges
+moved beside the headings instead of above them as eyebrows). Waived: five hero elements (the emergency note and the
+callback promise are required, D-020/D-024), light mode only (D-021), the ink footer (D-023).
+**Verified (2026-09-26):** green (lint, typecheck, 29 tests, build); headless Chrome at 1280/1440 and 520 (spine,
+discs, rail, rows, the two-column head, mobile stacking); an opened row in Chrome (the disc fills, the sentence, the
+link, the note); sticky rail sits 32px under the nav; no horizontal overflow at 1280; the side-by-side with
+Superpower in `refs/services/`; fact audit of `/` and `/services` HTML (owner facts present; no quality claims,
+"Delhi NCR", 24x7 or dashes).
+**Not verified:** a true 360/390px render (headless floor ~500px; Playwright MCP not connected); a real phone or
+Safari; the web-design-guidelines audit; owner approval of the grouping names and the copy (Q15).

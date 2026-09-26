@@ -1,0 +1,35 @@
+/* The footer wordmark (D-023). The ramp is the logo's lines: action blue -> brand blue -> lime -> a pale core.
+   --wm-3 is the one colour outside the token set; it only lives inside these letters. */
+.mark {
+  --wm-0: var(--color-action);
+  --wm-1: var(--color-line-blue);
+  --wm-2: var(--color-line-lime);
+  --wm-3: #eaf6ff;
+  position: relative;
+  container-type: inline-size;
+}
+/* Sized so the ink spans the column: Unbounded 800 "care setu" at -0.04em measures 5.7em wide. */
+.word {
+  display: block;
+  margin: 0;
+  font-family: var(--font-wordmark), var(--sans);
+  font-weight: 800;
+  font-size: calc(100cqi / 5.72);
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  color: transparent;
+  background: linear-gradient(100deg, var(--wm-0), var(--wm-1) 30%, var(--wm-2) 58%, var(--wm-3) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* The shader has taken over: keep the text's box for layout, hide its paint. */
+.mark[data-live] .word {
+  visibility: hidden;
+}

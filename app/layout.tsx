@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anek_Latin } from "next/font/google";
-import localFont from "next/font/local";
+import { Anek_Latin, Unbounded } from "next/font/google";
 import { connection } from "next/server";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
@@ -15,11 +14,11 @@ const anek = Anek_Latin({
   axes: ["wdth"],
 });
 
-// Wordmark only: the logo's Open Sans 700 (brand/fonts, OFL).
-const wordmark = localFont({
+// Web wordmark only (nav + footer): Unbounded 800, OFL (D-023). Provisional until the owners confirm (Q4).
+const wordmark = Unbounded({
   variable: "--font-wordmark",
-  src: "../brand/fonts/OpenSans-VF.ttf",
-  weight: "700",
+  subsets: ["latin"],
+  weight: "800",
 });
 
 export const metadata: Metadata = {

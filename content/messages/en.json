@@ -2,7 +2,7 @@
   "_note": "Draft copy (D-021). Owners approve before launch. Every factual line maps to an approved row in docs/CLAIMS.md.",
   "meta": {
     "title": "Care Setu: care after hospital, at home",
-    "description": "Care Setu arranges care at home after a hospital stay in Delhi NCR. Tell us what is needed and a coordinator calls you back with a care plan and a quote."
+    "description": "Care Setu arranges care at home after a hospital stay in Noida and Delhi. Tell us what is needed and a coordinator calls you back with a care plan and a quote."
   },
   "nav": {
     "home": "Care Setu home",
@@ -22,7 +22,7 @@
     "reassure": [
       { "icon": "phone", "text": "A coordinator calls you back", "claim": "C-025" },
       { "icon": "invoice", "text": "A care plan and a quote before you pay", "claim": "C-024" },
-      { "icon": "pin", "text": "Care at home across Delhi NCR", "claim": "C-026" }
+      { "icon": "pin", "text": "Care at home in Noida and Delhi", "claim": "C-032" }
     ],
     "emergencyTitle": "Emergency? Call 112.",
     "emergencyText": "Home care is not emergency care.",
@@ -43,11 +43,23 @@
   },
   "services": {
     "title": "Pick the line the patient needs",
-    "examplesNote": "These lines are examples. Which lines run at launch is the owners' decision.",
-    "whenLabel": "When families call us for this",
-    "coversLabel": "What the plan covers",
     "ask": "Talk to us",
-    "lineLabel": "Line"
+    "lineLabel": "Line",
+    "onLine": "On this line",
+    "seeLine": "See this line on the Services page",
+    "note": "Eight services in three lines, across Noida and Delhi."
+  },
+  "servicesPage": {
+    "metaTitle": "Services | Care Setu",
+    "metaDescription": "Nursing, attendants, ICU care, doctor visits, physiotherapy, lab sample collection and medical equipment at home in Noida and Delhi.",
+    "title": "What we arrange at home",
+    "lede": "Eight services in Noida and Delhi, in three lines. Open any one to see what it is.",
+    "promise": { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
+    "cta": "Talk to us",
+    "railTitle": "Lines",
+    "serviceCol": "Service",
+    "ask": "Talk to us about",
+    "note": { "text": "Arranged after a call, with a care plan and a quote before you pay.", "claim": "C-024" }
   },
   "partner": {
     "title": "Do you discharge patients, or care for them?",
@@ -73,7 +85,7 @@
       "refunds": "Refunds"
     },
     "draft": "Draft",
-    "legal": "Care Setu, Delhi NCR"
+    "legal": "Care Setu, 4B Grover Chamber, Karol Bagh, Delhi 110005"
   },
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",

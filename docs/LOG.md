@@ -85,3 +85,18 @@ Template:
   (crop latitude, calmer; D-021). The module-level `existsSync` cached "no image" in dev and was moved per render.
   §19.5 #9 happened a third time (a declaration removed in one Edit, re-added in the next). Committed with permission;
   blueprint updated with permission (§14 row, §19 notes, §11 traps).
+
+## 2026-09-26 (later) · Nav + footer (D-023) · owner answers (D-024) · impeccable init · Services (D-025)
+- Nav wordmark → Unbounded (Sasanka's pick over Anek wide), then uppercase on request. Footer on ink with a
+  full-width "care setu" filled by a WebGL drift in the line colours, after Spectrum.Life's PIXI footer (read from
+  source). StrictMode double-mount lost the WebGL context; fixed with a canvas per mount.
+- Owner answers: phone/WhatsApp, email, Karol Bagh office, 2-hour callback 7 AM to 10 PM, Noida and Delhi, the
+  eight services from care-setu.netlify.app, a fourth founder (Saurabh Chauhan). Their site's quality claims
+  (10+ partner hospitals, verified staff, transparent pricing) left off (Q10). Q3/Q6/Q7 answered, Q12 partly.
+- `impeccable init` wrote PRODUCT.md (no image generation, so code-first; live mode skipped, it needs a CSP change).
+- Services: concept-seed dealt three structures; Sasanka picked the line map but asked whether the tool-list sites
+  had been checked. They had not (Blueprint §1.6 skipped). Research: Mobbin sections (2 results/query), Recent
+  Health, Superpower "What we test" (measured) → line catalogue. Three lines replace one-service-per-line on Home.
+- Mistakes: split dependent edits twice (layout import, then an opening/closing div pair); both caught by the hook.
+  Invented GDA specifics (bathing, meals) caught and reverted to the owners' wording.
+- Not verified: true 360/390px, real phone/Safari, web-design-guidelines audit, owner copy approval.

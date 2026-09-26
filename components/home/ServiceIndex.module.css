@@ -138,6 +138,22 @@
   margin: 4px 0 0;
   font-size: 19px;
 }
+.list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.more {
+  justify-self: start;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
 .panel :global(.btn) {
   justify-self: start;
 }

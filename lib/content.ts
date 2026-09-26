@@ -13,15 +13,18 @@ const SiteConfig = z.object({
 export const LINES = ["lime", "blue", "olive"] as const;
 export type Line = (typeof LINES)[number];
 
-const Service = z.object({
+// The eight launch services (D-024) in three lines (D-025).
+const CatalogueLine = z.object({
   slug: z.string(),
   number: z.string(),
   line: z.enum(LINES),
   name: z.string(),
-  when: z.string(),
-  covers: z.string(),
+  whoLabel: z.string(),
+  services: z.array(z.object({ slug: z.string(), name: z.string(), who: z.string(), text: z.string() })).min(1),
 });
 
+export const lines = z.array(CatalogueLine).length(3).parse(servicesData.catalogue);
 export const config = SiteConfig.parse(siteConfig);
-export const services = z.array(Service).parse(servicesData.lines);
+// "+918448912820" -> "+91 84489 12820", the grouping Indian mobile numbers are read in.
+export const phoneDisplay = config.phone.replace(/^\+91(\d{5})(\d{5})$/, "+91 $1 $2");
 export const t = messages;

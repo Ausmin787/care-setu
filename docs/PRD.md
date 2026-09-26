@@ -9,7 +9,7 @@ Care Setu ("setu" = bridge) is a home-healthcare startup in Delhi NCR. Its thesi
 Indian healthcare is strong inside hospitals, but after discharge families struggle alone to find
 and coordinate trustworthy nurses, attendants, physiotherapy, equipment, diagnostics and medicines.
 Care Setu wants to be the single trusted bridge from hospital to home.
-Founder: Vishwanath Pratap Singh ("Shiva"). Co-founders: Ayush Srivastava (technology),
+Founders: Vishwanath Pratap Singh ("Shiva") and Saurabh Chauhan, a doctor (D-024). Co-founders: Ayush Srivastava (technology),
 Aashish Singh (strategy, partnerships, growth). Tech lead for the website: Sasanka.
 Business model (provisional, D-005): the patient pays for a service, the provider receives the
 majority, and Care Setu keeps a platform share. The split is not yet confirmed.

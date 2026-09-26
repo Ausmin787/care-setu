@@ -33,11 +33,12 @@ render at 16/32/64/512 px; owners confirm (Q4). Done except owner confirmation (
 **Verify:** every section has a named sample; ledger has no empty "taken" column; Difference ≥ 4 axes.
 
 ## Stage 3 — Scaffold (brief step 4)
-- [ ] Next.js + TS strict + Tailwind v4 (scaffold in a temp sibling and move in; Blueprint §5.3)
-- [ ] Drizzle + PGlite dev, env config (zod), `/api/v1` stubs, route stubs for every page in PRD §5
-- [ ] Security headers + test, Vitest, ESLint, CI workflow (only once clean)
-- [ ] Auth library choice → D-entry (context7-verified)
-- [ ] `impeccable init` (writes PRODUCT.md), README setup instructions
+- [x] Next.js 16 + TS strict + Tailwind v4 (scaffolded in a temp sibling and moved in; Blueprint §5.3), 2026-09-26
+- [x] Route stubs for every public page in PRD §5; zod-validated public config (`content/site.config.json`)
+- [x] Security headers + strict nonce CSP (D-022) + `security-headers.test.ts`; claims test; Vitest; ESLint
+- [ ] **Moved to the Contact page (D-021, the first page that needs them):** Drizzle + PGlite dev, env config,
+      `/api/v1` stubs, CI workflow. Auth library choice → D-entry, moved to Admin.
+- [ ] `impeccable init` (writes PRODUCT.md), README setup instructions (next session)
 - [ ] After the first Stage 4 pages: gbrain trial per D-019 (embedding privacy check → index code from
       the repo → 10 known-answer questions with/without → keep or drop, recorded as a D-entry)
 **Verify:** green (lint, typecheck, test, build); CI green on first push (push needs permission).

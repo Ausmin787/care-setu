@@ -24,6 +24,7 @@ refs/
 
 # Tool working dirs
 .impeccable/
+.playwright-mcp/
 .claude/settings.local.json
 .claude-flow/
 .swarm/

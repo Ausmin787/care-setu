@@ -9,8 +9,16 @@ service pages, a patient query form, payment against a quote, and a staff admin.
 holder to be set once the legal entity exists (Q5). Until then: proprietary, all rights reserved.
 
 ## Setup
-Not scaffolded yet. Setup instructions arrive with Stage 3 (Next.js + TypeScript + Tailwind v4 +
-Drizzle, PGlite for local development: no Docker, no cloud account needed).
+Node 24. Next.js 16 (App Router) + TypeScript strict + Tailwind v4; anime.js + GSAP for motion (D-021).
+No Docker or cloud account needed. Drizzle + PGlite arrive with the Contact page (D-021).
+```
+npm install
+npm run dev        # http://localhost:3000
+npm run green      # lint + typecheck + tests + build ("green", INVARIANT 26)
+```
+Copy lives in `content/` (D-008): `messages/en.json`, `services.json`, and `site.config.json` (public business
+facts; empty until the owners answer, and empty hides the UI). Hero illustration slot:
+`public/illustrations/hero-care-scene.png` (D-021).
 
 ## Docs map — one canonical home per fact
 | Topic | Canonical file |

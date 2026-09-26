@@ -1,0 +1,198 @@
+/* Geometry measured from the Transit capture and scaled to 22px stop names (x1.3):
+   spine 28px, fully rounded; station disc 12px white, inset; walk dots 6px at 14px pitch. */
+.how {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  padding-block: 88px;
+  background: var(--c-deep);
+}
+.intro h2 {
+  margin: 0;
+}
+.intro p {
+  margin: 16px 0 0;
+  max-width: 34ch;
+}
+.trip {
+  --spine: 28px;
+  --gap: 20px;
+  position: relative;
+  display: grid;
+  align-content: start;
+}
+.leg {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  --leg: var(--line, var(--c-ink));
+}
+.ink {
+  --leg: var(--c-ink);
+}
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--spine) minmax(0, 1fr);
+  column-gap: var(--gap);
+}
+/* Each row draws its own spine piece; together they read as one bar. */
+.spine {
+  position: relative;
+  --case: var(--c-ink);
+  background: var(--leg);
+  box-shadow:
+    -2px 0 0 var(--case),
+    2px 0 0 var(--case); /* ink casing (lime is 1.89:1 on the ground) */
+}
+/* Extend each piece 1px into the next so sub-pixel row heights never show a seam. */
+.row:not(.end) .spine {
+  margin-bottom: -1px;
+}
+.head .spine {
+  border-radius: calc(var(--spine) / 2) calc(var(--spine) / 2) 0 0;
+  box-shadow:
+    -2px 0 0 var(--case),
+    2px 0 0 var(--case),
+    0 -2px 0 var(--case);
+}
+.end .spine {
+  align-self: start;
+  height: var(--spine);
+  border-radius: 0 0 calc(var(--spine) / 2) calc(var(--spine) / 2);
+  box-shadow:
+    -2px 0 0 var(--case),
+    2px 0 0 var(--case),
+    0 2px 0 var(--case);
+}
+.disc {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--spine) / 2);
+  width: 12px;
+  height: 12px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: #fff;
+}
+.body {
+  padding-bottom: 28px;
+}
+.head .body {
+  display: flex;
+  line-height: 28px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding-block: 2px 22px;
+}
+.body h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px; /* centre = spine/2, so the disc sits on the title */
+  font-weight: 700;
+}
+.body p {
+  margin: 4px 0 0;
+  max-width: 44ch;
+  font-size: 19px;
+  line-height: 28px; /* integer line boxes keep spine pieces on whole pixels (no seams) */
+  color: var(--c-muted);
+}
+.dir {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 !important;
+  font-size: 22px !important;
+  font-weight: 700;
+  color: var(--c-ink) !important;
+}
+.dir svg {
+  width: 26px;
+  height: 26px;
+}
+/* Walk link: dots, an icon and a bold label (Transit "2 minutes"). */
+.walk {
+  display: grid;
+  grid-template-columns: var(--spine) minmax(0, 1fr);
+  column-gap: var(--gap);
+  padding-block: 12px 16px;
+}
+.dots {
+  justify-self: center;
+  width: 6px;
+  height: 100%;
+  overflow: visible;
+}
+.dots line {
+  stroke: var(--c-ink);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 0 14;
+}
+.walkTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.walkTitle svg {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+/* Live trip (D-021). Only while JS has set data-live: rows ahead of the marker ghost; text never does. */
+.marker {
+  display: none;
+}
+.trip[data-live] .marker {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: calc(var(--spine) / 2);
+  top: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: #fff;
+  border: 5px solid var(--c-ink);
+  box-shadow: 0 0 0 3px var(--c-deep);
+  will-change: transform;
+}
+.spine {
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.dots {
+  transition: opacity 0.35s ease;
+}
+/* Solid mixes, not opacity: the 1px overlaps between pieces would stack alpha into seams. */
+.trip[data-live] [data-seg]:not([data-passed]) .spine {
+  --case: color-mix(in srgb, var(--c-ink) 22%, var(--c-deep));
+  background: color-mix(in srgb, var(--leg) 22%, var(--c-deep));
+}
+.trip[data-live] [data-seg]:not([data-passed]) .dots {
+  opacity: 0.3;
+}
+
+@media (max-width: 900px) {
+  .trip[data-live] .marker {
+    display: none;
+  }
+  .how {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+    padding-block: 64px;
+  }
+  .trip {
+    --spine: 24px;
+    --gap: 16px;
+  }
+  .body h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

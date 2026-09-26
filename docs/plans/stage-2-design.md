@@ -1,6 +1,9 @@
 # Care Setu — Stage 2 design plan: "Setu Lines"
 
 **Status:** direction picked by Sasanka 2026-09-25 (D-020). Brand values provisional until Q4.
+**Partly superseded 2026-09-26 (D-021):** the network-diagram hero, "line isolate" as the signature, and
+finding 13 (now waived: light only). The built Home follows `docs/plans/2026-09-26-home-build.md`.
+Review findings 1–12 below were applied in that build.
 **Template:** Frontend Master Blueprint §13. Research log: Stage 2 session (LOG 2026-09-25).
 Captures live in `refs/` (gitignored, never shipped).
 

@@ -54,7 +54,7 @@ cited decision is the authority. Read it before acting on an edge case.
 24. **Agent reports are evidence, not truth.** Spot-check load-bearing claims. Platform and legal claims need a current primary-source citation. (D-016)
 25. **Open owner questions are never answered by a default.** Build behind configuration and keep the question open. (D-016)
 26. **"Green" means build + lint + typecheck + tests all pass.** Lint and tsc don't parse CSS. (D-016)
-27. **The design direction is "Setu Lines"** (`DESIGN.md`): line colours only on lines/stations/badges, lime always ink-cased, one coloured control (`#0D7CB1`), Anek type, enquiry = one question per page with an emergency note. Changing any of this needs a new D-entry. (D-020)
+27. **The design direction is "Setu Lines"** (`DESIGN.md`): line colours only on lines/stations/badges (plus small accents inside the one hero illustration), lime always ink-cased, one coloured control (`#0D7CB1`), Anek type, enquiry = one question per page with an emergency note. The Home hero is the illustrated care scene, light mode only, and the signature motion is the "live trip". Changing any of this needs a new D-entry. (D-020, D-021)
 
 ---
 

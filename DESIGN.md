@@ -1,12 +1,14 @@
 # DESIGN.md — Care Setu · "Setu Lines"
 
-Decided in D-020. Full reasoning, sample ledger and per-sample extraction: `docs/plans/stage-2-design.md`.
+Decided in D-020; hero, illustration and signature motion revised in D-021. Reasoning and ledgers:
+`docs/plans/stage-2-design.md` (direction), `docs/plans/2026-09-26-home-build.md` (the built Home).
 **Brand hexes are provisional until the owners confirm them (Q4).** When they change, re-run the contrast table.
 
 ## 1. Theme & atmosphere
 Hospital-to-home drawn as a transit network. White ground, ink type, and three signal lines taken from the logo's
 cross. It reads calm, civic and certain, like good wayfinding signage, never like a wellness brochure.
-Light mode only (the logo lockup is for light grounds); one ink band mode for the partner block and emphasis.
+Light mode only (D-021: the lockup is for light grounds, Q4 open); one ink band mode for the partner block.
+The Home hero carries one drawn care scene (D-021): illustrated, never photoreal, no real person, no logo.
 
 ## 2. Colour roles
 | Token | Hex | Job | Rule |
@@ -23,7 +25,8 @@ Light mode only (the logo lockup is for light grounds); one ink band mode for th
 | `--line-blue` | #0F8FCC | Line 02 | graphics / large text only (3.61:1) |
 | `--line-olive` | #6D9620 | Line 03 | graphics / large text only (3.48:1) |
 | `--wordmark` | #138AB2 | logo wordmark + the one highlighted phrase per page | |
-Line colours never fill panels or set body text. Contrast comes from value (ink on white), not hue.
+Line colours never fill panels or set body text, except as small accents inside the one hero illustration
+(D-021). Contrast comes from value (ink on white), not hue.
 
 ## 3. Typography
 - Family: **Anek Latin** (Anek Devanagari for Hindi, D-008), OFL, Google Fonts. Wordmark only: Open Sans 700 (logo).
@@ -42,15 +45,21 @@ Line colours never fill panels or set body text. Contrast comes from value (ink 
 - **Radio plate** (enquiry): 64px, 2px ink border, 26px ink ring; selected = inset 8px line-blue bar on the left.
 - **Line badge**: 2px ink border, radius 4px, 14px ink-cased colour square + 16px bold line name.
 - **Stations**: white capsule/disc with an 8px ink ring; interchange = white disc, ink ring ≈ 1.6× line width.
-- **Trip spine** (how it works, mobile network): 18px ink spine, white discs with a 4px ink ring; the handover link is a
-  6px dotted column; the care segment is the service line colour, ink-cased.
+- **Trip** (how it works; Transit trip view, measured): legs, each one continuous rounded 28px spine (24px mobile)
+  headed by a line badge + direction row; 12px white station discs inset; the callback link between legs is
+  6px round-cap dots at a 14px pitch with a filled icon and a bold label; the care leg is the service line colour,
+  ink-cased. Integer line boxes (28px) keep spine pieces seamless.
 - **Services index**: rows `56px 14px 1fr 22px`; closed rows muted; one open at a time; +/− from one bar; synced panel.
 - **Emergency note**: filled Tabler `alert-triangle` + "Emergency? Call 112." with a 6px ink rule on the left.
+- **Hero** (Supahero Spectrum.Life + Airbnb Homes): left: display headline (2 lines, one underlined phrase), lede
+  ≤ 20 words, one "Talk to us", three reassurances (40px ink tile + filled Tabler icon + 20px 600 line), the
+  emergency note. Right: the illustration panel, 4:5, radius 12px (the only non-4px radius, images only),
+  height-capped on short screens; 4:3 under the action on mobile.
 - Icons: Tabler **filled**, one size per context, never thin text arrows.
 
 ## 5. Layout principles
 Swiss grid with a `clamp(16px, 4vw, 56px)` gutter. Content starts at the left grid line; no centred hero column.
-Home order: promo strip (when configured) → nav with phone + "Lines open" → network hero with the first question →
+Home order: promo strip (when configured) → nav (phone + "Lines open" only when configured) → illustrated hero →
 how it works (trip) → service lines index → partner band (ink) → footer as the network legend.
 Diagrams use only 0°/45°/90° with rounded bends; parallel lines share corridors at even spacing.
 
@@ -67,7 +76,10 @@ stock-photo heroes · fade-up on every section · colour as the only carrier of 
 ## 8. Responsive behaviour
 ≤ 900px: one column; nav links collapse; the horizontal network becomes the vertical trip (Hospital at the top, three
 cased lanes, Home at the bottom); answer plates and buttons go full width. Input text ≥ 16px (iOS zoom).
-Motion (Stage 4): line isolate on desktop and touch (instant under reduced motion); scroll-scrubbed trip on desktop only.
+Motion (D-021): hero words rise from masks, then the underline draws and the panel opens (CSS, from first paint).
+Signature "live trip": a marker rides the trip spine on scroll (GSAP scrub, desktop); rows turn ghost → full as
+it passes; touch fills rows as they enter, no marker. Line isolate on the services index. All absent under
+reduced motion, where the finished state is the default.
 
 ## 9. Agent prompt guide
 "Setu Lines: a white page where hospital-to-home is drawn as a metro network in the logo's lime, blue and olive.

@@ -1,0 +1,29 @@
+{
+  "_note": "Example lines only (Q6 decides the launch set). Copy is draft; no claims beyond describing the service.",
+  "lines": [
+    {
+      "slug": "home-nursing",
+      "number": "01",
+      "line": "lime",
+      "name": "Home nursing",
+      "when": "A parent is coming home after surgery or a long stay and needs wound care, injections or a drip at home.",
+      "covers": "Visits or shifts by a nurse, following the treating doctor's instructions."
+    },
+    {
+      "slug": "physiotherapy",
+      "number": "02",
+      "line": "blue",
+      "name": "Physiotherapy and rehab",
+      "when": "After a fracture, a stroke or a joint replacement, when getting to a clinic is hard.",
+      "covers": "Sessions at home with a physiotherapist, planned around the doctor's advice."
+    },
+    {
+      "slug": "equipment",
+      "number": "03",
+      "line": "olive",
+      "name": "Equipment on rent",
+      "when": "The doctor has asked for a hospital bed, oxygen or a wheelchair at home.",
+      "covers": "Delivery and set-up of the equipment the plan needs, for as long as it is needed."
+    }
+  ]
+}

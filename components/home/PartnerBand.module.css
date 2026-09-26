@@ -1,0 +1,67 @@
+/* The one deliberate inversion (Taste finding 18): ink ground, white text. */
+.band {
+  display: grid;
+  gap: 40px;
+  padding-block: 72px;
+  background: var(--c-ink);
+  color: #fff;
+}
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: end;
+  justify-content: space-between;
+}
+.top h2 {
+  margin: 0;
+  max-width: 22ch;
+}
+.roles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.roles li {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 2px solid rgb(255 255 255 / 0.35);
+}
+.badge {
+  justify-self: start;
+  color: #fff;
+}
+.badge i {
+  box-shadow: 0 0 0 2px #fff !important;
+}
+.roles h3 {
+  margin: 4px 0 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700; /* Tailwind preflight resets heading weight */
+}
+.roles p {
+  margin: 0;
+  font-size: 18px;
+  color: var(--c-line);
+}
+.band :global(.btn.rev):focus-visible {
+  background: var(--c-heat);
+}
+
+@media (max-width: 900px) {
+  .band {
+    padding-block: 56px;
+  }
+  .roles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .top :global(.btn) {
+    width: 100%;
+  }
+}

@@ -1,0 +1,186 @@
+/* Spectrum.Life (Supahero): headline, one line, one action, a human scene in a rounded panel.
+   Split left/right so the action stays above the fold at 720px (D-021). */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  grid-template-rows: 1fr auto auto auto auto auto 1fr;
+  grid-template-areas:
+    ". fig"
+    "title fig"
+    "lede fig"
+    "actions fig"
+    "reassure fig"
+    "sos fig"
+    ". fig";
+  column-gap: clamp(32px, 4vw, 72px);
+  padding-block: clamp(24px, 4vh, 48px);
+  min-height: min(calc(100svh - var(--nav-h)), 920px);
+}
+.title {
+  grid-area: title;
+  margin: 0;
+  font-size: clamp(52px, min(7.2vw, 11.5vh), 104px);
+  max-width: 15ch;
+  text-wrap: balance;
+}
+/* One highlighted phrase per page, as an underline bar (Taste/impeccable finding 1: no gradient band).
+   A bar, not text-decoration, because decoration doesn't reach into the inline-block word masks. */
+.hl {
+  position: relative;
+  display: inline-block;
+}
+.hl::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0.12em;
+  bottom: -0.02em;
+  height: 0.1em;
+  background: var(--color-wordmark);
+  transform-origin: left center;
+}
+/* Word masks: the descender room is padded in and given back, so "p" isn't clipped. */
+.w {
+  display: inline-block;
+  overflow: clip;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  vertical-align: top;
+}
+.w > span {
+  display: inline-block;
+}
+
+/* Entrance (CSS, from first paint, D-021): words rise out of their masks in reading order, then the
+   underline draws; the panel opens from the bottom. Absent entirely under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .w > span {
+    animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(80ms + var(--i) * 70ms);
+  }
+  .hl::after {
+    animation: draw 0.6s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation-delay: calc(200ms + var(--i) * 70ms);
+  }
+  .panel {
+    animation: open 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes open {
+  from {
+    clip-path: inset(100% 0 0 0 round 12px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 12px);
+  }
+}
+.lede {
+  grid-area: lede;
+  margin: clamp(16px, 2.6vh, 28px) 0 0;
+  max-width: 34ch;
+  font-size: 22px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.actions {
+  grid-area: actions;
+  margin-top: clamp(20px, 3vh, 32px);
+}
+/* Airbnb Homes: three plain reassurances with icons, under the action. */
+.reassure {
+  grid-area: reassure;
+  list-style: none;
+  margin: clamp(24px, 3.4vh, 40px) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.reassure li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.tile {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 4px;
+  background: var(--c-ink);
+  color: #fff;
+}
+.tile svg {
+  width: 22px;
+  height: 22px;
+}
+.sos {
+  grid-area: sos;
+  margin: clamp(20px, 3vh, 32px) 0 0;
+  max-width: 34ch;
+}
+.panel {
+  grid-area: fig;
+  position: relative;
+  align-self: center;
+  justify-self: end;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  /* Short screens cap the height, not the width, so the panel keeps filling its column (the art crops). */
+  max-height: calc(100svh - var(--nav-h) - 64px);
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--c-deep);
+}
+.img {
+  object-fit: cover;
+  /* hero-care-scene.png (D-021): faces sit at ~25-35% height, feet at ~90%; anchor keeps faces in any crop */
+  object-position: 50% 55%;
+}
+.pending {
+  position: absolute;
+  inset: auto 20px 20px;
+  font-size: 16px;
+  color: var(--c-muted);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: "title" "lede" "actions" "fig" "reassure" "sos";
+    min-height: 0;
+    padding-block: 28px 40px;
+  }
+  .title {
+    font-size: clamp(48px, 13vw, 72px);
+  }
+  .lede {
+    font-size: 20px;
+  }
+  .actions :global(.btn) {
+    width: 100%;
+  }
+  .panel {
+    margin-top: 28px;
+    max-width: none;
+    aspect-ratio: 4 / 3;
+  }
+  .img {
+    object-position: 50% 42%;
+  }
+}

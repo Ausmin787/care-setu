@@ -347,3 +347,72 @@ recorded decision in `docs/plans/stage-2-design.md` (fixes land in Stage 4; the 
 **Not verified:** a true 360/390px screenshot (mobile styles written; headless Chrome can't go below ~500px); Refero MCP not connected (free site used); Mobbin Health sites/Flows Pro-locked; the
 `image-to-code` skill's image-generation step was not run (structure was extracted from captures);
 Chrome dropped twice mid-session. Owner copy, service set (Q6), hours (Q12) are all still open.
+
+## D-021 · 2026-09-26 · Trust hero with an illustrated care scene; build starts (partially supersedes D-020: hero, signature motion, colour-only-on-lines)
+Sasanka reviewed the Stage 2 comp and rejected its hero: the Hospital-to-Home metro diagram was
+"looking bad", "very confusing", and "horrible" on mobile. He asked for a hero that earns **trust**
+(not techy, not flashy), checked against Supahero, and for the build to begin on localhost with motion,
+without further static comps. He picked from two AskUserQuestion options (the recommended one each time):
+- **Hero = illustrated care scene** (Supahero Spectrum.Life layout; Airbnb Homes reassurances; Wise
+  headline weight). Left: headline, a lede of ≤20 words, one "Talk to us" action, three reassurance lines,
+  the emergency note. Right: a 4:5 rounded panel holding an **AI-generated illustration** (ChatGPT image,
+  run by Sasanka): a carer and an elderly man at home. It is drawn, never photoreal, shows no real person and
+  wears no logo, so it isn't presented as real staff (INVARIANT 16; CLAIMS C-027). The metro network
+  diagram is removed from the hero.
+- **Reassurances only from recorded facts:** quote before payment (D-004, C-024), a callback from the
+  team (D-006 / PRD F1, C-025), Delhi NCR (PRD, C-026). "One coordinator for everything" was dropped
+  because nothing evidences it yet.
+- **Signature motion = "live trip"** on How it works: a position marker travels the Transit-style spine
+  on scroll and each station turns from upcoming to passed. It replaces "line isolate" as the signature;
+  line isolate stays as a small state on the services index.
+- **Colour rule relaxed once:** the brand line colours may appear as small accents inside the one hero
+  illustration. Everywhere else, D-020's rule holds.
+- **Light mode only** for now (Taste finding 13 waived): the lockup is light-ground only and Q4 is open.
+  The tokens go through the semantic layer, so a dark theme is a variable swap later.
+- **Build scope:** Stage 3 scaffold (lean) + the Home page, then a check-in (D-011). Drizzle/PGlite,
+  `/api/v1`, auth and CI move to the Contact page, the first page that needs them.
+- **Owner review:** the owners review the running Home page instead of the comp. Sasanka (tech lead)
+  authorised going ahead; all hero copy is draft until the owners approve it.
+Kept from D-020: Anek type, the action blue `#0D7CB1`, NHS button physics, the enquiry flow, line badges,
+How it works as a Transit trip, the services index, the partner band, the footer legend.
+**Why:** For a family arranging care after a hospital stay, trust comes from seeing people and hearing plainly
+what happens next, not from a network metaphor they have to decode. Every health hero studied on Supahero
+carries trust through a human scene. We have no photos and may not fake them, so a clearly drawn scene is the honest
+equivalent. The comp's diagram also failed Blueprint §1.5: the trip section didn't match its sample.
+**Rejected:** "Question-first, no image" (reads as a form, not a care brand); "Scene + question" (too tight at
+720px and on mobile); a photoreal AI image (INVARIANT 16); a hand-drawn SVG scene (weak at human figures);
+keeping draw-on as the signature (repeats Hungry Anna D-083).
+**Built as (deviation from the plan, recorded):** the hero entrance is CSS, not anime.js. The words are
+server-rendered in masks and rise from the first paint (Smooth UI "word cut staircase"), then the "at home"
+underline draws and the panel opens. JS would paint the headline, hide it on hydration, and reveal it again,
+and §9.2 bans motion that delays reading. The live trip is GSAP ScrollTrigger (scrub, desktop) with
+per-row ScrollTriggers on touch; no pin.
+**Verified (2026-09-26, Playwright at real viewports on the dev server):** green (lint, typecheck, 28 tests,
+build); 0px horizontal overflow at 360/390/768/1024/1440; hero CTA above the fold at 360×780 (377px),
+390×844 (386px) and 1440×720 (449px, whole hero ends at 689px); the trip matches the Transit sample's
+geometry (side-by-sides in `refs/build-sbs/`); live-trip states step correctly through the scroll
+(1110000 → 1111110 → 1111111); reduced motion *emulated* (no animation, no live mode, full route); 0 transient
+attributes in the server HTML; console clean; `impeccable detect` clean at 1280 and 1440, with one finding
+at 390 (the wordmark `#138AB2` is 4.0:1, waived as a logotype under WCAG 1.4.3); Taste pre-flight (one fail
+fixed: the footer "Contact" became "Talk to us"); the web-interface-guidelines audit (skip link, touch-action,
+and per-frame layout reads fixed); tab path with visible focus; heading outline; the fact audit of every
+route's HTML is clean; security headers served.
+**Illustration (same day):** Sasanka generated two ChatGPT variants and left the pick to Claude. Kept
+`03_33_16`: quiet upper-left wall and figures in the lower two-thirds, so it crops cleanly to about 1:1 at
+1440×720 and to 4:3 on mobile (checked by screenshot, faces in frame); calmer and flatter than `03_33_29`,
+whose higher heads and foreground blur would clip on mobile. The alternate is kept in `refs/illustrations/`.
+**Not verified:** a real phone or Safari (Chromium only); `impeccable init`/PRODUCT.md (deferred to the
+next session); owner approval of any copy or of the illustration.
+
+## D-022 · 2026-09-26 · Strict CSP by per-request nonce; every page renders dynamically
+TRD §4 asks for `script-src 'self'` with no inline allowance. Next.js 16 injects inline scripts, so the
+only strict option (bundled guide `node_modules/next/dist/docs/01-app/02-guides/content-security-policy.md`)
+is a nonce generated per request in `proxy.ts` with `'strict-dynamic'`. Consequence: **all pages render
+dynamically** (no static optimisation, no ISR, no PPR). `style-src` keeps `'unsafe-inline'` because
+`next/image` `fill` and style attributes need it. Dev adds `'unsafe-eval'` (React debugging); production never
+does. The policy lives in `lib/security.ts`, used by `proxy.ts` and `next.config.ts`, and asserted by
+`tests/security-headers.test.ts`.
+**Why:** The site takes health enquiries and payments (TRD §4, D-010). A marketing site this small loses
+little from dynamic rendering, and it keeps one strict policy on every page instead of a weaker one on some.
+**Rejected:** `'unsafe-inline'` scripts (defeats the CSP); experimental SRI hash mode (experimental, and it
+doesn't cover inline scripts); a nonce on only the Contact/Pay routes (two policies to reason about).

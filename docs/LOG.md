@@ -62,3 +62,26 @@ Template:
   synced Impeccable to GitHub main (skill 4.4.0, engine 0.1.6, SHA256-verified, no hooks). Re-scan gave the
   same 10 findings. Mistake: stopping the scan server killed every python.exe (blueprint §19.5 #26).
 - Waiting on: owners' feedback on the comp (Sasanka shares it). No changes → Stage 3 scaffold.
+
+## 2026-09-26 · Stage 3 + Stage 4 Home · new trust hero, site built with motion
+- Sasanka rejected the comp's metro-diagram hero ("confusing", "horrible" on mobile) and the trip section's
+  fidelity to its Transit sample; asked for a trust-first hero checked on Supahero, then a real build on
+  localhost with motion. Picked "Illustrated care scene" (recommended) and light-only (D-021).
+- Supahero studied: Spectrum.Life, Airbnb Homes, Wise, Superpower, Biograph, MyHealthPrac, Phamily, Canopy,
+  Habito, Family Style, Quantum Body. Chrome extension disconnected once at start; retried.
+- Scaffold: Next 16.3.6 in a temp sibling, moved in (docs protected). Vitest 5 needed @types/node ^24.
+  CSP: the bundled Next docs show strict script-src needs a per-request nonce → D-022 (all pages dynamic).
+- Built Home: Nav, Hero (CSS word-mask entrance), Trip (Transit legs, measured), ServiceIndex (Cue Kit),
+  PartnerBand, Footer legend; route stubs; claims + security-header tests.
+- Fixed during verification: 3-line headline; mid-panel dead band on short screens; trip seams (fractional
+  line boxes); live-trip state read the scroll target instead of the rendered marker; ghosting by opacity
+  stacked alpha; mobile nav wrap; partner h3 weight (Tailwind preflight); footer duplicate CTA intent;
+  closed <details> occlusion; skip link; per-frame layout reads.
+- Mistake: twice made a usage edit before its declaration edit (layout `connection`, `t.nav.skip`);
+  the post-edit hook caught the second (Blueprint §19.5 #9, again).
+- Not verified: real phone / Safari; the illustration (not generated yet); owner copy approval.
+- Next: Sasanka reviews localhost + generates the illustration; then `impeccable init` and the Services page.
+- Later the same day: Sasanka generated two ChatGPT illustrations and left the pick to Claude; `03_33_16` shipped
+  (crop latitude, calmer; D-021). The module-level `existsSync` cached "no image" in dev and was moved per render.
+  §19.5 #9 happened a third time (a declaration removed in one Edit, re-added in the next). Committed with permission;
+  blueprint updated with permission (§14 row, §19 notes, §11 traps).

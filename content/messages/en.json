@@ -1,0 +1,82 @@
+{
+  "_note": "Draft copy (D-021). Owners approve before launch. Every factual line maps to an approved row in docs/CLAIMS.md.",
+  "meta": {
+    "title": "Care Setu: care after hospital, at home",
+    "description": "Care Setu arranges care at home after a hospital stay in Delhi NCR. Tell us what is needed and a coordinator calls you back with a care plan and a quote."
+  },
+  "nav": {
+    "home": "Care Setu home",
+    "services": "Services",
+    "how": "How it works",
+    "partner": "Partner with us",
+    "talk": "Talk to us",
+    "linesOpen": "Lines open",
+    "linesClosed": "Lines closed",
+    "menu": "Menu",
+    "skip": "Skip to content"
+  },
+  "hero": {
+    "title": "Care after hospital, at home.",
+    "lede": "Tell us what the patient needs after a hospital stay. We arrange the care at home as one plan.",
+    "cta": "Talk to us",
+    "reassure": [
+      { "icon": "phone", "text": "A coordinator calls you back", "claim": "C-025" },
+      { "icon": "invoice", "text": "A care plan and a quote before you pay", "claim": "C-024" },
+      { "icon": "pin", "text": "Care at home across Delhi NCR", "claim": "C-026" }
+    ],
+    "emergencyTitle": "Emergency? Call 112.",
+    "emergencyText": "Home care is not emergency care.",
+    "illustrationAlt": "Illustration: a home-care nurse checks an elderly man's blood pressure in his living room while his daughter joins on a video call.",
+    "illustrationPending": "Illustration to come"
+  },
+  "trip": {
+    "title": "From the ward to your door",
+    "lede": "Every family follows the same route. You always know which stop you are at.",
+    "legEnquiry": "Your enquiry",
+    "legEnquiryDir": "Takes a few minutes",
+    "stopAsk": { "title": "You tell us what is needed", "text": "Six short questions online. Nothing is shared until you agree." },
+    "walk": { "title": "A coordinator calls you back", "text": "To understand the patient, the home and the doctor's advice." },
+    "legCareDir": "Towards home",
+    "stopPlan": { "title": "Care plan and quote", "text": "One plan and one quote, with a reference number." },
+    "stopPay": { "title": "Pay the quote, care begins", "text": "You pay online against the quote reference, never before it." },
+    "stopHome": { "title": "Care at home", "text": "Questions and changes go to the Care Setu team." }
+  },
+  "services": {
+    "title": "Pick the line the patient needs",
+    "examplesNote": "These lines are examples. Which lines run at launch is the owners' decision.",
+    "whenLabel": "When families call us for this",
+    "coversLabel": "What the plan covers",
+    "ask": "Talk to us",
+    "lineLabel": "Line"
+  },
+  "partner": {
+    "title": "Do you discharge patients, or care for them?",
+    "cta": "Partner with us",
+    "roles": [
+      { "line": "lime", "lineName": "Line 01", "title": "Hospitals and discharge desks", "text": "Hand a patient over to one team instead of five phone numbers." },
+      { "line": "blue", "lineName": "Line 02", "title": "Doctors and clinics", "text": "Refer a patient and know who is following your instructions at home." },
+      { "line": "olive", "lineName": "Line 03", "title": "Nurses, attendants, therapists", "text": "Join the network and take on home visits." }
+    ]
+  },
+  "footer": {
+    "legendTitle": "Network legend",
+    "moreLines": "More lines as they open",
+    "links": {
+      "services": "Services",
+      "how": "How it works",
+      "partner": "Partner with us",
+      "contact": "Talk to us",
+      "pay": "Pay a quote",
+      "faq": "FAQ",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "refunds": "Refunds"
+    },
+    "draft": "Draft",
+    "legal": "Care Setu, Delhi NCR"
+  },
+  "stub": {
+    "text": "This page is built in Stage 4, one page at a time.",
+    "back": "Back to home"
+  }
+}

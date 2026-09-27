@@ -41,8 +41,11 @@ void main(){
 }`;
 
 // "#0d7cb1" -> [r, g, b] in 0..1. Colours come from the CSS tokens so the shader never holds a raw hex.
+// Short hex is expanded: the CSS minifier turns "#ffffff" into "#fff".
 function rgb(hex: string): [number, number, number] {
-  const n = parseInt(hex.trim().replace("#", ""), 16);
+  let h = hex.trim().replace("#", "");
+  if (h.length === 3) h = [...h].map((c) => c + c).join("");
+  const n = parseInt(h, 16);
   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
 }
 

@@ -36,6 +36,7 @@ facts; empty until the owners answer, and empty hides the UI). Hero illustration
 | How AI agents work here (loop, guardrails, evals, Jev, Codex) | `docs/AGENT-OPS.md` |
 | Logo, colours, brand assets | `docs/BRAND.md`, `brand/` |
 | Visual design system (Stage 2) | `DESIGN.md` |
+| Owner's design reactions, round by round | `docs/OWNER-TASTE.md` |
 | Build plans | `docs/plans/` |
 | Session trace | `docs/LOG.md` |
 | Agent rules | `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex/others) |

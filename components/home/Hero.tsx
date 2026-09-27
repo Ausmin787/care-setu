@@ -1,6 +1,3 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
-import Image from "next/image";
 import Link from "next/link";
 import {
   IconAlertTriangleFilled,
@@ -10,11 +7,9 @@ import {
   IconPhoneCallFilled,
 } from "@tabler/icons-react";
 import { t } from "@/lib/content";
+import { CallStatus } from "./CallStatus";
+import { HeroVideo } from "./HeroVideo";
 import s from "./Hero.module.css";
-
-// Supplied by Sasanka from ChatGPT image (D-021, CLAIMS C-027). Until then the panel is a placeholder.
-const ILLUSTRATION = "/illustrations/hero-care-scene.png";
-const illustrationPath = path.join(process.cwd(), "public", ILLUSTRATION);
 
 const icons = {
   phone: IconPhoneCallFilled,
@@ -34,60 +29,49 @@ function Words({ words, from }: { words: string[]; from: number }) {
   ));
 }
 
+// Warm Room hero (D-027). Function Health's layout (a face at right in warm light, a light serif at left, a
+// divided fact row, a pause control) carrying myhealthprac's full-bleed loop and pill. Text sits on an ink
+// scrim, so the section runs in ink mode.
 export function Hero() {
   const [before, highlight, after] = t.hero.title.split(/(at home)/);
   const lead = before.trim().split(" ");
   const hl = (highlight + after).split(" "); // the full stop rides with the last word
-  const hasIllustration = existsSync(illustrationPath); // checked per render, so a dropped-in file shows at once
   return (
-    <section className={`${s.hero} wrap`} aria-labelledby="hero-title">
-      <h1 id="hero-title" className={`${s.title} t-display`}>
-        <Words words={lead} from={0} />{" "}
-        <span className={s.hl} style={{ "--i": lead.length + hl.length } as React.CSSProperties}>
-          <Words words={hl} from={lead.length} />
-        </span>
-      </h1>
-      <p className={s.lede}>{t.hero.lede}</p>
-      <div className={s.actions}>
-        <Link className="btn" href="/contact">
-          {t.hero.cta}
-          <IconCircleArrowRightFilled aria-hidden="true" />
-        </Link>
+    <section className={s.hero} data-mode="ink" data-nav-over aria-labelledby="hero-title">
+      <div className={s.media}>
+        <HeroVideo className={s.video} buttonClassName={s.pause} />
       </div>
-      <ul className={s.reassure}>
-        {t.hero.reassure.map((r) => {
-          const Icon = icons[r.icon as keyof typeof icons];
-          return (
-            <li key={r.claim}>
-              <span className={s.tile}>
+      <div className={`${s.inner} wrap`}>
+        <h1 id="hero-title" className={`${s.title} t-display`}>
+          <Words words={lead} from={0} /> <em className={s.hl}><Words words={hl} from={lead.length} /></em>
+        </h1>
+        <p className={s.lede}>{t.hero.lede}</p>
+        <div className={s.actions}>
+          <Link className="btn" href="/contact">
+            {t.hero.cta}
+            <IconCircleArrowRightFilled aria-hidden="true" />
+          </Link>
+          <CallStatus className={s.status} dotClassName={s.dot} />
+        </div>
+        <ul className={s.facts}>
+          {t.hero.reassure.map((r) => {
+            const Icon = icons[r.icon as keyof typeof icons];
+            return (
+              <li key={r.claim}>
                 <Icon aria-hidden="true" />
-              </span>
-              {r.text}
-            </li>
-          );
-        })}
-      </ul>
-      <p className={`sos ${s.sos}`}>
-        <IconAlertTriangleFilled aria-hidden="true" />
-        <span>
-          <b>{t.hero.emergencyTitle}</b>
-          {t.hero.emergencyText}
-        </span>
-      </p>
-      <figure className={s.panel} data-hero-panel>
-        {hasIllustration ? (
-          <Image
-            src={ILLUSTRATION}
-            alt={t.hero.illustrationAlt}
-            fill
-            priority
-            sizes="(max-width: 900px) 100vw, 45vw"
-            className={s.img}
-          />
-        ) : (
-          <figcaption className={s.pending}>{t.hero.illustrationPending}</figcaption>
-        )}
-      </figure>
+                {r.text}
+              </li>
+            );
+          })}
+        </ul>
+        <p className={`sos ${s.sos}`}>
+          <IconAlertTriangleFilled aria-hidden="true" />
+          <span>
+            <b>{t.hero.emergencyTitle}</b>
+            {t.hero.emergencyText}
+          </span>
+        </p>
+      </div>
     </section>
   );
 }

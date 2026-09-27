@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anek_Latin, Unbounded } from "next/font/google";
+import { Anek_Latin, Petrona, Unbounded } from "next/font/google";
 import { connection } from "next/server";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
@@ -12,6 +12,14 @@ const anek = Anek_Latin({
   subsets: ["latin"],
   weight: "variable",
   axes: ["wdth"],
+});
+
+// Display serif, OFL (D-027): variable weight, roman + italic (the one italic phrase per page).
+const petrona = Petrona({
+  variable: "--font-petrona",
+  subsets: ["latin"],
+  weight: "variable",
+  style: ["normal", "italic"],
 });
 
 // Web wordmark only (nav + footer): Unbounded 800, OFL (D-023). Provisional until the owners confirm (Q4).
@@ -27,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#fbf6ee",
   colorScheme: "light",
 };
 
@@ -35,7 +43,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   // Every page renders per request so the CSP nonce reaches Next's inline scripts (D-022).
   await connection();
   return (
-    <html lang="en" className={`${anek.variable} ${wordmark.variable}`}>
+    <html lang="en" className={`${anek.variable} ${petrona.variable} ${wordmark.variable}`}>
       <body>
         <a className="skip" href="#main">
           {t.nav.skip}

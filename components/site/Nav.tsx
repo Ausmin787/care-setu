@@ -10,11 +10,13 @@ const links = [
   { href: "/partner", label: t.nav.partner },
 ];
 
+// Full-width bar (D-028, after Biograph and myhealthprac): solid parchment by default; over a hero marked
+// data-nav-over it starts transparent and solidifies on scroll (CSS only, see the module). Warm-toned mark.
 export function Nav() {
   return (
     <header className={`${s.nav} wrap`}>
       <Link className={s.brand} href="/" aria-label={t.nav.home}>
-        <LogoMark className={s.mark} />
+        <LogoMark className={s.mark} tone="warm" />
         <b translate="no">CARE SETU</b>
       </Link>
       <nav className={s.links} aria-label="Main">

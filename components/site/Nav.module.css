@@ -1,35 +1,63 @@
-/* Nav <= 72px (Taste finding 11). Sticky so "Talk to us" is always reachable (elderly rule). */
+/* Full-width bar (D-028). Biograph measured 2026-09-27: over the hero, light links on no fill; after scrolling, a
+   solid light bar with dark links and a dark pill. Sticky so "Talk to us" is always reachable (elderly rule). */
 .nav {
   position: sticky;
   top: 0;
   z-index: 20;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
   height: var(--nav-h);
+  box-sizing: border-box;
   background: var(--c-canvas);
-  border-bottom: 2px solid var(--c-ink);
+  border-bottom: 1px solid var(--c-line);
+  color: var(--c-ink);
+}
+/* Over a hero (Home): transparent with cream text at the top, solid by 140px of scroll. Scroll-driven, so no JS and
+   no flash; without scroll-timeline support the bar simply stays solid. Tokens flip at the midpoint, the fill and
+   rule fade across the range. */
+@supports (animation-timeline: scroll()) {
+  :global(body:has([data-nav-over])) .nav {
+    animation: solidify linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 140px;
+  }
+}
+@keyframes solidify {
+  from {
+    --c-canvas: var(--color-ink);
+    --c-ink: var(--color-cream);
+    --c-line: transparent;
+    --c-accent: var(--color-cream);
+    --c-accent-deep: #ffffff;
+    background-color: transparent;
+    border-bottom-color: transparent;
+  }
+}
+/* The global reduced-motion rule shortens every animation; this one is scroll-linked, not timed, so keep it. */
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    animation-duration: auto !important;
+  }
 }
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
 }
 .mark {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   flex: none;
 }
-/* Web wordmark (D-023): Unbounded 800 uppercase in the nav (the footer keeps lowercase). Capitals get open
-   spacing, not the lowercase's -0.04em. */
+/* Web wordmark (D-023): Unbounded 800 uppercase; in the nav it takes the text colour (warm, D-028). */
 .brand b {
   font-family: var(--font-wordmark), var(--sans);
   font-weight: 800;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1;
   letter-spacing: 0.01em;
-  color: var(--color-wordmark);
 }
 .links {
   display: flex;
@@ -43,7 +71,7 @@
 }
 .links a:hover {
   text-decoration: underline;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
 .right {
@@ -62,8 +90,8 @@
   font-variant-numeric: tabular-nums;
 }
 .phone svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 .menu {
   display: none;
@@ -75,16 +103,16 @@
   place-items: center;
   width: 48px;
   height: 48px;
-  border: 2px solid var(--c-ink);
-  border-radius: 4px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
   cursor: pointer;
 }
 .menu summary::-webkit-details-marker {
   display: none;
 }
 .menu summary svg {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
 }
 .sheet {
   position: absolute;
@@ -92,20 +120,22 @@
   top: calc(100% + 12px);
   min-width: 240px;
   display: grid;
-  background: var(--c-surface);
-  border: 2px solid var(--c-ink);
-  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hair);
+  border-radius: 20px;
 }
 /* Chrome keeps layout boxes for closed <details> content; drop them so nothing sits under the hero. */
 .menu:not([open]) .sheet {
   display: none;
 }
 .sheet a {
-  padding: 14px 18px;
+  padding: 14px 20px;
   font-size: 19px;
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--color-hair);
 }
 .sheet a:last-child {
   border-bottom: 0;
@@ -123,17 +153,17 @@
     gap: 12px;
   }
   .right {
-    gap: 10px;
+    gap: 8px;
   }
   .mark {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
   .brand {
     gap: 8px;
   }
   .brand b {
-    font-size: 16px;
+    font-size: 15px;
     white-space: nowrap;
   }
   .right :global(.btn) {

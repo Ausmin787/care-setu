@@ -514,3 +514,117 @@ Superpower in `refs/services/`; fact audit of `/` and `/services` HTML (owner fa
 "Delhi NCR", 24x7 or dashes).
 **Not verified:** a true 360/390px render (headless floor ~500px; Playwright MCP not connected); a real phone or
 Safari; the web-design-guidelines audit; owner approval of the grouping names and the copy (Q15).
+
+## D-026 · 2026-09-27 · Owner review round 1: "Setu Lines" look rejected; direction reopened; owner-taste loop (partially supersedes D-020/D-021/D-023/D-025: look, hero, light-only, Services structure)
+The owner reviewed Home and Services on localhost (through Sasanka, 2026-09-27):
+- **Rejected:** the overall look ("generic light background, simple blue buttons, like a normal Indian healthcare
+  site") and the Services page's design and structure (D-025). Services is to be redone, with animation.
+- **Liked:** the Home "From the ward to your door" trip and its live-trip animation (D-021), and the ink footer's
+  big moving "care setu" wordmark (D-023).
+- **Reference:** the hero of myhealthprac.com. Read with Playwright the same day (Claude in Chrome not connected):
+  one muted, looping, inline 5.4 s video at 1280×720 (file named `topaz_hero`, so likely AI-upscaled), warm dark
+  grade, a two-line headline in a large grotesk at left, three icon feature lines, black/white pill buttons with a
+  round arrow; the rest of their page is warm greige and sand, full-bleed photos, wide spacing.
+- **Mandate:** the owner told Sasanka to do it "his way" after this review. Sasanka chose to build the new direction,
+  then take it back to the owner, with every agree/disagree recorded in `docs/OWNER-TASTE.md` and analysed there, so
+  later pages start from sources aimed at the owner's taste rather than guesses.
+**Decided:**
+- The "Setu Lines" look (D-020: light mode, one blue control, Anek, colour only on lines; D-021: illustrated hero,
+  light only) is **no longer binding**. The new direction is set by a Blueprint §13 plan and locked in its own
+  D-entry before code.
+- **Kept, re-skinned to the new direction:** the ward-to-door trip and its live-trip motion (how it works stays),
+  and the footer wordmark's moving fill (the mechanics stay; the gradient is re-toned).
+- **Home hero = a looping, muted background video** in the spirit of the reference, not a copy of it. Sasanka
+  generates the clip with Gemini (Veo) from Claude's prompt. It is anonymous mood footage: never captioned or implied
+  as our staff, patients or premises (Invariant 16); its provenance goes in `CLAIMS.md`. The plain reassurances
+  (callback promise with hours, area, phone, emergency note) stay in the hero (D-024).
+- **Order:** direction plan → Home hero → re-skin trip and footer → Services redesign with animation.
+- Still binding: Unbounded wordmark provisional (D-023, Q4), CSP (D-022), claims rules (D-007), owner facts (D-024).
+**Why:** The owner is the client and rejected the look, not the facts. His three likes (cinematic footage, story
+motion, a bold moving brand moment) point one way: premium and emotional over template-clinical. Recording each
+round turns taste into evidence instead of re-guessing it per page.
+**Rejected:** re-skinning Setu Lines with darker colours (the owner rejected the feel, not the palette only);
+copying myhealthprac's eye (their motif says diagnostics; ours is home care); stock footage first (few Indian
+subjects; Sasanka can generate); redoing Services before the new look exists.
+**Hero clip (added the same day):** Pexels 7522351 (hands on a white bed) was rejected: high-key white against the
+warm dark direction, reads as illness, and it comes from a widely reused stock shoot. A sweep of Pexels (16 queries),
+Mixkit and Supahero/Recent/Biograph found no free clip that is Indian, at home, warm and loopable. Sasanka generated
+one in Gemini (Veo) instead (C-034). Gemini's visible ✦ mark (48px at x 1136–1184, y 576–624 of 1280×720) is removed by
+cropping to 1280×560, not by an eraser tool; SynthID stays. Google's help page offers watermark-off only to AI Ultra
+users in India and its policy bans passing AI content off as human-made (§4.5); Claude recommended a footer line
+"Some scenes on this site are AI-generated", and **Sasanka declined it**. The clip is never presented as real (Invariant
+16). ffmpeg 9.0.2 installed with winget, with Sasanka's permission, for the crop and encode.
+
+## D-027 · 2026-09-27 · Direction locked: "Warm Room" (supersedes D-020's look and D-021's hero; partially supersedes D-023: footer stops, D-025: Services structure)
+Sasanka picked Warm Room from three sample-grounded options (AskUserQuestion with previews; Night Room and Greige
+Clinic rejected), then approved the Blueprint §13 plan (`~/.claude/plans/go-ahead-serialized-creek.md`).
+- **Look:** a warm parchment page (Function Health's range, #FBF6EE / #F3ECE1), warm near-black ink, a sand block
+  (#D8C7AE); rules from Refero Alveos One (achromatic value family, near-black actions, 25/100px radius, no shadows;
+  extract in `refs/warm-room/`). Ink bands (`data-mode="ink"`) for the trip and the footer.
+- **The logo's colours stay the only chroma** (Sasanka: people remember the logo as green, blue and white; the warm
+  palette must not overshadow it or its meaning). No honey/terracotta accent. Line colours stay on trip spines,
+  discs and badges; the footer wordmark drifts through the logo's blue, green and white. The owner reviews this in
+  round 2; if he dislikes it, the lines re-tone warm (new D-entry).
+- **Buttons:** ink pills (cream on dark) with a round disc and a filled Tabler arrow; the logo blue appears only in
+  the disc and focus details, never as a filled button (the owner disliked "simple blue buttons").
+- **Type:** display **Petrona** (OFL, variable, light 300 with italics), picked by Sasanka from a headless-Chrome
+  sheet setting Petrona / Labrada / Faustina in the real hero over the video frame (Labrada wrapped to 3 lines;
+  Faustina sturdier but less refined). Anek Latin body at normal width (keeps Devanagari, D-008), Unbounded
+  wordmark (D-023).
+- **Home hero:** the Gemini loop (C-034) full-bleed with a warm dark scrim at left, existing hero copy, a fact row,
+  a live "taking calls now" status computed from the D-024 hours, the emergency note, and a pause button (WCAG
+  2.2.2); poster only under reduced motion. Nav becomes a solid cream floating bar (keeps the logo on a light ground).
+- **Kept mechanics:** the live trip (D-021) and the footer shader (D-023), re-skinned only.
+- **Services (Stage B):** three hairline columns (one per line) with native `<details>` rows and a line-draw on
+  scroll; the sticky rail goes. Built after the Home check-in.
+**Why:** The owner's three likes (cinematic footage, story motion, a bold moving brand moment) and his reference
+(myhealthprac: greige, black pills, sand block, footage) point to warm and premium; Function shows the same shot
+(a face at right in warm light) carried by a parchment page, which suits older readers better than a dark page.
+**Rejected:** Night Room (heavy to read for older visitors; needs photography everywhere); Greige Clinic (closest
+to myhealthprac, so it risks reading as a copy); a honey accent (would compete with the logo's colours);
+frosted-glass nav (slop tell; the logo lockup needs a light ground).
+**Stage A built (2026-09-27, Home):** Petrona via `next/font`; semantic tokens re-pointed in `app/globals.css` plus a
+`[data-mode="ink"]` block (hero, trip, footer); `.btn` is an ink pill with the logo-blue arrow disc. Hero rewritten
+(`Hero.tsx`, new `HeroVideo.tsx`: server renders paused on the poster, client plays only without reduced motion,
+pause/play button; new `CallStatus.tsx` + `lib/hours.ts`: live status from `site.config.json` hours, which now holds
+7 AM to 10 PM from D-024 instead of `null`). Nav is a solid cream floating bar; the hero slides under it. Trip on
+ink (disc and marker read `--c-canvas`); service index re-skinned; partner band on sand; footer in ink mode, wordmark
+stops blue, blue, green, white. `proxy.ts` skips `video/`. The footer shader's parser now expands 3-digit hex: the
+CSS minifier had turned `#ffffff` into `#fff`, which drew a wrong, saturated blue (caught on screenshot).
+Deviation from the plan: the nav stays a floating bar everywhere instead of going flush after the hero (no
+IntersectionObserver; one state is simpler and reads fine).
+**Verified:** green (lint, typecheck, 37 tests incl. 6 new IST boundary tests for the call status, build);
+Playwright at 1440x900 and 390x844 (hero, trip on ink, sand band, footer; no horizontal overflow); the video plays
+(webm), pauses and resumes from the button; reduced motion emulated: paused on the poster, "Play" label, server HTML
+has 0 `data-live`, no autoplay, no clock text; hero contrast sampled from real frames (headline >= 4.4:1 at its worst
+pixel after the scrim was strengthened from a measured 2.6:1; lede 10:1; fact row 7.5:1); `impeccable detect` at
+1280/1440/1024/390: video-underlay contrast clean after the fix; kept with reasons: italic serif display (the one
+italic phrase, from the approved preview), cream page (the chosen direction), cyan fallback gradient (D-023 waiver),
+nav logotype 3.7:1 (WCAG 1.4.3 logotype exemption). Taste pre-flight: zero em/en dashes; waived where the Blueprint
+and D-027 win: warm cream + espresso palette (Taste bans it as the premium-consumer default; here it is the approved
+direction and the chroma is the logo's blue and green, not brass), ink bands between light sections (theme lock),
+light only (no dark mode, D-021), hero carries the status line, fact row and emergency note (required facts and the
+instrument), partner roles as three hairline columns (pre-existing; watch).
+**Not verified:** a real phone or Safari; 360px and 768px renders (only 390 and 1024+ checked); the footer shader on
+a low-end Android GPU; `web-design-guidelines` audit; the side-by-side against myhealthprac and Function (captured
+separately, not composited); `DESIGN.md` still describes Setu Lines (regenerate after the Stage A check-in).
+
+## D-028 · 2026-09-27 · Nav: full-width, transparent over the hero then solid; warm-toned logo in the nav only (partially supersedes D-027: floating nav bar, logo colours in the nav)
+Sasanka rejected the floating cream bar and asked for a nav like Biograph's or myhealthprac's, and for the nav's logo
+colours (the mark's green, blue, olive and white, and the blue web wordmark) to be re-toned warm to suit the page,
+**in the nav only**; the footer wordmark keeps the logo's colours. This overrides Invariant 20 (the canonical logo's
+colours) and D-027 (logo colours as the only chroma) for the nav, at Sasanka's explicit instruction.
+- **Samples (measured in Chrome 2026-09-27):** myhealthprac: fixed, transparent, 68px, light 11.5px links over the
+  footage, class swaps per section. Biograph: over its dark hero a dark bar with white links; after scrolling a solid
+  white full-width bar with dark links and a dark pill.
+- **Built as:** a full-width sticky bar (72px), solid parchment with a hairline and ink text everywhere. On a page
+  whose first section carries `data-nav-over` (Home), a CSS scroll-driven animation (`animation-timeline:
+  scroll(root)`, range 0 to 140px) starts it transparent with cream text over the footage and turns it solid as the
+  page scrolls. No JavaScript; browsers without scroll timelines get the solid bar.
+- **Warm logo:** `LogoMark tone="warm"` swaps the fills for a warm tonal set (sand tile, parchment cross, walnut and
+  caramel pieces); the nav wordmark follows the text colour. `brand/` files and the footer are untouched.
+**Why:** the floating bar read as a separate object over the footage; both samples let the hero run edge to edge and
+only solidify the bar once the reader moves on. The warm mark keeps the logo's shape (recognition) while the page's
+one colour moment stays the footer wordmark.
+**Rejected:** the floating bar (D-027); a JS IntersectionObserver toggle (a flash of the solid bar before hydration,
+and more code); a mono cream-only logo (loses the mark's structure on parchment).

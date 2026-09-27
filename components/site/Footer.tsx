@@ -19,7 +19,7 @@ const links: { href: string; label: string; draft?: boolean }[] = [
 // The footer is the network legend: every line listed as on a metro map. It closes on the wordmark (D-023).
 export function Footer() {
   return (
-    <footer className={`${s.foot} wrap`}>
+    <footer className={`${s.foot} wrap`} data-mode="ink">
       <div className={s.legend}>
         <h2>{t.footer.legendTitle}</h2>
         <ul>

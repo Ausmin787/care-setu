@@ -1,5 +1,6 @@
 /* Geometry measured from the Transit capture and scaled to 22px stop names (x1.3):
-   spine 28px, fully rounded; station disc 12px white, inset; walk dots 6px at 14px pitch. */
+   spine 28px, fully rounded; station disc 12px, inset; walk dots 6px at 14px pitch.
+   Warm Room (D-027): the section runs in ink mode, so every colour below comes from the re-pointed tokens. */
 .how {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -73,7 +74,7 @@
   height: 12px;
   translate: -50% -50%;
   border-radius: 50%;
-  background: #fff;
+  background: var(--c-canvas); /* the band colour, so on the ink band the disc reads as a hole in the spine */
 }
 .body {
   padding-bottom: 28px;
@@ -156,7 +157,7 @@
   height: 26px;
   margin: -13px 0 0 -13px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--c-canvas);
   border: 5px solid var(--c-ink);
   box-shadow: 0 0 0 3px var(--c-deep);
   will-change: transform;

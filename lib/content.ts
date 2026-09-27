@@ -6,7 +6,10 @@ import siteConfig from "@/content/site.config.json";
 // Public business facts (D-007). Empty values hide the UI that depends on them.
 const SiteConfig = z.object({
   phone: z.union([z.literal(""), z.string().regex(/^\+91\d{10}$/)]),
-  hours: z.null(), // Q12: shape decided when the owners publish hours
+  // Call hours in Asia/Kolkata, "HH:MM" (D-024, C-031). Null hides the live call status.
+  hours: z
+    .object({ open: z.string().regex(/^\d{2}:\d{2}$/), close: z.string().regex(/^\d{2}:\d{2}$/) })
+    .nullable(),
   promotion: z.object({ text: z.string().min(1), href: z.string().startsWith("/") }).nullable(),
 });
 

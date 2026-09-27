@@ -1,8 +1,8 @@
 # Project Status
-**Updated:** 2026-09-26 · **Docs version: v0.3** · **Decision head: D-025**
-**Stage:** 4 in progress on localhost (`npm run dev`): Home (D-021..D-023) and Services, the "line catalogue" (D-025). Owner answers recorded (D-024): contact, 2-hour callback 7 AM to 10 PM, Noida and Delhi, eight services. `PRODUCT.md` written (impeccable init). System: `DESIGN.md`. Committed 2026-09-26.
-**Next:** Sasanka + owners review Home and Services (copy, grouping names) → the next Stage 4 page (About), one at a time.
-**Then:** About → Contact (adds Drizzle/PGlite, /api/v1, CI; alert recipient Q12) → … → Stage 5.
+**Updated:** 2026-09-27 · **Docs version: v0.3** · **Decision head: D-028**
+**Stage:** 4 on localhost (`npm run dev`). Owner review round 1 (D-026): the "Setu Lines" look and the Services structure were rejected; the ward-to-door trip and the moving footer wordmark were liked. Direction reopened and left to Sasanka. Taste evidence: `docs/OWNER-TASTE.md`. `DESIGN.md` describes the old direction until the new one is locked.
+**Next:** Warm Room locked (D-027, Petrona). Stage A (Home) built, nav reworked (D-028) → **Sasanka's check-in** → regenerate `DESIGN.md` → Stage B: Services (three hairline columns + line-draw).
+**Then:** re-skin trip + footer → Services redesign with animation → owner review round 2 (recorded in OWNER-TASTE) → About → Contact (Drizzle/PGlite, /api/v1, CI; Q12) → … → Stage 5.
 **Blocked on owners:** hosting/DB (Q1), domain (Q2), brand hexes (Q4), LLP/KYC (Q5), claim evidence (Q10), alert recipient (Q12), copy approval (Q15).
 **Not connected:** Refero MCP (D-009). No Docker on this machine (D-002).
 

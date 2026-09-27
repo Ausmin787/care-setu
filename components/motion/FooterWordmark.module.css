@@ -1,10 +1,10 @@
-/* The footer wordmark (D-023). The ramp is the logo's lines: action blue -> brand blue -> lime -> a pale core.
-   --wm-3 is the one colour outside the token set; it only lives inside these letters. */
+/* The footer wordmark (D-023). The ramp is the logo's own colours, blue -> blue -> green -> white (D-027: the
+   warm palette never overshadows them). Values must resolve to hex, 3 or 6 digits (the shader's parser). */
 .mark {
   --wm-0: var(--color-action);
   --wm-1: var(--color-line-blue);
   --wm-2: var(--color-line-lime);
-  --wm-3: #eaf6ff;
+  --wm-3: #ffffff;
   position: relative;
   container-type: inline-size;
 }

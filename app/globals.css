@@ -1,35 +1,59 @@
 @import "tailwindcss";
 
-/* Setu Lines tokens: DESIGN.md (D-020, D-021). Brand hexes provisional until Q4. Light only (D-021). */
+/* Warm Room tokens (D-027). Parchment range from Function Health (#FEF9EF to #F5EEE1, measured 2026-09-27);
+   value-family rules from Refero Alveos One (refs/warm-room/alveos-one-theme.extract.css): achromatic surfaces,
+   near-black actions, 20/100px radius, no shadows. The logo's colours are the only chroma (brand hexes
+   provisional until Q4). */
 @theme {
-  --color-line-lime: #9bcc3c; /* graphics only, always ink-cased on white (1.89:1) */
+  --color-line-lime: #9bcc3c; /* graphics only; ink-cased on light grounds (1.8:1 on parchment) */
   --color-line-blue: #0f8fcc;
   --color-line-olive: #6d9620;
-  --color-action: #0d7cb1; /* brand blue x0.87: 4.63:1 with white */
-  --color-action-deep: #0a5a80;
-  --color-ink: #14201a;
-  --color-muted: #4e5a52;
-  --color-deep: #f3f6ef;
-  --color-hair: #c9d1c7;
-  --color-focus: #ffd84a;
+  --color-action: #0d7cb1; /* the logo blue: arrow discs and details only, never a filled button (D-027) */
   --color-wordmark: #138ab2;
+  --color-parchment: #fbf6ee;
+  --color-parchment-deep: #f3ece1;
+  --color-sand: #d8c7ae;
+  --color-ink: #1c1814;
+  --color-ink-soft: #3a322a;
+  --color-muted: #5f564c;
+  --color-hair: #e3d9ca;
+  --color-cream: #f5eee3;
+  --color-cream-muted: #cbc1b3;
+  --color-ink-hair: #4a4038;
+  --color-focus: #ffd84a;
 }
 
 /* Semantic layer: components read these, never the palette above. */
 :root {
   color-scheme: light;
-  --c-canvas: #ffffff;
-  --c-deep: var(--color-deep);
-  --c-surface: #ffffff;
+  --c-canvas: var(--color-parchment);
+  --c-deep: var(--color-parchment-deep);
+  --c-surface: var(--color-parchment);
+  --c-sand: var(--color-sand);
   --c-line: var(--color-hair);
   --c-muted: var(--color-muted);
   --c-ink: var(--color-ink);
-  --c-accent: var(--color-action);
-  --c-accent-deep: var(--color-action-deep);
+  --c-accent: var(--color-ink);
+  --c-accent-deep: var(--color-ink-soft);
   --c-heat: var(--color-focus);
   --gutter: clamp(16px, 4vw, 56px);
   --nav-h: 72px;
   --sans: var(--font-anek), "Segoe UI", system-ui, sans-serif;
+  --serif: var(--font-petrona), Georgia, serif;
+}
+
+/* Ink bands (hero, trip, footer): the same variables re-pointed, so components need no second palette. */
+[data-mode="ink"] {
+  --c-canvas: var(--color-ink);
+  --c-deep: var(--color-ink);
+  --c-surface: var(--color-ink-soft);
+  --c-line: var(--color-ink-hair);
+  --c-muted: var(--color-cream-muted);
+  --c-ink: var(--color-cream);
+  --c-accent: var(--color-cream);
+  --c-accent-deep: #ffffff;
+  background: var(--c-deep);
+  color: var(--c-ink);
 }
 
 @layer base {
@@ -52,13 +76,13 @@
   button,
   summary {
     touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent; /* the NHS focus/press states give the feedback */
+    -webkit-tap-highlight-color: transparent;
   }
   :focus-visible {
     outline: 3px solid var(--c-ink);
     outline-offset: 2px;
     background-color: var(--c-heat);
-    color: var(--c-ink);
+    color: var(--color-ink);
   }
 }
 
@@ -70,7 +94,7 @@
     z-index: 30;
     padding: 12px 16px;
     background: var(--c-heat);
-    color: var(--c-ink);
+    color: var(--color-ink);
     font-weight: 700;
   }
   .skip:focus {
@@ -79,75 +103,89 @@
   .wrap {
     padding-inline: var(--gutter);
   }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 
-  /* Display type: the inverse law (Blueprint 6.1), height-aware clamp (6.2). */
+  /* Display type in Petrona (D-027): the inverse law (Blueprint 6.1). Light weights, as Function sets its serif. */
   .t-display {
-    font-weight: 800;
-    font-stretch: 75%;
-    line-height: 0.92;
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 0.94;
     letter-spacing: -0.02em;
   }
   .t-head {
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 800;
-    font-stretch: 80%;
-    line-height: 0.95;
-    letter-spacing: -0.015em;
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 350;
+    line-height: 0.98;
+    letter-spacing: -0.018em;
   }
 
-  /* Primary button: NHS physics (refs/nhs/nhsuk-button-rules.css). */
+  /* Pill button (myhealthprac): ink pill, bold label, and the round arrow disc in the logo blue. The disc is
+     Tabler's filled circle-arrow, so its arrow is cut out and shows the pill colour through it. */
   .btn {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 14px;
     min-height: 56px;
-    padding: 14px 22px;
-    border: 2px solid transparent;
-    border-radius: 4px;
+    padding: 8px 26px;
+    border: 0;
+    border-radius: 100px;
     background: var(--c-accent);
-    color: #fff;
-    font: 600 19px/1 var(--sans);
+    color: var(--c-canvas);
+    font: 700 18px/1 var(--sans);
     text-decoration: none;
-    box-shadow: 0 4px 0 var(--c-accent-deep);
     cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
   }
-  .btn::before {
-    content: "";
-    position: absolute;
-    inset: -2px -2px -6px -2px;
+  .btn:has(svg) {
+    padding: 8px 8px 8px 26px;
+  }
+  .btn svg {
+    width: 40px;
+    height: 40px;
+    flex: none;
+    color: var(--color-action);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn:hover {
     background: var(--c-accent-deep);
   }
+  .btn:hover svg {
+    transform: translateX(3px);
+  }
   .btn:active {
-    top: 4px;
-    box-shadow: none;
+    transform: translateY(1px);
   }
   .btn:focus-visible {
-    outline: none;
+    outline: 3px solid var(--c-ink);
+    outline-offset: 3px;
     background: var(--c-heat);
-    color: var(--c-ink);
-    box-shadow: 0 4px 0 var(--c-ink);
-  }
-  .btn svg {
-    width: 26px;
-    height: 26px;
-    flex: none;
+    color: var(--color-ink);
   }
   .btn.sm {
     min-height: 48px;
-    padding: 10px 16px;
+    padding: 6px 20px;
     font-size: 17px;
   }
-  .btn.rev {
-    background: #fff;
-    color: var(--c-ink);
-    box-shadow: 0 4px 0 var(--c-line);
+  .btn.sm:has(svg) {
+    padding: 6px 6px 6px 20px;
+  }
+  .btn.sm svg {
+    width: 34px;
+    height: 34px;
   }
 
-  /* Line badge: ink-cased swatch + line name (Transit leg header). */
+  /* Line badge: a round swatch in the line colour + the line name. */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -155,39 +193,40 @@
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
-    border: 2px solid currentColor;
-    border-radius: 4px;
-    padding: 3px 10px 3px 6px;
+    border: 1.5px solid currentColor;
+    border-radius: 100px;
+    padding: 3px 12px 3px 6px;
   }
   .badge i {
     width: 14px;
     height: 14px;
+    border-radius: 50%;
     box-shadow: 0 0 0 2px var(--c-ink);
     flex: none;
   }
 
-  /* Emergency note (DESIGN.md 4). */
+  /* Emergency note. */
   .sos {
     display: flex;
     gap: 12px;
     align-items: flex-start;
     font-size: 17px;
     line-height: 1.35;
-    border-left: 6px solid var(--c-ink);
+    border-left: 4px solid currentColor;
     padding-left: 14px;
   }
   .sos svg {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     flex: none;
   }
   .sos b {
     display: block;
-    font-size: 20px;
+    font-size: 19px;
   }
 }
 
-/* Line colours as data (only on lines, stations, badges; D-020). */
+/* Line colours as data (only on lines, stations, badges and the footer wordmark; D-027). */
 [data-line="lime"] {
   --line: var(--color-line-lime);
 }

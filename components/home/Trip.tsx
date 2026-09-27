@@ -26,7 +26,7 @@ function Station({ stop, last }: { stop: Stop; last?: boolean }) {
 
 export function Trip() {
   return (
-    <section className={`${s.how} wrap`} id="how" aria-labelledby="how-title">
+    <section className={`${s.how} wrap`} id="how" aria-labelledby="how-title" data-mode="ink">
       <div className={s.intro}>
         <h2 id="how-title" className="t-head">
           {t.trip.title}

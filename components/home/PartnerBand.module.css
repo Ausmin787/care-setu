@@ -1,10 +1,9 @@
-/* The one deliberate inversion (Taste finding 18): ink ground, white text. */
+/* myhealthprac's sand block (D-027): the one warm colour field on the page, ink text, hairline roles. */
 .band {
   display: grid;
-  gap: 40px;
-  padding-block: 72px;
-  background: var(--c-ink);
-  color: #fff;
+  gap: 44px;
+  padding-block: 80px;
+  background: var(--c-sand);
 }
 .top {
   display: flex;
@@ -15,7 +14,7 @@
 }
 .top h2 {
   margin: 0;
-  max-width: 22ch;
+  max-width: 20ch;
 }
 .roles {
   list-style: none;
@@ -30,28 +29,21 @@
   align-content: start;
   gap: 10px;
   padding-top: 20px;
-  border-top: 2px solid rgb(255 255 255 / 0.35);
+  border-top: 1px solid var(--c-ink);
 }
-.badge {
+.roles :global(.badge) {
   justify-self: start;
-  color: #fff;
-}
-.badge i {
-  box-shadow: 0 0 0 2px #fff !important;
 }
 .roles h3 {
   margin: 4px 0 0;
-  font-size: 24px;
-  line-height: 1.2;
-  font-weight: 700; /* Tailwind preflight resets heading weight */
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 400;
 }
 .roles p {
   margin: 0;
-  font-size: 18px;
-  color: var(--c-line);
-}
-.band :global(.btn.rev):focus-visible {
-  background: var(--c-heat);
+  font-size: 18px; /* ink, not muted: muted on sand is ~4.1:1, under AA for body text */
 }
 
 @media (max-width: 900px) {
@@ -63,5 +55,6 @@
   }
   .top :global(.btn) {
     width: 100%;
+    justify-content: space-between;
   }
 }

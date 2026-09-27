@@ -1,69 +1,85 @@
-/* Spectrum.Life (Supahero): headline, one line, one action, a human scene in a rounded panel.
-   Split left/right so the action stays above the fold at 720px (D-021). */
+/* Warm Room hero (D-027). Function Health measured 2026-09-27: light serif ~76px/0.9 at left over a face-right
+   loop, a divided fact row under the action, a round pause control bottom right. The section slides under the
+   floating nav so the footage starts at the top edge. */
 .hero {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-  grid-template-rows: 1fr auto auto auto auto auto 1fr;
-  grid-template-areas:
-    ". fig"
-    "title fig"
-    "lede fig"
-    "actions fig"
-    "reassure fig"
-    "sos fig"
-    ". fig";
-  column-gap: clamp(32px, 4vw, 72px);
-  padding-block: clamp(24px, 4vh, 48px);
-  min-height: min(calc(100svh - var(--nav-h)), 920px);
+  margin-top: calc(-1 * var(--nav-h));
+  min-height: min(100svh, 960px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+/* C-034 is 1280x560 with her chin ~50px above the bottom edge: anchor right and bottom so no crop takes it. */
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 100%;
+  display: block;
+}
+/* The clip's left third is lit curtain, so the scrim carries the text; the base fade seats the fact row. */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--c-deep) 92%, transparent) 0%,
+      color-mix(in srgb, var(--c-deep) 86%, transparent) 40%,
+      color-mix(in srgb, var(--c-deep) 50%, transparent) 56%,
+      color-mix(in srgb, var(--c-deep) 0%, transparent) 76%
+    ),
+    linear-gradient(0deg, color-mix(in srgb, var(--c-deep) 70%, transparent) 0%, transparent 38%),
+    /* seats the transparent nav (D-028) over the footage */
+    linear-gradient(180deg, color-mix(in srgb, var(--c-deep) 55%, transparent) 0, transparent 160px);
+  pointer-events: none;
+}
+/* Text over footage: a soft ink halo keeps small text above 4.5:1 on the brightest frames (impeccable's
+   canvas-video-underlay check). Only the inner copy gets it; the pill and pause control are opaque. */
+.inner {
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--c-deep) 85%, transparent);
+  display: grid;
+  grid-template-rows: 1fr auto auto auto 1fr auto auto;
+  grid-template-areas: "." "title" "lede" "actions" "." "facts" "sos";
+  padding-top: calc(var(--nav-h) + 24px);
+  padding-bottom: clamp(24px, 4vh, 40px);
+  padding-right: calc(var(--gutter) + 64px); /* room for the pause control */
+}
+.inner :global(.btn) {
+  text-shadow: none; /* the halo is for text on footage; the pill is opaque */
 }
 .title {
   grid-area: title;
   margin: 0;
-  font-size: clamp(52px, min(7.2vw, 11.5vh), 104px);
-  max-width: 15ch;
+  font-size: clamp(52px, min(6.6vw, 11vh), 100px);
+  max-width: 12ch;
   text-wrap: balance;
 }
-/* One highlighted phrase per page, as an underline bar (Taste/impeccable finding 1: no gradient band).
-   A bar, not text-decoration, because decoration doesn't reach into the inline-block word masks. */
 .hl {
-  position: relative;
-  display: inline-block;
+  font-style: italic;
 }
-.hl::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0.12em;
-  bottom: -0.02em;
-  height: 0.1em;
-  background: var(--color-wordmark);
-  transform-origin: left center;
-}
-/* Word masks: the descender room is padded in and given back, so "p" isn't clipped. */
+/* Word masks: descender and italic-overhang room is padded in and given back, so nothing is clipped. */
 .w {
   display: inline-block;
   overflow: clip;
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
+  padding: 0 0.08em 0.16em 0;
+  margin: 0 -0.08em -0.16em 0;
   vertical-align: top;
 }
 .w > span {
   display: inline-block;
 }
-
-/* Entrance (CSS, from first paint, D-021): words rise out of their masks in reading order, then the
-   underline draws; the panel opens from the bottom. Absent entirely under reduced motion. */
+/* Entrance (CSS, from first paint): words rise out of their masks in reading order. None under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   .w > span {
-    animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: calc(80ms + var(--i) * 70ms);
-  }
-  .hl::after {
-    animation: draw 0.6s cubic-bezier(0.65, 0, 0.35, 1) both;
-    animation-delay: calc(200ms + var(--i) * 70ms);
-  }
-  .panel {
-    animation: open 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+    animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(120ms + var(--i) * 70ms);
   }
 }
 @keyframes rise {
@@ -71,116 +87,147 @@
     transform: translateY(105%);
   }
 }
-@keyframes draw {
-  from {
-    transform: scaleX(0);
-  }
-}
-@keyframes open {
-  from {
-    clip-path: inset(100% 0 0 0 round 12px);
-  }
-  to {
-    clip-path: inset(0 0 0 0 round 12px);
-  }
-}
 .lede {
   grid-area: lede;
-  margin: clamp(16px, 2.6vh, 28px) 0 0;
-  max-width: 34ch;
-  font-size: 22px;
+  margin: clamp(18px, 2.8vh, 28px) 0 0;
+  max-width: 36ch;
+  font-size: 21px;
   line-height: 1.45;
   text-wrap: pretty;
 }
 .actions {
   grid-area: actions;
-  margin-top: clamp(20px, 3vh, 32px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: clamp(22px, 3.2vh, 34px);
 }
-/* Airbnb Homes: three plain reassurances with icons, under the action. */
-.reassure {
-  grid-area: reassure;
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+/* Open = the logo's green (the only chroma, D-027); closed = the muted cream. No pulse. */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-muted);
+}
+.status[data-open="true"] .dot {
+  background: var(--color-line-lime);
+}
+/* Function's fact row: items divided by hairlines. */
+.facts {
+  grid-area: facts;
   list-style: none;
-  margin: clamp(24px, 3.4vh, 40px) 0 0;
-  padding: 0;
-  display: grid;
-  gap: 12px;
-  font-size: 20px;
+  margin: 0 0 22px;
+  padding: 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 0;
+  border-top: 1px solid color-mix(in srgb, var(--c-ink) 28%, transparent);
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.25;
 }
-.reassure li {
+.facts li {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+  padding-right: 24px;
+  margin-right: 24px;
+  border-right: 1px solid color-mix(in srgb, var(--c-ink) 28%, transparent);
 }
-.tile {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  flex: none;
-  border-radius: 4px;
-  background: var(--c-ink);
-  color: #fff;
+.facts li:last-child {
+  border-right: 0;
+  margin-right: 0;
 }
-.tile svg {
+.facts svg {
   width: 22px;
   height: 22px;
+  flex: none;
 }
 .sos {
   grid-area: sos;
-  margin: clamp(20px, 3vh, 32px) 0 0;
-  max-width: 34ch;
-}
-.panel {
-  grid-area: fig;
-  position: relative;
-  align-self: center;
-  justify-self: end;
   margin: 0;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  /* Short screens cap the height, not the width, so the panel keeps filling its column (the art crops). */
-  max-height: calc(100svh - var(--nav-h) - 64px);
-  overflow: hidden;
-  border-radius: 12px;
-  background: var(--c-deep);
+  max-width: 44ch;
 }
-.img {
-  object-fit: cover;
-  /* hero-care-scene.png (D-021): faces sit at ~25-35% height, feet at ~90%; anchor keeps faces in any crop */
-  object-position: 50% 55%;
-}
-.pending {
+.pause {
   position: absolute;
-  inset: auto 20px 20px;
-  font-size: 16px;
-  color: var(--c-muted);
+  right: var(--gutter);
+  bottom: clamp(24px, 4vh, 40px);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--c-ink) 45%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-deep) 55%, transparent);
+  color: var(--c-ink);
+  cursor: pointer;
+}
+.pause svg {
+  width: 20px;
+  height: 20px;
 }
 
 @media (max-width: 900px) {
   .hero {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
-    grid-template-areas: "title" "lede" "actions" "fig" "reassure" "sos";
     min-height: 0;
-    padding-block: 28px 40px;
+    background: var(--c-deep);
+  }
+  /* The wide clip becomes a band above the text; the face sits at ~64% across the frame. */
+  .media {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    height: clamp(300px, 52svh, 460px);
+  }
+  .video {
+    object-position: 64% 100%;
+  }
+  /* Solid for the last 3px so a fractional band height never shows a seam under the title. */
+  .media::after {
+    inset: 0 0 -1px;
+    background: linear-gradient(0deg, var(--c-deep) 0, var(--c-deep) 3px, transparent 45%);
+  }
+  .inner {
+    grid-template-rows: none;
+    grid-template-areas: "title" "lede" "actions" "facts" "sos";
+    margin-top: -72px;
+    padding-top: 0;
+    padding-bottom: 40px;
+    padding-right: var(--gutter);
+    position: relative;
   }
   .title {
-    font-size: clamp(48px, 13vw, 72px);
+    font-size: clamp(44px, 12vw, 64px);
   }
   .lede {
-    font-size: 20px;
+    font-size: 19px;
   }
   .actions :global(.btn) {
     width: 100%;
+    justify-content: space-between;
   }
-  .panel {
+  .facts {
+    display: grid;
+    gap: 12px;
     margin-top: 28px;
-    max-width: none;
-    aspect-ratio: 4 / 3;
   }
-  .img {
-    object-position: 50% 42%;
+  .facts li {
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+  }
+  .pause {
+    top: calc(var(--nav-h) + 12px);
+    bottom: auto;
   }
 }

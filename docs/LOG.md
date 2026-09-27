@@ -100,3 +100,21 @@ Template:
 - Mistakes: split dependent edits twice (layout import, then an opening/closing div pair); both caught by the hook.
   Invented GDA specifics (bathing, meals) caught and reverted to the owners' wording.
 - Not verified: true 360/390px, real phone/Safari, web-design-guidelines audit, owner copy approval.
+
+## 2026-09-27 · Owner round 1 (D-026) · hero clip · Warm Room locked and Home built (D-027)
+- Owner rejected the Setu Lines look and the Services structure; liked the trip and the footer wordmark; wants a
+  myhealthprac-style video hero. Recorded in the new `docs/OWNER-TASTE.md` (round-by-round taste evidence).
+- Hero clip: Pexels 7522351 rejected (white, reads as illness, reused shoot); Pexels/Mixkit sweep found nothing
+  Indian + warm + loopable. Sasanka generated it in Gemini; ffmpeg installed (winget, with permission); cropped
+  1280x560 to remove the ✦ (first crop missed it: the mark's position was read off a scaled sheet), ping-pong loop.
+- Research: myhealthprac (Playwright), Function Health, Biograph, Refero (Alveos One, Alden, Function, Impilo),
+  Best Free Fonts. Refero MCP still not connected (browser fallback).
+- Sasanka picked Warm Room, with the logo's colours as the only chroma; Petrona from a rendered sheet.
+- Built Stage A. Caught on screenshots: footer wordmark wrong blue (#fff shortened by the minifier), headline
+  contrast 2.6:1 at the scrim's edge (fixed to >= 4.4:1), impeccable's video-underlay contrast (fixed with scrim +
+  text halo), a seam under the mobile title.
+- Mistakes: split dependent edits again (layout.tsx import before its usage; Nav's opening div before its closing
+  tag, caught by the hook, file rewritten). Not verified: real phone/Safari, 360/768, web-design-guidelines.
+- Later: Sasanka rejected the floating nav; built a full-width nav (transparent over the hero, solid on scroll via a
+  CSS scroll-driven animation, measured from Biograph + myhealthprac) with a warm-toned mark in the nav only (D-028).
+  Fixed the hero text halo leaking into the pill. Blueprint updated (standing permission, saved to memory).

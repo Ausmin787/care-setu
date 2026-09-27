@@ -26,8 +26,9 @@
     ],
     "emergencyTitle": "Emergency? Call 112.",
     "emergencyText": "Home care is not emergency care.",
-    "illustrationAlt": "Illustration: a home-care nurse checks an elderly man's blood pressure in his living room while his daughter joins on a video call.",
-    "illustrationPending": "Illustration to come"
+    "status": { "open": "Taking calls now, until 10 PM", "closed": "Calls open again at 7 AM", "claim": "C-031" },
+    "videoPause": "Pause background video",
+    "videoPlay": "Play background video"
   },
   "trip": {
     "title": "From the ward to your door",

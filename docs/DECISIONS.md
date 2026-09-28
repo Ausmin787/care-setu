@@ -769,3 +769,15 @@ pre-flight: en-dash ranges, a tag overlaid on the hover image and two labels for
 Guidelines: per-frame layout read cached, balanced heading wraps.
 **Not verified:** a real phone or Safari; trackpad inertia over the pin; 768 and 1024 visually; a screen reader; the
 owner's review. Copy changes (lede, deck title, closing band) await owner approval (Q15).
+**Revised the same day (device audit; Sasanka saw "no animation" on his 1280x537 laptop window, 1920x1080 at 150%):**
+the deck was gated at min-height 600px. It now runs from 480px and scales to the room under the nav (--fit; cards keep a
+design height of 440px, 480px under 1200px wide); under 600px tall the section heading is for screen readers only and
+the cards stack 14px apart, so text stays ~16px at 537. The same audit fixed two Home defects (D-030): the pinned reel
+had a hard 680px min-height (ran off short screens; it now scales to the room the same way, design height 440px, a
+one-line heading under 680px tall) and the hero's pause control sat under the text layer at every desktop size (the
+layer's empty box now ignores the pointer). **Verified:** `scripts/device-audit.mjs` (npm run audit:devices), 10 pages x
+9 devices (scaled laptops 1280x537/1093x490/1366x657/1536x730, 1920x961, iPad both ways and two phones with touch):
+no overflow, no pinned element taller than the screen, every visible control hittable, scroll never sticks (one-step
+hits on a reel panel mid-slide only). Effective text at 1280x537: deck 15.9px, reel 16.4px; at 1093x490: 13.1 and 14.6.
+**Not verified:** real iPad/Android hardware and Safari; 1093x490 text is small but legible.
+

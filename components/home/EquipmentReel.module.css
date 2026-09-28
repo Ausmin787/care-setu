@@ -159,13 +159,49 @@
   color: var(--color-ink);
 }
 
-/* Pinned (JS, desktop, fine pointer, motion allowed): one screen tall, below the nav; the track slides. */
+/* Header and strip as one piece; in the resting state it is transparent to the stage's own rhythm. */
+.fit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: inherit;
+}
+
+/* Pinned (JS, desktop, fine pointer, motion allowed): one screen tall, below the nav; the track slides.
+   The content keeps a designed height of 440px and scales down to the room on shorter windows
+   (Reel sets --room and --fit). A hard min-height of 680px made the pinned stage taller than a 537px laptop window
+   and hid the captions below the screen (device audit, 2026-09-28). */
 .stage[data-live] {
   height: 100svh;
-  min-height: 680px;
   box-sizing: border-box;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   padding-block: calc(var(--nav-h) + 40px) 48px;
+}
+/* Short windows: less height on chrome (tighter padding, a one-line heading) so the strip scales less and its captions
+   stay readable. */
+@media (max-height: 679px) {
+  .stage[data-live] {
+    padding-block: calc(var(--nav-h) + 20px) 20px;
+  }
+  .stage[data-live] .fit {
+    gap: 20px;
+  }
+  .stage[data-live] .head {
+    gap: 8px;
+  }
+  .stage[data-live] .head h2 {
+    max-width: none;
+    font-size: 36px;
+  }
+  .stage[data-live] .head p {
+    font-size: 17px;
+  }
+}
+.stage[data-live] .fit {
+  grid-template-rows: auto minmax(0, 1fr);
+  height: calc(var(--room, 520px) / var(--fit, 1));
+  width: calc(100% / var(--fit, 1));
+  transform: scale(var(--fit, 1));
+  transform-origin: 0 0;
 }
 /* The window's left edge sits just right of the thread (rail = half the gutter, line 20px wide), so panels slide
    out behind the line; the track's padding puts the first panel back on the content edge. */

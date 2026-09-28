@@ -30,6 +30,18 @@ export function Reel({
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference) and (min-width: 901px) and (pointer: fine)", () => {
         el.setAttribute("data-live", "");
+        // Short windows: the header and strip keep a designed height of 440px and scale down to the
+        // room under the nav, so the pinned stage never runs past the bottom of the screen. Re-measured on refresh.
+        const fitBox = el.querySelector<HTMLElement>("[data-reel-fit]");
+        const setFit = () => {
+          if (!fitBox) return;
+          const cs = getComputedStyle(el);
+          const room = el.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+          el.style.setProperty("--room", `${room}px`);
+          el.style.setProperty("--fit", String(Math.min(1, room / 440)));
+        };
+        setFit();
+        ScrollTrigger.addEventListener("refreshInit", setFit);
         // Travel = the track's overflow past its clipping window (the parent), not past the stage.
         const frame = track.parentElement ?? el;
         const distance = () => Math.max(0, track.scrollWidth - frame.clientWidth);
@@ -57,6 +69,9 @@ export function Reel({
         };
         track.addEventListener("focusin", onFocus);
         return () => {
+          ScrollTrigger.removeEventListener("refreshInit", setFit);
+          el.style.removeProperty("--room");
+          el.style.removeProperty("--fit");
           track.removeEventListener("focusin", onFocus);
           tl.scrollTrigger?.kill();
           tl.kill();

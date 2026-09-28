@@ -20,63 +20,66 @@ export function EquipmentReel() {
     <section className={s.sec} id="equipment" aria-labelledby="equipment-title" data-line="olive">
       <Reel className={`${s.stage} wrap`} trackSelector="[data-track]">
         <Thread />
-        <header className={s.head}>
-          <h2 id="equipment-title" className="t-head" data-thread-stop>
-            {e.title}
-            {items.some((i) => i.pending) && (
-              <span className="pending" title={t.pending.title}>
-                {t.pending.tag}
-              </span>
-            )}
-          </h2>
-          <p>{e.lede}</p>
-        </header>
-        {/* The window clips the moving track just right of the thread, so panels leave behind the line. */}
-        <div className={s.window}>
-          <ol className={s.track} data-track aria-label={e.hint}>
-            {items.map((item, i) => {
-              const prices = item.prices.map((p) => shownPrice(p)).filter((p) => p !== undefined);
-              return (
-                <li key={item.slug} className={s.panel}>
-                  <div className={s.slot}>
-                    {item.image ? (
-                      <Image
-                        className={s.img}
-                        src={item.image.src}
-                        alt={item.image.alt}
-                        fill
-                        sizes="(max-width: 900px) 78vw, 370px"
-                        style={{ objectPosition: `50% ${item.image.focus}` }}
-                      />
-                    ) : (
-                      <>
-                        <span className={s.n} aria-hidden="true">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className={s.soon}>{e.imageSlot}</span>
-                      </>
-                    )}
-                  </div>
-                  <div className={s.caption}>
-                    <p className={s.count}>
-                      {String(i + 1).padStart(2, "0")} {e.of} {total}
-                    </p>
-                    <h3>{item.name}</h3>
-                    <p className={s.text}>{item.text}</p>
-                    {prices.map((p) => (
-                      <p key={p.unit} className={s.price}>
-                        {formatPaise(p.paise)} {p.unit}
+        {/* Scaled as one piece to the room under the nav on short windows while pinned (Reel sets --fit). */}
+        <div className={s.fit} data-reel-fit>
+          <header className={s.head}>
+            <h2 id="equipment-title" className="t-head" data-thread-stop>
+              {e.title}
+              {items.some((i) => i.pending) && (
+                <span className="pending" title={t.pending.title}>
+                  {t.pending.tag}
+                </span>
+              )}
+            </h2>
+            <p>{e.lede}</p>
+          </header>
+          {/* The window clips the moving track just right of the thread, so panels leave behind the line. */}
+          <div className={s.window}>
+            <ol className={s.track} data-track aria-label={e.hint}>
+              {items.map((item, i) => {
+                const prices = item.prices.map((p) => shownPrice(p)).filter((p) => p !== undefined);
+                return (
+                  <li key={item.slug} className={s.panel}>
+                    <div className={s.slot}>
+                      {item.image ? (
+                        <Image
+                          className={s.img}
+                          src={item.image.src}
+                          alt={item.image.alt}
+                          fill
+                          sizes="(max-width: 900px) 78vw, 370px"
+                          style={{ objectPosition: `50% ${item.image.focus}` }}
+                        />
+                      ) : (
+                        <>
+                          <span className={s.n} aria-hidden="true">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span className={s.soon}>{e.imageSlot}</span>
+                        </>
+                      )}
+                    </div>
+                    <div className={s.caption}>
+                      <p className={s.count}>
+                        {String(i + 1).padStart(2, "0")} {e.of} {total}
                       </p>
-                    ))}
-                    <Link className={s.ask} href="/contact">
-                      {e.ask} {item.name.toLowerCase()}
-                      <IconCircleArrowRightFilled aria-hidden="true" />
-                    </Link>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
+                      <h3>{item.name}</h3>
+                      <p className={s.text}>{item.text}</p>
+                      {prices.map((p) => (
+                        <p key={p.unit} className={s.price}>
+                          {formatPaise(p.paise)} {p.unit}
+                        </p>
+                      ))}
+                      <Link className={s.ask} href="/contact">
+                        {e.ask} {item.name.toLowerCase()}
+                        <IconCircleArrowRightFilled aria-hidden="true" />
+                      </Link>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
         </div>
       </Reel>
     </section>

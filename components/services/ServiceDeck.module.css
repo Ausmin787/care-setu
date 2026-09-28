@@ -258,13 +258,37 @@
 .stage[data-live] {
   --peek: 42px;
   --head: 76px;
-  --deck-h: clamp(380px, calc(100svh - var(--nav-h) - 56px - var(--head) - 3 * var(--peek)), 540px);
+  /* Never below 440px, the height the fullest card needs; shorter windows scale the whole body down (--fit, Deck). */
+  --deck-h: clamp(var(--deck-min), calc(100svh - var(--nav-h) - 56px - var(--head) - 3 * var(--peek)), 540px);
+  --deck-min: 440px;
   height: 100svh;
   box-sizing: border-box;
   align-content: start;
   gap: 20px;
   padding-block: calc(var(--nav-h) + 20px) 16px;
   overflow: clip;
+}
+/* Very short windows (laptops at 125-150% scaling): the section heading is kept for screen readers only (the rail
+   names the line) and the cards stack tighter, so the deck scales less and its text stays readable (~17px at 537). */
+@media (max-height: 599px) {
+  .stage[data-live] {
+    --peek: 14px;
+    --head: 0px;
+  }
+  .stage[data-live] .head {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+/* Narrower windows wrap the card text onto more lines (GDA ran 13px over at 1093x490): a taller design height. */
+@media (max-width: 1199px) {
+  .stage[data-live] {
+    --deck-min: 480px;
+  }
 }
 @media (max-height: 759px) {
   .stage[data-live] {
@@ -290,6 +314,8 @@
   }
 }
 .stage[data-live] .body {
+  transform: scale(var(--fit, 1));
+  transform-origin: 50% 0;
   grid-template-columns: minmax(0, 1100px) 88px;
   column-gap: clamp(24px, 3vw, 48px);
   padding-left: calc(88px + clamp(24px, 3vw, 48px));

@@ -194,3 +194,19 @@ Template:
   Left: GDA touches its edge by 2px at 1280x640, dev-only (pending scope list).
 - Service still-lifes: ChatGPT returned one 897x1752 collage with invented "CLAIMS:" captions. Compositions good;
   panels too small to crop (290-443px wide for a 400-540px slot). Not used; asked for seven separate full-size files.
+- Owner preview (same day): Cloudflare Quick Tunnel from this machine (cloudflared 2026.9.3 via winget; no account;
+  testing-only per Cloudflare's docs) to the dev server, so the owner sees the dev build with pending content.
+  `allowedDevOrigins: ["*.trycloudflare.com"]` added (Next 16 blocks dev assets for other origins). Nothing hosted
+  (D-002 stands; Vercel Hobby still banned). Checked through the public link: 10 pages 200, deck motion identical.
+- Sasanka: "no animation on Services" on his laptop and phone. Phone: by design (no pin on touch). Laptop: his window
+  is 1280x537 (1920x1080 at 150% scaling) and the deck was gated at min-height 600px. Fix: gate lowered to 480px and the
+  deck + rail scale to the room under the header (--fit, cards keep a design height of 440px, 480px under 1200px wide).
+  Fit measured at 1280x537/800, 1093x490, 1024x600, 1366x657: every card's button inside its card. Probe at 1280x537
+  down and up: continuous, flown cards fully off-screen. Confirmed live in his Chrome over the tunnel.
+- Device audit (same day, after Sasanka tested on his own laptop and phone): new `scripts/device-audit.mjs`
+  (`npm run audit:devices`). Found and fixed: Services deck off on short windows (gate 600 -> 480, scale to fit);
+  Home reel's pinned stage taller than short screens (min-height 680 removed, scale to fit); hero pause button
+  unclickable at every desktop and iPad-landscape size (text layer swallowed clicks). Readability measured after
+  scaling (deck/reel ~16px at 1280x537). Colonnade taller than a 537px window: not pinned, all controls reachable, left.
+  Mistake recorded: Blueprint #42 (verified at two sizes only), memory device-matrix-before-done.
+

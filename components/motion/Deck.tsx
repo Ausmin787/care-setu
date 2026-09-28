@@ -30,7 +30,8 @@ export function Deck({ className, children }: { className: string; children: Rea
       const el = stage.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference) and (min-width: 901px) and (min-height: 600px) and (pointer: fine)", () => {
+      // Down to 480px tall: laptops at 125-150% Windows scaling give 480-600px windows (Sasanka's: 1280x537).
+      mm.add("(prefers-reduced-motion: no-preference) and (min-width: 901px) and (min-height: 480px) and (pointer: fine)", () => {
         el.setAttribute("data-live", "");
         const cards = gsap.utils.toArray<HTMLElement>("[data-card]", el);
         const n = cards.length;
@@ -60,13 +61,27 @@ export function Deck({ className, children }: { className: string; children: Rea
         const build = () => {
           peek = parseFloat(getComputedStyle(el).getPropertyValue("--peek")) || 42;
           trackH = track?.clientHeight ?? 0;
+          // Short windows: scale the deck and rail down to the room left under the header instead of switching the
+          // deck off. The cards keep their designed size inside, so their content never overflows.
+          el.style.setProperty("--fit", "1");
+          const deck = el.querySelector<HTMLElement>("[data-deck]");
+          const body = deck?.parentElement;
+          let fit = 1;
+          if (deck && body) {
+            const room =
+              el.getBoundingClientRect().bottom -
+              parseFloat(getComputedStyle(el).paddingBottom) -
+              body.getBoundingClientRect().top;
+            fit = Math.min(1, room / (deck.offsetHeight + 3 * peek));
+            el.style.setProperty("--fit", String(fit));
+          }
           enter = window.innerHeight;
           per = Math.round(window.innerHeight * 0.55);
           const runway = (n - 1) * per + Math.round(per * 0.5);
           cards.forEach((card, i) =>
             gsap.set(card, {
               zIndex: n - i,
-              y: enter * 0.72 + pose(i).y,
+              y: (enter * 0.72) / fit + pose(i).y,
               scale: pose(i).scale * 0.9,
               rotate: 0,
               transformOrigin: "50% 0%",
@@ -85,7 +100,7 @@ export function Deck({ className, children }: { className: string; children: Rea
           // Phase 2: the front card flies out; the cards behind step forward.
           for (let i = 0; i < n - 1; i++) {
             const at = enter + i * per;
-            tl.to(cards[i], { y: -window.innerHeight * 1.15, rotate: -25, scale: 0.94, duration: per }, at);
+            tl.to(cards[i], { y: (-window.innerHeight * 1.15) / fit, rotate: -25, scale: 0.94, duration: per }, at);
             for (let j = i + 1; j < n; j++) {
               const from = pose(j - i);
               const to = pose(j - i - 1);

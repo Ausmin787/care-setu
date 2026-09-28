@@ -50,6 +50,12 @@
   padding-top: calc(var(--nav-h) + 24px);
   padding-bottom: clamp(24px, 4vh, 40px);
   padding-right: calc(var(--gutter) + 64px); /* room for the pause control */
+  /* The pause control lives in the video layer beneath this one; the layer's empty box must not swallow its clicks
+     (device audit 2026-09-28: unclickable at every desktop and iPad-landscape size). Content stays interactive. */
+  pointer-events: none;
+}
+.inner > * {
+  pointer-events: auto;
 }
 .inner :global(.btn) {
   text-shadow: none; /* the halo is for text on footage; the pill is opaque */

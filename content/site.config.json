@@ -1,6 +1,7 @@
 {
-  "_note": "Public business facts. Phone from the owners (D-024, C-028). Call hours 7 AM to 10 PM, Asia/Kolkata (D-024, C-031). Still empty until answered: promotion Q9. Empty = the UI hides it.",
+  "_note": "Public business facts. Phone from the owners (D-024, C-028). Call hours 7 AM to 10 PM, Asia/Kolkata (D-024, C-031). Still empty until answered: promotion Q9. Empty = the UI hides it. showPrices stays false until the owners confirm prices (Q18, D-029); even then only approved price rows show.",
   "phone": "+918448912820",
   "hours": { "open": "07:00", "close": "22:00" },
-  "promotion": null
+  "promotion": null,
+  "showPrices": false
 }

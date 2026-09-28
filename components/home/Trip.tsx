@@ -61,7 +61,8 @@ export function Trip() {
           </div>
         </div>
 
-        <ol className={s.leg} data-line={careLine.line}>
+        {/* data-thread-from: the Home thread (D-030) leaves from this leg's end cap. */}
+        <ol className={s.leg} data-line={careLine.line} data-thread-from>
           <li className={`${s.row} ${s.head}`} data-seg>
             <span className={s.spine} aria-hidden="true" />
             <div className={s.body}>

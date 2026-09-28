@@ -1,8 +1,11 @@
-/* myhealthprac's sand block (D-027): the one warm colour field on the page, ink text, hairline roles. */
+/* Partner band (D-030): myhealthprac's sand block (D-027) set as an editorial index after Awwwards "Index"
+   (refs/care-setu/awwwards/index-3.mp4): big rows between ink rules; the hovered row fills with a colour bar.
+   Ours: the bar is the role's line colour, sliding in from the left (scaleX); ink text stays >= 4.8:1 on it. */
 .band {
+  position: relative;
   display: grid;
-  gap: 44px;
-  padding-block: 80px;
+  gap: 48px;
+  padding-block: 96px 120px;
   background: var(--c-sand);
 }
 .top {
@@ -16,42 +19,116 @@
   margin: 0;
   max-width: 20ch;
 }
-.roles {
+.rows {
   list-style: none;
   margin: 0;
   padding: 0;
+  border-bottom: 1.5px solid var(--c-ink);
+}
+.rows li {
+  border-top: 1.5px solid var(--c-ink);
+}
+.row {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: 64px minmax(0, 6fr) minmax(0, 5fr) 48px;
+  gap: 24px;
+  align-items: center;
+  min-height: 112px;
+  padding: 20px 16px;
+  text-decoration: none;
+  color: var(--c-ink);
 }
-.roles li {
-  display: grid;
-  align-content: start;
-  gap: 10px;
-  padding-top: 20px;
-  border-top: 1px solid var(--c-ink);
+.row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--line);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.roles :global(.badge) {
-  justify-self: start;
+.row:hover::before,
+.row:focus-visible::before {
+  transform: scaleX(1);
 }
-.roles h3 {
-  margin: 4px 0 0;
+.row:focus-visible {
+  outline: 3px solid var(--c-ink);
+  outline-offset: -3px;
+  background: none;
+}
+.n {
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.title {
+  text-wrap: balance;
   font-family: var(--serif);
-  font-size: 28px;
-  line-height: 1.1;
-  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 350;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
 }
-.roles p {
-  margin: 0;
-  font-size: 18px; /* ink, not muted: muted on sand is ~4.1:1, under AA for body text */
+.text {
+  font-size: 18px;
+  line-height: 1.4;
+  max-width: 40ch;
+}
+.arrow {
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  color: var(--color-ink);
+  transform: translateX(-10px);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+}
+.row:hover .arrow,
+.row:focus-visible .arrow {
+  transform: none;
+  opacity: 1;
+}
+/* Touch has no hover: the arrow is always there. */
+@media (hover: none) {
+  .arrow {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 900px) {
   .band {
-    padding-block: 56px;
+    padding-block: 64px 72px;
+    gap: 36px;
   }
-  .roles {
-    grid-template-columns: minmax(0, 1fr);
+  .row {
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    grid-template-areas:
+      "n title arrow"
+      ". text arrow";
+    gap: 6px 14px;
+    padding: 18px 4px;
+  }
+  .n {
+    grid-area: n;
+  }
+  .title {
+    grid-area: title;
+  }
+  .text {
+    grid-area: text;
+    font-size: 17px;
+  }
+  .arrow {
+    grid-area: arrow;
+    width: 36px;
+    height: 36px;
   }
   .top :global(.btn) {
     width: 100%;

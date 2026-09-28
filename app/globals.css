@@ -224,6 +224,22 @@
     display: block;
     font-size: 19px;
   }
+
+  /* D-029: marks content that awaits the owners' confirmation. Rendered in development only (shown()). */
+  .pending {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border: 1.5px dashed currentColor;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
 }
 
 /* Line colours as data (only on lines, stations, badges and the footer wordmark; D-027). */

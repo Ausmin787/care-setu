@@ -1,0 +1,102 @@
+/* How we work with you (D-030): an editorial statement (Petrona, ~22ch measure) that inks word by word
+   (Skiper UI 31 text scroll; the trip's ghost -> full physics). Left rail: label, the live call status, actions. */
+.sec {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 48px;
+  padding-block: 120px 128px;
+  border-top: 1px solid var(--c-ink);
+}
+.side {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  justify-items: start;
+}
+.label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-muted);
+  box-shadow: 0 0 0 2px var(--c-ink);
+}
+.status[data-open="true"] .dot {
+  background: var(--color-line-lime);
+}
+.actions {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.tel svg {
+  width: 22px;
+  height: 22px;
+}
+.tel:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.main {
+  display: grid;
+  gap: 28px;
+}
+.kicker {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+.statement p {
+  text-wrap: pretty;
+  margin: 0;
+  max-width: 24ch;
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.4vw, 64px);
+  font-weight: 350;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+/* Ghost is a solid mix, not opacity, so it stays readable (contrast 2.4:1 as a transient state only). */
+.statement[data-live] [data-w] {
+  color: color-mix(in srgb, var(--c-ink) 28%, var(--c-canvas));
+  transition: color 0.35s ease;
+}
+.statement[data-live] [data-w][data-inked] {
+  color: var(--c-ink);
+}
+
+@media (max-width: 900px) {
+  .sec {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding-block: 72px 80px;
+  }
+  .statement p {
+    max-width: none;
+  }
+}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IconMenu2, IconPhoneFilled } from "@tabler/icons-react";
 import { LogoMark } from "@/components/LogoMark";
 import { config, phoneDisplay, t } from "@/lib/content";
+import { NavLinks } from "./NavLinks";
 import s from "./Nav.module.css";
 
 const links = [
@@ -10,21 +11,17 @@ const links = [
   { href: "/partner", label: t.nav.partner },
 ];
 
-// Full-width bar (D-028, after Biograph and myhealthprac): solid parchment by default; over a hero marked
-// data-nav-over it starts transparent and solidifies on scroll (CSS only, see the module). Warm-toned mark.
+// Full-width ink bar (D-028, after Biograph and myhealthprac): one colour set everywhere (white wordmark, the
+// logo in its own colours, a cream pill); over a hero marked data-nav-over only the fill fades in on scroll.
 export function Nav() {
   return (
-    <header className={`${s.nav} wrap`}>
+    <header className={`${s.nav} wrap`} data-mode="ink">
       <Link className={s.brand} href="/" aria-label={t.nav.home}>
-        <LogoMark className={s.mark} tone="warm" />
+        <LogoMark className={s.mark} />
         <b translate="no">CARE SETU</b>
       </Link>
       <nav className={s.links} aria-label="Main">
-        {links.map((l) => (
-          <Link key={l.href} href={l.href}>
-            {l.label}
-          </Link>
-        ))}
+        <NavLinks links={links} />
       </nav>
       <div className={s.right}>
         {/* Phone shows only when the owners have published a real number (Q3 answered in D-024). */}
@@ -42,11 +39,7 @@ export function Nav() {
             <IconMenu2 aria-hidden="true" />
           </summary>
           <div className={s.sheet}>
-            {links.map((l) => (
-              <Link key={l.href} href={l.href}>
-                {l.label}
-              </Link>
-            ))}
+            <NavLinks links={links} />
           </div>
         </details>
       </div>

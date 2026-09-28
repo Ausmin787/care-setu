@@ -11,10 +11,42 @@ const SiteConfig = z.object({
     .object({ open: z.string().regex(/^\d{2}:\d{2}$/), close: z.string().regex(/^\d{2}:\d{2}$/) })
     .nullable(),
   promotion: z.object({ text: z.string().min(1), href: z.string().startsWith("/") }).nullable(),
+  // Prices stay hidden until the owners confirm them (Q18, D-029).
+  showPrices: z.boolean(),
 });
 
 export const LINES = ["lime", "blue", "olive"] as const;
 export type Line = (typeof LINES)[number];
+
+// Content from the owner's sample site carries its CLAIMS.md id; `pending` until that row is approved (D-029).
+const claimed = { claim: z.string().regex(/^C-\d{3}$/), pending: z.boolean() };
+// Integer paise, whole rupees only (D-004). A guide price; payment is always against a quote.
+const Price = z.object({
+  ...claimed,
+  paise: z.number().int().positive().multipleOf(100),
+  from: z.boolean(),
+  unit: z.string(),
+});
+export type Price = z.infer<typeof Price>;
+
+// A still-life illustration (C-073 and later rows), never presented as our stock, staff or premises; `focus` is the
+// vertical crop point.
+const Illustration = z.object({
+  src: z.string().startsWith("/"),
+  alt: z.string().startsWith("Illustration"),
+  focus: z.string().regex(/^\d{1,3}%$/),
+  claim: z.string().regex(/^C-\d{3}$/),
+});
+
+const Service = z.object({
+  slug: z.string(),
+  name: z.string(),
+  who: z.string(),
+  text: z.string(),
+  scope: z.object({ ...claimed, items: z.array(z.string()).min(1) }).optional(),
+  price: Price.optional(),
+  image: Illustration.optional(),
+});
 
 // The eight launch services (D-024) in three lines (D-025).
 const CatalogueLine = z.object({
@@ -23,11 +55,35 @@ const CatalogueLine = z.object({
   line: z.enum(LINES),
   name: z.string(),
   whoLabel: z.string(),
-  services: z.array(z.object({ slug: z.string(), name: z.string(), who: z.string(), text: z.string() })).min(1),
+  services: z.array(Service).min(1),
+});
+
+const Equipment = z.object({
+  slug: z.string(),
+  name: z.string(),
+  text: z.string(),
+  image: Illustration.optional(),
+  ...claimed,
+  prices: z.array(Price),
 });
 
 export const lines = z.array(CatalogueLine).length(3).parse(servicesData.catalogue);
+export const equipment = z.array(Equipment).parse(servicesData.equipment);
 export const config = SiteConfig.parse(siteConfig);
 // "+918448912820" -> "+91 84489 12820", the grouping Indian mobile numbers are read in.
 export const phoneDisplay = config.phone.replace(/^\+91(\d{5})(\d{5})$/, "+91 $1 $2");
 export const t = messages;
+
+// D-029: pending content renders in development only, so the owners can review it on localhost;
+// a production build shows approved content only. Read at call time so tests can switch it.
+export function shown<T extends { pending: boolean }>(item: T | undefined): T | undefined {
+  return item && (!item.pending || process.env.NODE_ENV !== "production") ? item : undefined;
+}
+
+export function shownPrice(price: Price | undefined): Price | undefined {
+  return config.showPrices ? shown(price) : undefined;
+}
+
+const inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
+// Display only: paise are whole rupees by schema, so the division is exact.
+export const formatPaise = (paise: number) => inr.format(paise / 100);

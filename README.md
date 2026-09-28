@@ -37,6 +37,7 @@ facts; empty until the owners answer, and empty hides the UI). Hero illustration
 | Logo, colours, brand assets | `docs/BRAND.md`, `brand/` |
 | Visual design system (Stage 2) | `DESIGN.md` |
 | Owner's design reactions, round by round | `docs/OWNER-TASTE.md` |
+| Prompts for images Sasanka generates | `docs/ASSET-PROMPTS.md` |
 | Build plans | `docs/plans/` |
 | Session trace | `docs/LOG.md` |
 | Agent rules | `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex/others) |

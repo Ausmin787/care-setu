@@ -1,0 +1,391 @@
+/* The services deck (D-031), replicating Cue Kit's "Stacked Deck Scroll Reveal" (refs/care-setu/cuekit/
+   stacked-deck-spec.md): a dark stage, a small centred serif header, flat colour cards split text | image 1fr 1fr,
+   shadow 0 18px 50px rgba(0,0,0,.28), title serif clamp(2rem, 4.5vw, 3.4rem), index at .35 opacity, image with a
+   12 s Ken Burns 1 -> 1.08. Ours: each card is a 40% tint of its line's logo colour (the reel captions, D-030), 20px
+   radii (Warm Room) instead of 2px, and GetLayers Cards Cascade's chapter counter on the right.
+   Resting state (no JS, touch, reduced motion): the cards in order; tall desktops pile them with sticky tops. */
+.sec {
+  position: relative;
+}
+.stage {
+  display: grid;
+  justify-items: center;
+  gap: clamp(24px, 5vh, 56px);
+  padding: 96px var(--gutter) 112px;
+  background: var(--c-canvas);
+}
+.head {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 350;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+/* The quote note (C-024), said once for all eight cards. */
+.sub {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--c-muted);
+}
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1100px);
+  justify-content: center;
+  width: 100%;
+}
+.deck {
+  display: grid;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A card is a light surface on the ink stage: point the semantic layer back at the light values inside it, so the
+   pill button, focus and muted text read as they do on parchment. */
+.card {
+  --c-canvas: var(--color-parchment);
+  --c-ink: var(--color-ink);
+  --c-muted: var(--color-ink-soft);
+  --c-accent: var(--color-ink);
+  --c-accent-deep: var(--color-ink-soft);
+  --tint: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+  border-radius: 20px;
+  background: var(--tint);
+  color: var(--color-ink);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 0.28);
+  transform-origin: 50% 0%;
+}
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+  height: 100%;
+  box-sizing: border-box;
+  padding: clamp(20px, 3vw, 36px);
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+.top h3 {
+  text-wrap: balance;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(34px, 3.6vw, 52px);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.idx {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1;
+  opacity: 0.35;
+  flex: none;
+}
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.meta i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  box-shadow: 0 0 0 2px var(--color-ink);
+  flex: none;
+}
+.lede {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 19px;
+  line-height: 1.45;
+}
+.parts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+.parts dt {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.parts dd {
+  margin: 2px 0 0;
+  max-width: 44ch;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.covers h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.covers ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.covers li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.covers svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin-top: 1px;
+}
+.price {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.fine {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--color-ink-soft);
+}
+.foot {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+/* Image column: fills its half (the sample removed the aspect cap). Nested radius 20 - padding. */
+.media {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--line) 62%, var(--color-parchment));
+  display: grid;
+  align-content: space-between;
+  padding: 16px 18px;
+}
+.img {
+  object-fit: cover;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .img {
+    animation: kenburns 12s ease-in-out infinite alternate;
+  }
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+/* Type-led slot until the still-life exists: the number set huge (as the reel's empty slots). */
+.n {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--serif);
+  font-size: clamp(96px, 11vw, 160px);
+  font-weight: 300;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  color: color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+.soon {
+  justify-self: start;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Chapter counter: only while the deck is live. */
+.rail {
+  display: none;
+}
+
+/* Tall desktops without the live deck: a sticky pile, each card 14px lower than the last. */
+@media (min-width: 901px) and (min-height: 760px) {
+  .stage:not([data-live]) .card {
+    position: sticky;
+    top: calc(var(--nav-h) + 32px + var(--i) * 14px);
+    height: min(560px, calc(100svh - var(--nav-h) - 200px));
+  }
+  .stage:not([data-live]) .deck {
+    gap: 40px;
+  }
+}
+
+/* Live (JS, desktop, fine pointer, motion allowed): one screen, pinned below the nav; Deck sets the transforms.
+   --peek is the gap between stacked cards (the sample's 42px; 24px on short laptops), read by Deck too. The deck
+   takes what the screen leaves after the nav, the header and three peeks. */
+.stage[data-live] {
+  --peek: 42px;
+  --head: 76px;
+  --deck-h: clamp(380px, calc(100svh - var(--nav-h) - 56px - var(--head) - 3 * var(--peek)), 540px);
+  height: 100svh;
+  box-sizing: border-box;
+  align-content: start;
+  gap: 20px;
+  padding-block: calc(var(--nav-h) + 20px) 16px;
+  overflow: clip;
+}
+@media (max-height: 759px) {
+  .stage[data-live] {
+    --peek: 24px;
+    --head: 40px;
+  }
+  .stage[data-live] .sub {
+    display: none;
+  }
+  /* The equipment card (three parts) ran 13px past its edge at 1366x657 (2026-09-28): tighten only that card. */
+  .stage[data-live] .text:has(.parts) {
+    gap: 10px;
+  }
+  .stage[data-live] .parts {
+    gap: 6px;
+  }
+  .stage[data-live] .parts dt {
+    font-size: 17px;
+  }
+  .stage[data-live] .parts dd {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+}
+.stage[data-live] .body {
+  grid-template-columns: minmax(0, 1100px) 88px;
+  column-gap: clamp(24px, 3vw, 48px);
+  padding-left: calc(88px + clamp(24px, 3vw, 48px));
+  box-sizing: border-box;
+}
+.stage[data-live] .deck {
+  position: relative;
+  display: block;
+  height: var(--deck-h);
+}
+.stage[data-live] .card {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  will-change: transform;
+}
+.stage[data-live] .rail {
+  display: grid;
+  /* A fixed label row: the vertical line name changes length, and it must never resize the track under the dot. */
+  grid-template-rows: auto minmax(0, 1fr) 176px;
+  justify-items: center;
+  gap: 16px;
+  height: var(--deck-h);
+  color: var(--c-ink);
+}
+.count {
+  display: grid;
+  justify-items: center;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+}
+.count small {
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+/* The three lines in proportion to their cards (4 / 3 / 1), a cream dot for where the reader is. */
+.track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 6px;
+}
+.track span {
+  flex-basis: 0;
+  border-radius: 3px;
+  background: var(--line);
+}
+.track b {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  box-shadow: 0 0 0 3px var(--color-ink);
+  will-change: transform;
+}
+.label {
+  margin: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Phones and narrow tablets: one column, the image first (the sample's mobile card). */
+@media (max-width: 900px) {
+  .stage {
+    padding-block: 72px 80px;
+  }
+  .deck {
+    gap: 20px;
+  }
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .media {
+    order: -1;
+    height: clamp(200px, 56vw, 320px);
+  }
+  .covers ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

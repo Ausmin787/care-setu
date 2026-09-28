@@ -1,0 +1,205 @@
+/* Equipment reel (D-030), after the Akaru homepage (refs/care-setu/awwwards/homepage-akaru.mp4): tall panels in a
+   sideways run, each an image over a flat colour caption block with the name set large. Ours: one caption colour,
+   the equipment line's olive (ink text 4.9:1); image slots in sand until the still-lifes arrive.
+   Resting state (no JS, touch, reduced motion) is a native scroll-snap strip; desktop pins and scrubs it (Reel). */
+.sec {
+  position: relative;
+}
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* the wide track must never widen the grid (it pushed the lede off-screen) */
+  gap: 36px;
+  padding-block: 88px 96px;
+  background: var(--c-canvas);
+}
+/* Stacked header (Taste pre-flight: no split header). */
+.head {
+  display: grid;
+  gap: 16px;
+}
+.head h2 {
+  margin: 0;
+  max-width: 22ch;
+}
+.head p {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 20px;
+}
+
+.track {
+  --panel: clamp(290px, 24vw, 370px);
+  display: flex;
+  gap: 20px;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) 12px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  overscroll-behavior-x: contain;
+}
+/* Trailing space the browser won't give from padding-right in an overflowing flex row. */
+.track::after {
+  content: "";
+  flex: 0 0 1px;
+}
+.panel {
+  flex: 0 0 var(--panel);
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 560px;
+  scroll-snap-align: start;
+  border: 1.5px solid var(--c-ink);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--c-deep);
+}
+
+/* Image slot: sand and grain, the item's number set huge in the display serif. */
+.slot {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  padding: 18px 20px;
+  background: linear-gradient(170deg, var(--color-parchment-deep), var(--color-sand));
+}
+.slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+/* The still-life (C-073) fills the slot; the placeholder's grain is only for the type-led slot. */
+.img {
+  object-fit: cover;
+}
+.slot:has(.img)::after {
+  display: none;
+}
+.n {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--serif);
+  font-size: 112px;
+  font-weight: 300;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  color: color-mix(in srgb, var(--c-ink) 30%, var(--color-sand));
+}
+.soon {
+  justify-self: start;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+}
+
+/* One caption height across the reel, so the image/caption edge reads as one line (Akaru's blocks are equal).
+   A tint of the logo olive, not full strength: beside the warm still-lifes the full olive shouted (2026-09-28). */
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 232px;
+  box-sizing: border-box;
+  padding: 18px 20px 20px;
+  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+  border-top: 1.5px solid var(--c-ink);
+  color: var(--color-ink);
+}
+.caption .ask {
+  margin-top: auto;
+}
+.count {
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.caption h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.text {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.price {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+.ask {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.ask svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  color: var(--color-ink);
+}
+
+/* Pinned (JS, desktop, fine pointer, motion allowed): one screen tall, below the nav; the track slides. */
+.stage[data-live] {
+  height: 100svh;
+  min-height: 680px;
+  box-sizing: border-box;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding-block: calc(var(--nav-h) + 40px) 48px;
+}
+/* The window's left edge sits just right of the thread (rail = half the gutter, line 20px wide), so panels slide
+   out behind the line; the track's padding puts the first panel back on the content edge. */
+.stage[data-live] .window {
+  overflow: clip;
+  height: 100%;
+  margin-left: calc(12px - var(--gutter) / 2);
+  margin-right: calc(var(--gutter) * -1);
+}
+.stage[data-live] .track {
+  overflow: visible;
+  height: 100%;
+  margin: 0;
+  padding: 0 var(--gutter) 0 calc(var(--gutter) / 2 - 12px);
+  will-change: transform;
+}
+.stage[data-live] .panel {
+  height: 100%;
+  max-height: 600px;
+}
+
+@media (max-width: 900px) {
+  .stage {
+    padding-block: 64px 72px;
+    gap: 28px;
+  }
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .track {
+    --panel: min(78vw, 320px);
+  }
+  .panel {
+    height: 500px;
+  }
+}

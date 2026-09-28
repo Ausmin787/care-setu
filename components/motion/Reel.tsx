@@ -1,0 +1,79 @@
+"use client";
+
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+// Horizontal reel (D-030, after the Akaru homepage): on desktop the stage pins and vertical scroll moves the track
+// sideways; the stage's thread segment draws in the same scrub. Touch and reduced motion keep the native
+// scroll-snap strip (Blueprint 9.4: no pinned horizontal scroll on touch). The stage is pinned inside this
+// component's own <div>, so React never removes a node GSAP has re-parented (Blueprint 11).
+export function Reel({
+  className,
+  trackSelector,
+  children,
+}: {
+  className: string;
+  trackSelector: string;
+  children: React.ReactNode;
+}) {
+  const stage = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const el = stage.current;
+      const track = el?.querySelector<HTMLElement>(trackSelector);
+      if (!el || !track) return;
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference) and (min-width: 901px) and (pointer: fine)", () => {
+        el.setAttribute("data-live", "");
+        // Travel = the track's overflow past its clipping window (the parent), not past the stage.
+        const frame = track.parentElement ?? el;
+        const distance = () => Math.max(0, track.scrollWidth - frame.clientWidth);
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: () => `+=${distance()}`,
+            pin: true,
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        });
+        tl.to(track, { x: () => -distance() }, 0);
+        // Keyboard: a focused panel may sit off-screen in the track; scroll the page to the pin position that
+        // brings it into the window, so focus is never invisible (WCAG 2.4.11).
+        const onFocus = (e: FocusEvent) => {
+          const panel = (e.target as HTMLElement).closest("li");
+          const st = tl.scrollTrigger;
+          if (!panel || !st || !track.contains(panel)) return;
+          const x = Math.min(Math.max(0, panel.offsetLeft - 24), distance());
+          const y = st.start + (distance() ? x / distance() : 0) * (st.end - st.start);
+          window.scrollTo({ top: y, behavior: "instant" });
+        };
+        track.addEventListener("focusin", onFocus);
+        return () => {
+          track.removeEventListener("focusin", onFocus);
+          tl.scrollTrigger?.kill();
+          tl.kill();
+          gsap.set(track, { clearProps: "transform" });
+          el.removeAttribute("data-live");
+        };
+      });
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    },
+    { scope: stage },
+  );
+
+  return (
+    <div>
+      <div ref={stage} className={className}>
+        {children}
+      </div>
+    </div>
+  );
+}

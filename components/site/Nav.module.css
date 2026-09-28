@@ -13,9 +13,10 @@
   border-bottom: 1px solid var(--c-line);
   color: var(--c-ink);
 }
-/* Over a hero (Home): transparent with cream text at the top, solid by 140px of scroll. Scroll-driven, so no JS and
-   no flash; without scroll-timeline support the bar simply stays solid. Tokens flip at the midpoint, the fill and
-   rule fade across the range. */
+/* The bar runs in ink mode (set in Nav.tsx), so text, logo and pill never change colour. Over a hero (Home) only
+   the fill and rule fade in across the first 140px of scroll. Scroll-driven, so no JS and no flash; without
+   scroll-timeline support the bar simply stays solid. (An earlier version flipped the colour tokens mid-scroll too;
+   removed so no state can pair a pill with its own text colour.) */
 @supports (animation-timeline: scroll()) {
   :global(body:has([data-nav-over])) .nav {
     animation: solidify linear both;
@@ -25,11 +26,6 @@
 }
 @keyframes solidify {
   from {
-    --c-canvas: var(--color-ink);
-    --c-ink: var(--color-cream);
-    --c-line: transparent;
-    --c-accent: var(--color-cream);
-    --c-accent-deep: #ffffff;
     background-color: transparent;
     border-bottom-color: transparent;
   }
@@ -51,7 +47,7 @@
   height: 40px;
   flex: none;
 }
-/* Web wordmark (D-023): Unbounded 800 uppercase; in the nav it takes the text colour (warm, D-028). */
+/* Web wordmark (D-023): Unbounded 800 uppercase, in the bar's white (cream) text colour (D-028). */
 .brand b {
   font-family: var(--font-wordmark), var(--sans);
   font-weight: 800;
@@ -73,6 +69,13 @@
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
+}
+/* The page you are on: a heavier underline in the logo's green (the one chroma, on ink it reads 9:1). */
+.links a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-line-lime);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
 }
 .right {
   margin-left: auto;
@@ -139,6 +142,10 @@
 }
 .sheet a:last-child {
   border-bottom: 0;
+}
+.sheet a[aria-current="page"] {
+  box-shadow: inset 4px 0 0 var(--color-line-olive);
+  background: var(--color-parchment-deep);
 }
 
 @media (max-width: 900px) {

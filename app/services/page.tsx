@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   IconAlertTriangleFilled,
+  IconArrowDown,
   IconCircleArrowRightFilled,
   IconPhoneFilled,
 } from "@tabler/icons-react";
 import { config, lines, phoneDisplay, t } from "@/lib/content";
+import { CallStatus } from "@/components/home/CallStatus";
+import { deckCards, ServiceDeck } from "@/components/services/ServiceDeck";
+import { EquipmentSheet } from "@/components/services/EquipmentSheet";
 import s from "./page.module.css";
 
 const p = t.servicesPage;
@@ -15,105 +19,85 @@ export const metadata: Metadata = {
   description: p.metaDescription,
 };
 
-// The line catalogue (D-025): Superpower's "What we test" structure (sticky rail with counts, quiet rows that
-// open to one sentence) with each line's rows hung on its coloured spine, as on the Home trip.
-// Rows are native <details>: no JS, keyboard and screen-reader behaviour for free, all closed by default.
+function Actions() {
+  return (
+    <div className={s.actions}>
+      <Link className="btn" href="/contact">
+        {p.cta}
+        <IconCircleArrowRightFilled aria-hidden="true" />
+      </Link>
+      {config.phone && (
+        <a className={s.tel} href={`tel:${config.phone}`}>
+          <IconPhoneFilled aria-hidden="true" />
+          {phoneDisplay}
+        </a>
+      )}
+    </div>
+  );
+}
+
+// Services (D-031): a type-led opener whose three lines jump into the deck, the stacked deck on an ink band, the
+// equipment side by side (development only while C-041 is pending), and a closing band with the live call status.
 export default function Page() {
   return (
     <>
       <section className={`${s.head} wrap`}>
-        <div className={s.intro}>
-          <h1 className="t-display">{p.title}</h1>
-          <p className={s.lede}>{p.lede}</p>
-        </div>
-        <div className={s.reach}>
-          <p className={s.promise}>{p.promise.text}</p>
-          <div className={s.actions}>
-            <Link className="btn" href="/contact">
-              {p.cta}
-              <IconCircleArrowRightFilled aria-hidden="true" />
-            </Link>
-            {config.phone && (
-              <a className={s.tel} href={`tel:${config.phone}`}>
-                <IconPhoneFilled aria-hidden="true" />
-                {phoneDisplay}
-              </a>
-            )}
+        <h1 className="t-display">{p.title}</h1>
+        <div className={s.headFoot}>
+          <div className={s.intro}>
+            <p className={s.lede}>{p.lede}</p>
+            <Actions />
+            <p className="sos">
+              <IconAlertTriangleFilled aria-hidden="true" />
+              <span>
+                <b>{t.hero.emergencyTitle}</b>
+                {t.hero.emergencyText}
+              </span>
+            </p>
           </div>
-          <p className="sos">
-            <IconAlertTriangleFilled aria-hidden="true" />
-            <span>
-              <b>{t.hero.emergencyTitle}</b>
-              {t.hero.emergencyText}
-            </span>
-          </p>
+          <nav className={s.lines} aria-label={p.linesLabel}>
+            <ol>
+              {lines.map((line) => {
+                const cards = deckCards.filter((c) => c.line === line.line);
+                const first = deckCards.indexOf(cards[0]) + 1;
+                const last = first + cards.length - 1;
+                return (
+                  <li key={line.slug} data-line={line.line}>
+                    <a href={`#${cards[0].id}`} data-deck-link>
+                      <span className={s.range}>
+                        {String(first).padStart(2, "0")}
+                        {last > first && `-${String(last).padStart(2, "0")}`}
+                      </span>
+                      <span className={s.lineName}>
+                        <i aria-hidden="true" />
+                        {line.name}
+                      </span>
+                      <IconArrowDown className={s.down} aria-hidden="true" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
         </div>
       </section>
 
-      <div className={`${s.body} wrap`}>
-        <nav className={s.rail} aria-label={p.railTitle}>
-          <p className={s.railTitle}>{p.railTitle}</p>
-          <ul>
-            {lines.map((line) => (
-              <li key={line.slug} data-line={line.line}>
-                <a href={`#${line.slug}`}>
-                  <i aria-hidden="true" />
-                  {line.name}
-                  <span className={s.count}>({line.services.length})</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+      <ServiceDeck />
+      <EquipmentSheet />
 
-        <div className={s.lines}>
-          {lines.map((line) => (
-            <section
-              key={line.slug}
-              id={line.slug}
-              className={s.line}
-              data-line={line.line}
-              aria-labelledby={`${line.slug}-title`}
-            >
-              <header className={s.lineHead}>
-                <h2 id={`${line.slug}-title`}>
-                  {line.name}{" "}
-                  <span className={s.count}>{line.services.length}</span>
-                </h2>
-                <span className="badge">
-                  <i style={{ background: "var(--line)" }} />
-                  {t.services.lineLabel} {line.number}
-                </span>
-              </header>
-              <div className={s.cols} aria-hidden="true">
-                <span>{p.serviceCol}</span>
-                <span>{line.whoLabel}</span>
-              </div>
-              <ul className={s.stops}>
-                {line.services.map((svc) => (
-                  <li key={svc.slug}>
-                    <details className={s.stop}>
-                      <summary>
-                        <span className={s.name}>{svc.name}</span>
-                        <span className={s.who}>{svc.who}</span>
-                        <span className={s.pm} aria-hidden="true" />
-                      </summary>
-                      <div className={s.open}>
-                        <p>{svc.text}</p>
-                        <Link className={s.ask} href="/contact">
-                          {p.ask} {svc.name}
-                          <IconCircleArrowRightFilled aria-hidden="true" />
-                        </Link>
-                        <p className={s.fine}>{p.note.text}</p>
-                      </div>
-                    </details>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+      <section className={s.closing} aria-labelledby="closing-title">
+        <div className={`${s.closingIn} wrap`}>
+          <h2 id="closing-title" className="t-head">
+            {p.closing.title}
+          </h2>
+          <div className={s.closingSide}>
+            <p className={s.closingText}>{p.closing.text}</p>
+            <p className={s.promise}>{p.promise.text}</p>
+            <CallStatus className={s.status} dotClassName={s.dot} />
+            <Actions />
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

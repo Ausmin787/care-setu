@@ -118,3 +118,79 @@ Template:
 - Later: Sasanka rejected the floating nav; built a full-width nav (transparent over the hero, solid on scroll via a
   CSS scroll-driven animation, measured from Biograph + myhealthprac) with a warm-toned mark in the nav only (D-028).
   Fixed the hero text halo leaking into the pill. Blueprint updated (standing permission, saved to memory).
+- Review fixes (D-028 revised): original logo colours in the nav with a white wordmark; current page marked
+  (aria-current + green underline); "Talk to us" unreadable report not reproducible, so the mid-scroll colour-token
+  flip was removed and the bar made ink everywhere (fill fades in over the hero).
+
+## 2026-09-28 · Stage 4 · Owner's sample site → pending content (D-029); plan for the Home/Services redesign
+- Model/effort: Opus 5.5; plan written at medium, Stage 0 run at high (Sasanka set `/effort high` to compare).
+- Read `care-setu-sample.vercel.app` (WebFetch: /, /services, /equipment, /about, /hospitals, /contact). It is an AI
+  mock: invented reviews, rating, leadership, hospital logos, metrics, apps; contacts contradicting D-024 and itself.
+  Objected with a says-vs-on-record table; Sasanka chose safe subset as pending, prices built but off, D-024 stands.
+- Built: scope lists + equipment range + prices (paise) in `content/services.json`, `showPrices: false`, story lines
+  in `en.json`; `shown()`/`shownPrice()`/`formatPaise()` in `lib/content.ts`; Services rows show "What it covers"
+  with a dev-only "Awaiting owner" tag. CLAIMS C-035..C-072; Q17..Q19.
+- Tests: the approved-ids test replaced by a walk over all content JSON (pending flag ⇔ pending row); production gate
+  and prices-off tests; risky patterns for the sample's fabrications. 41/41. Lint, typecheck, build green.
+- Fact audit on served HTML: prod build on :3100 has 0 hits for 1800, caresetu.in, Gurugram, Faridabad, NABL/NABH,
+  4.92, 2,400, Pvt, Vikram, Ritu, Ananya, App Store, Login, ₹, IV infusion, "Awaiting owner"; phone and callback
+  line present. Dev (:3000) shows the fill. Server on :3100 killed by PID only.
+- Fixed on screenshot: `.stops li` hairline bled into the new scope list (`.stops > li`).
+- Gotcha: the running dev server left a duplicated tail in `.next/dev/types/routes.d.ts` (tsc TS1005); `next typegen`
+  doesn't touch `.next/dev`; trimmed the generated file.
+- Blueprint: §1.7 ambition bar, §17.3 GetLayers corrected, mistakes #38/#39.
+- Not verified: the pending-flag test's failure path (not mutation-tested); 360/390px of the new list; owner review.
+
+## 2026-09-28 · Stage 4 · Stage 1: Home after the trip rebuilt (D-030)
+- Model/effort: Opus 5.5, high effort (Sasanka's comparison run).
+- Research in Chrome, captured to `refs/care-setu/`: GetLayers /sections (7 preview MP4s + frame sheets; the
+  blueprint's "buy nothing" line had kept this library unopened before), Awwwards animation collection (10 MP4s),
+  Skiper UI scroll effects (16, 19, 31 demos), before-shot of Home. Mobbin not used (no flow change).
+- One AskUserQuestion round, recommended option picked on all four: Colonnade, horizontal equipment reel, the trip's
+  line continues, Sasanka-generated still-lifes. Claude's calls: ink statement (Skiper 31), partner index (Awwwards).
+- Built: `Colonnade`, `EquipmentReel` + `motion/Reel` (pin + scrub, focus-follows for keyboard), `HowWeWork` +
+  `motion/InkStatement`, `PartnerBand` as an index, `motion/Thread` (one SVG segment per section, measured from the
+  trip's end cap). `ServiceIndex` removed. Invariant 27 widened for the logo colours as fields (D-030).
+- Verification: green (lint, tsc, 46 tests, build). Frozen gate via headless `--force-prefers-reduced-motion`.
+  Motion via a CDP wheel-scroll script (real wheel input, visible page): thread draws, reel pins, statement inks,
+  hover conveyor works. Real Tab-key test: columns activate on focus; all six reel links scroll into view.
+  390x844 CDP emulation: bands, swipe strip, no overflow. Fixed on capture: 867px overflow and clipped lede (wide
+  track widened the grid), panels passing over the line (clip window), knots at segment joints (butt caps), blank
+  Colonnade columns (muted headlines), double sentence gaps. impeccable 1280 + 390: nothing new (waivers: Warm Room
+  cream, logo blue field, field mesh, display leading, strip panels off-screen, nav over video). Taste pre-flight:
+  split headers fixed (stacked), vh -> svh. Web Interface Guidelines: text-wrap + tabular-nums added.
+- Prod fact audit (:3100, killed by PID): reel, pending kicker, prices and sample fabrications absent; promises present.
+- Mistake: #30 again (a wrapper's opening tag in one Edit, closing in the next; hook caught it).
+- Not verified: real phone/Safari; 768/1024 visually (overflow 0 checked only at 1440 and 390); owner review; a
+  pinned-reel feel on trackpads with inertia; screen-reader pass.
+- Follow-up (same day): Sasanka reported the line "just appears and disappears". A per-step probe confirmed 0 -> 1
+  jumps (pathLength="1" + GSAP px auto-round) and that the design never tied the tip to the reader. Thread rebuilt:
+  tip follows the viewport at 65% via one ScrollTrigger + gsap.quickTo on real lengths, faint route, stations ink.
+  Probe down and up: tip at 585/900 every step. Mistake: motion had been "verified" from stills at a few depths;
+  and #9 again (removed a declaration in one parallel Edit before its uses in the next).
+- Images: six ChatGPT still-lifes from Sasanka (1122x1402). Checked at full resolution for text/logos (none). Originals
+  to `refs/care-setu/stills/`, WebP (q80, 58-138 KB) to `public/illustrations/equipment/`; CLAIMS C-073 (illustration
+  only). Schema requires alt text starting "Illustration". Caption blocks: fixed height + 40% olive tint (the full
+  olive fought the warm photos). Green; impeccable unchanged (9 known waivers). Note: services.json was re-serialised
+  by JSON.stringify (formatting-only churn in the diff).
+
+## 2026-09-28 · Stage 2: Services rebuilt (D-031)
+- Research (previews read frame by frame, `refs/care-setu/`): GetLayers (all 10 sections), 6 more Awwwards
+  animation items, 14 Skiper UI, 4 Cue Kit with written specs. Options round: stacked deck, 7 new still-lifes, equipment
+  sheet with hover images, ink stage (all recommended). Sasanka also likes Cue Kit's Collapsing Cards Accordion:
+  source copied to `refs/care-setu/cuekit/`, kept for About (founders).
+- Built: type-led opener with a lines index that jumps into the deck; ServiceDeck + Deck (one pixel-measured GSAP
+  timeline: rise while entering, then pin and deal; focus and jump links bring cards forward); EquipmentSheet +
+  HoverPreview (CSS-trailed cursor figure, thumbnails on touch); closing band on sand with the live call status.
+  Service schema gained an optional still-life (shared Illustration schema).
+- Verification and fixes: see D-031 Verified. Mistakes: #9 again, twice (a declaration and its reassignment in
+  separate Edits; a declaration, its use and its assignment in three Edits). The CDP script failed to start Chrome
+  with a relative profile path (now path.resolve). `next start`'s child kept port 3100 after killing the wrapper PID;
+  found by port, checked its command line, stopped that PID.
+- Not verified: real phone/Safari, trackpad inertia, 768/1024 visually, screen reader, owner review.
+- Follow-up (same day): Sasanka's screenshot showed "Talk to us about equipment" cut off. Measured every card's
+  button against its card edge at 1366x657, 1280x720, 1536x730: only the equipment card overflowed (-13px at 657).
+  Tightened only that card's parts on screens under 760px tall; now 23px inside at 1366x657, unchanged at 720+.
+  Left: GDA touches its edge by 2px at 1280x640, dev-only (pending scope list).
+- Service still-lifes: ChatGPT returned one 897x1752 collage with invented "CLAIMS:" captions. Compositions good;
+  panels too small to crop (290-443px wide for a 400-540px slot). Not used; asked for seven separate full-size files.

@@ -1,0 +1,61 @@
+/* The thread (D-030, after Skiper UI 19 "stroke follows the scroll"): the trip's lime line continuing down Home.
+   Drawn like the trip's spine: lime, ink-cased (lime is 1.8:1 on parchment), stations as white discs ringed in ink.
+   Width 16px + 2px casing each side; the rail sits in the middle of the left gutter. Desktop only. */
+.thread {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Butt caps: segments meet end to end at section edges; round caps would draw a knot at every joint. */
+.case,
+.line {
+  fill: none;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+.case {
+  stroke: var(--color-ink);
+  stroke-width: 20;
+}
+.line {
+  stroke: var(--color-line-lime);
+  stroke-width: 16;
+}
+.stop {
+  fill: var(--color-parchment);
+  stroke: var(--color-ink);
+  stroke-width: 5;
+}
+.stop[data-end] {
+  stroke-width: 6;
+}
+
+/* Live (JS, desktop, motion allowed): the route ahead of the tip shows faintly, as the trip's ghost rows do.
+   One group at low opacity, so the casing and fill never stack alpha into seams. */
+.route {
+  display: none;
+}
+.thread[data-live] .route {
+  display: inline;
+  opacity: 0.2;
+}
+.thread[data-live] .stop {
+  transition:
+    stroke 0.3s ease,
+    fill 0.3s ease;
+}
+.thread[data-live] .stop:not([data-passed]) {
+  stroke: color-mix(in srgb, var(--color-ink) 25%, var(--color-parchment));
+}
+.thread[data-live] .stop[data-passed] {
+  fill: var(--color-line-lime);
+}
+
+@media (max-width: 900px) {
+  .thread {
+    display: none;
+  }
+}

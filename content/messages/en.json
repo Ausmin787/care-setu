@@ -43,24 +43,89 @@
     "stopHome": { "title": "Care at home", "text": "Questions and changes go to the Care Setu team." }
   },
   "services": {
-    "title": "Pick the line the patient needs",
-    "ask": "Talk to us",
-    "lineLabel": "Line",
-    "onLine": "On this line",
-    "seeLine": "See this line on the Services page",
-    "note": "Eight services in three lines, across Noida and Delhi."
+    "lineLabel": "Line"
   },
   "servicesPage": {
     "metaTitle": "Services | Care Setu",
     "metaDescription": "Nursing, attendants, ICU care, doctor visits, physiotherapy, lab sample collection and medical equipment at home in Noida and Delhi.",
     "title": "What we arrange at home",
-    "lede": "Eight services in Noida and Delhi, in three lines. Open any one to see what it is.",
+    "lede": "Eight services in Noida and Delhi, in three lines.",
     "promise": { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
     "cta": "Talk to us",
-    "railTitle": "Lines",
-    "serviceCol": "Service",
+    "linesLabel": "Go to a line",
     "ask": "Talk to us about",
-    "note": { "text": "Arranged after a call, with a care plan and a quote before you pay.", "claim": "C-024" }
+    "note": { "text": "Arranged after a call, with a care plan and a quote before you pay.", "claim": "C-024" },
+    "covers": "What it covers",
+    "from": "From",
+    "priceNote": "A guide only. You pay against your quote.",
+    "deck": {
+      "title": "The eight services",
+      "hint": "The services, one card each. Scroll to bring the next one forward.",
+      "of": "of",
+      "imageSlot": "Still-life to come",
+      "equipmentWho": "Rent, buy or sell back"
+    },
+    "sheet": {
+      "title": "The equipment, side by side",
+      "lede": "What each item is, and whether you can rent it or buy it.",
+      "item": "Item",
+      "what": "What it is",
+      "ways": "Rent or buy",
+      "rent": "Rent",
+      "buy": "Buy",
+      "ask": "Talk to us about"
+    },
+    "closing": {
+      "title": "Not sure which one you need?",
+      "text": "Tell us what the patient needs. We call back and work out the care plan with you."
+    }
+  },
+  "pending": {
+    "tag": "Awaiting owner",
+    "title": "Not yet confirmed by the owners. Shown in development only."
+  },
+  "story": {
+    "line": {
+      "text": "Treatment begins in a hospital. Healing continues at home.",
+      "claim": "C-043",
+      "pending": true
+    },
+    "founding": {
+      "text": "Care Setu was founded on a simple observation: while Indian tertiary hospitals offer world-class clinical care, discharge often leaves families anxious, isolated and unprepared. We built Setu to bridge that vulnerable threshold with dignity and clinical precision.",
+      "claim": "C-044",
+      "pending": true
+    }
+  },
+  "colonnade": {
+    "title": "What we arrange at home",
+    "lede": { "text": "Eight services in three lines, across Noida and Delhi.", "claim": "C-032" },
+    "all": "See every service",
+    "ask": "Talk to us",
+    "show": "Show",
+    "servicesCount": "services",
+    "fields": {
+      "care-at-home": "A nurse, an attendant or an ICU set-up, in the patient's own home.",
+      "visits-and-tests": "A doctor, a physiotherapist or a sample collector comes to you.",
+      "equipment": "Hospital beds, oxygen and monitors: rented, bought, or sold back."
+    }
+  },
+  "equipment": {
+    "title": "Equipment for the room they recover in",
+    "lede": "Rent it for as long as it is needed, buy it outright, or sell it back when you are done.",
+    "imageSlot": "Photograph to come",
+    "ask": "Ask about",
+    "of": "of",
+    "hint": "Scroll to move through the equipment"
+  },
+  "promise": {
+    "label": "How we work with you",
+    "sentences": [
+      { "text": "Tell us what the patient needs after a hospital stay." },
+      { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
+      { "text": "You get a care plan and a quote before you pay, and you pay against the quote.", "claim": "C-024" },
+      { "text": "Care at home in Noida and Delhi.", "claim": "C-032" }
+    ],
+    "cta": "Talk to us"
   },
   "partner": {
     "title": "Do you discharge patients, or care for them?",

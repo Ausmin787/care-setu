@@ -628,3 +628,144 @@ only solidify the bar once the reader moves on. The warm mark keeps the logo's s
 one colour moment stays the footer wordmark.
 **Rejected:** the floating bar (D-027); a JS IntersectionObserver toggle (a flash of the solid bar before hydration,
 and more code); a mono cream-only logo (loses the mark's structure on parchment).
+**Revised the same day (Sasanka's review):** (1) the nav logo goes back to the **original colours** (green, blue,
+olive, white; the warm tone is removed and `LogoMark` restored) with "CARE SETU" in white; (2) the page you are on is
+marked (`aria-current="page"` from `usePathname` in a small client `NavLinks`; a 3px underline in the logo's green,
+an olive edge in the mobile sheet); (3) "Talk to us" in the nav was reported unreadable. It could not be reproduced
+(Playwright at every scroll position, hover, both pages; installed Chrome headless), so the fragile part was removed:
+the keyframes no longer flip colour tokens mid-scroll. The bar now runs in ink mode everywhere (white wordmark,
+cream pill with ink text) and only its fill fades in over the hero; solid, it is an ink bar (Biograph's dark header)
+rather than parchment, which white text requires.
+**Verified:** green (lint, typecheck, 38 tests, build); Playwright 1440: /services shows the ink bar, "Services"
+underlined, pill cream 245,238,227 with ink 28,24,20 text; Home at 0/70/300px scroll keeps the same pill colours while
+the bar goes transparent → ink. **Not verified:** the original invisible-label state (never reproduced; ask for a
+screenshot if it recurs); real phone/Safari.
+
+## D-029 · 2026-09-28 · The owner's sample site: a safe subset as pending content, prices built but off, D-024 contacts stand
+The owner sent `care-setu-sample.vercel.app` as "all the information" to fill the site (Home looked empty). Read on
+2026-09-28 (WebFetch: `/`, `/services`, `/equipment`, `/about`, `/hospitals`, `/contact`). It reads as an AI-built
+mock rather than owner facts: it contradicts itself (contact page `+91 98765 43210`, 8 AM – 8 PM; elsewhere
+`1800-CARE-SETU`, "24x7"), names a leadership team that is not the founders on record (D-024), and carries outcome
+statistics a pre-launch company cannot have. Sasanka chose in one AskUserQuestion round (2026-09-28):
+- **Content: the safe subset, as pending.** What each service covers (scope lists), the equipment range, "flexible
+  engagements", the line "Treatment begins in a hospital. Healing continues at home." (unattributed) and the founding
+  observation for About go into the content files, each tied to a `pending` row (C-035..C-044). **Pending content
+  renders in development only**, with a visible "awaiting owner" tag, so the owner can review a filled page on
+  localhost; a production build shows approved content only (`shown()` in `lib/content.ts`, enforced by
+  `tests/claims.test.ts`). Approving a row in CLAIMS.md and dropping the item's `pending` flag is what ships it.
+- **Prices: built, switched off.** The sample's prices are stored in integer paise per service and equipment item
+  (C-045..C-057, pending) behind `showPrices: false` in `content/site.config.json`. Q8 (payment policy) stays open;
+  payment is still only ever made against a quote (D-004), so a price is a "from" guide, never a checkout amount.
+- **Contacts, area, response time: D-024 stands.** +91 84489 12820, care.setu.1@gmail.com, Noida and Delhi, "We call
+  back within 2 hours, every day 7 AM to 10 PM". The sample's 1800 number, `caresetu.in`, Gurugram and Faridabad,
+  "120-minute dispatch" and "Pvt. Ltd." go to the owner as questions (Q17..Q19), not into copy.
+**Why:** the owner's intent (a fuller site) is served without publishing anything the business cannot back
+(INVARIANT 15, 18). A dev-only render lets the owner see and correct the fill before anything is approved, instead of
+reviewing a spreadsheet.
+**Rejected:** (never ship; rows C-058, C-059, C-061..C-063, C-066, C-070) the named testimonials (Vikram Malhotra, Ritu Khurana,
+"Sister Priya"); "4.92 / 5 across 2,400+ home care transitions"; the leadership team (Dr. Ananya Sen, Sister Mary
+Kutty, Dr. Arvind Sehgal); hospital integrations (Max, Fortis, Apollo, Medanta, Artemis, Manipal, "42+ hospital
+consortia"); outcome metrics (42% fewer readmissions, ALOS −1.8 days, 99.4% SLA, "42 mins" transfer); DISHA/HIPAA
+compliance; login, iOS/Android apps, WhatsApp bot, live vitals portal and daily telemetry (D-001, they don't exist);
+the placeholder `+91 98765 43210`. Also rejected: taking the whole sample as fact (it overrides D-024 with
+self-contradicting details); structure-only with no content (the owner asked for the content).
+**Not decided here:** Home and Services layouts (Stage 1 and 2 of the 2026-09-28 plan, each with its own D-entry).
+
+## D-030 · 2026-09-28 · Home after the trip: Colonnade services, an equipment reel, one drawn line to the footer; logo colours as fields (partially supersedes D-027: where the logo colours may appear; D-025: Home's one-open services index and the partner cards)
+The owner loved the hero, the trip and the footer and nothing else (D-026). Blueprint §1.7 (new today) requires each
+section to name a cross-domain reference, a signature interaction and why it isn't a card row. Research 2026-09-28
+in Chrome, captured to `refs/care-setu/` (preview MP4s + 8/12-frame sheets): GetLayers `/sections` (Colonnade, Cards
+Cascade, Cards Almanac, Roadmap Ascent, Showcase Equator, Carousel Spotlight, Slider Spectra); the Awwwards animation
+collection (Service Totem/Scrib3, Index/The Line, Akaru homepage, Work hover/Inkfish, Emmpo hover, Monogrid, RXK
+kinetic, 3 more); Skiper UI Scroll Effects (16 card stack, 19 stroke follows scroll, 31 text scroll). Mobbin was not
+used this round (Home has no transactional flow; the enquiry flow is unchanged). Sasanka picked, in one
+AskUserQuestion round, the recommended option on all four questions:
+- **Services = Colonnade** (GetLayers Colonnade: columns on warm paper; the active column's grain field slides up,
+  headline swaps). Three columns, one per line (D-025). Our twist: the field is the footer's drifting grain in that
+  line's logo colour, built in **CSS** (layered gradients moved by `transform` + an SVG-noise grain), because the
+  footer already holds the page's one WebGL context (Blueprint §10). Equal columns; the field moves, widths don't
+  (no layout animation, §9.4). Hover, focus or tap activates; the first line is active at rest; no-JS shows all three.
+- **Equipment = horizontal reel** (Akaru homepage): desktop pins the section and scrubs six tall panels sideways,
+  each ending in an olive caption block; touch gets a native scroll-snap strip (§9.4: no pinned horizontal scroll on
+  touch). Items are C-041 (pending), so **the reel renders in development only** until the owners confirm (D-029).
+  Image slots have fixed ratios; the images are still-lifes Sasanka generates (objects and rooms, never staff or
+  patients, INVARIANT 16), each logged in CLAIMS before it ships.
+- **The trip's line continues** (Skiper 19): from the trip's spine a lime line, ink-cased like the trip, draws itself
+  with scroll down a rail in the left gutter, stopping at a station disc beside each section heading, and ends at a
+  terminus above the footer. Built as one SVG segment per section (a single page-wide overlay would drift against the
+  pinned reel). Desktop only (the phone gutter can't hold a 20px cased line); reduced motion and no-JS get the
+  finished line.
+- **Imagery:** still-lifes generated by Sasanka from Claude's prompts; type-led slots until they exist.
+Claude's calls (Sasanka left the rest of the page to the method): **the promises become one statement** that inks
+word by word with scroll (Skiper 31; the trip's ghost → full physics), built only from approved claims (C-024, C-025,
+C-031, C-032), with the live call status inline as the instrument; **the partner band becomes an editorial index**
+(Awwwards "Index"): three large role rows on the sand block, where hover slides the row's line colour in behind
+the text and the arrow disc enters.
+**Chroma (supersedes the D-027 clause):** the logo's colours stay the only chroma, but may now also appear as the
+Colonnade's grain fields, the equipment caption blocks and the drawn line. Nothing else gains colour.
+**Why:** each section now has the kind of idea the three loved sections have (motion that tells something), taken
+from outside the health genre, while the palette, type and the trip's line language keep the page one piece.
+**Rejected:** Card cascade (a second pinned section right after the trip felt scroll-heavy; kept as the Services-page
+candidate), editorial index for services (calmest, least "wow" for a feel-first owner), stacked notes and no
+equipment section, no spine, type-led only and more Gemini loops (weight); a WebGL field per column (second context);
+widening columns (layout animation); Roadmap Ascent (it counts numbers we don't have).
+**Revised the same day (Sasanka: the line "just appears and disappears"):** measured per 60px wheel step, each segment jumped 0 -> 1. Cause: the path was normalised with pathLength="1" and the dash offset tweened 1 -> 0; GSAP auto-rounds px CSS values, so it snapped. Also each segment was mapped to its own section range, so the tip was never where the reader was. Rebuilt: real path length (getTotalLength) with a y -> length lookup; one standalone ScrollTrigger (onUpdate) sets the tip at 65% of the viewport, the line the trip's marker rides, eased by gsap.quickTo; a faint route shows ahead; stations ink as the tip passes; the pinned reel no longer animates the line (the tip holds while pinned). **Verified:** CDP wheel probe, 120px steps down and back up: tip at 585/900px on every step, continuous hand-over between segments, holds during the pin, retraces on scroll up; green. **Not verified:** trackpad inertia feel, real Safari.
+**Images in (same day):** Sasanka's six ChatGPT still-lifes (C-073, illustration only; checked at full size for text and brand marks, none) fill the reel via next/image (WebP, 58-138 KB each; alt text must start with "Illustration", enforced by the schema). With photos in, the full-strength olive caption shouted and the ragged caption heights broke the image edge: captions are now one fixed height and a 40% tint of the logo olive in parchment (still the logo colour, Akaru's muted blocks). **Rejected:** full olive (fought the warm photos); a grain overlay on the photos.
+
+## D-031 · 2026-09-28 · Services page: a pinned stacked deck on an ink band, an equipment price sheet with hover images, seven more still-lifes (supersedes D-025's page structure; partially supersedes D-027: a third ink band)
+The owner rejected the D-025 line catalogue (D-026) and asked for animation on Services. Research 2026-09-28 under
+Blueprint §1.7, previews read frame by frame into `refs/care-setu/`: GetLayers `/sections` (all 10, new: Mirror Hall,
+Slider Slipstream, Carousel Under The Radar), six more Awwwards animation items (Malvah case index, The Branch team,
+Ottografie nav, NOD, media page, page transition), 14 Skiper UI previews (6, 16, 17, 23, 24, 35, 53, 60, 74, 79, 80,
+96, 103, 104) and four Cue Kit components with their written specs (Stacked Deck Scroll Reveal, Collapsing Cards
+Accordion, Split Panel FAQ, Scrollspy Line). Sasanka picked the recommended option on all four questions:
+- **Services = stacked deck** (Cue Kit "Stacked Deck Scroll Reveal", replicated to its spec: cards 42px apart, each
+  4.5% smaller behind, scaled from the top edge; cards rise into the stack, then the front card flies out
+  `y: -115vh, rotate: -25deg, scale: .94` while the rest step forward; scrubbed, `ease: none`; text | image 50/50)
+  plus GetLayers Cards Cascade's chapter counter (big number, "/ 08", a vertical rail and a vertical label). Eight
+  cards, one per launch service (D-024); the equipment line is one card holding rent, buy and sell back. Each card is a
+  40% tint of its line's logo colour (as the reel captions, D-030) with the name, who comes, the owners' sentence, the
+  scope and price slots (pending, dev only, D-029), the ask and the quote note (C-024). Our twists: the rail is the
+  three line colours in proportion, with the current line named; the deck shows at most four cards deep; 20px radii
+  (Warm Room) instead of the sample's 2px. Desktop, fine pointer and motion allowed pin and scrub it; everything else
+  gets the cards as a plain stack (a CSS sticky pile where the viewport is tall enough). Keyboard focus inside the
+  deck scrolls to the pin position that brings that card to the front.
+- **Stage = ink band** (as the sample): a third ink band after the trip and footer. **Supersedes INVARIANT 27's
+  "ink bands for the trip and footer"** for this one page.
+- **Imagery:** seven more still-lifes generated by Sasanka (objects and rooms only, same style as C-073; prompts in
+  `docs/ASSET-PROMPTS.md`); the equipment card reuses a C-073 image. Type-led slots until they arrive.
+- **Equipment = price sheet with hover images** (Awwwards Malvah case index + Inkfish work hover): after the deck,
+  the six items as rows (number, item, what it is, rent or buy, ask); on a fine pointer, hovering a row floats that
+  item's still-life beside the cursor; touch shows a thumbnail in the row. Amounts appear only
+  when `showPrices` is on (D-029). The items are C-041 (pending), so the sheet renders in development only.
+- **Claude's calls:** a type-led opener (title, lede, the two ways to reach us, the emergency note) with the three
+  lines as jump links into the deck; a closing "not sure which you need" band on sand with the live call status (the
+  instrument, reused from Home). No drawn line on this page (it is Home's continuation of the trip). Nothing repeats a
+  Home section.
+**Why:** each service gets the screen to itself, in order, like the trip's legs, and the page moves the way the owner
+asked for, from a written spec rather than an approximation. The ink band makes the tinted cards the page's colour
+event while the logo colours stay the only chroma.
+**Rejected:** the moving index (Skiper 24: strong, but its tinted ground repeats Home's Colonnade idea); the split
+panel (Cue Kit: click-driven and calm, the least ambitious); type-led cards only (less warm than the still-lifes);
+the six equipment items inside the rent card only (no way to compare them); a parchment stage; the Cue Kit
+Collapsing Cards Accordion on this page (Sasanka likes it; its images would repeat Home's reel, so it is kept for
+About, four founders, when consented photos exist; its `flex` transition is a layout animation and gets rebuilt
+with transforms). Also rejected: Lenis (the sample's smooth scroll; native scroll keeps ScrollTrigger and the rest
+of the site as they are).
+**Verified (2026-09-28):** green (lint, typecheck, 50 tests, build). Per-step CDP probe, 120px wheel ticks down and back
+up at 1280x800 and 1366x657: cards rise while the band scrolls in, the pin holds, each tick flies the front card a
+steady ~300px (-25deg, .94) while the rest step 12px forward, the rail number changes at each card's midpoint, the
+dot moves ~6.75px per tick, and scrolling up retraces the same values. Fixed from the probe: the rail dot jumped 49px
+between cards 7 and 8 (the vertical line name resized the track; the label row is now fixed); card text overflowed at
+800px tall (the quote note moved to the deck header, once; the equipment card lost its item list, which the sheet
+shows); text of the cards behind bled below their edges (cards clip). Real Tab-key pass: each card's link brings its
+card to the front, visible and on top (elementFromPoint). The opener's line links land on cards 01, 05 and 08. Hover
+on the sheet: the row inverts and its still-life follows the cursor. 390x844: plain card list, image first, no
+overflow; reduced motion at 1280: the sticky pile. Prod build on :3100 (killed by PID): no pending content, prices or
+sample fabrications; D-024 phone, call hours and the quote note present; the "Still-life to come" label is dev-only.
+impeccable 1280 + 390: waivers only (the stage clipping its flying cards, the visually hidden table header on phones,
+the footer wordmark gradient, Warm Room cream); fixed: long uppercase card labels (now sentence case). Taste
+pre-flight: en-dash ranges, a tag overlaid on the hover image and two labels for one intent, fixed. Web Interface
+Guidelines: per-frame layout read cached, balanced heading wraps.
+**Not verified:** a real phone or Safari; trackpad inertia over the pin; 768 and 1024 visually; a screen reader; the
+owner's review. Copy changes (lede, deck title, closing band) await owner approval (Q15).

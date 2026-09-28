@@ -7,6 +7,7 @@
   "nav": {
     "home": "Care Setu home",
     "services": "Services",
+    "about": "About",
     "how": "How it works",
     "partner": "Partner with us",
     "talk": "Talk to us",
@@ -80,6 +81,29 @@
       "text": "Tell us what the patient needs. We call back and work out the care plan with you."
     }
   },
+  "aboutPage": {
+    "metaTitle": "About | Care Setu",
+    "metaDescription": "Why Care Setu exists: care after hospital, at home in Noida and Delhi, and the people building it.",
+    "kicker": "About Care Setu",
+    "fallbackTitle": "Care after hospital, at home.",
+    "fallbackLede": "Connecting Care. Empowering Lives.",
+    "situationsLabel": "What our founder kept seeing",
+    "letterTitle": "A letter from our founder",
+    "wishesTitle": "What he wants",
+    "visionKicker": "Our vision",
+    "missionKicker": "Our mission",
+    "groupsHint": "Select a group to read its part.",
+    "close": "Close",
+    "valuesKicker": "What we hold to",
+    "valuesTitle": "Four values",
+    "imageSlot": "Still-life to come",
+    "foundersKicker": "The people behind it",
+    "foundersTitle": "Our founders",
+    "foundersHint": "Hover, tap or tab to a card to open it.",
+    "photoSlot": "Photo to come",
+    "promiseKicker": "Our promise",
+    "cta": "Talk to us"
+  },
   "pending": {
     "tag": "Awaiting owner",
     "title": "Not yet confirmed by the owners. Shown in development only."
@@ -141,6 +165,7 @@
     "moreLines": "More lines as they open",
     "links": {
       "services": "Services",
+      "about": "About",
       "how": "How it works",
       "partner": "Partner with us",
       "contact": "Talk to us",

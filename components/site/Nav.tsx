@@ -7,6 +7,7 @@ import s from "./Nav.module.css";
 
 const links = [
   { href: "/services", label: t.nav.services },
+  { href: "/about", label: t.nav.about },
   { href: "/#how", label: t.nav.how },
   { href: "/partner", label: t.nav.partner },
 ];

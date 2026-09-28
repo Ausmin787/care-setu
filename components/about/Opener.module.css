@@ -1,0 +1,123 @@
+/* About opener (D-032). Type-led like the Services opener, but the statement is a question set as large as the room
+   allows (height-aware clamp, Blueprint 6.2: four lines at 0.94 leading in about 55% of the viewport). */
+.opener {
+  display: grid;
+  gap: clamp(28px, 5vh, 56px);
+  padding-block: clamp(40px, 7vh, 80px) clamp(56px, 9vh, 104px);
+}
+.kicker {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.title {
+  margin: 0;
+  max-width: 17ch;
+  font-size: clamp(48px, min(8.2vw, 14.5vh), 128px);
+  text-wrap: balance;
+}
+.title em {
+  font-style: italic;
+}
+.lede {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Word masks: descender and italic-overhang room is padded in and given back, so nothing is clipped. */
+.w {
+  display: inline-block;
+  overflow: clip;
+  padding: 0 0.08em 0.16em 0;
+  margin: 0 -0.08em -0.16em 0;
+  vertical-align: top;
+}
+.w > span {
+  display: inline-block;
+}
+
+.foot {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: 24px 48px;
+  padding-top: 24px;
+  border-top: 2px solid var(--c-ink);
+}
+.label {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  max-width: 16ch;
+}
+.situations {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.situations li {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.situations p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(21px, 1.7vw, 26px);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+.n {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-muted);
+}
+
+@media (max-width: 900px) {
+  .foot {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .situations {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .situations li {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .n {
+    padding-top: 4px;
+  }
+}
+
+/* Entrance (CSS, from first paint): the question's words rise out of their masks in reading order, then the three
+   situations follow. None under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .w > span {
+    animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(120ms + var(--i) * 60ms);
+  }
+  .situations li {
+    animation: settle 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(200ms + var(--i) * 60ms);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}

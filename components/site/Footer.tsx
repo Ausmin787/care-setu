@@ -6,6 +6,7 @@ import s from "./Footer.module.css";
 const L = t.footer.links;
 const links: { href: string; label: string; draft?: boolean }[] = [
   { href: "/services", label: L.services },
+  { href: "/about", label: L.about },
   { href: "/#how", label: L.how },
   { href: "/partner", label: L.partner },
   { href: "/contact", label: L.contact },

@@ -38,3 +38,18 @@ the text and to a wide strip on phones, so **keep the object in the middle third
 7. *Lab sample collection:* a sample collection kit on a side table: sealed blood tubes standing in a small rack, cotton swabs, a tourniquet strip and a closed insulated box.
 **No text or brand names anywhere** (tubes and bags unlabelled), no people or hands. **Delivery:** as above, with
 the subject number and the word "service" in the file name. Each gets a CLAIMS row before it ships (as C-073).
+
+## About still-lifes (D-032): 7 images
+Same shared style as the equipment still-lifes (paste it first) and **attach two of them** (the motorised bed and the
+patient monitor) so the light, palette and lens match. No people, no hands, no text or brand names.
+**Values (4), portrait 4:5, 1600×2000.** The card is 4:5 and small on laptops, so keep the object large and centred.
+1. *Care:* a hand-knitted cotton shawl folded over the arm of a wooden armchair by a sunlit window, a steel tumbler of water on the side table.
+2. *Trust:* a front door left slightly open onto a bright, tidy hallway, a pair of house slippers set neatly just inside.
+3. *Healing:* a physiotherapy resistance band and a small pair of dumbbells on a cotton durrie beside a window, morning light across the floor.
+4. *Home:* a made bed with a patterned Indian cotton bedcover, a folded reading glasses case and a small brass lamp on the bedside table.
+**Capsules (3), wide 2.4:1, 2400×1000.** They show inside a pill about three words long, so one simple object, centred,
+with plain wall around it.
+5. *Recovery continues at home:* a single potted tulsi plant on a sunlit windowsill.
+6. *Care continues with the family:* two steel tea glasses and a small plate of biscuits on a low wooden table.
+7. *Support continues with the patient:* a wooden walking stick leaning against a cream wall beside a chair.
+**Delivery:** `refs/care-setu/stills/` with the number and "about" in the file name; each gets a CLAIMS row (as C-073).

@@ -781,3 +781,63 @@ no overflow, no pinned element taller than the screen, every visible control hit
 hits on a reel panel mid-slide only). Effective text at 1280x537: deck 15.9px, reel 16.4px; at 1093x490: 13.1 and 14.6.
 **Not verified:** real iPad/Android hardware and Safari; 1093x490 text is small but legible.
 
+
+## D-032 · 2026-09-29 · About page: the founder's question and letter, an inline-image manifesto, a pinned values odometer, collapsing founder cards; content from the founders' deck as pending
+The brief's next page is About (order Landing, Services, About, Contact, Payments). Content comes from the **founders'
+vision deck** (pp. 3, 4, 6, 7, 8), not the sample site: Shiva's letter, vision, mission, the four values, the promise,
+and the co-founders' bios and photos. It is owner-written, so it is carried in the owners' words (cut only, never
+added to, Blueprint #31), as **pending** rows (C-021, C-043, C-074..C-078) that render in development only (D-029). Removed
+while carrying: the deck's statistics (2.2 Cr+, 70%+, 40-60%, 10 Cr+: no evidence, C-008..C-011) and, in the Trust
+value, "verified professionals, hospital partnerships" (claims, C-006/C-015). The deck's belief line is the same as
+C-043, which now has an owner source. Production shows the tagline (C-022), the service area and the actions only.
+Research 2026-09-29 (Blueprint §1.6/§1.7; plan and ledger in `docs/plans/stage-3-about.md`): all 52 GetLayers
+templates frame by frame (Marcus Vane, Artist, Kimi, Halden, Northwall, Ridgeline, Codescan, Dantora), 8 new Cue Kit
+components, Mobbin (founder, our story), Pafolios, Unlumen Animate Digits, Smooth UI Inline Testimonials, Design Spells
+(Abode, Dub.co), Kokonut Card Flip, 21st.dev, UI Guideline, Curated, Godly. Sasanka picked the recommended option on
+all four questions (2026-09-29):
+- **Story = question, then letter** (Marcus Vane + Artist): Shiva's question as the H1 with the three situations he
+  saw; then his letter beside a sticky portrait, the four "I want..." wishes ticking in on logo-colour discs.
+- **Vision = manifesto with inline images** (Halden): one sentence with three image capsules that open with scroll;
+  the mission follows with the six partner groups as inline words that open their one-line role (Smooth UI Inline
+  Testimonials spec: one open, click toggles, focus opens, Escape returns focus).
+- **Values = pinned odometer** (Northwall + Unlumen Animate Digits + Abode card flip) on the sand block: 01 Care to
+  04 Home; only the changing digit rolls, direction-aware; a still-life card turns between values.
+- **Founders = Collapsing Cards Accordion** (Cue Kit, kept for this in D-031), rebuilt with transforms; photos share
+  one warm monochrome treatment on the card's logo-colour tint. Dr Saurabh's card is type-only until a photo and bio
+  exist.
+Claude's calls: close on the deck's line "Because sometimes, the best support we can give a family is simply to be
+there." with the actions and the live call status; no new ink band (the values sit on the sand block).
+**Why:** the owners wrote this story themselves; each section gets its own mechanic from outside the health genre,
+and none repeats a Home or Services section.
+**Rejected:** chapter timeline (Kimi: its rail and marker echo Home's trip line); burn-through band (Cue Kit: dark,
+one idea); split vision/mission boxes (calm, no idea); step accordion and marquee for the values (calmer; the marquee
+is typographic only); a portrait row (The Branch: the genre average); the sample site's founding text (C-044, an AI
+mock's wording, superseded by the founders' own letter).
+**Built (2026-09-29):** `content/about.json` + `lib/about.ts` (zod; every block pending); Opener (word-mask entrance,
+the three situations), Letter (sticky portrait, serif letter, Ticks), Manifesto (Capsules + Groups), Values (Odometer),
+Founders (FounderCards), a close on parchment with the call status. Founder photos are cropped into gitignored
+`refs/care-setu/founders/` and served by `app/dev/founders/[file]` in development only (404 in production); a test
+fails if a founder photo ever lands in `public/`. Photos share one treatment (warm monochrome multiplied onto
+parchment) with the logo colour as a block beside them: lime multiplied onto skin read as illness and was dropped.
+The accordion's `flex` is rebuilt as full-width cards placed by translateX with a clip window (paint only); the
+mission's cards sit inside the text under their word (a native top-layer popover did not follow its word on scroll in
+headless Chrome, and following needed a scroll listener, which Taste bans).
+**Verified:** green (lint, typecheck, 67 tests, build). CDP wheel probe at 1440x900, 120px ticks: capsules open
+continuously (0.12 -> 1 over ~1000px), wishes tick as rows pass 70%, the values stage pins and steps 0 -> 3 every 540px
+with the right card faces; a 60ms-after-step frame shows the half-turn in progress, the changing digit rolling and the
+text resolving from blur (the "0" stays). Real mouse: founder cards open on hover in both directions; the mission
+card opens on click, stays pinned and follows its word through three wheel ticks. Real Tab pass: every mission word
+opens its card on focus, founder cards open on focus, every focused element on screen and not under the nav. Device
+audit (9 sizes incl. 1280x537, 1093x490, iPads and phones with touch): no overflow, nothing pinned taller than the
+screen, every control hittable, no stuck scroll. 1280x537: the stage fits (card ends at 515/537, text ~24px). 390x844:
+plain list, groups one per line, founder cards stacked open. Prod build on :3100 (stopped by PID): none of the pending
+text, no photo reference, no deck statistic; photo route 404; the fallback H1, tagline, phone, call hours and
+emergency note present. impeccable 1280 + 390: waived: italic serif / oversized H1 (Warm Room hero language, as Home
+and Services), cream palette, footer wordmark gradient, the founder row clipping its own cards, one long-line reading
+from the visually hidden values list; fixed: leading on 20-28px reading text raised to 1.3. Taste pre-flight: fixed 9
+eyebrows -> 2 (the rest are sentence-case labels), three split headers stacked, the `01 / 04` card pagination
+removed, a scroll listener removed, italic descender room on the closing line; kept with reasons: Petrona and the
+Warm Room palette (D-027), the three-line manifesto H1, vertical names on narrow cards (the sample's mechanic). Web
+Interface Guidelines: straight apostrophes curled.
+**Not verified:** Escape closing a mission card (implemented, not driven); a real phone, iPad or Safari; trackpad
+inertia over the pinned stage; a screen reader; the owners' review of any of the content (Q20).

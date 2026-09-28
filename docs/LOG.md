@@ -210,3 +210,25 @@ Template:
   scaling (deck/reel ~16px at 1280x537). Colonnade taller than a 537px window: not pinned, all controls reachable, left.
   Mistake recorded: Blueprint #42 (verified at two sizes only), memory device-matrix-before-done.
 
+
+## 2026-09-29 · Stage 3: About built (D-032)
+- Next page per the brief's order (Landing, Services, About, Contact, Payments). Content from the founders' vision
+  deck (rendered with PyMuPDF via uv; pp. 3, 4, 6, 7, 8), not the sample site: letter, vision, mission, values,
+  promise, co-founder bios and photos. All pending (C-021, C-043, C-074..C-078), dev-only; Q20 added.
+- Research: all 52 GetLayers templates (MP4 -> 12-frame sheets in `refs/care-setu/getlayers/templates/`), 8 new Cue Kit
+  components, Unlumen Animate Digits spec, Smooth UI Inline Testimonials spec, Design Spells (Abode, Dub.co), Kokonut
+  Card Flip, Mobbin (founder, our story), Pafolios, 21st.dev, UI Guideline, Curated, Godly. Options round: all four
+  recommended (question + letter, inline-image manifesto, pinned odometer, collapsing founder cards).
+- Mistake (Blueprint #43): the first options round was offered after GetLayers and Cue Kit only; Sasanka asked why the
+  rest of the tool list was skipped. Ran it before building; nothing overturned a pick, three specs sharpened them.
+- Built and fixed from captures: lime multiplied onto a face (read as illness) -> warm monochrome + colour block;
+  698px overflow (full-width collapsed cards) -> row clips; a 3:4 photo covering a landscape card (pixelated face) ->
+  photo panel + tint bio block; mission icons on their own lines (Tailwind preflight makes svg a block; a button is an
+  inline box) -> inline svg, nowrap on wide screens, one group per line on phones; collapsed-card buttons flagged by the
+  device audit (full-width boxes) -> sized to the visible strip; top-layer popover did not follow its word ->
+  in-text card. Pre-flight: eyebrows 9 -> 2, split headers stacked, card pagination and a scroll listener removed.
+- Verification: see D-032 Verified. Not verified: Escape on a mission card, real devices/Safari, trackpad inertia,
+  screen reader, owner review.
+- Follow-up (same day): About had no way in from the site (Sasanka: the owner wants to see the whole website on
+  localhost:3000). Added "About" to the nav (bar + mobile sheet, after Services) and the footer. Nav stays one line at
+  1093px; About shows as the current page; device audit on / and /about clean.

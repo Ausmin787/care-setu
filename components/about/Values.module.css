@@ -1,0 +1,278 @@
+/* Four values on the sand block (D-032). Text on sand is ink (the muted tone fails body contrast there). */
+.values {
+  background: var(--c-sand);
+}
+.head {
+  display: grid;
+  gap: 10px;
+  padding-top: clamp(64px, 10vh, 120px);
+}
+.kicker {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.title {
+  margin: 0;
+}
+.intro {
+  margin: 0;
+  max-width: 44ch;
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+/* The list: what reads frozen, on touch and under reduced motion. Northwall's numbered rows. */
+.list {
+  margin: clamp(32px, 5vh, 56px) 0 0;
+  padding-bottom: clamp(64px, 10vh, 120px);
+  list-style: none;
+}
+.list li {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 4fr) minmax(0, 7fr);
+  gap: 16px clamp(24px, 4vw, 64px);
+  align-items: baseline;
+  padding-block: 28px;
+  border-top: 1px solid color-mix(in srgb, var(--c-ink) 22%, transparent);
+}
+.list li:first-child {
+  border-top: 2px solid var(--c-ink);
+}
+.listN {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.listName {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(40px, 4vw, 60px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.listName::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--line);
+  box-shadow: 0 0 0 2.5px var(--c-ink);
+  flex: none;
+}
+.listText p {
+  margin: 0 0 10px;
+  max-width: 48ch;
+  font-size: 19px;
+  line-height: 1.5;
+}
+.lead {
+  font-family: var(--serif);
+}
+.listText .lead {
+  font-size: clamp(23px, 1.9vw, 28px);
+  line-height: 1.3;
+}
+
+/* The stage (desktop, motion allowed; set by the Odometer). It fills the screen under the nav while pinned. */
+.visual {
+  display: none;
+}
+.stage[data-live] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100svh;
+  box-sizing: border-box;
+  padding-top: var(--nav-h);
+  padding-bottom: clamp(16px, 4vh, 40px);
+}
+.stage[data-live] .head {
+  padding-top: clamp(16px, 4vh, 40px);
+}
+.stage[data-live] .title {
+  font-size: clamp(30px, min(3.6vw, 6.4svh), 58px);
+}
+.stage[data-live] .intro {
+  font-size: clamp(20px, min(1.9vw, 3.6svh), 32px);
+}
+.stage[data-live] .list {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.stage[data-live] .visual {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 4fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: center;
+  min-height: 0;
+  padding-top: clamp(12px, 3vh, 32px);
+}
+
+/* Stacked pieces: each state is a pose; CSS moves between them, so going back retraces the way it came. Unlumen's
+   entrance: from 55% below, scale .7, blurred. */
+.piece {
+  grid-area: 1 / 1;
+  transition:
+    transform 0.7s cubic-bezier(0.2, 1, 0.3, 1),
+    opacity 0.45s ease,
+    filter 0.55s ease;
+}
+.piece[data-state="past"] {
+  opacity: 0;
+  transform: translateY(-55%) scale(0.7);
+  filter: blur(12px);
+}
+.piece[data-state="next"] {
+  opacity: 0;
+  transform: translateY(55%) scale(0.7);
+  filter: blur(12px);
+}
+
+.odo {
+  display: grid;
+  gap: clamp(8px, 2vh, 20px);
+  align-content: center;
+}
+.digits {
+  display: flex;
+  font-family: var(--serif);
+  font-size: clamp(120px, min(15vw, 30svh), 280px);
+  font-weight: 300;
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.roll {
+  display: inline-grid;
+  overflow: clip;
+  overflow-clip-margin: 0.08em;
+}
+.names {
+  display: grid;
+  font-family: var(--serif);
+  font-size: clamp(40px, min(4.4vw, 8svh), 76px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.ticks {
+  display: flex;
+  gap: 8px;
+  margin: clamp(4px, 1.5vh, 14px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tick {
+  width: 34px;
+  height: 8px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px var(--c-ink);
+  transition: background-color 0.3s ease;
+}
+.tick[data-state="past"],
+.tick[data-state="now"] {
+  background: var(--line);
+}
+
+/* The turning card: 4:5, half a turn per value (Abode / Kokonut: perspective, preserve-3d, hidden backfaces). */
+.card {
+  justify-self: center;
+  height: min(100%, 460px);
+  max-height: 52svh;
+  aspect-ratio: 4 / 5;
+  perspective: 1400px;
+}
+.rotor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--turn, 0) * 180deg));
+  transition: transform 0.95s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.back {
+  transform: rotateY(180deg);
+}
+.slot {
+  display: none;
+  position: absolute;
+  inset: 0;
+  place-items: center;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+  box-shadow: inset 0 0 0 2px var(--c-ink);
+}
+.slot svg {
+  width: 42%;
+  height: 42%;
+  stroke-width: 1.4;
+  color: var(--color-ink);
+}
+.slotNote {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.rotor[data-front="0"] .front [data-slot="0"],
+.rotor[data-front="1"] .front [data-slot="1"],
+.rotor[data-front="2"] .front [data-slot="2"],
+.rotor[data-front="3"] .front [data-slot="3"],
+.rotor[data-back="0"] .back [data-slot="0"],
+.rotor[data-back="1"] .back [data-slot="1"],
+.rotor[data-back="2"] .back [data-slot="2"],
+.rotor[data-back="3"] .back [data-slot="3"] {
+  display: grid;
+}
+
+.texts {
+  display: grid;
+  align-content: center;
+}
+.texts p {
+  margin: 0 0 12px;
+  max-width: 34ch;
+  font-size: clamp(17px, min(1.4vw, 3.2svh), 20px);
+  line-height: 1.5;
+}
+.texts .lead {
+  font-size: clamp(22px, min(2vw, 4.4svh), 30px);
+  line-height: 1.3;
+}
+
+@media (max-width: 900px) {
+  .list li {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+  .listN {
+    font-size: 30px;
+  }
+  .listText {
+    grid-column: 1 / -1;
+  }
+}

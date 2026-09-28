@@ -1,0 +1,153 @@
+{
+  "_note": "About (D-032). From the founders' vision deck, in their words: cut only, never added to (Blueprint #31). Every block is pending until the owners approve it (Q20), so it renders in development only (D-029).",
+  "opener": {
+    "question": {
+      "text": "Why should care become uncertain when a patient returns home?",
+      "claim": "C-074",
+      "pending": true
+    },
+    "situations": {
+      "items": [
+        "A son living away from his elderly parents.",
+        "A daughter unable to be with her mother when she needs her most.",
+        "A family bringing a loved one home after hospitalisation and suddenly having to manage everything on their own."
+      ],
+      "claim": "C-074",
+      "pending": true
+    }
+  },
+  "letter": {
+    "quote": "I have spent years trying to understand society. Now, I want to serve it.",
+    "paras": [
+      "I have always believed that education is meaningful only when it helps us understand people and inspires us to make their lives better. My journey has been shaped by this belief.",
+      "During my UPSC preparation, I studied governance, public administration, society, development and the challenges faced by ordinary people. But beyond books and examinations, I began to understand the problems that families quietly face every day.",
+      "These situations made me think about a simple question: “Why should care become uncertain when a patient returns home?” That question became the beginning of this vision.",
+      "I want to build a trusted platform that connects families with hospitals, doctors, nurses, caregivers, physiotherapists, diagnostic services, pharmacies and medical equipment, making it easier for people to find the care they need at home."
+    ],
+    "pull": "But for me, this is not just another business idea. It is an effort to turn learning into service.",
+    "trust": [
+      "When a family allows a healthcare professional into their home, they are not simply taking a service. They are trusting that person with the health, dignity and wellbeing of someone they love. That trust must be respected.",
+      "I want to build a system based on trust, compassion, accountability and dignity: a system where technology makes healthcare easier, while human care remains at its heart."
+    ],
+    "wishes": [
+      { "text": "I want an elderly person to feel that they are not forgotten.", "line": "lime" },
+      { "text": "I want a patient returning from the hospital to feel that they are not alone.", "line": "blue" },
+      { "text": "I want families living in another city to have the comfort of knowing that someone reliable is there to support their loved ones.", "line": "olive" },
+      { "text": "And I want trained healthcare professionals to have an opportunity to serve people with dignity.", "line": "blue" }
+    ],
+    "closing": "My UPSC journey taught me to understand society’s problems. Now, I want to use that understanding to do something about them.",
+    "dreamLead": "My dream is simple:",
+    "dream": "to make healthcare more accessible, dependable and human.",
+    "name": "Vishwanath Pratap Singh (Shiva)",
+    "role": "Founder, Care Setu",
+    "claim": "C-074",
+    "pending": true,
+    "photo": {
+      "src": "/dev/founders/shiva.webp",
+      "alt": "Vishwanath Pratap Singh (Shiva), founder of Care Setu",
+      "claim": "C-021",
+      "pending": true
+    }
+  },
+  "vision": {
+    "title": "To build a trusted bridge between the hospital and the home.",
+    "lead": "We believe that healthcare should not stop when a patient leaves the hospital.",
+    "clauses": [
+      { "before": "Recovery continues", "after": "at home,", "line": "lime", "icon": "home" },
+      { "before": "care continues", "after": "with the family,", "line": "blue", "icon": "family" },
+      { "before": "and support should continue", "after": "with the patient.", "line": "olive", "icon": "heart" }
+    ],
+    "claim": "C-075",
+    "pending": true
+  },
+  "mission": {
+    "title": "To make quality home healthcare easier to find, easier to access and easier to trust.",
+    "claim": "C-075",
+    "pending": true,
+    "groups": {
+      "lead": "Care Setu will bring different parts of the healthcare journey together on one platform:",
+      "items": [
+        { "name": "hospitals", "role": "to create a trusted connection after discharge.", "icon": "hospital" },
+        { "name": "doctors and healthcare professionals", "role": "to support patients with appropriate care.", "icon": "stethoscope" },
+        { "name": "nurses and caregivers", "role": "to provide trained support at home.", "icon": "nurse" },
+        { "name": "diagnostics and pharmacies", "role": "to make essential healthcare services more convenient.", "icon": "flask" },
+        { "name": "medical equipment partners", "role": "to provide access to equipment through rental and purchase options.", "icon": "wheelchair" },
+        { "name": "technology", "role": "to connect everything through a simple and transparent experience.", "icon": "device" }
+      ],
+      "change": "One platform. Multiple services. One trusted connection.",
+      "claim": "C-078",
+      "pending": true
+    }
+  },
+  "values": {
+    "intro": "Healthcare is not only about treating an illness. It is about caring for a person.",
+    "items": [
+      {
+        "name": "Care",
+        "lead": "Every patient deserves attention, respect and compassion.",
+        "text": "Whether it is an elderly person who needs daily assistance, a patient recovering from surgery, or a family caring for someone after a long hospital stay, care should always remain personal.",
+        "line": "lime"
+      },
+      {
+        "name": "Trust",
+        "lead": "A healthcare professional entering someone’s home is being trusted with something extremely important.",
+        "text": "We want to build that trust through clear processes, responsible service and continuous feedback.",
+        "line": "blue"
+      },
+      {
+        "name": "Healing",
+        "lead": "Treatment and healing are not always the same thing.",
+        "text": "Treatment may happen in a hospital, but recovery can take weeks or months at home. Care Setu aims to support that journey through nursing, physiotherapy, rehabilitation, follow-up care and long-term support.",
+        "line": "olive"
+      },
+      {
+        "name": "Home",
+        "lead": "Home is where people feel most comfortable and secure.",
+        "text": "Whenever clinically appropriate, we want to make it easier for people to receive dependable healthcare support without leaving the familiarity and dignity of their own home.",
+        "line": "lime"
+      }
+    ],
+    "claim": "C-076",
+    "pending": true
+  },
+  "founders": {
+    "people": [
+      {
+        "name": "Vishwanath Pratap Singh",
+        "known": "Shiva",
+        "role": "Founder",
+        "text": "I have spent years trying to understand society. Now, I want to serve it.",
+        "photo": "/dev/founders/shiva.webp",
+        "line": "lime"
+      },
+      {
+        "name": "Dr Saurabh Chauhan",
+        "role": "Founder",
+        "line": "blue"
+      },
+      {
+        "name": "Ayush Srivastava",
+        "role": "Co-founder",
+        "text": "Computer Science Engineering graduate and alumnus of KIIT University, bringing a technology-driven perspective to healthcare. He contributes through technology, innovation and digital solutions.",
+        "photo": "/dev/founders/ayush.webp",
+        "line": "olive"
+      },
+      {
+        "name": "Aashish Singh",
+        "role": "Co-founder",
+        "text": "Currently pursuing an Integrated MBA from Doon Business School, Dehradun, bringing a business and management perspective to healthcare. He contributes through strategy, partnerships, marketing and growth initiatives.",
+        "photo": "/dev/founders/aashish.webp",
+        "line": "blue"
+      }
+    ],
+    "claim": "C-021",
+    "pending": true
+  },
+  "promise": {
+    "lead": "There is someone we can depend on.",
+    "lines": ["Not just during an emergency.", "Not just after discharge.", "But throughout the journey of care."],
+    "close": "Because sometimes, the best support we can give a family is simply to be there.",
+    "claim": "C-077",
+    "pending": true
+  }
+}

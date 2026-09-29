@@ -1,95 +1,111 @@
-# DESIGN.md — Care Setu · "Setu Lines"
+# DESIGN.md — Care Setu · "Warm Room"
 
-Decided in D-020; hero, illustration and signature motion revised in D-021; web wordmark and footer in D-023. Reasoning and ledgers:
-`docs/plans/stage-2-design.md` (direction), `docs/plans/2026-09-26-home-build.md` (the built Home).
-**Brand hexes are provisional until the owners confirm them (Q4).** When they change, re-run the contrast table.
+Derived from the shipped build (2026-09-29): tokens in `app/globals.css`, fonts in `app/layout.tsx`, pages Home, Services
+and About. Decided in D-027 (direction), D-028 (nav), D-030 (Home after the trip), D-031 (Services), D-032 (About); the
+owner's taste evidence is `docs/OWNER-TASTE.md`. It replaces the "Setu Lines" system (D-020), which the owner rejected
+(D-026). **Brand hexes are provisional until the owners confirm them (Q4).**
 
 ## 1. Theme & atmosphere
-Hospital-to-home drawn as a transit network. White ground, ink type, and three signal lines taken from the logo's
-cross. It reads calm, civic and certain, like good wayfinding signage, never like a wellness brochure.
-Light mode only (D-021: the lockup is for light grounds, Q4 open); one ink band mode for the partner block.
-The Home hero carries one drawn care scene (D-021): illustrated, never photoreal, no real person, no logo.
+A warm room: parchment pages, warm near-black ink, and ink bands where the page wants weight (the hero, the trip, the
+Services deck, the footer). Premium and calm, cinematic where it moves, never clinical white with blue buttons (the
+"normal Indian healthcare website" the owner rejected). Motion tells something: the hospital-to-home trip, a deck
+dealt one service at a time, a line that follows the reader. Light mode only (the lockup is for light grounds, Q4).
+The Home hero is a looping AI mood video (C-034) with a pause control, never presented as our staff, patients or
+premises (INVARIANT 16).
 
 ## 2. Colour roles
-| Token | Hex | Job | Rule |
+Components read the semantic layer only; `[data-mode="ink"]` re-points the same variables for ink bands.
+| Semantic | Parchment mode | Ink mode | Job |
 |---|---|---|---|
-| `--c-canvas` | #FFFFFF | page ground | |
-| `--c-deep` | #F3F6EF | alternate section ground | lime-tinted neutral |
-| `--c-ink` | #14201A | all text, casings, borders | 16.78:1 on canvas |
-| `--c-muted` | #4E5A52 | secondary text | 7.22:1 on canvas |
-| `--c-line` | #C9D1C7 | decorative hairlines only | never for meaning |
-| `--c-accent` | #0D7CB1 | the only coloured control (primary button) | brand blue ×0.87, 4.63:1 with white |
-| `--c-accent-deep` | #0A5A80 | primary button's hard bottom shadow | |
-| `--c-heat` | #FFD84A | focus state fill (NHS pattern) | ink text on it, 12.13:1 |
-| `--line-lime` | #9BCC3C | Line 01 + promotions strip | graphics only; always ink-cased on white (1.89:1) |
-| `--line-blue` | #0F8FCC | Line 02 | graphics / large text only (3.61:1) |
-| `--line-olive` | #6D9620 | Line 03 | graphics / large text only (3.48:1) |
-| `--wordmark` | #138AB2 | nav wordmark + the one highlighted phrase per page | |
-Line colours never fill panels or set body text, except as small accents inside the one hero illustration
-(D-021) and inside the footer wordmark (D-023). Contrast comes from value (ink on white), not hue.
+| `--c-canvas` | parchment #FBF6EE | ink #1C1814 | page ground |
+| `--c-deep` | parchment-deep #F3ECE1 | ink | alternate ground |
+| `--c-surface` | parchment | ink-soft #3A322A | raised panels |
+| `--c-sand` | sand #D8C7AE | — | the sand block (Home promise/partners, Services close, About values) |
+| `--c-line` | hair #E3D9CA | ink-hair #4A4038 | decorative rules only |
+| `--c-muted` | #5F564C | cream-muted #CBC1B3 | secondary text |
+| `--c-ink` | ink #1C1814 | cream #F5EEE3 | text, rules, borders |
+| `--c-accent` | ink | cream | pill buttons (the action is value, not hue) |
+| `--c-heat` | focus #FFD84A | focus | focus fill, ink text on it |
+
+**The logo's colours are the only chroma** (D-027, Sasanka: people remember the logo as green, blue and white):
+lime #9BCC3C, blue #0F8FCC, olive #6D9620; `--color-action` #0D7CB1 appears only in the button's arrow disc and small
+details; wordmark blue #138AB2. They may appear only as: trip spines, discs and badges; the footer wordmark drift;
+Home's Colonnade grain fields, the reel's caption blocks (40% tint in parchment) and the drawn line (D-030); the
+Services deck's tinted cards (40%) and rail (D-031); About's card and capsule tints and the blocks beside portraits
+(D-032); the nav's current-page underline (green) and the nav logo in its own colours (D-028). Nothing else gains
+colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds (1.8:1 on parchment).
 
 ## 3. Typography
-- Family: **Anek Latin** (Anek Devanagari for Hindi, D-008), OFL, Google Fonts. Web wordmark only (nav + footer): **Unbounded 800**: nav uppercase "CARE SETU" 20px +0.01em (16px mobile); footer lowercase "care setu" -0.04em (D-023, provisional until Q4; `brand/` logo files keep Open Sans).
-- Display: ExtraBold 800, width 75, `line-height .9`, `letter-spacing -.02em`, `clamp(52px, min(8.4vw, 13vh), 112px)`.
-- Section heads: 800, width 80, 36–56px, `line-height .95`.
-- Body: 400–600 at 20px, `line-height 1.5`, measure ≤ 60ch. Hint/secondary 19px muted.
-- Caption: 14px, 600, uppercase, `+.06em`, muted. Nothing smaller than 14px (elderly readers).
-- Numbers that align (line numbers, amounts): `tabular-nums`.
+- **Display: Petrona** (OFL, variable, roman + italic), light: `.t-display` 300, `line-height .94`, `-.02em`;
+  `.t-head` 350, `clamp(36px, 5vw, 58px)`, `line-height .98`, `-.018em`. One italic phrase per page at most.
+- **Body: Anek Latin** (OFL; Anek Devanagari for Hindi later, D-008) at normal width, 20px, `line-height 1.5`,
+  measure ≤ 60ch; 20–28px reading text at `line-height 1.3`. Labels sentence case; nothing under 14px.
+- **Wordmark only: Unbounded 800** (D-023): nav uppercase "CARE SETU" in white; footer lowercase "care setu".
+  `brand/` logo files keep Open Sans (Q4).
+- Numbers that compare (chapter counters, odometer, prices): `tabular-nums`. Curly apostrophes.
 
 ## 4. Component stylings
-- **Primary button** (NHS physics): `#0D7CB1`, white 600 19px, radius 4px, min-height 56px (48px small),
-  `box-shadow: 0 4px 0 #0A5A80`, `:active { top:4px; box-shadow:none }`, `::before` extends the hit area over the
-  shadow; full width on mobile; one primary per page; sentence-case labels ("Continue", "Confirm and send", "Pay").
-- **Option plate** (answers, choices): white, 2px ink border, radius 4px, 72px tall, 21px 600 label left, ink tile
-  right holding a filled Tabler `circle-arrow-right`.
-- **Radio plate** (enquiry): 64px, 2px ink border, 26px ink ring; selected = inset 8px line-blue bar on the left.
-- **Line badge**: 2px ink border, radius 4px, 14px ink-cased colour square + 16px bold line name.
-- **Stations**: white capsule/disc with an 8px ink ring; interchange = white disc, ink ring ≈ 1.6× line width.
-- **Trip** (how it works; Transit trip view, measured): legs, each one continuous rounded 28px spine (24px mobile)
-  headed by a line badge + direction row; 12px white station discs inset; the callback link between legs is
-  6px round-cap dots at a 14px pitch with a filled icon and a bold label; the care leg is the service line colour,
-  ink-cased. Integer line boxes (28px) keep spine pieces seamless.
-- **Services index** (Home): one row per line (D-025), rows `56px 14px 1fr 22px`; closed rows muted; one open at a time;
-  +/− from one bar; synced panel lists the line's services and links to `/services#<line>`.
-- **Line catalogue** (Services, D-025; Superpower "What we test", measured): sticky 260px rail of lines with counts;
-  per line an h2 + grey count with the line badge beside it; column heads `Service | Who comes`; 64px `<details>` rows
-  hung on a 12px ink-cased spine with 22px white station discs (4px ink ring, filled with the line colour when open);
-  an open row = one sentence, "Talk to us about <service>", a 16px muted note. Mobile: rail wraps, `who` drops under the name.
-- **Emergency note**: filled Tabler `alert-triangle` + "Emergency? Call 112." with a 6px ink rule on the left.
-- **Hero** (Supahero Spectrum.Life + Airbnb Homes): left: display headline (2 lines, one underlined phrase), lede
-  ≤ 20 words, one "Talk to us", three reassurances (40px ink tile + filled Tabler icon + 20px 600 line), the
-  emergency note. Right: the illustration panel, 4:5, radius 12px (the only non-4px radius, images only),
-  height-capped on short screens; 4:3 under the action on mobile.
-- Icons: Tabler **filled**, one size per context, never thin text arrows.
+- **Pill button `.btn`** (myhealthprac): ink pill (cream on ink bands), 700 18px label, min-height 56px (48px `.sm`),
+  radius 100px, with a 40px round disc (Tabler filled `circle-arrow-right`) in the logo blue that nudges 3px on
+  hover. The logo blue is **never** a filled button (the owner disliked "simple blue buttons"). Focus: yellow fill,
+  ink text, 3px ink outline.
+- **Nav** (D-028): full-width sticky 72px ink bar; over Home's hero it starts transparent and fills to ink on scroll
+  (CSS `animation-timeline: scroll(root)`, 0–140px, no colour-token flips); logo in its original colours, white
+  wordmark, cream "Talk to us" pill, current page underlined 3px in the logo green (`aria-current`).
+- **Emergency note `.sos`**: filled Tabler `alert-triangle`, bold "Emergency? Call 112.", 4px rule on the left.
+- **Live call status** (the instrument, Blueprint §8.3): a dot + "taking calls now" / closed, computed client-side
+  in Asia/Kolkata from the published hours (D-024, C-031); renders nothing on the server.
+- **Trip** (Home, Transit trip view measured): continuous rounded spines per leg on ink, inset discs, line badges,
+  a dotted callback link; a marker rides the spine on scroll.
+- **Cards**: 20px radius (Alveos One's 25 tightened), no shadow; the Services deck cards are 40% tints of their line
+  colour with text | image 50/50.
+- **Radius rule (one system):** pills 100px (buttons) · cards and ink panels 20px · form controls and boxes 16px (answer
+  plates, text inputs, the error summary) · tags 4px (pending, DRAFT).
+- **Forms** (Contact, D-033): GOV.UK question pages, one question per page; answer plates with a 2px muted border,
+  ink-filled when chosen (a chosen service shows its line colour in the dot); inputs with a yellow focus ring and an
+  ink edge; errors in ink with the warning icon and a left rule, never red (the logo's colours are the only chroma).
+- **Still-lifes** (C-073 and later): ChatGPT illustrations of objects and rooms, never people; alt text starts with
+  "Illustration"; fixed-ratio slots so late images cause no shift.
+- **Pending mark `.pending`**: a dashed uppercase 12px tag on owner-unconfirmed content, development only (D-029).
+- Icons: Tabler **filled**, never thin text arrows.
 
 ## 5. Layout principles
-Swiss grid with a `clamp(16px, 4vw, 56px)` gutter. Content starts at the left grid line; no centred hero column.
-Services order: two-column head (title + lede | promise, "Talk to us", phone, emergency note) → the line catalogue.
-Home order: promo strip (when configured) → nav (phone + "Lines open" only when configured) → illustrated hero →
-how it works (trip) → service lines index → partner band (ink) → footer (ink): the network legend, links, then the
-full-width "care setu" wordmark and the legal line.
-Diagrams use only 0°/45°/90° with rounded bends; parallel lines share corridors at even spacing.
+Full-width sections with a `clamp(16px, 4vw, 56px)` gutter; content starts at the left edge, no centred hero column.
+Bands alternate parchment / ink / sand; a section never repeats another page's idea.
+- **Home:** video hero (ink) with a fact row, status and emergency note → the live trip (ink) → Colonnade (three
+  line columns with grain fields) → pinned equipment reel (dev only) → ink statement → partner index on sand →
+  footer (ink). The trip's line continues down the left gutter to a terminus above the footer (desktop).
+- **Services:** type-led opener with line jump links → pinned stacked deck on an ink band with a chapter rail →
+  equipment price sheet with hover images (dev only) → "not sure which you need" close on sand.
+- **About:** founder's question → letter beside a sticky portrait → inline-image manifesto + mission words that open
+  cards → pinned values odometer on sand → collapsing founder cards → close with the status. All pending (Q20).
+- **Footer:** ink, links, the full-width drifting "care setu" wordmark, the legal line.
 
 ## 6. Depth & elevation
-Flat. One shadow type in the whole system: the primary button's hard bottom bar. Separation comes from 2px ink
-rules and the ink bands, never blur shadows, glass or gradients. The one gradient is inside the footer wordmark (D-023).
+Flat. No shadows, no glass, no blur. Separation comes from value (ink bands, the sand block) and hairlines. The one
+gradient lives inside the footer wordmark (WebGL, the page's single context).
 
 ## 7. Do's and don'ts
-Do: ink-case every lime mark · show pending owner facts as visibly pending · keep one primary action per view ·
-say what happens next after every submission.
-Don't: stat chips, "trusted by", hospital logos, ratings (D-007) · pill buttons or mono micro-labels (§19.3) ·
-stock-photo heroes · fade-up on every section · colour as the only carrier of meaning · prices on the site (D-004).
+Do: keep the logo's colours recognisable and never outshone · mark owner-unconfirmed content as pending (dev only) ·
+say what happens next after every action · one italic phrase per page · measure a sample and replicate its behaviour
+before adding a twist.
+Don't: stat chips, "trusted by", hospital logos, ratings (D-007) · a blue filled button · a floating nav bar ·
+fade-up on every section · colour as the only carrier of meaning · a second WebGL context · pinned horizontal scroll on
+touch · AI people presented as real.
 
 ## 8. Responsive behaviour
-≤ 900px: one column; nav links collapse; the horizontal network becomes the vertical trip (Hospital at the top, three
-cased lanes, Home at the bottom); answer plates and buttons go full width. Input text ≥ 16px (iOS zoom).
-Motion (D-021): hero words rise from masks, then the underline draws and the panel opens (CSS, from first paint).
-Signature "live trip": a marker rides the trip spine on scroll (GSAP scrub, desktop); rows turn ghost → full as
-it passes; touch fills rows as they enter, no marker. Line isolate on the services index. Footer wordmark (D-023):
-the line colours drift slowly through the letters with grain (WebGL, only while on screen; after Spectrum.Life).
-All absent under reduced motion, where the finished state (one still frame) is the default.
+Pinned or scroll-driven sections scale to the room under the nav (`--fit`) and switch off only below ~480px tall,
+never at 600 (the owner's laptop window is 1280x537); verified with `npm run audit:devices` (scaled laptops, iPads,
+phones). On touch and under reduced motion: no pins or scrubs; the deck becomes a plain stack, the reel a scroll-snap
+strip, the odometer a list, the founder cards stacked open. Inputs ≥ 16px. Hit targets ≥ 44px on touch.
+**Motion by page:** Home: CSS word-mask hero entrance, video loop with pause (WCAG 2.2.2), live-trip marker (GSAP scrub),
+Colonnade field slide, reel scrub, word-by-word ink statement, line following the reader at 65% of the viewport.
+Services: the deck (one pixel-measured GSAP timeline: rise, pin, deal). About: capsules opening with scroll, wishes
+ticking, the odometer (only the changing digit rolls) with a card half-turn, collapsing cards (transforms + clip).
+Footer: slow grain drift in the logo colours. Reduced motion: every finished state is the default.
 
 ## 9. Agent prompt guide
-"Setu Lines: a white page where hospital-to-home is drawn as a metro network in the logo's lime, blue and olive.
-Ink text in Anek Latin; condensed ExtraBold display; 20px body. Colour lives only on lines, stations and badges;
-the one coloured control is #0D7CB1 with a hard 4px bottom shadow. Swiss grid, left-aligned, no photos, no stats."
+"Warm Room: a parchment page with warm near-black ink and ink bands for weight. Petrona light display, Anek body at
+20px, Unbounded only for the wordmark. The logo's lime, blue and olive are the only colour: lines, tints and fields,
+never a filled button. Ink pill buttons with a round logo-blue arrow disc. Flat, no shadows, 20px card radius.
+Each section has one idea that moves; pinned stages scale to short windows; reduced motion shows the finished state."

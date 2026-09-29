@@ -232,3 +232,27 @@ Template:
 - Follow-up (same day): About had no way in from the site (Sasanka: the owner wants to see the whole website on
   localhost:3000). Added "About" to the nav (bar + mobile sheet, after Services) and the footer. Nav stays one line at
   1093px; About shows as the current page; device audit on / and /about clean.
+
+## 2026-09-30 · Stage 4: Contact built (D-033)
+- About approved by Sasanka. Planning round: DESIGN.md first, then Contact; questions in Elder's order (hospital or home
+  first). `DESIGN.md` regenerated from the shipped Warm Room build (impeccable on `/`: the same 9 standing waivers).
+- Data layer first (design-independent): Drizzle 0.45 + PGlite 0.5 + pg + drizzle-kit 0.31 (npm audit --omit=dev: 0; a
+  moderate esbuild advisory via drizzle-kit, dev only, left). context7 was down, so APIs were checked against the Drizzle
+  docs and the installed d.ts. Migration reviewed by hand. API probed by hand (201/422/415/400/429).
+- Research (Blueprint §1.6, #43): GOV.UK question/check-answers/confirmation patterns; Elder stepped live (now a panel
+  over blurred carer results, auto-advance with a horizontal slide; stopped before the postcode); Portea (the genre
+  average); all 52 GetLayers templates' endings pulled into sheets (Ridgeline, Northwall, Forma, Dantora, Wanderlust);
+  Cue Kit (wizard, envelope), Bencho, Design Spells (Airbnb seal, Things progress; MP4s in refs), Mobbin (questionnaire),
+  UI Guideline, Curated, 21st.dev (Appointment Intake Match, driven), Motion.dev, Unlumen Questionnaire (full spec),
+  Awwwards, Pafolios. Options round: Your route, Call card beside, Route reaches Home (recommended on all three).
+- Built: `/contact` (call card, sand line, enquiry with route card), `/privacy` (draft notice against the DPDP Act and
+  Rules, downloaded from MeitY because WebFetch got 403), service cards pre-select via `?service=`, the nav pill's
+  current-page ring, `enquiryLive` gate, CI file.
+- Caught and fixed before showing: the nav pill had no current-page state (#36 again); "Question n of 5" floated right
+  with no Back link; the opener ran off a 537px window; Tailwind preflight dropped the error-summary heading weight and
+  the confirmation's list numbers; the privacy notice said the IP is held "up to 10 minutes" while the rate limiter only
+  pruned past 1,000 keys (code changed to expire each key); impeccable on /privacy (uppercase marker, ~90-character
+  lines); guidelines (input names, ellipsis, curly apostrophes, leave warning); Taste (four radii without a rule, one
+  copy line implying routing by service).
+- Not verified: the dev server's own console output (started outside the session); real devices/Safari; screen reader;
+  real email; owner review. No commit yet.

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { IconMenu2, IconPhoneFilled } from "@tabler/icons-react";
 import { LogoMark } from "@/components/LogoMark";
 import { config, phoneDisplay, t } from "@/lib/content";
-import { NavLinks } from "./NavLinks";
+import { NavLinks, NavTalk } from "./NavLinks";
 import s from "./Nav.module.css";
 
 const links = [
@@ -32,9 +32,7 @@ export function Nav() {
             {phoneDisplay}
           </a>
         )}
-        <Link className="btn sm" href="/contact">
-          {t.nav.talk}
-        </Link>
+        <NavTalk label={t.nav.talk} />
         <details className={s.menu}>
           <summary aria-label={t.nav.menu}>
             <IconMenu2 aria-hidden="true" />

@@ -6,6 +6,8 @@ import siteConfig from "@/content/site.config.json";
 // Public business facts (D-007). Empty values hide the UI that depends on them.
 const SiteConfig = z.object({
   phone: z.union([z.literal(""), z.string().regex(/^\+91\d{10}$/)]),
+  // The owners' address (D-024, C-029). Empty hides it.
+  email: z.union([z.literal(""), z.email()]),
   // Call hours in Asia/Kolkata, "HH:MM" (D-024, C-031). Null hides the live call status.
   hours: z
     .object({ open: z.string().regex(/^\d{2}:\d{2}$/), close: z.string().regex(/^\d{2}:\d{2}$/) })
@@ -13,6 +15,8 @@ const SiteConfig = z.object({
   promotion: z.object({ text: z.string().min(1), href: z.string().startsWith("/") }).nullable(),
   // Prices stay hidden until the owners confirm them (Q18, D-029).
   showPrices: z.boolean(),
+  // The enquiry goes live only after the privacy notice sign-off (Q14) and the alert recipient (Q12), by a D-entry.
+  enquiryLive: z.boolean(),
 });
 
 export const LINES = ["lime", "blue", "olive"] as const;
@@ -78,6 +82,11 @@ export const t = messages;
 // a production build shows approved content only. Read at call time so tests can switch it.
 export function shown<T extends { pending: boolean }>(item: T | undefined): T | undefined {
   return item && (!item.pending || process.env.NODE_ENV !== "production") ? item : undefined;
+}
+
+// D-033: the enquiry form and POST /api/v1/queries run in development until `enquiryLive` is set by a D-entry.
+export function enquiryOpen(): boolean {
+  return config.enquiryLive || process.env.NODE_ENV !== "production";
 }
 
 export function shownPrice(price: Price | undefined): Price | undefined {

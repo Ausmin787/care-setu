@@ -10,24 +10,24 @@ vendor docs) before it is relied on (INVARIANT 24).
 |---|---|---|---|
 | Framework | Next.js (App Router) + React + TypeScript strict | SSR/SEO, brief's suggestion, Blueprint §5.1 | exact versions pinned at scaffold *(verify)* |
 | Styling | Tailwind CSS v4 + semantic token layer | Blueprint §4 | tokens from DESIGN.md (Stage 2) |
-| DB access | Drizzle ORM + drizzle-kit migrations | Plain Postgres, portable (D-002) | |
-| Dev DB | PGlite (in-process Postgres, file-backed in `.pglite/`) | No Docker (D-002) | Drizzle PGlite driver *(verify)* |
+| DB access | Drizzle ORM 0.45 + drizzle-kit 0.31 migrations | Plain Postgres, portable (D-002) | locked D-033; `pg` driver when `DATABASE_URL` is set |
+| Dev DB | PGlite (in-process Postgres, file-backed in `.pglite/`) | No Docker (D-002) | `drizzle-orm/pglite` + migrator, verified D-033 (Drizzle docs + installed d.ts) |
 | Validation | zod | One schema for server and API clients | |
 | Staff auth | Candidate: Better Auth or Auth.js with DB sessions + roles | Portable, not tied to a DB vendor | choose at Stage 3 with a D-entry *(verify)* |
 | Payments | `PaymentProvider` adapter; Razorpay sandbox first | D-003 | Checkout + Orders API + webhook signature *(verify)* |
 | Email | `EmailTransport` adapter; console in dev | D-006 | provider chosen with Q1 |
 | Tests | Vitest (unit/contract), Playwright for e2e at Stage 4 | HA pattern | |
 | Lint | ESLint (next core-web-vitals + typescript) | HA pattern | configs protected by hook |
-| CI | GitHub Actions: install, lint, typecheck, test, build | Missing in HA; churn lesson: clean code first | added at Stage 3 |
+| CI | GitHub Actions: install, lint, typecheck, test, build | Missing in HA; churn lesson: clean code first | file added D-033; runs once a remote exists (D-015) |
 
-## 2. Data model (draft; migration 0001 at Stage 4 when Contact is built)
+## 2. Data model (`queries` and `consents` built in migration 0001, D-033; the rest is draft)
 All tables have `id` (uuid), `created_at`, `updated_at` (timestamptz). Money is integer paise
 (`bigint`). Business dates are `Asia/Kolkata`.
 | Table | Key columns | Notes |
 |---|---|---|
 | `service_lines` | slug, name, status (`live`/`coming_soon`/`hidden`) | seeded from `content/`; live set pending Q6 |
-| `queries` | name, phone, email?, service_slug?, area?, message, status (`new`/`contacted`/`quoted`/`closed`/`spam`), source_page | personal data: see §5 |
-| `consents` | query_id / partner_enquiry_id, notice_version, purpose, granted_at, ip_hash, user_agent_hash | INVARIANT 12 |
+| `queries` | reference (10 chars, unique), patient_location (`hospital`/`home`/`not_sure`), service_slug? (null = not sure), area (`noida`/`delhi`/`other`), message, name, phone (+91XXXXXXXXXX), email?, status (`new`/`contacted`/`quoted`/`closed`/`spam`), source_page | built (D-033); personal data: see §5 |
+| `consents` | query_id (partner_enquiry_id later), notice_version, purpose, granted_at | INVARIANT 12; built (D-033) without IP or user-agent hashes (data minimisation) |
 | `partner_enquiries` | org_name, contact_name, phone, email, kind, message, status | |
 | `providers` | display_name, kind, active | payouts manual (D-005) |
 | `quotes` | reference (unique, non-guessable), query_id, service_slug, provider_id?, amount_paise, currency `INR`, platform_share_bps (config snapshot, D-005), promo_code?, discount_paise, expires_at, status (`draft`/`sent`/`paid`/`expired`/`cancelled`) | amount is server truth (D-004) |
@@ -69,7 +69,7 @@ Every request body and response is a zod schema in `server/contracts/` (shared).
   D-039: it tried to downgrade Next to 9).
 
 ## 5. Privacy engineering (DPDP-oriented; legal review pending, D-012)
-- Collect the minimum: name, phone, message are required; email, area and service are optional.
+- Collect the minimum: where the patient is, service (or "not sure"), area, message, name and phone are asked; email is optional (D-033). The IP address is held in memory only, for the rate limit.
 - Consent: explicit, specific, unticked checkbox; stored with notice version and timestamp.
 - Purpose limitation: data is used only to respond and deliver care; no marketing use without a
   separate opt-in.

@@ -841,3 +841,71 @@ Warm Room palette (D-027), the three-line manifesto H1, vertical names on narrow
 Interface Guidelines: straight apostrophes curled.
 **Not verified:** Escape closing a mission card (implemented, not driven); a real phone, iPad or Safari; trackpad
 inertia over the pinned stage; a screen reader; the owners' review of any of the content (Q20).
+
+## D-033 · 2026-09-30 · Contact: the data layer (Drizzle + PGlite, migration 0001, POST /api/v1/queries, consent, CI), a one-question enquiry with a live route card, a call card, and a draft privacy notice; the enquiry runs in development until sign-off
+The brief's next page after About (approved by Sasanka 2026-09-29). Plan: `~/.claude/plans/now-what-is-our-vivid-wall.md`
+(session) and `docs/plans/stage-4-contact.md` (Blueprint §13, sample ledger). `DESIGN.md` was regenerated first from the
+shipped Warm Room build (it still described Setu Lines; impeccable grades against it).
+- **Data layer (D-002, D-006, locks TRD §1):** Drizzle ORM 0.45 (stable, not the v1 RC the docs now show) over PGlite 0.5
+  in development (`.pglite/`, gitignored, migrated on first use) and `pg` when `DATABASE_URL` is set (migrated by
+  `drizzle-kit migrate` at deploy, never `push`). Migration `drizzle/0000_queries_consents.sql` (reviewed): `queries`
+  (reference, patient_location, service_slug, area, message, name, phone, email, status, source_page) and `consents`
+  (query_id, notice_version, purpose, granted_at). **Deviation from TRD §2:** no IP or user-agent hash on consents
+  (data minimisation; an unsalted IPv4 hash is reversible). `serverExternalPackages: ["@electric-sql/pglite"]`.
+- **API:** `POST /api/v1/queries` (zod strict contract in `server/contracts/queries.ts`, shared with the form): JSON only,
+  8 KB cap, 5 requests per 10 minutes per address in memory (the address is never stored or logged and is dropped when
+  its window passes), honeypot, 422 with field names only, 201 `{ reference }`, `no-store`. The query and its consent
+  are written in one transaction (INVARIANT 12); the team alert goes through `EmailTransport` after the commit, and the
+  only transport is `console`, which logs the internal id and nothing else (INVARIANT 11). Production requires
+  `DATABASE_URL`, a real transport (Q1) and `EMAIL_TEAM_INBOX` (Q12), and refuses to start the query path otherwise.
+  References: 10 characters without 0/O/1/I/L. CI: `.github/workflows/ci.yml` (lint, typecheck, test, build; no
+  remote yet, pushing needs permission).
+- **Enquiry (INVARIANT 27; Sasanka's picks, recommended on all):** five questions in Elder's order: where the patient is
+  now (hospital / home / not sure), which service (grouped by line, "not sure yet", pre-selected from a service card's
+  `?service=`), area (Noida / Delhi / somewhere else, stating the limit), what's needed, who to call; then check answers
+  with Change links, unticked consent linking to the notice, "Send my details", and a GOV.UK confirmation (reference,
+  what happens next with C-031 and the live status, the phone). **Your route:** a sticky ink card beside the questions
+  (21st.dev Appointment Intake Match's live card, drawn with the trip's spine and stations); each answer inks its
+  station, the chosen service's disc takes its line colour, the route reaches Home on send; phones get a thin track.
+  Steps slide 72px with an 8px blur, reversed going back (Unlumen Questionnaire spec), in CSS. The step lives in the URL
+  (Back/Forward work); focus moves to each question's heading and to the NHS error summary; the browser warns before
+  leaving with unsent answers. Errors use ink, bold and the warning icon, never red (INVARIANT 27: no other chroma).
+- **Opener:** "Talk to us." beside an ink call card (GetLayers Ridgeline): the number in display type, Call and WhatsApp,
+  live status, C-031, the emergency note; email (now in `site.config.json`, C-029) and office on a sand line; no map.
+  The nav's "Talk to us" pill now marks /contact as the current page (Blueprint #36).
+- **Privacy notice (D-012):** `/privacy` drafted against the DPDP Act 2023 (ss. 5, 6, 11-14) and DPDP Rules 2025
+  (rules 3, 9, 14; Gazette 14 Nov 2025, downloaded from MeitY; rules 3 and 5-16 commence eighteen months later): an
+  itemised list of exactly what the form collects, the purpose, who sees it, rights, contact; retention, the grievance
+  officer, providers and the legal name stated as not yet set. Visible "DRAFT, not legal advice, pending professional
+  review" marker, version `2026-09-29-draft-1` (`lib/privacy.ts`; the API accepts only the current version), and
+  points for the reviewer.
+- **Production gate:** `enquiryLive: false` in `site.config.json`. Until a D-entry records the notice sign-off (Q14) and
+  the alert recipient (Q12), production shows the call card, email and office only and the API answers 404.
+**Why:** the family's two real ways in (call now, or leave details for a callback) are both on the page, the form asks
+one thing at a time in the order a coordinator needs it, and nothing is stored without consent against a notice that
+describes only what the code does. The route card turns the loved trip into the family's own progress without
+pinning or repeating another page's section.
+**Rejected:** answers card and plain NHS column (calmer, less brand); number as the H1 (the call and the enquiry compete);
+the pressed seal (implies a certification; stamping echoes Hungry Anna); auto-advance on a tap (Elder does it; arrow keys
+on a radio group must not submit); a map embed (loads a third party for every visitor); Motion/GSAP for the form
+(CSS is enough, §9.1); red errors (new chroma); draft answers in localStorage (personal data kept in the browser);
+IP/UA hashes on consents; Drizzle v1 RC.
+**Verified (2026-09-30):** green (lint, typecheck, 92 tests incl. 23 new: contract, consent atomicity on an in-memory
+PGlite with a forced consent failure rolling the query back, alert failure logging only the id, rate limit, reference
+alphabet; build). API by hand: 201, 422 (consent, phone, unknown key, honeypot), 415, 400, sixth request 429, `no-store`.
+Stored row read back from a copy of `.pglite/`: consent row with the notice version, one migration applied. Playwright,
+real clicks and keys: the full flow at 1280x800 (empty Continue focuses the summary, focus moves to each heading,
+physiotherapy pre-selected, 201 and the confirmation focused, Back after sending keeps the confirmation); radio group is
+one tab stop, arrows select, Enter continues, Shift+Tab reaches Back; every step at 360x740 and 1093x490 with long
+inputs: no overflow, nothing blocked. Device audit (9 sizes) on /contact and /privacy: clean. Opener at 1280x537 ends at
+464px. Reduced motion emulated: final state at 50ms, transitions instant; server HTML has no animation attributes. Slide
+sampled every 60ms: 72px -> 0 and blur 8 -> 0 over ~450ms, reversed going back. impeccable 1280 + 390: /contact only the
+standing waivers (cream page, footer wordmark gradient); /privacy fixed (uppercase marker, line length). Web Interface
+Guidelines: input names, loading ellipsis, curly apostrophes, leave warning, balanced headings fixed; errors focus the
+summary (GOV.UK) by design. Taste pre-flight: radius rule unified and documented, one copy line made honest. Production
+build on :3100 (stopped by PID): enquiry, pending tags and banned strings absent; contact facts present; `/privacy`
+carries the marker; API 404. Side-by-side: `refs/build-sbs/contact-vs-ridgeline.png`.
+**Not verified:** the dev server's own console output for personal data (it was started outside this session; covered
+by a test and the code, not observed live); a real phone, iPad or Safari; a screen reader; a real email send (no provider,
+Q1); the rate limit behind a real proxy (which header to trust depends on the host, Q1); the owners' review of the
+questions and copy (Q15).

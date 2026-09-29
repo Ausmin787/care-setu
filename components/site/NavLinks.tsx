@@ -13,3 +13,13 @@ export function NavLinks({ links }: { links: { href: string; label: string }[] }
     </Link>
   ));
 }
+
+// The "Talk to us" pill marks /contact as the current page too (Blueprint #36).
+export function NavTalk({ label }: { label: string }) {
+  const pathname = usePathname();
+  return (
+    <Link className="btn sm" href="/contact" aria-current={pathname === "/contact" ? "page" : undefined}>
+      {label}
+    </Link>
+  );
+}

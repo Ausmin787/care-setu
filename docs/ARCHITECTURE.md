@@ -29,6 +29,7 @@ server/
     email/           EmailTransport interface + console / provider implementations
   auth/              staff auth + session
   config/            typed env loading (zod), per-environment settings
+  rate-limit.ts      public-form rate limit (in memory, per instance, D-033)
 content/             message files (i18n-ready copy, D-008), service catalogue data
 lib/                 shared pure helpers (money in paise, formatting, ids)
 tests/               unit + contract + claims tests

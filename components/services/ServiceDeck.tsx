@@ -21,6 +21,8 @@ export type DeckCard = {
   price?: Service["price"];
   image?: Service["image"];
   ask: string;
+  // The service the card's "Talk to us" pre-selects on /contact (D-033); the equipment card has none.
+  service?: string;
 };
 
 // Eight cards, one per launch service (D-024); the equipment line is one card holding rent, buy and sell back (D-031).
@@ -51,6 +53,7 @@ export const deckCards: DeckCard[] = lines.flatMap((line): DeckCard[] =>
         price: svc.price,
         image: svc.image,
         ask: svc.name,
+        service: svc.slug,
       })),
 );
 
@@ -141,7 +144,10 @@ export function ServiceDeck() {
                         </p>
                       )}
                       <div className={s.foot}>
-                        <Link className="btn" href="/contact">
+                        <Link
+                          className="btn"
+                          href={card.service ? `/contact?service=${card.service}#enquiry` : "/contact"}
+                        >
                           {p.ask} {card.ask}
                           <IconCircleArrowRightFilled aria-hidden="true" />
                         </Link>

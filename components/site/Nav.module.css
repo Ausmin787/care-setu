@@ -77,6 +77,11 @@
   text-decoration-thickness: 3px;
   text-underline-offset: 8px;
 }
+/* On /contact the pill is the current page: a ring in the same logo green. */
+.right :global(.btn)[aria-current="page"] {
+  outline: 3px solid var(--color-line-lime);
+  outline-offset: 3px;
+}
 .right {
   margin-left: auto;
   display: flex;

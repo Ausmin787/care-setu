@@ -178,6 +178,173 @@
     "draft": "Draft",
     "legal": "Care Setu, 4B Grover Chamber, Karol Bagh, Delhi 110005"
   },
+  "contactPage": {
+    "metaTitle": "Talk to us | Care Setu",
+    "metaDescription": "Call or WhatsApp Care Setu, or leave your details and a coordinator calls you back. Care at home in Noida and Delhi.",
+    "title": "Talk to us.",
+    "lede": "Call us now, or leave your details and a coordinator calls you back.",
+    "leave": "Leave your details",
+    "cardTitle": "Call or WhatsApp",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "Email",
+    "officeLabel": "Office",
+    "office": { "text": "4B Grover Chamber, Karol Bagh, Delhi 110005", "claim": "C-030" },
+    "noscript": "Leaving your details online needs JavaScript. You can call, WhatsApp or email us using the details above."
+  },
+  "enquiry": {
+    "title": "Leave your details",
+    "intro": "Five short questions, one at a time. Then a coordinator calls you back.",
+    "progress": "Question {n} of 5",
+    "back": "Back",
+    "continue": "Continue",
+    "change": "Change",
+    "location": {
+      "question": "Where is the patient now?",
+      "why": "So the coordinator knows where care starts.",
+      "options": { "hospital": "In hospital", "home": "At home", "not_sure": "Not sure" },
+      "error": "Choose where the patient is now"
+    },
+    "service": {
+      "question": "Which service do you need?",
+      "why": "So the coordinator knows what to arrange. Not sure is fine.",
+      "notSure": "Not sure yet",
+      "error": "Choose a service, or Not sure yet"
+    },
+    "area": {
+      "question": "Where is the patient?",
+      "why": "We arrange care in Noida and Delhi right now.",
+      "options": { "noida": "Noida", "delhi": "Delhi", "other": "Somewhere else" },
+      "otherNote": "You can still send this. The coordinator will tell you what is possible.",
+      "error": "Choose where the patient is"
+    },
+    "needs": {
+      "question": "What does the patient need?",
+      "why": "A few lines are enough.",
+      "privacy": "Only the Care Setu team reads this. Please share only what the care needs.",
+      "error": "Tell us what the patient needs",
+      "tooLong": "Keep it under 1000 characters"
+    },
+    "you": {
+      "question": "Who should we call?",
+      "why": "The coordinator calls this number back.",
+      "name": "Your name",
+      "phone": "Mobile number",
+      "phoneHint": "A 10-digit Indian mobile number",
+      "email": "Email (optional)",
+      "errors": {
+        "name": "Enter your name",
+        "phone": "Enter a 10-digit mobile number",
+        "email": "Enter an email address, or leave it empty"
+      }
+    },
+    "check": {
+      "title": "Check your answers",
+      "labels": {
+        "location": "Where the patient is now",
+        "service": "Service",
+        "area": "Area",
+        "needs": "What the patient needs",
+        "name": "Name",
+        "phone": "Mobile number",
+        "email": "Email"
+      },
+      "notProvided": "Not provided",
+      "consent": "I agree to Care Setu storing these details to arrange care, as described in the",
+      "consentLink": "privacy notice (draft)",
+      "consentError": "Tick the box to agree, so we can store your details",
+      "send": "Send my details",
+      "sending": "Sending your details…"
+    },
+    "errors": {
+      "summary": "There is a problem",
+      "invalid": "Something in your answers needs another look.",
+      "rateLimited": "Too many tries from here. Please call or WhatsApp us instead.",
+      "network": "Your details could not be sent. Please try again, or call us.",
+      "unavailable": "Leaving details online isn’t open yet. Please call or WhatsApp us."
+    },
+    "done": {
+      "title": "We have your details.",
+      "refLabel": "Your reference",
+      "refNote": "Mention it if you call us.",
+      "nextTitle": "What happens next",
+      "next1": "A coordinator calls you back.",
+      "next2": "Together you work out a care plan, and you get a quote before you pay.",
+      "sooner": "Need us sooner? Call or WhatsApp"
+    },
+    "route": {
+      "label": "Your route",
+      "location": "Where care starts",
+      "service": "Service",
+      "area": "Area",
+      "needs": "What’s needed",
+      "needsDone": "Told us",
+      "you": "Who we call",
+      "end": "Home",
+      "endText": "A coordinator calls you back"
+    }
+  },
+  "privacyPage": {
+    "metaTitle": "Privacy notice (draft) | Care Setu",
+    "metaDescription": "Draft privacy notice for the details you leave on the Care Setu website. Pending professional review.",
+    "draft": "DRAFT, not legal advice, pending professional review",
+    "title": "Privacy notice",
+    "version": "Version {v}. A draft for review; not yet in force.",
+    "intro": "This notice explains what Care Setu does with the details you give us when you leave your details on this website, so that you can decide whether to agree.",
+    "sections": [
+      {
+        "title": "What we collect",
+        "items": [
+          "Where the patient is now: in hospital, at home, or not sure.",
+          "The service you ask about, or that you are not sure yet.",
+          "The area: Noida, Delhi or somewhere else.",
+          "What the patient needs, in your own words.",
+          "Your name and mobile number.",
+          "Your email address, if you give it.",
+          "The date and time you agreed to this notice, and which version of it you agreed to."
+        ],
+        "text": "Our server also holds your device’s internet address in memory for about 10 minutes, only to stop the form being sent over and over by automated programs. It is not stored. This page runs no advertising or tracking scripts."
+      },
+      {
+        "title": "Why we collect it",
+        "text": "To call you back and arrange the care you asked about, including a care plan and a quote before you pay. We do not use these details for anything else, and never for marketing unless you separately agree."
+      },
+      {
+        "title": "Who sees it",
+        "text": "The Care Setu team who arrange care. We have not yet chosen the email service that alerts the team or the provider that will host the data; this notice will name them before it takes effect."
+      },
+      {
+        "title": "How long we keep it",
+        "text": "The period is not set yet. It will be stated here before this notice takes effect, and we will erase your details once they are no longer needed for the purpose above."
+      },
+      {
+        "title": "Your rights",
+        "items": [
+          "Withdraw your consent at any time, as easily as you gave it.",
+          "Ask for a summary of the details we hold about you and how we use them.",
+          "Ask us to correct, complete, update or erase them.",
+          "Raise a grievance with us, and get a response.",
+          "Nominate someone to exercise these rights if you die or cannot act yourself.",
+          "Complain to the Data Protection Board of India, after first using our grievance process."
+        ],
+        "text": "To do any of these, call, WhatsApp or email us using the details below, and mention your reference if you have one."
+      },
+      {
+        "title": "Who to contact",
+        "text": "The person who answers questions about your details and handles grievances has not been named yet. Until then, contact us using these details."
+      }
+    ],
+    "reviewTitle": "Points for the reviewer",
+    "review": [
+      "The legal entity and name that appear as the data fiduciary (the LLP is not yet registered).",
+      "The retention period, and the named grievance officer with a response period.",
+      "The email and hosting providers, which process the details on our behalf.",
+      "Whether the free-text description of the patient’s needs, which can include health information, needs extra safeguards or a separate consent.",
+      "Commencement: the DPDP Rules, 2025 were published on 14 November 2025, and the notice and rights rules take effect eighteen months later. This draft is written to that standard now.",
+      "A Hindi version, so that the notice can be read in a language of the Eighth Schedule (Act, section 5(3))."
+    ],
+    "sources": "Written against the Digital Personal Data Protection Act, 2023 (sections 5, 6, 11 to 14) and the Digital Personal Data Protection Rules, 2025 (rules 3, 9 and 14), as published by MeitY."
+  },
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",
     "back": "Back to home"

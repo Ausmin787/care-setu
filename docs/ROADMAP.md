@@ -36,8 +36,8 @@ render at 16/32/64/512 px; owners confirm (Q4). Done except owner confirmation (
 - [x] Next.js 16 + TS strict + Tailwind v4 (scaffolded in a temp sibling and moved in; Blueprint §5.3), 2026-09-26
 - [x] Route stubs for every public page in PRD §5; zod-validated public config (`content/site.config.json`)
 - [x] Security headers + strict nonce CSP (D-022) + `security-headers.test.ts`; claims test; Vitest; ESLint
-- [ ] **Moved to the Contact page (D-021, the first page that needs them):** Drizzle + PGlite dev, env config,
-      `/api/v1` stubs, CI workflow. Auth library choice → D-entry, moved to Admin.
+- [x] **Built with the Contact page (D-021 -> D-033):** Drizzle + PGlite dev, env config (`server/config/env.ts`),
+      `POST /api/v1/queries`, CI workflow (`.github/workflows/ci.yml`, not pushed: no remote). Auth library choice → D-entry, moved to Admin.
 - [ ] `impeccable init` (writes PRODUCT.md), README setup instructions (next session)
 - [ ] After the first Stage 4 pages: gbrain trial per D-019 (embedding privacy check → index code from
       the repo → 10 known-answer questions with/without → keep or drop, recorded as a D-entry)

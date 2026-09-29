@@ -1,0 +1,86 @@
+/* The draft privacy notice (D-012, D-033): a plain reading page, one column at a comfortable measure. */
+.page {
+  /* 54ch of Anek's wide "0" is about 75 characters per rendered line (measured; impeccable line-length). */
+  max-width: calc(54ch + 2 * var(--gutter));
+  padding-block: clamp(48px, 8vh, 88px) clamp(64px, 10vh, 112px);
+}
+.draft {
+  display: inline-block;
+  margin: 0 0 28px;
+  padding: 6px 12px;
+  border: 2px dashed var(--c-ink);
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.page h1 {
+  margin: 0;
+}
+.version {
+  margin: 12px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--c-muted);
+}
+.intro {
+  margin: 24px 0 0;
+  font-size: 22px;
+  line-height: 1.45;
+}
+.section,
+.review {
+  margin-top: 40px;
+}
+.page h2 {
+  margin: 0;
+  text-wrap: balance;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 350;
+  line-height: 1.1;
+}
+.page ul {
+  margin: 14px 0 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+.page li + li {
+  margin-top: 6px;
+}
+.section p,
+.review p {
+  margin: 14px 0 0;
+}
+.contact {
+  display: grid;
+  gap: 10px;
+  margin: 28px 0 0;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: var(--c-sand);
+}
+.contact div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.contact dt {
+  font-weight: 700;
+}
+.contact dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.review {
+  padding-top: 32px;
+  border-top: 2px solid var(--c-ink);
+  font-size: 18px;
+  color: var(--c-muted);
+}
+.review h2 {
+  color: var(--c-ink);
+}
+.review ul,
+.review p {
+  max-width: 56ch;
+}

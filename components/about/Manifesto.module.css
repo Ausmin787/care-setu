@@ -1,4 +1,4 @@
-/* Vision + mission (D-032). */
+/* Vision + mission (D-032; the mission's panel and bridge are D-034). */
 .section {
   padding-block: clamp(64px, 11vh, 136px) clamp(64px, 10vh, 120px);
   border-top: 1px solid var(--c-line);
@@ -38,175 +38,295 @@
 }
 
 /* The capsule: a reserved, pill-shaped slot in the line. A 40% tint of its logo colour (as the reel captions and
-   deck cards), with an ink icon; the still-life replaces the icon when it arrives. */
+   deck cards), with an ink icon; the still-life replaces the icon when it arrives.
+   It opens as a window on the full-size pill, never by scaling it (Capsules sets --open from 0.12 to 1): the ink
+   pill and the tint inside it are each clipped to a pill --open wide, the tint 2px smaller all round, so the 2px
+   ring stays whole and sharp at every width. Without JS or with reduced motion --open is 1. */
 .capsule {
+  position: relative;
   display: inline-grid;
   place-items: center;
   width: 1.9em;
   height: 0.78em;
-  border-radius: 100px;
   vertical-align: -0.02em;
+  background: var(--c-ink);
+  clip-path: inset(0 calc((1 - var(--open, 1)) * 50%) round 100px);
+}
+.capsule::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
-  box-shadow: inset 0 0 0 2px var(--c-ink);
-  transform-origin: 50% 50%;
-  overflow: hidden;
+  clip-path: inset(2px calc((1 - var(--open, 1)) * 50% + 2px) round 100px);
 }
 .capsule svg {
+  position: relative;
   width: 0.46em;
   height: 0.46em;
   color: var(--color-ink);
 }
 
-/* Mission. */
+/* ---- Mission: an ink panel (data-mode="ink" re-points the colours), with a faint grain so the ink has a surface. */
 .mission {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 40px clamp(40px, 6vw, 112px);
   margin-top: clamp(64px, 11vh, 128px);
-  padding-top: 32px;
-  border-top: 2px solid var(--c-ink);
-  align-items: start;
+}
+.panel {
+  position: relative;
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.07;
+}
+/* One stacked header (Taste bans the headline-left, explainer-right split; D-032 removed three of them). */
+.missionHead {
+  padding-bottom: clamp(28px, 4vh, 44px);
+  border-bottom: 1px solid var(--c-line);
 }
 .missionTitle {
   margin: 0;
-  max-width: 16ch;
+  max-width: 19ch;
   text-wrap: balance;
 }
-.groups {
-  display: grid;
-  gap: 14px;
-  max-width: 44ch;
-}
-.groupsText {
-  margin: 0;
-  font-size: 24px;
-  line-height: 1.6;
-}
-.hint {
-  margin: 0;
-  font-size: 16px;
+.lead {
+  margin: clamp(24px, 3.5vh, 36px) 0 0;
+  max-width: 46ch;
+  font-size: 22px;
+  line-height: 1.35;
   color: var(--c-muted);
 }
-.change {
-  margin: 18px 0 0;
-  font-family: var(--serif);
-  font-size: clamp(26px, 2.4vw, 34px);
-  font-style: italic;
-  line-height: 1.15;
-}
 
-/* Inline trigger: reads as an enriched word, not a chip. The prose's size and colour, a small icon, and a 2px rule
-   that turns the logo blue while its card is open (Smooth UI). */
-.trigger {
-  display: inline;
+/* The bridge. Wide screens: stations | the merge drawing (200 x 336, six 56px rows) | the mark and the closing
+   sentence. A station's part and the hint are placed in one slot under that sentence (they are absolute in the
+   bridge, not in their station). */
+.bridge {
+  position: relative;
+  display: grid;
+  --sw: min(42%, 430px);
+  --mw: 200px;
+  --gap: 72px; /* the mark's width plus its space */
+  grid-template-columns: var(--sw) var(--mw) minmax(0, 1fr);
+  margin-top: clamp(28px, 4vh, 44px);
+}
+.stations {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.station {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+}
+.stationBtn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 48px;
   padding: 0;
   border: 0;
   background: none;
   color: inherit;
   font: inherit;
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
-  text-decoration-color: var(--c-ink);
   text-align: left;
   cursor: pointer;
 }
-.trigger svg {
-  display: inline-block; /* Tailwind preflight makes svg a block */
-  width: 0.9em;
-  height: 0.9em;
-  margin-right: 0.22em;
-  vertical-align: -0.12em;
-  color: var(--color-action);
-}
-/* A <button> lays out as one inline box, so on wide screens keep each group on one line (it moves as a unit). */
-@media (min-width: 701px) {
-  .trigger {
-    white-space: nowrap;
-  }
-}
-.trigger[aria-expanded="true"] {
-  text-decoration-color: var(--color-action);
-}
-.trigger:hover {
-  text-decoration-thickness: 3px;
-}
-
-/* The card: a parchment note set under its word (the word’s wrapper is its containing block, so it scrolls with the
-   text). Flipped above when there is no room below; shifted in by JS to stay on screen. */
-.group {
-  position: relative;
-}
-.card {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  z-index: 5;
-  width: min(320px, calc(100vw - 32px));
-  box-sizing: border-box;
-  padding: 18px 20px 20px;
-  border: 2px solid var(--c-ink);
-  border-radius: 14px;
-  background: var(--color-parchment);
-  color: var(--color-ink);
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.4;
-  white-space: normal;
-}
-.card[data-above] {
-  top: auto;
-  bottom: calc(100% + 10px);
-}
-.card:not([hidden]) {
-  display: grid;
-  gap: 6px;
-}
-.cardIcon {
+.disc {
+  flex: none;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  margin-bottom: 4px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--color-line-blue) 40%, var(--color-parchment));
-  box-shadow: 0 0 0 2px var(--color-ink);
+  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+  color: var(--color-ink);
+  transition: background-color 0.2s ease;
 }
-.cardIcon svg {
-  width: 22px;
-  height: 22px;
+.disc svg {
+  width: 24px;
+  height: 24px;
 }
-.cardName {
-  font-weight: 700;
+.stationName {
   font-size: 19px;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: color 0.2s ease;
 }
-.cardName::first-letter {
+.stationName::first-letter {
   text-transform: uppercase;
 }
-.cardRole {
+.stationBtn:hover .disc,
+.station[data-on] .disc {
+  background: var(--line);
+}
+.stationBtn:focus-visible {
+  border-radius: 100px;
+  outline-offset: 4px;
+}
+/* The lead-in from a name to the drawing: the same 3px line the branch continues. It draws first (clip, paint only). */
+.leader {
+  flex: 1 1 16px;
+  min-width: 16px;
+  height: 3px;
+  border-radius: 3px 0 0 3px;
+  background: var(--line);
+  clip-path: inset(0 calc(max(0, 1 - var(--p, 1) / 0.35) * 100%) 0 0);
+  transition: opacity 0.2s ease;
+}
+.merge {
+  display: block;
+  width: var(--mw);
+  height: 336px;
+  overflow: visible;
+}
+.branch,
+.trunk {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+}
+.branch {
+  stroke: var(--line);
+  stroke-width: 3px;
+  stroke-dashoffset: calc(1 - clamp(0, (var(--p, 1) - 0.35) / 0.65, 1));
+  transition: opacity 0.2s ease; /* stroke-width switches instantly (paint only; the detector reads any width as layout) */
+}
+.trunk {
+  stroke: var(--c-ink);
+  stroke-width: 5px;
+  stroke-dashoffset: calc(1 - var(--pt, 1));
+}
+/* One station chosen: its line stays, the others step back. */
+.bridge[data-active] .leader,
+.bridge[data-active] .branch {
+  opacity: 0.28;
+}
+.bridge[data-active] .station[data-on] .leader,
+.bridge[data-active] .branch[data-on] {
+  opacity: 1;
+}
+.bridge[data-active] .branch[data-on] {
+  stroke-width: 5px;
+}
+.bridge[data-active] .station:not([data-on]) .stationName {
   color: var(--c-muted);
 }
+
+.end {
+  position: relative;
+  min-height: 336px;
+}
+/* The Care Setu mark is where the one line arrives (the trunk runs into its left edge at the rows' middle). */
+.terminus {
+  position: absolute;
+  left: 0;
+  top: 140px;
+  width: 56px;
+  height: 56px;
+  opacity: calc(0.4 + 0.6 * var(--pt, 1));
+}
+.terminus svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.change {
+  position: absolute;
+  left: var(--gap);
+  right: 0;
+  top: 168px;
+  margin: 0;
+  transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-style: italic;
+  line-height: 1.15;
+  opacity: calc(0.62 + 0.38 * var(--pt, 1)); /* ghost to ink as the line arrives; never below ~7:1 */
+}
+.hint,
+.part {
+  position: absolute;
+  left: calc(var(--sw) + var(--mw) + var(--gap));
+  right: 0;
+  top: 256px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.hint {
+  color: var(--c-muted);
+}
+.bridge[data-active] .hint {
+  visibility: hidden;
+}
+.part:not([hidden]) {
+  display: grid;
+  gap: 2px;
+}
+.partName::first-letter {
+  text-transform: uppercase;
+}
 @media (prefers-reduced-motion: no-preference) {
-  .card:not([hidden]) {
-    animation: pop 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .part:not([hidden]) {
+    animation: part 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
-@keyframes pop {
+@keyframes part {
   from {
     opacity: 0;
-    transform: translateY(6px) scale(0.97);
+    transform: translateY(6px);
   }
 }
 
-/* Phones: each group on its own line with its comma, since a long name can't share a line. */
-@media (max-width: 700px) {
-  .group {
-    display: block;
-    margin-top: 6px;
+/* Narrower laptops: the same drawing in less width (it is stretched sideways only; the rows keep their 56px). */
+@media (max-width: 1199px) {
+  .bridge {
+    --mw: 140px;
   }
-  /* Read line by line, so the commas and "and" are for screen readers only here. */
-  .sep {
+}
+
+/* Below 960px there is no room to fan the lines: the stations are a ruled list, each part opens under its station,
+   and the mark and the sentence close the panel. */
+@media (max-width: 959px) {
+  .lead {
+    font-size: 20px;
+  }
+  .bridge {
+    display: block;
+  }
+  .hint {
+    position: static;
+    margin-bottom: 8px;
+    font-size: 17px;
+  }
+  .bridge[data-active] .hint {
+    visibility: visible;
+  }
+  .station {
+    display: block;
+    height: auto;
+    border-top: 1px solid var(--c-line);
+  }
+  .stationBtn {
+    width: 100%;
+    min-height: 60px;
+  }
+  .leader,
+  .merge {
+    display: none;
+  }
+  .part {
+    position: static;
+    padding: 0 0 16px 58px;
+  }
+  .partName {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -214,13 +334,26 @@
     clip-path: inset(50%);
     white-space: nowrap;
   }
-}
-
-@media (max-width: 900px) {
-  .mission {
-    grid-template-columns: minmax(0, 1fr);
+  .bridge[data-active] .station:not([data-on]) .stationName {
+    color: inherit;
   }
-  .groupsText {
-    font-size: 21px;
+  .end {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--c-line);
+  }
+  .terminus,
+  .change {
+    position: static;
+    transform: none;
+    opacity: 1;
+  }
+  .terminus {
+    flex: none;
+    width: 48px;
+    height: 48px;
   }
 }

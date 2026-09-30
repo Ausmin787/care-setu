@@ -256,3 +256,21 @@ Template:
   copy line implying routing by service).
 - Not verified: the dev server's own console output (started outside the session); real devices/Safari; screen reader;
   real email; owner review. No commit yet.
+
+## 2026-09-30 · About polish (D-034)
+- Sasanka's review of About: founder cards bland beside Cue Kit's, the mission too simple, the vision capsules pixelated
+  while scrolling, the founder photos soft.
+- Capsules first (no design call): CDP LayerTree showed GSAP's translate3d giving each capsule its own compositor layer
+  mid-scrub; rebuilt as a clip-path window on a full-size pill driven by `--open`, icon by translate. Could not reproduce
+  the pixelation headless (screenshots wait for raster), so verified structurally.
+- Photos: measured the deck's native pixels (Shiva 184x245, Ayush 126x168, Aashish 814x1086); re-cut and cleaned
+  classically (denoise, 2x Lanczos steps, unsharp). No AI: Higgsfield had 0 credits anyway, and it would invent a real
+  face. Originals still needed (Q20).
+- Research (#43): Cue Kit live + 15 previews, React Bits, Aceternity, Unlumen, Smooth UI, Cult UI, Magic UI, Kokonut,
+  Skiper, 21st.dev, all 52 GetLayers sheets re-read, Mobbin, Pafolios, Design Spells, Curated, Godly, Recent, Awwwards,
+  Motion.dev, UI Guideline, Origin Kit, Watermelon; skipped with reasons in the plan. Three founder skins rendered as a
+  local comp (`refs/care-setu/build/about-options/`). Sasanka picked the recommended option on all three questions.
+- Built: Ink gallery founder cards, the mission bridge on an ink panel, LogoMark `id` prop, Groups removed.
+- Caught: #9 once more (Bridge used LogoMark's new prop before LogoMark was written; the hook fired, then cleared);
+  Taste found a split header, pagination and an extra dot; impeccable a low ghost contrast.
+- Not verified: the capsule fix on real GPU raster (Sasanka's laptop), real devices/Safari, screen reader. No commit.

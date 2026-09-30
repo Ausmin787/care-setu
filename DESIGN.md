@@ -31,8 +31,8 @@ Components read the semantic layer only; `[data-mode="ink"]` re-points the same 
 lime #9BCC3C, blue #0F8FCC, olive #6D9620; `--color-action` #0D7CB1 appears only in the button's arrow disc and small
 details; wordmark blue #138AB2. They may appear only as: trip spines, discs and badges; the footer wordmark drift;
 Home's Colonnade grain fields, the reel's caption blocks (40% tint in parchment) and the drawn line (D-030); the
-Services deck's tinted cards (40%) and rail (D-031); About's card and capsule tints and the blocks beside portraits
-(D-032); the nav's current-page underline (green) and the nav logo in its own colours (D-028). Nothing else gains
+Services deck's tinted cards (40%) and rail (D-031); About's capsule tints, the founder cards' index discs and the
+mission's station discs and merging lines (D-032, D-034); the nav's current-page underline (green) and the nav logo in its own colours (D-028). Nothing else gains
 colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds (1.8:1 on parchment).
 
 ## 3. Typography
@@ -58,7 +58,11 @@ colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds
 - **Trip** (Home, Transit trip view measured): continuous rounded spines per leg on ink, inset discs, line badges,
   a dotted callback link; a marker rides the spine on scroll.
 - **Cards**: 20px radius (Alveos One's 25 tightened), no shadow; the Services deck cards are 40% tints of their line
-  colour with text | image 50/50.
+  colour with text | image 50/50. **Ink cards and panels** sit inside parchment sections where a section wants weight
+  (Contact's call and route cards; About's founder cards and mission panel, D-034): `data-mode="ink"` on the card.
+- **Portrait prints** (About, D-034): warm monochrome multiplied onto sand, with grain, dimmed under an ink scrim until
+  the card opens (Cue Kit's collapsing cards). Founder photos are re-cut from the deck's native pixels with classical
+  clean-up only; no AI upscaling of real people.
 - **Radius rule (one system):** pills 100px (buttons) · cards and ink panels 20px · form controls and boxes 16px (answer
   plates, text inputs, the error summary) · tags 4px (pending, DRAFT).
 - **Forms** (Contact, D-033): GOV.UK question pages, one question per page; answer plates with a 2px muted border,
@@ -77,13 +81,15 @@ Bands alternate parchment / ink / sand; a section never repeats another page's i
   footer (ink). The trip's line continues down the left gutter to a terminus above the footer (desktop).
 - **Services:** type-led opener with line jump links → pinned stacked deck on an ink band with a chapter rail →
   equipment price sheet with hover images (dev only) → "not sure which you need" close on sand.
-- **About:** founder's question → letter beside a sticky portrait → inline-image manifesto + mission words that open
-  cards → pinned values odometer on sand → collapsing founder cards → close with the status. All pending (Q20).
+- **About:** founder's question → letter beside a sticky portrait → inline-image manifesto → the mission on an ink
+  panel, its six groups drawn as stations whose lines merge into one (GetLayers Relay) → pinned values odometer on sand
+  → collapsing founder cards on ink (Cue Kit) → close with the status. All pending (Q20).
 - **Footer:** ink, links, the full-width drifting "care setu" wordmark, the legal line.
 
 ## 6. Depth & elevation
-Flat. No shadows, no glass, no blur. Separation comes from value (ink bands, the sand block) and hairlines. The one
-gradient lives inside the footer wordmark (WebGL, the page's single context).
+Flat. No shadows, no glass, no blur. Separation comes from value (ink bands, ink cards, the sand block), hairlines and
+feTurbulence grain (Colonnade fields, portrait prints, the mission panel). The one moving gradient lives inside the
+footer wordmark (WebGL, the page's single context); scrims on portraits are static.
 
 ## 7. Do's and don'ts
 Do: keep the logo's colours recognisable and never outshone · mark owner-unconfirmed content as pending (dev only) ·
@@ -100,8 +106,10 @@ phones). On touch and under reduced motion: no pins or scrubs; the deck becomes 
 strip, the odometer a list, the founder cards stacked open. Inputs ≥ 16px. Hit targets ≥ 44px on touch.
 **Motion by page:** Home: CSS word-mask hero entrance, video loop with pause (WCAG 2.2.2), live-trip marker (GSAP scrub),
 Colonnade field slide, reel scrub, word-by-word ink statement, line following the reader at 65% of the viewport.
-Services: the deck (one pixel-measured GSAP timeline: rise, pin, deal). About: capsules opening with scroll, wishes
-ticking, the odometer (only the changing digit rolls) with a card half-turn, collapsing cards (transforms + clip).
+Services: the deck (one pixel-measured GSAP timeline: rise, pin, deal). About: capsules opening with scroll (a clip-path
+window driven by `--open`; nothing is scaled, so nothing is rasterised small), wishes ticking, the mission's lines
+drawing with scroll (CSS variables into clips and pathLength-1 dash offsets), the odometer (only the changing digit
+rolls) with a card half-turn, collapsing cards (transforms + clip; the print clears as a card opens).
 Footer: slow grain drift in the logo colours. Reduced motion: every finished state is the default.
 
 ## 9. Agent prompt guide

@@ -1,4 +1,4 @@
-/* Founders (D-032). */
+/* Founders (D-032; the look is D-034's "Ink gallery"). */
 .section {
   padding-block: clamp(64px, 11vh, 136px);
 }
@@ -23,7 +23,7 @@
 }
 
 /* The row. Widths from the row’s own width (container units): three narrow cards of --wc, the open one --we. The
-   open card is Pafolios’ colour block: a 3:4 photo panel (--pw, from the row height) and the words on the tint. */
+   photo panel is 3:4 (--pw, from the row height). */
 .cards {
   position: relative;
   container-type: inline-size;
@@ -39,13 +39,15 @@
   --we: calc(100cqw - 3 * (var(--wc) + var(--gap)));
   --pw: calc(var(--h) * 0.75);
   --ease: cubic-bezier(0.2, 1, 0.3, 1);
+  /* The footer's grain (feTurbulence), here over the prints: it sets three photos of uneven quality as one set. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+/* Each card is an ink card (data-mode="ink" re-points the colours, as Contact's cards do). */
 .card {
   position: absolute;
   inset: 0 auto 0 0;
   width: var(--we);
   overflow: hidden;
-  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
   transform: translateX(calc(var(--i) * (var(--wc) + var(--gap)) + var(--after) * (var(--we) - var(--wc))));
   clip-path: inset(0 calc((1 - var(--on)) * (var(--we) - var(--wc))) 0 0 round 20px);
   transition:
@@ -53,8 +55,9 @@
     clip-path 0.75s var(--ease);
 }
 
-/* The photo panel: warm monochrome multiplied onto parchment (studio white becomes the page tone). Narrow, it slides
-   so the face sits in the visible strip; open, it settles from 1.04 to 1 (the sample). */
+/* The print: warm monochrome multiplied onto sand, so a studio white becomes paper and three different backdrops
+   read as one set (multiplied onto a logo colour, skin read as illness: D-032). Narrow, it slides so the face sits
+   in the visible strip; open, it settles from 1.04 to 1 (the sample). */
 .media {
   position: absolute;
   inset: 0 auto 0 0;
@@ -62,12 +65,8 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--color-parchment-deep);
+  background: var(--color-sand);
   transform: translateX(calc((1 - var(--on)) * (var(--wc) - var(--pw)) / 2));
-  transition: transform 0.9s var(--ease);
-}
-.media > * {
-  transform: scale(calc(1.04 - 0.04 * var(--on)));
   transition: transform 0.9s var(--ease);
 }
 .photo {
@@ -75,8 +74,45 @@
   height: 100%;
   object-fit: cover;
   object-position: 50% 18%;
-  filter: grayscale(1) sepia(0.22) contrast(1.05);
+  filter: grayscale(1) contrast(1.06);
   mix-blend-mode: multiply;
+  transform: scale(calc(1.04 - 0.04 * var(--on)));
+  transition: transform 0.9s var(--ease);
+}
+/* The sample's scrim: ink rising from the foot (where the name runs) and a lighter one at the head (the index), with
+   the grain in the same layer. It dims a narrow card and clears, not fully, when the card opens. */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to top,
+      rgb(28 24 20 / 0.95) 0%,
+      rgb(28 24 20 / 0.74) 34%,
+      rgb(28 24 20 / 0.24) 62%,
+      rgb(28 24 20 / 0.12) 78%,
+      rgb(28 24 20 / 0.5) 100%
+    ),
+    var(--grain);
+  opacity: calc(1 - 0.62 * var(--on));
+  transition: opacity 0.75s var(--ease);
+}
+/* Open: the print’s right edge fades into the card’s ink, where the words sit. */
+.media::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 -1px 0 auto;
+  width: 36%;
+  background: linear-gradient(to right, rgb(28 24 20 / 0), var(--color-ink));
+  opacity: var(--on);
+  transition: opacity 0.6s ease;
+}
+/* No photo yet: initials on the raised ink. Narrow, they shrink and lift clear of the name instead of being cut. */
+.card[data-nophoto] .media {
+  background: var(--c-surface);
 }
 .initials {
   font-family: var(--serif);
@@ -84,18 +120,63 @@
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.03em;
-  color: var(--color-ink);
+  color: var(--c-muted);
+  transform: translateY(calc((1 - var(--on)) * var(--h) * -0.2)) scale(calc(0.4 + 0.6 * var(--on)));
+  transition: transform 0.9s var(--ease);
+}
+
+/* Index at the head of the strip: the founder’s line colour as one small disc (the card’s only colour), then the
+   number. No "/ 04": Taste bans pagination labels (D-032 removed them from the values card too). */
+.idx {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  /* Centred in the narrow strip (the disc and two digits are about 46px), and it stays there when the card opens. */
+  left: calc((var(--wc) - 46px) / 2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+/* The same number, large, behind the words of the open card. */
+.ghost {
+  position: absolute;
+  z-index: 1;
+  top: 6px;
+  right: clamp(22px, 3cqw, 40px);
+  font-family: var(--serif);
+  font-size: clamp(120px, 15cqw, 210px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-surface);
+  opacity: var(--on);
+  transition: opacity 0.5s ease calc(var(--on) * 0.1s);
 }
 
 .slotNote {
   position: absolute;
-  top: 18px;
-  left: 18px;
+  bottom: 22px;
+  left: 22px;
   z-index: 1;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--c-muted);
   opacity: var(--on);
 }
 
@@ -109,29 +190,29 @@
   padding: 0;
   border: 0;
   background: none;
-  color: var(--color-ink);
+  color: var(--c-ink);
   font: inherit;
   cursor: pointer;
 }
 .hit:focus-visible {
   background: none;
-  outline: 3px solid var(--color-ink);
+  color: var(--c-ink);
+  outline: 3px solid var(--color-focus);
   outline-offset: -8px;
   border-radius: 20px;
 }
 .card[data-on] .hit {
   cursor: default;
 }
-/* Narrow: the name runs up the strip on a tint band, so it reads over any photo. */
+/* Narrow: the name runs up the strip in cream, over the scrim. */
 .vname {
   position: absolute;
   left: 0;
   bottom: 0;
   width: var(--wc);
-  height: 50%;
+  height: 66%;
   box-sizing: border-box;
-  padding: 20px 0;
-  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+  padding: 22px 0;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   display: flex;
@@ -139,7 +220,7 @@
   justify-content: flex-start;
   font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
   opacity: calc(1 - var(--on));
@@ -154,7 +235,6 @@
   z-index: 2;
   box-sizing: border-box;
   padding: 28px clamp(22px, 3cqw, 40px) 32px;
-  color: var(--color-ink);
   opacity: var(--on);
   transform: translateY(calc((1 - var(--on)) * 10px));
   transition:
@@ -174,14 +254,17 @@
   font-style: italic;
 }
 .role {
-  margin: 8px 0 0;
+  margin: 12px 0 0;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--c-muted);
 }
 .text {
-  margin: 14px 0 0;
+  margin: 16px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--c-line);
   max-width: 44ch;
   font-size: 18px;
   line-height: 1.45;
@@ -196,6 +279,7 @@
     display: grid;
     gap: 12px;
     height: auto;
+    --pw: 38cqw;
   }
   .card {
     position: relative;
@@ -215,8 +299,17 @@
   .initials {
     font-size: 72px;
   }
-  .hit {
+  .hit,
+  .ghost {
     display: none;
+  }
+  .idx {
+    top: 14px;
+    left: 14px;
+  }
+  .slotNote {
+    bottom: 14px;
+    left: 14px;
   }
   .bio {
     position: relative;

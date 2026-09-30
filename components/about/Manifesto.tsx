@@ -1,8 +1,8 @@
 import { IconHeartFilled, IconHomeFilled, IconUsersGroup } from "@tabler/icons-react";
 import { about } from "@/lib/about";
-import { shown, t } from "@/lib/content";
+import { LINES, shown, t } from "@/lib/content";
 import { Capsules } from "@/components/motion/Capsules";
-import { Groups } from "./Groups";
+import { Bridge } from "./Bridge";
 import { Pending } from "./Pending";
 import s from "./Manifesto.module.css";
 
@@ -11,8 +11,8 @@ const capIcons = { home: IconHomeFilled, family: IconUsersGroup, heart: IconHear
 
 // Vision, then mission (D-032). The vision is one large sentence with three capsules set between its words
 // (GetLayers Halden), in the logo colours until Sasanka's still-lifes arrive; they open with scroll (Capsules).
-// The mission follows in two columns: its line on the left, and on the right the six groups the founders want to
-// bring together, each an inline word that opens its part (Groups). Development only until approved (C-075, C-078).
+// The mission follows on an ink panel (D-034): its line, the founders' lead-in, and the six groups they want to
+// bring together drawn as stations whose lines merge into one (Bridge). Development only until approved (C-075, C-078).
 export function Manifesto() {
   const vision = shown(about.vision);
   const mission = shown(about.mission);
@@ -52,24 +52,25 @@ export function Manifesto() {
 
       {mission && (
         <div className={`${s.mission} wrap`}>
-          <div>
-            <p className={s.kicker}>
-              {p.missionKicker}
-              <Pending on={mission.pending} />
-            </p>
-            <h2 id="mission-title" className={`t-head ${s.missionTitle}`}>
-              {mission.title}
-            </h2>
-          </div>
-          {groups && (
-            <div className={s.groups}>
-              <p className={s.groupsText}>
-                {groups.lead} <Groups items={groups.items} />
+          <div className={s.panel} data-mode="ink">
+            <div className={s.missionHead}>
+              <p className={s.kicker}>
+                {p.missionKicker}
+                <Pending on={mission.pending} />
               </p>
-              <p className={s.hint}>{p.groupsHint}</p>
-              <p className={s.change}>{groups.change}</p>
+              <h2 id="mission-title" className={`t-head ${s.missionTitle}`}>
+                {mission.title}
+              </h2>
             </div>
-          )}
+            {groups && <p className={s.lead}>{groups.lead}</p>}
+            {groups && (
+              <Bridge
+                items={groups.items.map((g, i) => ({ ...g, line: LINES[i % LINES.length] }))}
+                change={groups.change}
+                hint={p.groupsHint}
+              />
+            )}
+          </div>
         </div>
       )}
     </section>

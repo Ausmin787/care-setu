@@ -909,3 +909,57 @@ carries the marker; API 404. Side-by-side: `refs/build-sbs/contact-vs-ridgeline.
 by a test and the code, not observed live); a real phone, iPad or Safari; a screen reader; a real email send (no provider,
 Q1); the rate limit behind a real proxy (which header to trust depends on the host, Q1); the owners' review of the
 questions and copy (Q15).
+
+## D-034 · 2026-09-30 · About polish: ink founder cards, the mission as a bridge on an ink panel, capsules opened by a clip window, founder photos re-cut (partially supersedes D-032: the founder cards' look, the mission's layout, "no ink on About"; D-027: where ink may appear)
+Sasanka's review of About: the founder cards move well but look "way too simple and bland" next to Cue Kit's, which
+look premium with or without a hover; the mission section is too simple; the vision capsules render in low quality
+while scrolling; the founder photos should be sharper. Research 2026-09-30 (Blueprint 1.6, #43; ledger and the
+opened/skipped list in `docs/plans/2026-09-30-about-polish.md`): Cue Kit (live preview + 15 others), React Bits,
+Aceternity, Unlumen, Smooth UI, Cult UI, Magic UI, Kokonut, Skiper, 21st.dev, all 52 GetLayers templates re-read, Mobbin,
+Pafolios, Design Spells, Curated, Godly, Recent, Awwwards, Motion.dev, UI Guideline. Three founder skins were rendered
+as a local comp (`refs/care-setu/build/about-options/`); Sasanka picked the recommended option on all three questions:
+- **Founders = "Ink gallery"** (Cue Kit's own recipe; structure and motion unchanged): ink cards; each portrait a warm
+  mono print (multiplied onto sand, with grain) filling the card's height, dimmed under an ink scrim while narrow and
+  clearing as the card opens; index and a logo-colour disc at the top; the name in cream over the scrim; open, the
+  print fades into the ink, where the name, role and bio sit in cream under a ghost numeral.
+- **Mission = "The bridge"** (GetLayers Relay's canvas, drawn in our lines): an ink panel; the six groups are stations
+  whose lines, in the logo's colours, merge into one line that reaches "One platform"; a group's role shows beside the
+  diagram on hover, focus or tap; the lines draw with scroll. The founders' words are unchanged.
+- **Photos = classical clean-up only**, re-cut from the deck's native pixels (Shiva 184x245, Ayush 126x168, Aashish
+  814x1086). No AI upscale: it would invent detail on a real person's face (INVARIANT 16) and send unconsented photos
+  to an outside service. True HD waits for the founders' originals (Q20).
+- **Capsules:** opened by a clip window on a full-size pill, never by scaling it.
+Ink on About: D-032 kept About without ink. These are ink **cards and one ink panel** inside parchment sections (as
+Contact's two ink cards, D-033), not a band; INVARIANT 27 and `DESIGN.md` now say so.
+**Why:** the look Sasanka pointed at is image-led and dark; ink is the system's own depth (DESIGN.md 6 allows value,
+hairlines and grain, not shadows), and it lets soft, mismatched headshots read as one set of prints. The mission's
+meaning is six parts becoming one connection, so the section shows exactly that, and every role is reachable without
+a popover.
+**Rejected:** names-only strips (Skiper 35: elegant, but no image at rest); paper "gallery prints" (GetLayers Artist:
+still light and quiet); six always-open rows on sand (a relative of Home's partner index); six segments closing into a
+bar (the same idea with less to look at); holographic, glass or glow cards and hub-and-spoke beams (break DESIGN.md 6
+and are known tells); AI upscaling (above).
+**Built (2026-09-30):** `FounderCards.tsx` + `Founders.module.css` (ink cards, sand-multiplied print with grain and scrim,
+index disc, ghost numeral, initials that shrink and lift in a narrow card); `Bridge.tsx` (stations as disclosure buttons,
+the merge SVG at 200 x 336 drawn 1:1 above 1200px and narrowed to 140px below, the part in one slot beside the drawing,
+a ruled list below 960px); `Manifesto.tsx`/`.module.css` (ink panel, stacked header); `Groups.tsx` removed (replaced);
+`LogoMark` takes an `id` so its clip path stays unique when the mark appears twice. Capsules: `--open` drives a clip
+window on a full-size pill and its tint (2px ring intact at every width); the icon fades up by translate; force3D off.
+Photos re-cut in `refs/care-setu/founders/` (gitignored; the earlier files kept as `*-v1-before-enhance.webp`).
+**Verified:** green (lint, typecheck, 92 tests, build). Capsule cause measured with CDP LayerTree: during the scrub each
+capsule had its own compositor layer ("Trivial3DTransform" from GSAP's translate3d) plus overlap layers; after the fix
+no capsule or icon carries a scale at any step, down or up (per-step log). Founders at 1440x900, 1280x537 and 390x844:
+hover opens each card (real CDP mouse); the no-photo card's initials clear its name. Bridge: real mouse hover opens a
+part and leaving closes it; a click pins it; Escape closes and keeps focus on the station; Tab opens each station in
+turn. Scroll drawing probed in 80px wheel steps at 1280x537, down and up: the six lines draw in order, then the trunk,
+and reverse. Device audit, 9 sizes on /about: no overflow, nothing blocked, no stuck scroll. impeccable 1280 + 390: the
+standing D-032 waivers (italic/oversized H1, display leading, cream page, footer gradient, the rows clipping their own
+cards); fixed: the sentence's ghost floor raised (0.5 -> 0.62) after a low-contrast reading, a stroke-width transition
+removed (the detector reads it as layout). Taste pre-flight: the split mission header stacked, the "/ 04" pagination
+and a second decorative dot removed; kept with reasons: Petrona and the Warm Room palette (D-027), ink panels on a light
+page (this entry), light-only (DESIGN.md).
+**Not verified:** the capsule pixelation itself: headless Chrome's screenshots wait for full raster, so the old fault never
+showed there, and the Chrome extension tab went to the background (no rAF); the fix is proven structurally, and
+Sasanka's laptop is the real test. Also not verified: a real phone, iPad or Safari; a screen reader on the bridge;
+the Web Interface Guidelines skill (checked by hand: focus rings, 48px+ targets, aria-expanded/controls, decoration
+aria-hidden); the owners' review (Q20).

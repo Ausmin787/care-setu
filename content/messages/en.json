@@ -345,6 +345,108 @@
     ],
     "sources": "Written against the Digital Personal Data Protection Act, 2023 (sections 5, 6, 11 to 14) and the Digital Personal Data Protection Rules, 2025 (rules 3, 9 and 14), as published by MeitY."
   },
+  "payPage": {
+    "metaTitle": "Pay for your care | Care Setu",
+    "metaDescription": "Pay the quote your Care Setu coordinator sent you, using its reference.",
+    "title": "Pay for your care.",
+    "lede": "Pay the amount on the quote your coordinator sent you. Have its reference ready.",
+    "field": {
+      "label": "Quote reference",
+      "hint": "It starts with QT and has 8 letters and numbers after it, for example QT 4K7M 9P2X.",
+      "submit": "Find my quote",
+      "errorEmpty": "Enter the reference from your quote.",
+      "errorFormat": "Check the reference: 8 letters and numbers after QT. It never uses 0, O, 1, I or L."
+    },
+    "stepsTitle": "How paying works",
+    "steps": [
+      {
+        "title": "Care plan",
+        "meta": "On the phone"
+      },
+      {
+        "title": "Written quote",
+        "meta": "Sent to you"
+      },
+      {
+        "title": "Pay",
+        "meta": "Here, by reference"
+      },
+      {
+        "title": "Care begins",
+        "meta": "We call to confirm"
+      }
+    ],
+    "samplesTitle": "Sample quotes (development only)",
+    "samplesText": "Each one shows a different screen. No money moves.",
+    "sampleStates": {
+      "paid": "Pays",
+      "failed": "Bank declines",
+      "pending": "Bank still confirming",
+      "expired": "Expired",
+      "cancelled": "Withdrawn",
+      "alreadyPaid": "Already paid"
+    },
+    "closedTitle": "Paying for care",
+    "closedText": "Online payment isn’t open yet. To pay for care, call us and a coordinator will help.",
+    "call": "Call",
+    "quote": {
+      "kicker": "Quote",
+      "sample": "Sample, no money moves",
+      "titleOpen": "Your care plan, ",
+      "titleOpenEm": "priced",
+      "titlePaid": "This quote is paid.",
+      "titleExpired": "This quote has expired.",
+      "titleCancelled": "This quote was withdrawn.",
+      "textExpired": "Ask your coordinator for a new quote. Nothing has been charged.",
+      "textCancelled": "Your coordinator withdrew it. They will send a new one if you still need care.",
+      "service": "Service",
+      "starts": "Starts",
+      "validUntil": "Valid until",
+      "preparedBy": "Prepared by",
+      "coordinator": "Your coordinator",
+      "wrong": "Something looks wrong? Call ",
+      "wrongAfter": " before you pay.",
+      "notFoundTitle": "We can’t find that quote.",
+      "notFoundText": "Check the reference in your coordinator’s message and try again, or call us.",
+      "again": "Enter the reference again"
+    },
+    "card": {
+      "label": "Care Setu · payment",
+      "ready": "Ready to pay",
+      "waiting": "Waiting for the bank",
+      "printing": "Printing your receipt",
+      "paid": "Paid",
+      "failed": "The bank didn’t take the payment",
+      "failedText": "No money was taken. You can try again, or call us.",
+      "pending": "The bank is still confirming",
+      "pendingText": "Please don’t pay again. Your coordinator will confirm once the bank does.",
+      "expired": "Expired",
+      "cancelled": "Withdrawn",
+      "network": "We couldn’t reach the payment service. Check your connection and try again; if money left your account, call us.",
+      "checkFound": "Quote found",
+      "checkValid": "Still valid",
+      "checkUnpaid": "Not paid yet",
+      "checkPaid": "Paid in full",
+      "pay": "Pay ",
+      "retry": "Try again",
+      "terms": "Before you pay, read the ",
+      "termsLink": "terms",
+      "and": " and the ",
+      "refundsLink": "refund policy",
+      "noscript": "Paying online needs JavaScript. Call us and a coordinator will help."
+    },
+    "receipt": {
+      "kicker": "Receipt",
+      "title": "Paid to Care Setu",
+      "for": "For",
+      "quote": "Quote",
+      "paidOn": "Paid on",
+      "paymentId": "Payment ID",
+      "total": "Total paid",
+      "next": "Your coordinator calls to confirm the first visit. Keep this receipt.",
+      "print": "Print or save receipt"
+    }
+  },
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",
     "back": "Back to home"

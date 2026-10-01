@@ -1,0 +1,115 @@
+/* The quote reference field (Bencho one-time-code): eight drawn boxes in two groups of four after a printed "QT",
+   one real input laid over them. Radius 16px (form controls, DESIGN.md); errors in ink with a left rule, never red. */
+.form {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.label {
+  font-size: 22px;
+  font-weight: 700;
+}
+.hint {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 18px;
+  color: var(--c-muted);
+}
+.error {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 0;
+  padding-left: 14px;
+  border-left: 4px solid currentColor;
+  font-size: 18px;
+  font-weight: 700;
+}
+.error svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 6px 0 10px;
+}
+.prefix {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 350;
+  letter-spacing: 0.02em;
+}
+.boxes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 14px repeat(4, 1fr);
+  gap: 8px;
+}
+.box {
+  display: grid;
+  place-items: center;
+  width: clamp(28px, 7.4vw, 52px);
+  height: clamp(44px, 11vw, 64px);
+  border: 2px solid var(--c-muted);
+  border-radius: 16px;
+  background: var(--color-cream);
+  font-family: var(--serif);
+  font-size: clamp(22px, 6vw, 36px);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.box:nth-child(5) {
+  grid-column: 6;
+}
+.char {
+  font-weight: inherit;
+  animation: swell 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes swell {
+  from {
+    transform: scale(1.35);
+    opacity: 0.4;
+  }
+}
+/* The real input covers the boxes; its own text is invisible, the boxes show it. */
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px;
+  outline: none;
+  cursor: text;
+}
+.field:has(.input:focus-visible) .box[data-now] {
+  border-color: var(--c-ink);
+  background: var(--c-heat);
+  box-shadow: 0 0 0 1px var(--c-ink);
+}
+.field:has(.input:focus-visible) {
+  outline: 3px solid var(--c-ink);
+  outline-offset: 6px;
+  border-radius: 20px;
+}
+.field[data-invalid] .box {
+  border-color: var(--c-ink);
+  border-width: 3px;
+}
+@media (max-width: 420px) {
+  .field {
+    gap: 8px;
+  }
+  .prefix {
+    font-size: 28px;
+  }
+  .boxes {
+    gap: 5px;
+    grid-template-columns: repeat(4, 1fr) 6px repeat(4, 1fr);
+  }
+}

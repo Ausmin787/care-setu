@@ -37,7 +37,7 @@ separately. The price is never guessed on the website: it comes from a quote aft
 ## Operating Context
 
 - Families usually arrive at a stressful moment: a discharge date, a new diagnosis, a parent who can't manage alone.
-- Contact is a phone call or WhatsApp to **+91 84489 12820**, email **care.setu.1@gmail.com**, or the website
+- Contact is a phone call or WhatsApp to **+91 78600 42009**, email **caresetuhealth@gmail.com** (D-035), or the website
   query. The team calls back **within 2 hours, every day 7 AM – 10 PM** (D-024; always stated together).
 - Office: **4B Grover Chamber, Karol Bagh, Delhi 110005**. Service area: **Noida and Delhi** (more cities later).
 - Payment is made online against a quote reference; the result comes only from the gateway's verified callback

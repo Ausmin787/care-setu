@@ -1,0 +1,353 @@
+/* The ink payment card and its receipt (D-036, Option A). Cue Kit's Thermal Cut Invoice measured from its written spec:
+   machine with a screen, a black slot, paper fed in 20 steps over 1.75s, rows every 260ms from +60ms (180ms, 4px).
+   Reskinned: the machine is an ink card (20px), the paper is parchment with Petrona type and a hairline edge (the
+   system is flat: no shadow, DESIGN.md 6). No scissors, barcode,
+   perforation or stamp (Hungry Anna's chit, Blueprint 1.2). Transform and opacity only. */
+.device {
+  position: relative;
+}
+.machine {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+/* Cue Kit's chassis grain, on ink. */
+.machine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  pointer-events: none;
+}
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 16px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.sample {
+  padding: 1px 8px;
+  border: 1.5px dashed currentColor;
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.screen {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 4px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--c-surface);
+}
+.svc {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+.sub {
+  margin: 0;
+  font-size: 17px;
+  color: var(--c-muted);
+}
+.amt {
+  margin: 14px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  margin: 14px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.status svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+.status .ok {
+  color: var(--color-line-lime);
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  margin-inline: 6px;
+  border-radius: 50%;
+  background: var(--color-line-lime);
+}
+[data-stage="expired"] .dot,
+[data-stage="cancelled"] .dot {
+  background: var(--c-muted);
+}
+.spin {
+  width: 20px;
+  height: 20px;
+  margin-inline: 2px;
+  border: 2.5px solid var(--c-muted);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.note {
+  margin: 6px 0 0;
+  max-width: 34ch;
+  font-size: 17px;
+  line-height: 1.4;
+}
+/* The checks the server made, inked on arrival (Increase's compliance card). */
+.checks {
+  display: grid;
+  gap: 4px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 17px;
+}
+.checks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.checks svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.checks circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.checks path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  animation: tick 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(300ms + var(--i) * 380ms);
+}
+@keyframes tick {
+  from {
+    stroke-dashoffset: 20;
+  }
+}
+.pay {
+  width: 100%;
+  justify-content: space-between;
+}
+.terms {
+  margin: -6px 0 0;
+  font-size: 16px;
+  color: var(--c-muted);
+}
+.terms a {
+  color: var(--c-ink);
+  font-weight: 700;
+}
+
+/* The slot the paper leaves through, then the paper itself: in flow (so nothing is reserved before it prints),
+   clipped by its wrapper and fed down from behind the slot. */
+.slot {
+  position: relative;
+  z-index: 3;
+  height: 10px;
+  margin: -4px 18px 0;
+  border-radius: 0 0 8px 8px;
+  background: #000;
+}
+.out {
+  margin: 0 clamp(14px, 3vw, 34px);
+  overflow: clip;
+}
+.paper {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: 26px 24px 28px;
+  border: 1px solid var(--color-hair);
+  border-top: 0;
+  background: var(--color-parchment);
+  color: var(--color-ink);
+}
+.paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.paper h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 350;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.k {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.k svg {
+  width: 20px;
+  height: 20px;
+}
+.paper dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 18px;
+  margin: 0;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.paper dt {
+  color: var(--color-muted);
+}
+.paper dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin: 2px 0 0;
+  padding-top: 14px;
+  border-top: 1.5px solid var(--color-ink);
+  font-size: 17px;
+}
+.total b {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 350;
+  font-variant-numeric: tabular-nums;
+}
+.next {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.acts {
+  margin: 0;
+}
+.acts button {
+  min-height: 48px;
+  padding: 0 20px;
+  border: 2px solid var(--color-ink);
+  border-radius: 100px;
+  background: none;
+  color: var(--color-ink);
+  font: 700 17px/1 var(--sans);
+  cursor: pointer;
+}
+.acts button:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* Printing: the paper feeds in steps, the rows land one by one, the chassis hums. */
+[data-stage="printing"] .paper {
+  animation: feed 1.75s steps(20, end) both;
+}
+@keyframes feed {
+  from {
+    transform: translateY(calc(-100% + 2px));
+  }
+}
+.row {
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+[data-stage="printing"] .row {
+  animation: row 0.18s ease both;
+  animation-delay: calc(60ms + var(--i) * 260ms);
+}
+@keyframes row {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-stage="printing"] .machine {
+    animation: hum 0.09s linear infinite;
+  }
+}
+@keyframes hum {
+  25% {
+    transform: translate(0.6px, -0.3px);
+  }
+  75% {
+    transform: translate(-0.6px, 0.3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .checks path,
+  [data-stage="printing"] .row {
+    animation-delay: 0s;
+  }
+}
+
+/* Print the receipt alone. */
+@media print {
+  :global(body) * {
+    visibility: hidden;
+  }
+  .paper,
+  .paper * {
+    visibility: visible;
+  }
+  .paper {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 120mm;
+  }
+  .acts {
+    display: none;
+  }
+}
+
+/* The status line takes focus programmatically only (tabindex -1); it needs no ring of its own. */
+.status:focus {
+  outline: none;
+}

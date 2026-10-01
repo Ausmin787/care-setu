@@ -17,6 +17,8 @@ const SiteConfig = z.object({
   showPrices: z.boolean(),
   // The enquiry goes live only after the privacy notice sign-off (Q14) and the alert recipient (Q12), by a D-entry.
   enquiryLive: z.boolean(),
+  // The pay flow goes live only when a D-entry wires the quotes backend and the gateway (D-036).
+  paymentsLive: z.boolean(),
 });
 
 export const LINES = ["lime", "blue", "olive"] as const;
@@ -74,7 +76,7 @@ const Equipment = z.object({
 export const lines = z.array(CatalogueLine).length(3).parse(servicesData.catalogue);
 export const equipment = z.array(Equipment).parse(servicesData.equipment);
 export const config = SiteConfig.parse(siteConfig);
-// "+918448912820" -> "+91 84489 12820", the grouping Indian mobile numbers are read in.
+// "+917860042009" -> "+91 78600 42009", the grouping Indian mobile numbers are read in.
 export const phoneDisplay = config.phone.replace(/^\+91(\d{5})(\d{5})$/, "+91 $1 $2");
 export const t = messages;
 
@@ -87,6 +89,11 @@ export function shown<T extends { pending: boolean }>(item: T | undefined): T | 
 // D-033: the enquiry form and POST /api/v1/queries run in development until `enquiryLive` is set by a D-entry.
 export function enquiryOpen(): boolean {
   return config.enquiryLive || process.env.NODE_ENV !== "production";
+}
+
+// D-036: the pay flow runs in development on sample quotes until `paymentsLive` is set by a D-entry.
+export function paymentsOpen(): boolean {
+  return config.paymentsLive || process.env.NODE_ENV !== "production";
 }
 
 export function shownPrice(price: Price | undefined): Price | undefined {

@@ -1,12 +1,10 @@
 import { randomInt } from "node:crypto";
 import { CONSENT_PURPOSE } from "@/lib/privacy";
 import type { EmailTransport } from "../adapters/email";
+import { ALPHABET } from "../contracts/enums";
 import type { QueryInput } from "../contracts/queries";
 import type { Db } from "../db/client";
 import { consents, queries } from "../db/schema";
-
-// 31 characters without 0/O or 1/I/L, so a reference survives being read out on the phone.
-const ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 
 export function newReference(): string {
   let reference = "";

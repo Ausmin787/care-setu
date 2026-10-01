@@ -68,6 +68,11 @@ colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds
 - **Forms** (Contact, D-033): GOV.UK question pages, one question per page; answer plates with a 2px muted border,
   ink-filled when chosen (a chosen service shows its line colour in the dot); inputs with a yellow focus ring and an
   ink edge; errors in ink with the warning icon and a left rule, never red (the logo's colours are the only chroma).
+- **Payment card + receipt** (Pay, D-036; Cue Kit Thermal Cut Invoice): an ink card with a screen (service, amount
+  in Petrona, a status line, the server's three checks) and a black slot; on paying, a parchment receipt with a
+  hairline edge feeds out of the slot in 20 steps and its rows land one by one. No barcode, perforation, scissors or
+  stamp. **Reference field** (Bencho one-time-code): a printed "QT" and eight drawn boxes in two groups over one real
+  input; the box for the next character takes the focus fill.
 - **Still-lifes** (C-073 and later): ChatGPT illustrations of objects and rooms, never people; alt text starts with
   "Illustration"; fixed-ratio slots so late images cause no shift.
 - **Pending mark `.pending`**: a dashed uppercase 12px tag on owner-unconfirmed content, development only (D-029).
@@ -84,6 +89,9 @@ Bands alternate parchment / ink / sand; a section never repeats another page's i
 - **About:** founder's question → letter beside a sticky portrait → inline-image manifesto → the mission on an ink
   panel, its six groups drawn as stations whose lines merge into one (GetLayers Relay) → pinned values odometer on sand
   → collapsing founder cards on ink (Cue Kit) → close with the status. All pending (Q20).
+- **Pay** (dev only, D-036): the ask with the reference field beside Ridgeline's four numbered steps; a quote is an
+  editorial split (reference, "Your care plan, *priced*.", ruled rows) beside the ink payment card. Production shows
+  the ask beside the ink call card.
 - **Footer:** ink, links, the full-width drifting "care setu" wordmark, the legal line.
 
 ## 6. Depth & elevation
@@ -110,7 +118,8 @@ Services: the deck (one pixel-measured GSAP timeline: rise, pin, deal). About: c
 window driven by `--open`; nothing is scaled, so nothing is rasterised small), wishes ticking, the mission's lines
 drawing with scroll (CSS variables into clips and pathLength-1 dash offsets), the odometer (only the changing digit
 rolls) with a card half-turn, collapsing cards (transforms + clip; the print clears as a card opens).
-Footer: slow grain drift in the logo colours. Reduced motion: every finished state is the default.
+Pay: the checks ink on arrival, the bank holds at least 1.4s, the receipt feeds (steps, 1.75s) with rows every
+260ms and a 0.6px chassis hum, all CSS. Footer: slow grain drift in the logo colours. Reduced motion: every finished state is the default.
 
 ## 9. Agent prompt guide
 "Warm Room: a parchment page with warm near-black ink and ink bands for weight. Petrona light display, Anek body at

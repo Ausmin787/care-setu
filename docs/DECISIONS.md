@@ -451,7 +451,7 @@ headless Chrome (SwiftShader WebGL) at 1440 and 520: the wordmark spans the colu
 is gated on `prefers-reduced-motion`); a real phone/Safari or a true 360/390 px render; GPU cost on a low-end
 Android; `impeccable detect` and the Taste pre-flight on the new footer; owner approval of the wordmark face (Q4).
 
-## D-024 · 2026-09-26 · Owner answers: contact details, response time, service area, launch services, a fourth founder
+## D-024 · 2026-09-26 · Owner answers: contact details, response time, service area, launch services, a fourth founder *(phone and email superseded by D-035)*
 The owners answered through Sasanka (2026-09-26) and pointed to their own prototype site
 (`care-setu.netlify.app`, read in Chrome the same day) for the service list. Sasanka confirmed each reading in an
 AskUserQuestion round:
@@ -963,3 +963,68 @@ showed there, and the Chrome extension tab went to the background (no rAF); the 
 Sasanka's laptop is the real test. Also not verified: a real phone, iPad or Safari; a screen reader on the bridge;
 the Web Interface Guidelines skill (checked by hand: focus rings, 48px+ targets, aria-expanded/controls, decoration
 aria-hidden); the owners' review (Q20).
+
+## D-035 · 2026-10-01 · New contact phone and email from the owners (partially supersedes D-024: phone and email only)
+The owners sent their latest contact details through Sasanka (2026-10-01): phone **+91 78600 42009** and email
+**caresetuhealth@gmail.com**. Sasanka confirmed the new number is also the WhatsApp number (AskUserQuestion), so it
+replaces +91 84489 12820 for calls and WhatsApp alike. The office address, the 2-hour callback and the 7 AM – 10 PM
+hours from D-024 are unchanged. Q19 is answered for the phone and email only; its area, response-time and entity parts
+stay open.
+**Built:** `content/site.config.json` (`phone`, `email`), the one source every page reads (Nav, Home, Services, About,
+Contact, Privacy, the enquiry's call links, Footer); CLAIMS C-028/C-029; PRODUCT.md; the format example in
+`lib/content.ts`.
+**Why:** owner-supplied facts are evidence for the claims register when recorded as a D-entry (as D-024).
+**Rejected:** keeping the old number for WhatsApp (Sasanka: the new number covers both); showing both numbers.
+**Verified:** green (see LOG 2026-10-01).
+**Not verified:** that the number reaches the owners or that wa.me opens a chat with it (not dialled); owner review.
+
+## D-036 · 2026-10-01 · Payments: the full flow is built front-end first and runs in development only
+Sasanka asked for the remaining pages "to show only, no backend connected", content replaceable later. A pay page
+with a working-looking Pay button and no gateway would break INVARIANT 18 (no control that doesn't work) and D-004
+(pay only against a server-side quote; status only from a verified callback). Sasanka chose (AskUserQuestion,
+2026-10-01) the full flow, development only:
+- Every screen is designed and built now: enter a reference, the quote summary, the pay step, and each result
+  (paid, failed, pending, expired, not found, already paid).
+- In development it runs on **sample quotes** (one per state) from a dev-only fixture behind `getQuote(reference)` in
+  `lib/quotes.ts`, each screen tagged "sample, no money moves". The pay step in development is a labelled sample step,
+  not a gateway.
+- Production keeps the flow off: `paymentsLive: false` in `content/site.config.json`, read through `paymentsOpen()`
+  (the `enquiryOpen()` pattern, D-033). `/pay` then shows a call-your-coordinator card; no amount, no Pay button, no
+  sample data.
+- The client only ever sends the reference; amounts are integer paise read server-side (INVARIANTS 4, 5).
+- The backend (quotes table and migration, the `PaymentProvider` adapter with the Razorpay sandbox, the signed and
+  idempotent webhook) plugs in behind `getQuote` and the pay step later, without a redesign (D-003 unchanged).
+Per-service detail pages (D-013) were raised in the same round; Sasanka chose to decide later, so they stay in scope
+and unscheduled.
+**Why:** the owners can review the real payment experience on localhost now, the design is not blocked on the LLP,
+KYC or Q8, and nothing in production pretends the business can take money.
+**Rejected:** an explainer page only (the flow screens would be designed later anyway, and owners can't review
+them); building the sandbox backend in the same stage (most tokens, and Sasanka wants frontend pages first).
+**Picked (2026-10-01):** after research across the tool list (ledger and the opened/skipped list in
+`docs/plans/stage-4-payments.md`) and a rendered comp of three skins (`refs/care-setu/build/pay-options/`), Sasanka
+chose the recommended option on both questions: **A · the printed receipt** (an ink payment card beside the quote as an
+editorial split; its screen shows the server's checks, then "Waiting for the bank", then a parchment receipt prints out
+of its slot, Cue Kit Thermal Cut Invoice's timings) and **grouped boxes** for the reference (Bencho one-time-code).
+Rejected in that round: B, a ledger that ticks beside Ridgeline's steps (calmer, less to remember); C, a flight-status
+bar (repeats the trip and route idea of Home and Contact).
+**Built (2026-10-01):** `paymentsLive` + `paymentsOpen()`; `server/contracts/payments.ts` (quote reference = "QT" + 8
+characters from the phone-safe alphabet, now in `server/contracts/enums.ts`; `PayInput` takes the reference only;
+`PayResult`); `server/domain/quotes.ts` (six dev-only samples, one per state; an open quote past its date reads as
+expired); `server/adapters/payments` (`PaymentProvider` + the dev sample bank); `POST /api/v1/payments`; `/pay`
+(reference field, Ridgeline's four steps, the sample list in dev; the call card in production); `/pay/[reference]`
+(noindex; not found, open, paid, expired, withdrawn); `components/pay/PayCard.tsx` (ready, waiting, printing, paid,
+failed, pending; focus moves to the status when Pay is pressed; print via the browser) and `ReferenceField.tsx`;
+`formatIst` in `lib/hours.ts`; `tests/pay.test.ts`. The comp's paper shadow was dropped for a hairline (DESIGN.md 6).
+**Verified:** green (lint, typecheck, 115 tests, build). Headless Chrome over CDP, real mouse click: waiting holds
+~1.4s, printing 2.0s, then paid; the paper's transform steps -399, -329, -258, -141, 0 px and the rows land 260ms
+apart; same at 390x844; reduced motion emulated: the full receipt within 0.6s, no travel. Real Tab and Enter: the tab
+path reaches Pay; Enter moves focus to "Waiting for the bank", then "Paid". Declined and pending samples show their
+screens. Server states: expired, withdrawn, already paid (receipt printed), not found; all quote pages noindex. Field:
+too short and a "0" both show the error with aria-invalid; "qt 4k7m 9p2x" typed or pasted reads as 4K7M9P2X.
+Device audit, 9 sizes x 4 routes: no overflow after shrinking the boxes at 360. impeccable 1280 + 390: only the standing
+waivers (cream page, the one italic phrase, the footer wordmark gradient). Production (`next start`): /pay shows the
+call card with no amount, sample, field or Pay button; /pay/<ref> redirects to /pay; the API returns 404; no sample
+reference in `.next/static`.
+**Not verified:** a real phone, iPad or Safari; a screen reader; the printed receipt on paper (print CSS checked
+structurally only); Taste and the Web Interface Guidelines were run by hand (curly apostrophes and the focus loss were
+found and fixed this way); the owners' review of the copy (Q15). Any real payment: nothing is wired (D-003).

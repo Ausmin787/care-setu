@@ -274,3 +274,31 @@ Template:
 - Caught: #9 once more (Bridge used LogoMark's new prop before LogoMark was written; the hook fired, then cleared);
   Taste found a split header, pagination and an extra dot; impeccable a low ghost contrast.
 - Not verified: the capsule fix on real GPU raster (Sasanka's laptop), real devices/Safari, screen reader. No commit.
+
+## 2026-10-01 · Stage 4 · Owner contact update (D-035)
+- Owners' latest details via Sasanka: +91 78600 42009 (calls and WhatsApp, confirmed by Sasanka) and
+  caresetuhealth@gmail.com. Changed `content/site.config.json` (the single source), CLAIMS C-028/C-029, PRODUCT.md,
+  Q19 (phone/email part answered), the `lib/content.ts` format comment, the D-024 heading, STATUS.
+- Commands run → result: lint clean; tsc clean; 92 tests pass; build OK. `next start` on :3123: /, /about, /services
+  show the new number and tel: link; /contact also the wa.me link and the email; /privacy the number and email; no page
+  carries the old number or email.
+- Not verified: dialling the number or opening the WhatsApp chat; owner review. No commit.
+
+## 2026-10-01 · Stage 4 · What's left, and Payments (D-036)
+- Asked for the frontend pages left and a heavy/light split (plan file; STATUS "Then" now carries it), and a
+  display-only Payments page. Objection raised (INVARIANT 18, D-004); Sasanka chose the full flow, dev only (D-036);
+  service detail pages (D-013): decide later.
+- Research (routing in `docs/plans/stage-4-payments.md`): Stripe Checkout demo, Paytm bill pay (stopped before data),
+  GOV.UK Pay docs, Razorpay Payment Links API (primary source), Mobbin (payment success, invoice), all 52 GetLayers
+  templates' last 45% (Ridgeline taken), Design Spells (3 MP4 sheets), Cue Kit (Thermal Cut Invoice spec, Lime
+  Retainer), 21st.dev, Increase, Componentry, Unlumen, Bencho, Smooth UI, Magic UI, Cult UI, Skiper, Motion.dev, Refero
+  (browser fallback; Mollie), Recent, Curated, Awwwards, Pafolios, UI Guideline, Portea. Skipped with reasons there.
+  Refero MCP, context7 and Playwright MCP not connected; the Chrome extension dropped once and came back.
+- Comp of three skins (`refs/care-setu/build/pay-options/`); Sasanka picked A (printed receipt) and grouped boxes.
+- Built and verified as recorded in D-036 (green, 115 tests; CDP frame probe, keyboard, reduced motion, 9-size audit,
+  impeccable, production audit).
+- Caught: #9 twice (an import removed one Edit before its last use; a shared constant moved before its consumer was
+  repointed); a sample-quote expiry test that could never fail (samples built from the same clock they were checked
+  against); a 21px overflow at 360; the comp's shadow against DESIGN.md 6; straight apostrophes; focus lost when the
+  Pay button unmounts. Git Bash turned "/pay,..." into a Windows path for the audit script (MSYS_NO_PATHCONV=1).
+- Not verified: real devices/Safari, screen reader, printing on paper, owner review. No commit.

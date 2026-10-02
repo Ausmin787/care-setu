@@ -48,3 +48,4 @@ node .claude/hooks/context-head.mjs --check   # decision index integrity
 node .claude/hooks/docs-check.mjs             # + STATUS cap, Why/Rejected, citations
 node .claude/hooks/context-head.mjs --wrap    # end-of-session close-out
 ```
+

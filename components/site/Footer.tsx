@@ -4,18 +4,20 @@ import { lines, t } from "@/lib/content";
 import s from "./Footer.module.css";
 
 const L = t.footer.links;
-const links: { href: string; label: string; draft?: boolean }[] = [
+// `stub`: the page is still a Stub, which is a 404 in production, so production leaves the link out. Drop the flag in
+// the change that builds the page.
+const links: { href: string; label: string; draft?: boolean; stub?: boolean }[] = [
   { href: "/services", label: L.services },
   { href: "/about", label: L.about },
   { href: "/#how", label: L.how },
   { href: "/partner", label: L.partner },
   { href: "/contact", label: L.contact },
   { href: "/pay", label: L.pay },
-  { href: "/faq", label: L.faq },
+  { href: "/faq", label: L.faq, stub: true },
   { href: "/privacy", label: L.privacy, draft: true },
-  { href: "/terms", label: L.terms, draft: true },
-  { href: "/refunds", label: L.refunds, draft: true },
-];
+  { href: "/terms", label: L.terms, draft: true, stub: true },
+  { href: "/refunds", label: L.refunds, draft: true, stub: true },
+].filter((l) => !l.stub || process.env.NODE_ENV !== "production");
 
 // The footer is the network legend: every line listed as on a metro map. It closes on the wordmark (D-023).
 export function Footer() {

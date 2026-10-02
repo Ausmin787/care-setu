@@ -17,7 +17,7 @@ const p = t.contactPage;
 
 export const metadata: Metadata = {
   title: p.metaTitle,
-  description: p.metaDescription,
+  description: enquiryOpen() ? p.metaDescription : p.metaDescriptionClosed,
 };
 
 // Contact (D-033): a type-led opener beside an ink call card (GetLayers Ridgeline), the email and office on sand, then
@@ -34,7 +34,7 @@ export default async function Page({ searchParams }: PageProps<"/contact">) {
       <section className={`${s.opener} wrap`}>
         <div className={s.intro}>
           <h1 className="t-display">{p.title}</h1>
-          <p className={s.lede}>{p.lede}</p>
+          <p className={s.lede}>{open ? p.lede : p.ledeClosed}</p>
           {open && (
             <a className="btn" href="#enquiry">
               {p.leave}

@@ -344,3 +344,10 @@ Template:
 - Not verified: the Values card mid-turn and the phone strip crop by eye; owner review. No commit.
 - Follow-up, same day: Sasanka judged the capsule still-lifes poor, so the vision capsules are back to icons (images,
   web copies and schema keys removed; D-039 amended, C-086 trimmed to four).
+
+## 2026-10-02 · Launch day · production audit and fixes (D-040)
+- Model/effort: Opus 5.5.
+- Built a production build, served it on :3100, probed every route and screenshotted 8 pages in headless Chrome.
+- Fixed: closed-state copy on Home's route and Contact; `Stub` 404s in production; footer drops stub links.
+- Commands → result: `npm run green` passed; production re-probe confirmed.
+- Not verified: device matrix on the production build. Committed with Sasanka's permission.

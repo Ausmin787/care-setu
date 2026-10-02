@@ -1135,3 +1135,24 @@ icons as a values fallback (the schema requires the image, so it was dead code).
 **Verified:** green (lint, typecheck, tests, build). In Chrome on the dev server: the Services deck shows its images.
 Device audit on /services and /about at 9 sizes (before the capsule revert, which only restores the earlier markup): clean.
 **Not verified:** the Values card mid-turn and the phone strip crop by eye; owner review. No commit.
+
+## D-040 · 2026-10-02 · Launch-day production audit and fixes
+The owners will deploy the site today, after a meeting with their tech team (hosting is their call, Q1; Sasanka reviews
+the setup afterwards). Before that, a production build was served locally (`next build` + `next start`) and every route
+probed and screenshotted. APIs answer `not_available`, `/dev` is closed, robots disallows everything (no `APP_ENV`).
+Three problems were found and fixed:
+- **Copy that promised what production doesn't do (INVARIANT 18).** Home's route said "Six short questions online"
+  (the form has five, and it is off in production) and "You pay online"; Contact said "or leave your details". Now the
+  route's first stop reads "Call or WhatsApp us and tell us about the patient" while `enquiryOpen()` is false
+  ("Five short questions online…" in development), the pay stop drops "online", and Contact shows `ledeClosed` and
+  `metaDescriptionClosed` in production.
+- **Unbuilt pages.** FAQ, Terms and Refunds showed visitors "This page is built in Stage 4". `Stub` now calls
+  `notFound()` in production, and the footer leaves out links flagged `stub` (drop the flag in the change that builds
+  the page).
+- **Thin About and Partner pages in production** (their deck content is pending, D-029): kept as they are, on
+  Sasanka's call; owner changes come after the deploy.
+**Why:** a first-day visitor must not meet a promise the site can't keep or a page that says it isn't built.
+**Rejected:** hiding About from the production nav (Sasanka keeps it); deploying as it was.
+**Verified:** green (lint, typecheck, 137 tests, build). Production probe: `/faq`, `/terms`, `/refunds` 404; the footer
+links only Privacy among the legal pages; the new copy renders; "leave your details" absent from production Contact.
+**Not verified:** the device matrix on the production build (copy and links only changed).

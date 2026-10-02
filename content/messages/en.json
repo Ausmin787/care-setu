@@ -36,11 +36,12 @@
     "lede": "Every family follows the same route. You always know which stop you are at.",
     "legEnquiry": "Your enquiry",
     "legEnquiryDir": "Takes a few minutes",
-    "stopAsk": { "title": "You tell us what is needed", "text": "Six short questions online. Nothing is shared until you agree." },
+    "stopAsk": { "title": "You tell us what is needed", "text": "Five short questions online. Nothing is shared until you agree." },
+    "stopAskCall": { "title": "You tell us what is needed", "text": "Call or WhatsApp us and tell us about the patient." },
     "walk": { "title": "A coordinator calls you back", "text": "To understand the patient, the home and the doctor's advice." },
     "legCareDir": "Towards home",
     "stopPlan": { "title": "Care plan and quote", "text": "One plan and one quote, with a reference number." },
-    "stopPay": { "title": "Pay the quote, care begins", "text": "You pay online against the quote reference, never before it." },
+    "stopPay": { "title": "Pay the quote, care begins", "text": "You pay against the quote reference, never before it." },
     "stopHome": { "title": "Care at home", "text": "Questions and changes go to the Care Setu team." }
   },
   "services": {
@@ -182,6 +183,8 @@
     "metaDescription": "Call or WhatsApp Care Setu, or leave your details and a coordinator calls you back. Care at home in Noida and Delhi.",
     "title": "Talk to us.",
     "lede": "Call us now, or leave your details and a coordinator calls you back.",
+    "metaDescriptionClosed": "Call or WhatsApp Care Setu, every day 7 AM to 10 PM. Care at home in Noida and Delhi.",
+    "ledeClosed": "Call or WhatsApp us now, every day 7 AM to 10 PM.",
     "leave": "Leave your details",
     "cardTitle": "Call or WhatsApp",
     "call": "Call",

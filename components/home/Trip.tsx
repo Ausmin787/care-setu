@@ -1,5 +1,5 @@
 import { IconCircleArrowRightFilled, IconPhoneCallFilled } from "@tabler/icons-react";
-import { lines, t } from "@/lib/content";
+import { enquiryOpen, lines, t } from "@/lib/content";
 import { LiveTrip } from "@/components/motion/LiveTrip";
 import s from "./Trip.module.css";
 
@@ -45,7 +45,8 @@ export function Trip() {
               </span>
             </div>
           </li>
-          <Station stop={t.trip.stopAsk} last />
+          {/* While the enquiry is closed in production (D-033), the first stop is a call, not the online form. */}
+          <Station stop={enquiryOpen() ? t.trip.stopAsk : t.trip.stopAskCall} last />
         </ol>
 
         <div className={s.walk} data-seg>

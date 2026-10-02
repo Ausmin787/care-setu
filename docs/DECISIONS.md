@@ -1028,3 +1028,32 @@ reference in `.next/static`.
 **Not verified:** a real phone, iPad or Safari; a screen reader; the printed receipt on paper (print CSS checked
 structurally only); Taste and the Web Interface Guidelines were run by hand (curly apostrophes and the focus loss were
 found and fixed this way); the owners' review of the copy (Q15). Any real payment: nothing is wired (D-003).
+
+## D-037 · 2026-10-02 · Light pages: the 404, the promotions banner (off) and search discovery (closed until live)
+Sasanka's direction for the rest of Phase 1: finish the whole front end with drafted or sample content first; owner
+answers (Q17..Q20) and the generated still-lifes are swapped in afterwards, in one pass, so they are not a blocker now.
+Three light pages built this session:
+- **404** (`app/not-found.tsx`): "We can’t find that page." with a "Where were you headed?" spine in the trip's grammar
+  (a hollow dashed "You are here", then Home, Services, About and Talk to us, each taking a line colour as the spine
+  draws to it, CSS only), the live call status with the number, and the emergency note. It links only to built pages.
+  Partner, FAQ and the legal drafts stay off it until they ship.
+- **Promotions banner** (D-013): `PromoBanner` above the nav, a slim sand strip that is one link. It renders only when
+  `promotion` in `site.config.json` is non-null; it stays `null` until the owners set the rules (Q9). It shows the
+  owners' words and never computes a discount (that is server-side on the quote, D-004).
+- **`/robots.txt` and `/sitemap.xml`**: indexable only when `APP_ENV=production` and `APP_BASE_URL` is an https URL
+  (`lib/seo.ts`). Otherwise robots disallows everything and the sitemap is empty, so localhost, the review tunnel and any
+  staging copy are never indexed, and no domain is written in code (Q2 is open). When live: allow `/`, disallow `/api/`,
+  `/pay`, `/dev`, and list Home, Services, About, Contact. The legal drafts and the unbuilt Partner and FAQ are left out
+  until signed off or built.
+**Why:** all three are small and need no owner answer; making indexing depend on the environment means going live can't
+leak a draft or a tunnel, and the banner can be switched on by editing one config value.
+**Rejected:** a fixed `Allow: /` robots file (it would let the review tunnel be indexed); a hard-coded domain in the
+sitemap (Q2); a dismissible or sticky banner (more code and state for a strip nobody has asked to be dismissible).
+**Verified:** green (lint, typecheck, tests incl. `tests/seo.test.ts`, build). Headless Playwright on localhost: the 404
+returns status 404 at 1280x800 and 390x844 with no horizontal overflow, 80px rows; reduced motion emulated shows the
+finished line and coloured discs outright; the banner, switched on temporarily with sample text, sits above the Home hero
+at 390px and was switched back to `null`; `/robots.txt` and `/sitemap.xml` return the closed form in development.
+Device audit on /nope, 9 sizes (scaled laptops, desktop, iPad both ways, 390 and 360 phones): no overflow, every control
+hittable, no sticking.
+**Not verified:** the live (open) robots and sitemap output beyond the unit test; the banner on pages other than Home;
+a real phone, Safari or a screen reader; owner review.

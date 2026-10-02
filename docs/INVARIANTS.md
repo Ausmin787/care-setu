@@ -58,6 +58,8 @@ cited decision is the authority. Read it before acting on an edge case.
 28. **The enquiry form and `POST /api/v1/queries` run in development only (`enquiryLive: false`)** until a D-entry records the privacy notice sign-off (Q14) and the alert recipient (Q12); production shows the call card, email and office. (D-033)
 29. **The payment flow runs in development only (`paymentsLive: false`) on sample quotes from a dev-only fixture**; production shows a call-your-coordinator card with no amount, no Pay button and no sample data, until a D-entry wires the quotes backend and the gateway (still sandbox until LLP + KYC). (D-036)
 
+30. **Search engines are kept out unless the environment is production with an https `APP_BASE_URL`**: otherwise `/robots.txt` disallows everything and the sitemap is empty. Private and draft paths (`/pay`, `/api/`, `/dev`, legal drafts) never enter the sitemap. The promotions banner renders only when `promotion` is set in config, and never computes a discount. (D-037, D-013)
+
 ---
 
 ## Open — do NOT treat these as decided

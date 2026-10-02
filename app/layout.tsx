@@ -3,6 +3,7 @@ import { Anek_Latin, Petrona, Unbounded } from "next/font/google";
 import { connection } from "next/server";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
+import { PromoBanner } from "@/components/site/PromoBanner";
 import { t } from "@/lib/content";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <a className="skip" href="#main">
           {t.nav.skip}
         </a>
+        <PromoBanner />
         <Nav />
         <main id="main">{children}</main>
         <Footer />

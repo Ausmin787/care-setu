@@ -302,3 +302,15 @@ Template:
   against); a 21px overflow at 360; the comp's shadow against DESIGN.md 6; straight apostrophes; focus lost when the
   Pay button unmounts. Git Bash turned "/pay,..." into a Windows path for the audit script (MSYS_NO_PATHCONV=1).
 - Not verified: real devices/Safari, screen reader, printing on paper, owner review. No commit.
+
+## 2026-10-02 · Stage 4 · Light pages: 404, promo banner (off), robots + sitemap
+- Model/effort: Sonnet 5.5, medium.
+- Read: Blueprint in full, DESIGN.md, Pay/Contact CSS for the card and spine grammar, Next 16 robots/sitemap docs.
+- Built: `app/not-found.tsx` + module CSS, `components/site/PromoBanner.*` (wired in `app/layout.tsx`), `lib/seo.ts`,
+  `app/robots.ts`, `app/sitemap.ts`, `tests/seo.test.ts`, copy in `content/messages/en.json`.
+- Commands → result: `npm run green` passed (build lists /robots.txt and /sitemap.xml); Playwright 1280x800 and 390x844,
+  reduced motion emulated; banner switched on and back off; curl of robots and sitemap (closed form).
+- Caught: an import and its usage landed in two Edits in `layout.tsx` (#9 again; import first, so it held).
+- Device audit on /nope (MSYS_NO_PATHCONV=1, 9 sizes): all OK. Committed on Sasanka's instruction.
+- Not verified: real devices, open-state robots/sitemap output outside the unit test.
+- Next: Sasanka's check, then the remaining heavy pages; content swaps and still-lifes after the front end is complete.

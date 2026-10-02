@@ -1,0 +1,34 @@
+/* Promotion strip (D-013, D-037): a slim sand band above the nav, the one place the sand block meets the ink bar.
+   Not sticky, so it scrolls away and the nav keeps the top. The whole strip is one link, 48px tall or more. */
+.promo {
+  display: block;
+  background: var(--c-sand);
+  color: var(--color-ink);
+}
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding-block: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  text-decoration: none;
+}
+.link svg {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link:hover span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.link:hover svg {
+  transform: translateX(3px);
+}

@@ -75,6 +75,7 @@ colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds
   input; the box for the next character takes the focus fill.
 - **Still-lifes** (C-073 and later): ChatGPT illustrations of objects and rooms, never people; alt text starts with
   "Illustration"; fixed-ratio slots so late images cause no shift.
+- **404 and promo strip** (D-037): the 404 is the /pay split (ask left, a "Where were you headed?" spine right: a hollow dashed "You are here", then stations whose discs take the line colours as the spine draws, CSS only). The promo strip is a slim sand band above the nav, one link, not sticky; it renders only when the owners set a promotion.
 - **Pending mark `.pending`**: a dashed uppercase 12px tag on owner-unconfirmed content, development only (D-029).
 - Icons: Tabler **filled**, never thin text arrows.
 

@@ -1,0 +1,216 @@
+/* 404. The visitor is off the line: a hollow "You are here" station, then a spine that draws down through the pages
+   they most likely wanted, each station taking its line colour as the spine reaches it (the trip's grammar, Home and
+   Contact). All CSS, so no-JS and reduced motion show the finished line. Type scale and split follow /pay. */
+.opener {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px 72px;
+  align-items: start;
+  padding-block: clamp(48px, 8vh, 88px);
+}
+.intro {
+  display: grid;
+  gap: 24px;
+  justify-items: start;
+}
+.kicker {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.intro h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(48px, min(7.5vw, 13vh), 112px);
+}
+.lede {
+  margin: 0;
+  max-width: 32ch;
+  font-size: 24px;
+  line-height: 1.4;
+}
+.person {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+.person p {
+  margin: 0;
+}
+.ask {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--c-muted);
+}
+.number {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 300;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.number a {
+  text-decoration: none;
+}
+.number a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-muted);
+  box-shadow: 0 0 0 2px var(--color-ink);
+}
+.status[data-open="true"] .dot {
+  background: var(--color-line-lime);
+}
+.intro :global(.sos) {
+  max-width: 36ch;
+  margin-top: 8px;
+}
+
+.stationsTitle {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* Integer line boxes and a 1px overlap between segments, so the spine shows no seams (Blueprint 11). */
+.stations {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stations li {
+  position: relative;
+  border-bottom: 1px solid var(--c-line);
+}
+.stations li:first-child {
+  border-top: 1px solid var(--c-line);
+}
+.stations li::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: -1px;
+  width: 4px;
+  background: var(--c-ink);
+  transform-origin: top;
+  animation: draw 0.26s linear both;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+.stations li:first-child::before {
+  top: 50%;
+}
+.stations li:last-child::before {
+  bottom: 50%;
+}
+.row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-areas: "disc label meta";
+  align-items: center;
+  column-gap: 12px;
+  min-height: 80px;
+  padding-block: 14px;
+  text-decoration: none;
+}
+.disc {
+  grid-area: disc;
+  position: relative;
+  width: 22px;
+  height: 22px;
+  margin-left: 11px;
+  border-radius: 50%;
+  background: var(--c-canvas);
+  box-shadow: 0 0 0 2px var(--c-ink);
+}
+.stations li[data-line] .disc {
+  animation: fill 0.2s linear both;
+  animation-delay: calc(var(--i) * 0.2s + 0.2s);
+}
+/* The visitor's own stop sits off the line: hollow, dashed. */
+.here .disc {
+  box-shadow: none;
+  border: 3px dashed var(--c-ink);
+  box-sizing: border-box;
+}
+.label {
+  grid-area: label;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 350;
+  line-height: 32px;
+}
+.meta {
+  grid-area: meta;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  text-align: right;
+}
+a.row:hover .label {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+@keyframes draw {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes fill {
+  from {
+    background-color: var(--c-canvas);
+  }
+  to {
+    background-color: var(--line);
+  }
+}
+/* The global reduced-motion rule shortens durations but not delays; show the finished line outright. */
+@media (prefers-reduced-motion: reduce) {
+  .stations li::before,
+  .stations li[data-line] .disc {
+    animation: none;
+  }
+}
+.stations li[data-line] .disc {
+  background-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  .opener {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .row {
+    grid-template-areas:
+      "disc label"
+      "disc meta";
+    row-gap: 2px;
+  }
+  .meta {
+    text-align: left;
+  }
+}

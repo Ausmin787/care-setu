@@ -447,6 +447,25 @@
       "print": "Print or save receipt"
     }
   },
+  "promo": {
+    "label": "Offer"
+  },
+  "notFound": {
+    "metaTitle": "Page not found | Care Setu",
+    "kicker": "Page not found",
+    "title": "We can’t find that page.",
+    "lede": "The link may be old, or the address mistyped. Pick up from one of these.",
+    "stationsTitle": "Where were you headed?",
+    "here": "You are here",
+    "stations": [
+      { "href": "/", "label": "Home", "meta": "Start again" },
+      { "href": "/services", "label": "Services", "meta": "Care at home" },
+      { "href": "/about", "label": "About", "meta": "Who we are" },
+      { "href": "/contact", "label": "Talk to us", "meta": "Call or leave details" }
+    ],
+    "needPerson": "Rather speak to a person?",
+    "call": "Call"
+  },
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",
     "back": "Back to home"

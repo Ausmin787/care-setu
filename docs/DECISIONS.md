@@ -1115,3 +1115,23 @@ finding (close-out, Sasanka asked to fix it): the device audit flagged "Ask abou
 half hidden behind the thread by design; clickable at every visible position. No product bug: the audit now skips a
 control clipped out by an ancestor (scripts/device-audit.mjs), and still flags a visible covered one (an overlay
 placed on a tab was caught). Re-run on Home, Services, About and Partner at 9 sizes: clean.
+
+## D-039 · 2026-10-02 · The About and Services still-lifes are placed (C-086, C-087)
+Sasanka delivered the fourteen still-lifes planned in D-031 (Services, seven) and D-032 (About, seven) from
+`docs/ASSET-PROMPTS.md`; each was viewed in full and matches its prompt (no people, text or brand marks). Eleven are
+placed; the three vision capsules were tried and **dropped on Sasanka's review the same day**.
+- **Services deck:** one `image` per service (nurse, GDA, procedures, ICU, doctor, physiotherapy, lab samples), 1122 px
+  webp in `public/illustrations/services/`; the equipment card keeps the motorised bed (C-073). All eight cards now
+  hold a still-life; the type-led slot stays only as the schema's fallback.
+- **About values:** the turning card shows the value's still-life (care, trust, healing, home) in place of the icon,
+  900 px webp in `public/illustrations/about/`, the ink ring kept on top. The stage image is decorative (`alt=""`,
+  aria-hidden parent); the "Illustration: …" alt text stays in the content file.
+- **About vision capsules: icons stay** (D-032's look). The still-lifes (tulsi, tea glasses, walking stick) read badly
+  at pill size ("not looking good at all"), so they are not used; originals stay in `refs/care-setu/stills/about-5..7`
+  and no web copies exist. `Illustration` (lib/content.ts) is exported and required on About's values only.
+**Why:** the slots were reserved since D-031/D-032; this fills them without touching any layout or motion.
+**Rejected:** still-lifes in the capsules (tried, judged poor at that size by the owner of the page's taste); keeping
+icons as a values fallback (the schema requires the image, so it was dead code).
+**Verified:** green (lint, typecheck, tests, build). In Chrome on the dev server: the Services deck shows its images.
+Device audit on /services and /about at 9 sizes (before the capsule revert, which only restores the earlier markup): clean.
+**Not verified:** the Values card mid-turn and the phone strip crop by eye; owner review. No commit.

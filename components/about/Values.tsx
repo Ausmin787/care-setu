@@ -1,4 +1,4 @@
-import { IconFirstAidKit, IconHeartHandshake, IconHomeHeart, IconShieldCheckFilled } from "@tabler/icons-react";
+import Image from "next/image";
 import { about } from "@/lib/about";
 import { shown, t } from "@/lib/content";
 import { Odometer } from "@/components/motion/Odometer";
@@ -6,14 +6,13 @@ import { Pending } from "./Pending";
 import s from "./Values.module.css";
 
 const p = t.aboutPage;
-const icons = [IconHeartHandshake, IconShieldCheckFilled, IconFirstAidKit, IconHomeHeart];
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 // The four values on the sand block (D-032). The list is the page: numbered rows that read well frozen and are all
 // that touch, reduced motion and screen readers get. On desktop the Odometer pins the block and shows the same four
 // on a stage (aria-hidden, the list stays for assistive tech): the number rolls, the name follows, a card in the
-// value's logo tint turns, and the text beside it swaps. The card holds a still-life once Sasanka's arrive; until
-// then the value's icon, large, in ink.
+// value's logo tint turns, and the text beside it swaps. The card holds the value's still-life (C-086, an
+// illustration, so the stage image is decorative and its alt stays in the content file).
 export function Values() {
   const values = shown(about.values);
   if (!values) return null;
@@ -21,15 +20,17 @@ export function Values() {
 
   const face = (side: "front" | "back") => (
     <div className={s[side]}>
-      {items.map((v, i) => {
-        const Icon = icons[i];
-        return (
-          <div key={v.name} className={s.slot} data-slot={i} data-line={v.line}>
-            <Icon />
-            {process.env.NODE_ENV !== "production" && <span className={s.slotNote}>{p.imageSlot}</span>}
-          </div>
-        );
-      })}
+      {items.map((v, i) => (
+        <div key={v.name} className={s.slot} data-slot={i} data-line={v.line}>
+          <Image
+            src={v.image.src}
+            alt=""
+            fill
+            sizes="368px"
+            style={{ objectFit: "cover", objectPosition: `50% ${v.image.focus}` }}
+          />
+        </div>
+      ))}
     </div>
   );
 

@@ -39,7 +39,7 @@ export type Price = z.infer<typeof Price>;
 
 // A still-life illustration (C-073 and later rows), never presented as our stock, staff or premises; `focus` is the
 // vertical crop point.
-const Illustration = z.object({
+export const Illustration = z.object({
   src: z.string().startsWith("/"),
   alt: z.string().startsWith("Illustration"),
   focus: z.string().regex(/^\d{1,3}%$/),

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import aboutData from "@/content/about.json";
-import { LINES } from "@/lib/content";
+import { Illustration, LINES } from "@/lib/content";
 
 // About (D-032): the founders' deck in their own words. Each block carries its CLAIMS.md row and stays `pending`
 // until the owners approve it (Q20), so `shown()` renders it in development only (D-029).
@@ -56,7 +56,9 @@ const About = z.object({
   }),
   values: z.object({
     intro: z.string(),
-    items: z.array(z.object({ name: z.string(), lead: z.string(), text: z.string(), line })).length(4),
+    items: z
+      .array(z.object({ name: z.string(), lead: z.string(), text: z.string(), line, image: Illustration }))
+      .length(4),
     ...claimed,
   }),
   founders: z.object({

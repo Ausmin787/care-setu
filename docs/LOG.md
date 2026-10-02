@@ -331,3 +331,16 @@ Template:
 - Home reel finding: measured as a clipped-by-design mid-slide panel, not a bug; the device audit now skips controls
   clipped out by an ancestor (overlay negative test still caught). Home, Services, About, Partner x 9 sizes: clean.
 - Not verified: real devices, a screen reader, owner review (Q15, Q16, Q21).
+
+## 2026-10-02 · Stage 4 · About and Services still-lifes placed (D-039)
+- Model/effort: Sonnet 5.5, medium.
+- Read: ASSET-PROMPTS, the Services deck, About's Values and Manifesto, the content schemas. All 14 images viewed in full.
+- Built: webp copies in `public/illustrations/{about,services}/`, originals in `refs/care-setu/stills/`; `image` on seven
+  services and About's four values; `Values.tsx` renders the values' (its icons and
+  `aboutPage.imageSlot` removed); `Illustration` exported; CLAIMS C-086, C-087.
+- Commands → result: `npm run green` passed; Chrome check of the capsules and the Services deck; device audit on
+  /services and /about at 9 sizes: all OK.
+- Slips: a stray `python` heredoc hung the shell once (stopped); a split import/usage edit tripped the post-edit hook (#9).
+- Not verified: the Values card mid-turn and the phone strip crop by eye; owner review. No commit.
+- Follow-up, same day: Sasanka judged the capsule still-lifes poor, so the vision capsules are back to icons (images,
+  web copies and schema keys removed; D-039 amended, C-086 trimmed to four).

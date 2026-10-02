@@ -25,6 +25,7 @@ not our stock / staff / premises"), and alt text that says what it shows. Never 
 **Delivery:** drop the files in `refs/care-setu/stills/` with the subject number in the name; Claude crops to the slot.
 
 ## Service still-lifes (Services deck, D-031): 7 images, portrait 4:5, 1600×2000
+**Delivered 2026-10-02**, registered as C-087, live in `public/illustrations/services/`.
 Same shared style as above (paste it first), and **attach two of the equipment still-lifes** (the motorised bed and the
 patient monitor work best) so the light, palette and lens match. The deck crops them to a near-square slot beside
 the text and to a wide strip on phones, so **keep the object in the middle third** with room on every side.
@@ -40,6 +41,7 @@ the text and to a wide strip on phones, so **keep the object in the middle third
 the subject number and the word "service" in the file name. Each gets a CLAIMS row before it ships (as C-073).
 
 ## About still-lifes (D-032): 7 images
+**Delivered 2026-10-02**, registered as C-086. Values 1–4 are live in `public/illustrations/about/`; capsules 5–7 were tried and dropped (the vision capsules keep their icons, D-039), originals only in `refs/care-setu/stills/`.
 Same shared style as the equipment still-lifes (paste it first) and **attach two of them** (the motorised bed and the
 patient monitor) so the light, palette and lens match. No people, no hands, no text or brand names.
 **Values (4), portrait 4:5, 1600×2000.** The card is 4:5 and small on laptops, so keep the object large and centred.

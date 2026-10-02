@@ -10,7 +10,8 @@ const p = t.aboutPage;
 const capIcons = { home: IconHomeFilled, family: IconUsersGroup, heart: IconHeartFilled };
 
 // Vision, then mission (D-032). The vision is one large sentence with three capsules set between its words
-// (GetLayers Halden), in the logo colours until Sasanka's still-lifes arrive; they open with scroll (Capsules).
+// (GetLayers Halden), in the logo colours, each with an icon (the still-lifes tried there were dropped, D-039); they
+// open with scroll (Capsules).
 // The mission follows on an ink panel (D-034): its line, the founders' lead-in, and the six groups they want to
 // bring together drawn as stations whose lines merge into one (Bridge). Development only until approved (C-075, C-078).
 export function Manifesto() {

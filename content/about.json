@@ -86,25 +86,29 @@
         "name": "Care",
         "lead": "Every patient deserves attention, respect and compassion.",
         "text": "Whether it is an elderly person who needs daily assistance, a patient recovering from surgery, or a family caring for someone after a long hospital stay, care should always remain personal.",
-        "line": "lime"
+        "line": "lime",
+        "image": { "src": "/illustrations/about/care.webp", "alt": "Illustration: a hand-knitted cream shawl folded over the arm of a wooden armchair, with a steel tumbler on the side table", "focus": "50%", "claim": "C-086" }
       },
       {
         "name": "Trust",
         "lead": "A healthcare professional entering someone’s home is being trusted with something extremely important.",
         "text": "We want to build that trust through clear processes, responsible service and continuous feedback.",
-        "line": "blue"
+        "line": "blue",
+        "image": { "src": "/illustrations/about/trust.webp", "alt": "Illustration: a front door left slightly open onto a bright hallway, a pair of house slippers just inside", "focus": "50%", "claim": "C-086" }
       },
       {
         "name": "Healing",
         "lead": "Treatment and healing are not always the same thing.",
         "text": "Treatment may happen in a hospital, but recovery can take weeks or months at home. Care Setu aims to support that journey through nursing, physiotherapy, rehabilitation, follow-up care and long-term support.",
-        "line": "olive"
+        "line": "olive",
+        "image": { "src": "/illustrations/about/healing.webp", "alt": "Illustration: a resistance band and two small dumbbells on a cotton durrie in morning light by a window", "focus": "50%", "claim": "C-086" }
       },
       {
         "name": "Home",
         "lead": "Home is where people feel most comfortable and secure.",
         "text": "Whenever clinically appropriate, we want to make it easier for people to receive dependable healthcare support without leaving the familiarity and dignity of their own home.",
-        "line": "lime"
+        "line": "lime",
+        "image": { "src": "/illustrations/about/home.webp", "alt": "Illustration: a made bed with a block-printed cotton cover, and a bedside table with a brass lamp", "focus": "50%", "claim": "C-086" }
       }
     ],
     "claim": "C-076",

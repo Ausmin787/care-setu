@@ -38,7 +38,7 @@
 }
 
 /* The capsule: a reserved, pill-shaped slot in the line. A 40% tint of its logo colour (as the reel captions and
-   deck cards), with an ink icon; the still-life replaces the icon when it arrives.
+   deck cards), with an ink icon.
    It opens as a window on the full-size pill, never by scaling it (Capsules sets --open from 0.12 to 1): the ink
    pill and the tint inside it are each clipped to a pill --open wide, the tint 2px smaller all round, so the 2px
    ring stays whole and sharp at every width. Without JS or with reduced motion --open is 1. */

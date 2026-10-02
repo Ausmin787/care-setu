@@ -13,6 +13,12 @@
           "name": "Nurse at Home",
           "who": "A nurse",
           "text": "Nursing care in the patient's own home, following the treating doctor's advice.",
+          "image": {
+            "src": "/illustrations/services/nurse.webp",
+            "alt": "Illustration: a blood-pressure monitor, thermometer, hand sanitiser and folded towel on a bedside table",
+            "focus": "62%",
+            "claim": "C-087"
+          },
           "scope": {
             "claim": "C-035",
             "pending": true,
@@ -36,6 +42,12 @@
           "name": "GDA at Home",
           "who": "An attendant",
           "text": "A general duty attendant (GDA) for the patient's daily care and assistance at home.",
+          "image": {
+            "src": "/illustrations/services/gda.webp",
+            "alt": "Illustration: an armchair by a sunlit window with a folded towel, a walking stick and a side table with a steel tumbler",
+            "focus": "55%",
+            "claim": "C-087"
+          },
           "scope": {
             "claim": "C-036",
             "pending": true,
@@ -60,13 +72,25 @@
           "slug": "procedures",
           "name": "Nursing procedures",
           "who": "A nurse",
-          "text": "Dressing, injections, catheter care and other procedures, done at home."
+          "text": "Dressing, injections, catheter care and other procedures, done at home.",
+          "image": {
+            "src": "/illustrations/services/procedures.webp",
+            "alt": "Illustration: a steel dressing tray with gauze packs, a rolled bandage, surgical tape and scissors on a white cloth",
+            "focus": "62%",
+            "claim": "C-087"
+          }
         },
         {
           "slug": "icu",
           "name": "ICU care at home",
           "who": "A care team",
           "text": "A critical care set-up at home, with the staff and equipment it needs.",
+          "image": {
+            "src": "/illustrations/services/icu.webp",
+            "alt": "Illustration: a bedroom set up for critical care, with a motorised bed, a ventilator on a stand and a patient monitor",
+            "focus": "55%",
+            "claim": "C-087"
+          },
           "scope": {
             "claim": "C-037",
             "pending": true,
@@ -98,6 +122,12 @@
           "name": "Doctor at Home",
           "who": "A doctor",
           "text": "A doctor's consultation at home, for patients who can't easily get to a clinic.",
+          "image": {
+            "src": "/illustrations/services/doctor.webp",
+            "alt": "Illustration: a closed leather doctor's bag and a stethoscope on a dining table beside a steel tumbler",
+            "focus": "60%",
+            "claim": "C-087"
+          },
           "scope": {
             "claim": "C-038",
             "pending": true,
@@ -121,6 +151,12 @@
           "name": "Physiotherapy",
           "who": "A physiotherapist",
           "text": "A rehabilitation plan made for the patient, to help them move and recover at home.",
+          "image": {
+            "src": "/illustrations/services/physiotherapy.webp",
+            "alt": "Illustration: a resistance band and two small dumbbells on a cotton durrie, with a rolled mat and a wooden chair behind",
+            "focus": "65%",
+            "claim": "C-087"
+          },
           "scope": {
             "claim": "C-039",
             "pending": true,
@@ -143,6 +179,12 @@
           "name": "Lab sample collection",
           "who": "A sample collector",
           "text": "Samples collected at home, so there is no trip to the lab.",
+          "image": {
+            "src": "/illustrations/services/lab-samples.webp",
+            "alt": "Illustration: sample tubes in a rack, cotton swabs, a tourniquet strip and an insulated box on a wooden side table",
+            "focus": "60%",
+            "claim": "C-087"
+          },
           "scope": {
             "claim": "C-040",
             "pending": true,

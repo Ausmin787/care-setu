@@ -526,6 +526,26 @@
       }
     }
   },
+  "faqPage": {
+    "metaTitle": "Questions families ask | Care Setu",
+    "metaDescription": "Answers about care at home after a hospital stay in Noida and Delhi: the call back, the care plan and quote, paying, and equipment.",
+    "title": "Questions families ask us",
+    "lede": "Plain answers, in the order families usually need them.",
+    "card": {
+      "name": "Care Setu",
+      "promise": { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
+      "index": "Questions about",
+      "call": "Call",
+      "whatsapp": "WhatsApp"
+    },
+    "replyFrom": "Care Setu",
+    "askWa": "Ask this on WhatsApp",
+    "waText": "Hi Care Setu, I have a question: {q}",
+    "close": {
+      "title": "Your question isn’t here?",
+      "text": "Call or WhatsApp us on {phone} and ask."
+    }
+  },
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",
     "back": "Back to home"

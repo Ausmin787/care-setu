@@ -351,3 +351,13 @@ Template:
 - Fixed: closed-state copy on Home's route and Contact; `Stub` 404s in production; footer drops stub links.
 - Commands → result: `npm run green` passed; production re-probe confirmed.
 - Not verified: device matrix on the production build. Committed with Sasanka's permission.
+
+## 2026-10-02 · Stage 4 · FAQ "The thread" (D-041)
+- Model/effort: Opus 5.5.
+- Research: the tool list (see D-041); options round, recommended option picked.
+- Built: `content/faq.json`, `lib/faq.ts`, `components/faq/Thread.{tsx,module.css}`, `app/faq/page.{tsx,module.css}`,
+  `faqPage` messages, footer link, sitemap entry, `tests/faq.test.ts`, seo test updated.
+- Commands → result: `npm run green` passed (144 tests); CDP behaviour probe and card-fit probe; device audit 9 sizes OK;
+  impeccable at 2 viewports triaged; production build audited.
+- Slips: `lib/faq.ts` written before its `faqPage` messages, and a `useState` type, tripped the post-edit hook twice (#9/#46).
+- Not verified: real devices, owner review. No commit yet.

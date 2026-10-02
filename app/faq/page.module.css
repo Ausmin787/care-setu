@@ -1,0 +1,37 @@
+/* FAQ opener (D-041): type-led, the headline left and the emergency note at the right edge, like Contact's opener. */
+.opener {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: 32px 72px;
+  align-items: end;
+  padding-block: clamp(48px, 8vh, 88px) clamp(40px, 6vh, 64px);
+}
+.intro {
+  display: grid;
+  gap: 22px;
+}
+.intro h1 {
+  margin: 0;
+  max-width: 13ch;
+  text-wrap: balance;
+  font-size: clamp(52px, min(8vw, 14vh), 120px);
+}
+.lede {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 22px;
+  line-height: 1.4;
+}
+.sos {
+  justify-self: end;
+  max-width: 30ch;
+}
+
+@media (max-width: 900px) {
+  .opener {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sos {
+    justify-self: start;
+  }
+}

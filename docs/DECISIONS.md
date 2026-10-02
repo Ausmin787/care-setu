@@ -1156,3 +1156,51 @@ Three problems were found and fixed:
 **Verified:** green (lint, typecheck, 137 tests, build). Production probe: `/faq`, `/terms`, `/refunds` 404; the footer
 links only Privacy among the legal pages; the new copy renders; "leave your details" absent from production Contact.
 **Not verified:** the device matrix on the production build (copy and links only changed).
+
+## D-041 · 2026-10-02 · FAQ: "The thread", answers only from approved claims, grouped by the family's stage
+D-013's FAQ, "answered only from confirmed owner facts". GOV.UK's style guide says "Do not use FAQs… if you write
+content by starting with user needs, you will not need to use FAQs", so the questions run in the family's order: Before
+you call, Getting in touch, Plan and quote, Paying, At home, For partners. Research 2026-10-02 (tool list): Cue Kit
+(Split Panel FAQ and Scrollspy Line Navigation, Prompt specs read), Mobbin (faq / frequently asked questions / health faq:
+Serus, Daylight, New Yorker, David, Superpower), Design Spells (Spotify chapters), GetLayers (sections + all 52 template
+endings: Artefakt "Need to know", Vexon), Curated (88 FAQ sections, "accordions mostly"), 21st.dev (191; FAQ Chat
+Accordion), Unlumen (Motion FAQs Accordion), UI Guideline (accordion spec paywalled; WAI-ARIA APG used), GOV.UK. Not
+opened: Pafolios (deploy day). Sasanka picked the recommended option of three (The thread / Need-to-know sheet / Route
+index).
+- **The thread** (21st.dev FAQ Chat Accordion): each question is the family's sand bubble with a bold two-bar toggle;
+  opening it brings Care Setu's reply as an ink bubble indented under it, signed with the mark and name. Several may stay
+  open. Physics from Cue Kit's Split Panel: grid-rows 0fr to 1fr over 0.5s `cubic-bezier(0.22, 1, 0.36, 1)`, the
+  vertical bar turning 90deg; the reply rises 10px from its tail corner after 120ms. CSS only, and only after the reader's
+  first toggle, so hydration never animates.
+- **The profile card** (ink, sticky; WhatsApp-business header): the mark, the live call status (`CallStatus`), the 2-hour
+  promise (C-031), the stage index (Cue Kit Scrollspy: a band a third of the way down, IntersectionObserver; click =
+  1000ms easeInOutQuart; the current stage's disc fills logo green, Spotify's current chapter), Call and WhatsApp. On
+  windows under 760px tall it drops the promise and the call row (the nav carries both), under 560px the index title, so
+  it fits 1280x537 and 1093x490 without running off; it scrolls inside itself only as a fallback. Under 900px wide it is
+  one static ink block with a row of stage chips.
+- **The instrument:** every reply has "Ask this on WhatsApp", a `wa.me/<number>?text=` link that pre-fills "Hi Care Setu,
+  I have a question: {question}" (WhatsApp Help Center, "How to use click to chat", read 2026-10-02). Only the question
+  goes in the URL.
+- **Content** (`content/faq.json`, `lib/faq.ts`): 17 items, each citing CLAIMS rows; public ones only approved rows
+  (tested). Contact details are filled from config. Gated items answer with closed text while their flow is off (online
+  details: "Not yet. Please call or WhatsApp us"; paying: the Pay page's closed text). Dev only, pending: refunds (Q8, no
+  answer written), staff checks (C-083), languages (C-020).
+- **No-JS / reduced motion:** the server renders every reply open and the toggles hidden; the client collapses them.
+  The index is real `#stage-` links. Reduced motion: no transition and no delay (the global rule zeroes durations only).
+- The footer links /faq again; `/faq` joins the sitemap (D-037).
+**Why:** Care Setu is reached by phone and WhatsApp, so a conversation is the subject's own form; it beats the genre's
+centred accordion, and every answer ends in a working way to ask.
+**Rejected:** Need-to-know sheet (calm, all visible, but the least idea); Route index (the third page on the route after
+Home and Contact; the owner dislikes repeated sections); typing dots or an "online" badge (would fake a live chat);
+answering refunds, prices or languages by default (INVARIANT 25).
+**Verified:** green (lint, typecheck, 144 tests, build). CDP probe at 1280x537: collapsed after hydration; a click opens
+(height 0 to 220px over ~500ms, the bubble fading in from 120ms) and closes; `/faq#q-cost` opens only that item, 184px
+from the top; the index follows the wheel both ways; an index click lands the heading 104px down and focuses it; Tab +
+Enter toggles. Reduced motion opens instantly. SSR HTML: 0 collapsed items. Device audit at 9 sizes: OK. Production
+build: 200; pending items absent; closed answers shown; no ₹, %, 24x7, domain or "verified". impeccable at 1280 and 390:
+cyan gradient and cream page are site-wide (same on Contact; the footer shader and Warm Room); content-hidden-at-rest,
+heading-rhythm (h3s are accordion headers, their content collapsed) and column-overflow (the short column is the sticky
+card) are by design. Taste pre-flight: the sender label made sentence case, one "Call" label, scrollspy moved off a raw
+scroll listener; dark mode waived (light-only Warm Room). Vercel guidelines: translate="no" on the brand, text-wrap,
+overflow-wrap, link hover fixed.
+**Not verified:** real Safari and devices; trackpad feel of the eased scroll; owner review. Founder copy approval (Q15).

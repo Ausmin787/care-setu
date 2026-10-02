@@ -13,7 +13,7 @@ const links: { href: string; label: string; draft?: boolean; stub?: boolean }[] 
   { href: "/partner", label: L.partner },
   { href: "/contact", label: L.contact },
   { href: "/pay", label: L.pay },
-  { href: "/faq", label: L.faq, stub: true },
+  { href: "/faq", label: L.faq },
   { href: "/privacy", label: L.privacy, draft: true },
   { href: "/terms", label: L.terms, draft: true, stub: true },
   { href: "/refunds", label: L.refunds, draft: true, stub: true },

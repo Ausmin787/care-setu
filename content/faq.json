@@ -1,0 +1,182 @@
+{
+  "_note": "FAQ (D-041): answers only from confirmed owner facts (D-013). Each item cites its CLAIMS.md rows; `pending` items render in development only (D-029). {phone}, {email} and {office} are filled from site.config.json and the Contact copy at render, never typed here. `list: services` renders the eight services from services.json. `gate` swaps in `aClosed` while that flow is off in production (enquiryLive, paymentsLive). Open owner questions are never answered here (INVARIANT 25).",
+  "stages": [
+    {
+      "slug": "before",
+      "label": "Before you call",
+      "items": [
+        {
+          "slug": "what",
+          "q": "What does Care Setu do?",
+          "a": [
+            "We arrange care at home after a hospital stay. You tell us what the patient needs, and we arrange it as one plan."
+          ],
+          "claims": ["C-033"],
+          "pending": false
+        },
+        {
+          "slug": "areas",
+          "q": "Which areas do you cover?",
+          "a": ["Noida and Delhi."],
+          "claims": ["C-032"],
+          "pending": false
+        },
+        {
+          "slug": "services",
+          "q": "Which services can you arrange?",
+          "a": ["Eight services, in three lines:"],
+          "list": "services",
+          "link": { "href": "/services", "label": "See every service" },
+          "claims": ["C-033"],
+          "pending": false
+        },
+        {
+          "slug": "emergency",
+          "q": "Is Care Setu emergency care?",
+          "a": ["No. In an emergency, call 112.", "Home care is not emergency care."],
+          "claims": [],
+          "pending": false
+        }
+      ]
+    },
+    {
+      "slug": "touch",
+      "label": "Getting in touch",
+      "items": [
+        {
+          "slug": "reach",
+          "q": "How do I reach you?",
+          "a": ["Call or WhatsApp {phone}, or email {email}.", "Our office is at {office}."],
+          "claims": ["C-028", "C-029", "C-030"],
+          "pending": false
+        },
+        {
+          "slug": "callback",
+          "q": "When will someone call me back?",
+          "a": ["We call back within 2 hours, every day 7 AM to 10 PM."],
+          "claims": ["C-031"],
+          "pending": false
+        },
+        {
+          "slug": "online",
+          "q": "Can I leave my details online?",
+          "gate": "enquiry",
+          "a": [
+            "Yes. Answer five short questions on the Talk to us page, and a coordinator calls you back. Nothing is shared until you agree."
+          ],
+          "aClosed": ["Not yet. Please call or WhatsApp us on {phone}."],
+          "link": { "href": "/contact", "label": "Talk to us" },
+          "claims": ["C-025"],
+          "pending": false
+        }
+      ]
+    },
+    {
+      "slug": "plan",
+      "label": "Plan and quote",
+      "items": [
+        {
+          "slug": "call",
+          "q": "What happens when you call back?",
+          "a": [
+            "A coordinator talks with you to understand the patient, the home and the doctor's advice. Then we put together a care plan and a quote."
+          ],
+          "claims": ["C-025", "C-024"],
+          "pending": false
+        },
+        {
+          "slug": "cost-first",
+          "q": "Will I know the cost before care begins?",
+          "a": ["Yes. You get one care plan and one quote, with a reference number, before you pay."],
+          "claims": ["C-024"],
+          "pending": false
+        },
+        {
+          "slug": "cost",
+          "q": "How much does care cost?",
+          "a": [
+            "It depends on the care the patient needs. Your coordinator works it out with you and gives you a quote before you pay."
+          ],
+          "claims": ["C-024"],
+          "pending": false
+        }
+      ]
+    },
+    {
+      "slug": "paying",
+      "label": "Paying",
+      "items": [
+        {
+          "slug": "pay",
+          "q": "How do I pay?",
+          "gate": "payments",
+          "a": ["On the Pay a quote page, with the reference on your quote. You pay against the quote, never before it."],
+          "aClosed": ["Online payment isn’t open yet. To pay for care, call us and a coordinator will help."],
+          "link": { "href": "/pay", "label": "Pay a quote" },
+          "claims": ["C-024"],
+          "pending": false
+        },
+        {
+          "slug": "refunds",
+          "q": "Can I cancel, or get a refund?",
+          "a": ["To be confirmed by the owners (Q8)."],
+          "claims": [],
+          "pending": true
+        }
+      ]
+    },
+    {
+      "slug": "home",
+      "label": "At home",
+      "items": [
+        {
+          "slug": "during",
+          "q": "Who do I talk to once care has begun?",
+          "a": ["The Care Setu team. Questions and changes go to us, on {phone}."],
+          "claims": ["C-028"],
+          "pending": false
+        },
+        {
+          "slug": "equipment",
+          "q": "Can I rent equipment, or sell it back?",
+          "a": [
+            "Yes. Rent hospital beds, oxygen concentrators, wheelchairs and monitors, short or long term, delivered and set up at home.",
+            "You can also buy equipment outright, or sell it back when you no longer need it, and we collect it from your home."
+          ],
+          "claims": ["C-033"],
+          "pending": false
+        },
+        {
+          "slug": "checks",
+          "q": "How do you check the people who come to our home?",
+          "a": [
+            "Five checks before anyone visits a family: documents, background, a clinical assessment where it applies, a trial and review of first assignments, and continuous monitoring."
+          ],
+          "claims": ["C-083"],
+          "pending": true
+        },
+        {
+          "slug": "languages",
+          "q": "Which languages do you speak?",
+          "a": ["Hindi, English, Marathi, Gujarati, Bengali, Tamil, Telugu and Kannada."],
+          "claims": ["C-020"],
+          "pending": true
+        }
+      ]
+    },
+    {
+      "slug": "partners",
+      "label": "For partners",
+      "items": [
+        {
+          "slug": "partner",
+          "q": "I work at a hospital or clinic, or I'm a care professional. How do we work together?",
+          "a": ["Start on the Partner with us page, or call {phone} or email {email}."],
+          "link": { "href": "/partner", "label": "Partner with us" },
+          "claims": ["C-028", "C-029"],
+          "pending": false
+        }
+      ]
+    }
+  ]
+}

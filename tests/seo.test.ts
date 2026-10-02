@@ -39,6 +39,7 @@ describe("search discovery (D-037)", () => {
       "https://example.org/about",
       "https://example.org/contact",
       "https://example.org/partner",
+      "https://example.org/faq",
     ]);
     expect(urls.some((u) => /pay|privacy|dev|api/.test(u))).toBe(false);
     vi.unstubAllEnvs();

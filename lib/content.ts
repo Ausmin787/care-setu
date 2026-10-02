@@ -19,6 +19,8 @@ const SiteConfig = z.object({
   enquiryLive: z.boolean(),
   // The pay flow goes live only when a D-entry wires the quotes backend and the gateway (D-036).
   paymentsLive: z.boolean(),
+  // The partner form goes live only when a D-entry answers Q16 and wires the Partner API (D-038, INVARIANT 31).
+  partnerEnquiryLive: z.boolean(),
 });
 
 export const LINES = ["lime", "blue", "olive"] as const;
@@ -94,6 +96,11 @@ export function enquiryOpen(): boolean {
 // D-036: the pay flow runs in development on sample quotes until `paymentsLive` is set by a D-entry.
 export function paymentsOpen(): boolean {
   return config.paymentsLive || process.env.NODE_ENV !== "production";
+}
+
+// D-038: the partner form runs in development (and sends nothing) until `partnerEnquiryLive` is set by a D-entry.
+export function partnerEnquiryOpen(): boolean {
+  return config.partnerEnquiryLive || process.env.NODE_ENV !== "production";
 }
 
 export function shownPrice(price: Price | undefined): Price | undefined {

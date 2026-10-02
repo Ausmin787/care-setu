@@ -3,7 +3,8 @@
 // phones), wheels through the whole page and at every step checks: (1) horizontal overflow, (2) a pinned element
 // taller than the viewport, (3) every visible link/button is hittable (elementFromPoint at its centre lands on it),
 // (4) scrolling never sticks. Deck cards are skipped (covered by design while stacked).
-// A one-step BLOCKED on a moving strip (a panel mid-slide under its clip) is expected; anything repeated is a bug.
+// A control whose centre is clipped out by an ancestor (a reel panel mid-slide behind its window) is skipped as hidden
+// (D-038 close-out: it was reported as BLOCKED on every Home run); anything visible but covered is a bug.
 // usage (dev server running): node scripts/device-audit.mjs http://localhost:3000 [/,/services] ; DEVICES=1280x537 to filter
 // In Git Bash prefix MSYS_NO_PATHCONV=1, or the page list is rewritten into a Windows path.
 import { spawn } from "node:child_process";
@@ -40,6 +41,13 @@ const probe = `(() => {
     if (!r.width || !r.height) return;
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     if (cy < navH + 2 || cy > innerHeight - 2 || cx < 2 || cx > innerWidth - 2) return;
+    // Clipped out of sight by an ancestor (a reel panel sliding behind its window's edge) is hidden, not covered:
+    // nobody can see it to click it. A visible control that something sits on top of still fails below.
+    for (let p = a.parentElement; p && p !== document.body; p = p.parentElement) {
+      if (getComputedStyle(p).overflowX === 'visible' && getComputedStyle(p).overflowY === 'visible') continue;
+      const c = p.getBoundingClientRect();
+      if (cx < c.left || cx > c.right || cy < c.top || cy > c.bottom) return;
+    }
     const hit = document.elementFromPoint(cx, cy);
     if (hit && (hit === a || a.contains(hit))) {
       // Visible centre: also require the whole box inside the viewport's bottom edge when the element is fully rendered

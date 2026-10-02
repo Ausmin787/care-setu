@@ -6,7 +6,7 @@ import s from "./PartnerBand.module.css";
 
 // Partner band (D-030): the sand block (D-027) set as an editorial index, after Awwwards "Index" (The Line):
 // three large rows; hover or focus slides the row's line colour in behind the text and brings in the arrow disc.
-// The Home thread ends here with a terminus, just above the footer.
+// Each row opens the Partner page on its own audience (D-038). The Home thread ends here with a terminus, just above the footer.
 export function PartnerBand() {
   return (
     <section className={`${s.band} wrap`} id="partner" aria-labelledby="partner-title">
@@ -23,7 +23,7 @@ export function PartnerBand() {
       <ul className={s.rows}>
         {t.partner.roles.map((r, i) => (
           <li key={r.title} data-line={r.line}>
-            <Link className={s.row} href="/partner">
+            <Link className={s.row} href={`/partner?for=${r.for}`}>
               <span className={s.n}>{String(i + 1).padStart(2, "0")}</span>
               <span className={s.title}>{r.title}</span>
               <span className={s.text}>{r.text}</span>

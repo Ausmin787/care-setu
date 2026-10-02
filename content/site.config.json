@@ -1,10 +1,14 @@
 {
-  "_note": "Public business facts. Phone (also WhatsApp) and email from the owners (D-035, C-028, C-029). Call hours 7 AM to 10 PM, Asia/Kolkata (D-024, C-031). Still empty until answered: promotion Q9. Empty = the UI hides it. showPrices stays false until the owners confirm prices (Q18, D-029); even then only approved price rows show. enquiryLive stays false until a D-entry records the privacy notice sign-off (Q14) and the alert recipient (Q12); until then the enquiry form and POST /api/v1/queries work in development only (D-033). paymentsLive stays false until a D-entry wires the quotes backend and the gateway; until then /pay runs on sample quotes in development and production shows a call card (D-036).",
+  "_note": "Public business facts. Phone (also WhatsApp) and email from the owners (D-035, C-028, C-029). Call hours 7 AM to 10 PM, Asia/Kolkata (D-024, C-031). Still empty until answered: promotion Q9. Empty = the UI hides it. showPrices stays false until the owners confirm prices (Q18, D-029); even then only approved price rows show. enquiryLive stays false until a D-entry records the privacy notice sign-off (Q14) and the alert recipient (Q12); until then the enquiry form and POST /api/v1/queries work in development only (D-033). paymentsLive stays false until a D-entry wires the quotes backend and the gateway; until then /pay runs on sample quotes in development and production shows a call card (D-036). partnerEnquiryLive stays false until a D-entry answers Q16 (is the form wanted, who replies), wires the Partner API and extends the privacy notice to partner data; until then the partner form works in development only and sends nothing (D-038).",
   "phone": "+917860042009",
   "email": "caresetuhealth@gmail.com",
-  "hours": { "open": "07:00", "close": "22:00" },
+  "hours": {
+    "open": "07:00",
+    "close": "22:00"
+  },
   "promotion": null,
   "showPrices": false,
   "enquiryLive": false,
-  "paymentsLive": false
+  "paymentsLive": false,
+  "partnerEnquiryLive": false
 }

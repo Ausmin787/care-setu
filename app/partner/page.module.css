@@ -1,0 +1,116 @@
+/* Partner page close (D-038): the form beside an ink call card (Contact's card, D-033), sticky on wide screens so the
+   number stays in reach while the form is filled. Production shows the card alone. */
+.enquiry {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: 48px 72px;
+  align-items: start;
+  padding-block: clamp(64px, 9vw, 120px);
+  border-top: 1.5px solid var(--c-ink);
+}
+.main {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.main h2 {
+  margin: 0;
+}
+.intro {
+  margin: 0 0 12px;
+  max-width: 44ch;
+  font-size: 21px;
+  line-height: 1.45;
+}
+.card {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 20px;
+  background: var(--c-canvas);
+  color: var(--c-ink);
+}
+.cardTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--c-muted);
+}
+.number {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(32px, 3vw, 46px);
+  font-weight: 300;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.number a {
+  text-decoration: none;
+}
+.number a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.ways {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+.card :global(.btn) .icon {
+  width: 26px;
+  height: 26px;
+  margin-right: 7px;
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  font-size: 19px;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.link svg {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+.link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-muted);
+  box-shadow: 0 0 0 2px var(--color-ink);
+}
+.status[data-open="true"] .dot {
+  background: var(--color-line-lime);
+}
+
+@media (max-width: 960px) {
+  .enquiry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card {
+    position: static;
+  }
+}

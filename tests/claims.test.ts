@@ -51,6 +51,7 @@ const risky: [RegExp, string][] = [
   [/\blakh\b|\bcrore\b|\bCr\+/i, "market statistic (C-008..C-011)"],
   [/24\s?[x/×]\s?7/i, "24x7 support (C-016)"],
   [/background[- ]verified/i, "verification claim (C-015)"],
+  [/incentive|revenue[- ]shar|commission/i, "referral money (C-085, Q21, IMC Regulations 2002 cl. 6.4.1)"],
 ];
 
 describe("claims register (D-007)", () => {

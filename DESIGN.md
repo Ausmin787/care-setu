@@ -76,6 +76,13 @@ colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds
 - **Still-lifes** (C-073 and later): ChatGPT illustrations of objects and rooms, never people; alt text starts with
   "Illustration"; fixed-ratio slots so late images cause no shift.
 - **404 and promo strip** (D-037): the 404 is the /pay split (ask left, a "Where were you headed?" spine right: a hollow dashed "You are here", then stations whose discs take the line colours as the spine draws, CSS only). The promo strip is a slim sand band above the nav, one link, not sticky; it renders only when the owners set a promotion.
+- **Partner switchboard** (D-038; Cue Kit Morphing Bento): an "I'm a" switch of three equal thirds in an ink-edged
+  track, an ink indicator that moves by transform only, each option with its line-colour disc; it re-deals a 7-column
+  bento (ink tray card for the stack, parchment-deep cards with a hairline, an ink "How it starts" card, a sand quote
+  card) whose frames stay put while their contents slide in from the side moved towards. The chosen audience's line
+  colour is the only accent on the page at a time (discs, inked stack pills and step numbers carry ink text). **Check
+  file**: sand and parchment-deep folders with an ink edge and a tab, stacked by CSS `position: sticky`, a ghost
+  numeral on each sheet. Partner form: the Contact field system on one page.
 - **Pending mark `.pending`**: a dashed uppercase 12px tag on owner-unconfirmed content, development only (D-029).
 - Icons: Tabler **filled**, never thin text arrows.
 

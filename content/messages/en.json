@@ -155,9 +155,9 @@
     "title": "Do you discharge patients, or care for them?",
     "cta": "Partner with us",
     "roles": [
-      { "line": "lime", "lineName": "Line 01", "title": "Hospitals and discharge desks", "text": "Hand a patient over to one team instead of five phone numbers." },
-      { "line": "blue", "lineName": "Line 02", "title": "Doctors and clinics", "text": "Refer a patient and know who is following your instructions at home." },
-      { "line": "olive", "lineName": "Line 03", "title": "Nurses, attendants, therapists", "text": "Join the network and take on home visits." }
+      { "for": "hospital", "tab": "Hospital", "line": "lime", "lineName": "Line 01", "title": "Hospitals and discharge desks", "text": "Hand a patient over to one team instead of five phone numbers." },
+      { "for": "doctor", "tab": "Doctor or clinic", "line": "blue", "lineName": "Line 02", "title": "Doctors and clinics", "text": "Refer a patient and know who is following your instructions at home." },
+      { "for": "professional", "tab": "Care professional", "line": "olive", "lineName": "Line 03", "title": "Nurses, attendants, therapists", "text": "Join the network and take on home visits." }
     ]
   },
   "footer": {
@@ -465,6 +465,64 @@
     ],
     "needPerson": "Rather speak to a person?",
     "call": "Call"
+  },
+  "partnerPage": {
+    "metaTitle": "Partner with us | Care Setu",
+    "metaDescription": "For hospitals, doctors and care professionals in Noida and Delhi: how Care Setu works with you to carry care on at home.",
+    "kicker": "Partner with us",
+    "switchLabel": "I’m a",
+    "area": { "text": "Visits in Noida and Delhi", "claim": "C-032" },
+    "cards": {
+      "stack": "One team",
+      "why": "Why",
+      "offer": "What you get",
+      "start": "Start",
+      "quote": "In the founders’ words"
+    },
+    "startCta": "Tell us about you",
+    "checksKicker": "Before anyone visits",
+    "contact": {
+      "title": "Talk to us about working together",
+      "text": "Call, WhatsApp or email us.",
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "emailLabel": "Email"
+    },
+    "form": {
+      "title": "Tell us about you",
+      "intro": "One short form. Every field is checked as you send it.",
+      "kind": "I’m writing as",
+      "org": {
+        "hospital": "Hospital name",
+        "doctor": "Clinic name (optional)"
+      },
+      "name": "Your name",
+      "phone": "Mobile number",
+      "phoneHint": "A 10-digit Indian mobile number",
+      "email": "Email (optional)",
+      "message": "What would you like to talk about?",
+      "messageHint": "A few lines are enough. Please don’t include patient details.",
+      "consent": "I agree to Care Setu storing these details to reply to me, as described in the",
+      "consentLink": "privacy notice (draft)",
+      "send": "Send",
+      "errors": {
+        "summary": "There is a problem",
+        "kind": "Choose who you are writing as",
+        "orgName": "Enter the hospital name",
+        "name": "Enter your name",
+        "phone": "Enter a 10-digit mobile number",
+        "email": "Enter an email address, or leave it empty",
+        "message": "Tell us what you’d like to talk about",
+        "tooLong": "Keep it under 1000 characters",
+        "consent": "Tick the box to agree"
+      },
+      "sample": "Sample: in development nothing is sent or stored. Partner enquiries open once the owners confirm who replies.",
+      "done": {
+        "title": "Thank you. We have your details.",
+        "next": "We call you back to talk about working together.",
+        "again": "Fill in the form again"
+      }
+    }
   },
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",

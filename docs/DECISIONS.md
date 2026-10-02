@@ -1057,3 +1057,61 @@ Device audit on /nope, 9 sizes (scaled laptops, desktop, iPad both ways, 390 and
 hittable, no sticking.
 **Not verified:** the live (open) robots and sitemap output beyond the unit test; the banner on pages other than Home;
 a real phone, Safari or a screen reader; owner review.
+
+## D-038 · 2026-10-02 · Partner page: the re-deal (one bento morphed by audience), a sticky five-check file, a short partner form in development only
+The next heavy page (D-013, STATUS). Plan: `~/.claude/plans/now-our-next-heavy-peaceful-cray.md` (session) and
+`docs/plans/stage-5-partner.md` (Blueprint §13, sample ledger, opened/skipped tools). Content is the founders' deck
+p.24A (hospitals), 24B (doctors) and 25 (professionals, the five checks), read at full size; every block is pending
+(C-080..C-084) and renders in development only (D-029). Sasanka picked the recommended option on all three questions:
+- **The re-deal** (Cue Kit Morphing Bento Product Showcase, Prompt-tab spec): an "I'm a…" switch (Hospital · Doctor or
+  clinic · Care professional, ARIA tabs, `?for=` in the URL, deep-linked from Home's partner rows) re-deals one
+  five-card bento and swaps the headline in the owners' words; the chosen audience's line colour (lime, blue, olive,
+  as on Home's partner band) runs through the indicator, the stack highlight and the cards' accents. Card one walks a
+  highlight down a stack once on entering view. The swap is a direction-aware slide with blur, CSS only. Not taken
+  from the spec: 3D tilt, cursor spotlight, magnetic buttons, shadows, parallax (DESIGN.md 6; known tells).
+- **How we check** (Cue Kit Sticky Cascade): the five checks as folder tabs that stack with CSS `position: sticky`.
+- **Partner form, front end only:** one short page (kind, organisation, name, phone, email, message, consent), checked
+  in the browser against the zod contract `server/contracts/partners.ts` (shaped to TRD's `partner_enquiries`), then a
+  confirmation marked "sample, nothing was sent or stored". No table, no API (STATUS: Partner API is backend-later).
+  `partnerEnquiryLive: false`: production shows the phone and email only (Q16 open; INVARIANT 31).
+- **Instrument:** "Visits in Noida and Delhi" (C-032) beside the live call status.
+- **Left out (C-085):** the deck's referral money ("incentive-based earnings" for doctors, a revenue share for hospitals
+  and "referring doctors"): Indian Medical Council (Professional Conduct, Etiquette and Ethics) Regulations 2002
+  cl. 6.4.1 forbids a physician any "gift, gratuity, commission or bonus in consideration of or return for the
+  referring, recommending or procuring of any patient" (nmc.org.in Ethics-Regulations-2002.pdf; the NMC 2023
+  regulations, which also ban referral commissions, were notified 2 Aug 2023 and held in abeyance). Also left out:
+  digital integration with hospital systems, tele-consult and the doctor app (they don't exist, D-001), hospital names
+  (C-006), certifications (C-001..C-005). Asked as Q21. The claims test now bans "incentive", "revenue share" and
+  "commission" in copy.
+**Why:** three different visitors each see their own deal at once in one layout, the page carries real motion with a
+job (the owner's taste), and nothing offers what the business can't lawfully or actually do yet.
+**Rejected:** B, a before/after divider (close to About's six lines merging into one); C, three pinned acts (everyone
+scrolls past the other two audiences; repeats the Services deck); the data layer now (backend-later); one question per
+page (repeats Contact); a hospital logo wall, a stats band and three photo cards (the genre average, Honor; C-006/C-014).
+**Built (2026-10-02):** `content/partner.json` + `lib/partner.ts` (zod, one audience per kind in the switch's order,
+each block with its claim); `server/contracts/partners.ts` (`PartnerInput`, `parsePartnerKind`; the phone rule is now
+exported from `queries.ts`; `PARTNER_KINDS` in `enums.ts`); `partnerEnquiryLive` + `partnerEnquiryOpen()`;
+`components/partner/Switchboard.tsx` (switch, headline swap, bento; the stack card is Cue Kit's tray inside an ink
+frame), `Stack.tsx` (cumulative walk, once, 550ms a step), `CheckFile.tsx` (sticky folders with a ghost numeral),
+`PartnerForm.tsx` (no network request), `audience.ts` (the shared choice); `app/partner/page.tsx` replaces the stub;
+Home's partner rows link to `/partner?for=<kind>`; `/partner` joins the sitemap; `tests/partner.test.ts`.
+**Verified:** green (lint, typecheck, 137 tests, build). Playwright at 1280x800, sampled every 60ms after a click: card
+contents slide 28px to 0 and fade in over ~420ms, 45ms apart; the indicator travels 222px in ~500ms; the stack inks
+0 to 8 over ~4.4s and stops (only when on screen); arrow keys and Home move and select with focus; `?for=` is
+replaced, and a deep link renders that audience on the server. First view at 1280x537: the stack walks on scroll-in;
+the frame deal arms only when the bento starts below the fold (phones), so nothing visible is hidden. Reduced motion
+emulated: instant swaps, a full stack; server HTML has no transient attributes. Form: an empty send focuses the error
+summary (name, phone, message, consent), links focus their fields, the kind follows the switch until picked, a valid
+send focuses the sample confirmation, and no POST is made. Device audit (9 sizes) on `/partner` and
+`/partner?for=professional`: no overflow, every control hittable, no sticking. impeccable 1280 + 390: fixed muted text
+on sand (4.3:1); kept: the italic phrase, cream page and footer gradient (standing waivers), and 1.08-1.1 leading on
+28px+ display text (inverse law, Blueprint 6.1). Production (`next start`): the switch with Home's approved role lines,
+the area, the phone and email; no pending text, form, sample line, "incentive", "revenue", "commission", ISO or
+hospital name; no deck text in `.next/static`. Side-by-side: `refs/build-sbs/partner-vs-morphing-bento.png`.
+**Not verified:** a real phone, iPad or Safari; a screen reader on the tabs; the Taste pre-flight and the Web Interface
+Guidelines were run by hand, not as skills; the owners' review of the copy (Q15) and answers to Q16 and Q21. Home reel
+finding (close-out, Sasanka asked to fix it): the device audit flagged "Ask about motorised bed" at 1280x537 and
+1536x730, one step per run. Measured: only when the link's centre (x=19) had slid left of the reel window's clip (x=38),
+half hidden behind the thread by design; clickable at every visible position. No product bug: the audit now skips a
+control clipped out by an ancestor (scripts/device-audit.mjs), and still flags a visible covered one (an overlay
+placed on a tab was caught). Re-run on Home, Services, About and Partner at 9 sizes: clean.

@@ -9,8 +9,8 @@ import { AREAS, PATIENT_LOCATIONS } from "./enums";
 export const serviceSlugs = lines.flatMap((line) => line.services.map((service) => service.slug));
 
 // Indian mobile numbers: 10 digits starting 6-9, written with or without +91 / 0 and spaces or dashes.
-// Stored as +91XXXXXXXXXX.
-const phone = z
+// Stored as +91XXXXXXXXXX. Shared with the partner contract (D-038).
+export const phone = z
   .string()
   .max(20)
   .transform((v) => v.replace(/[\s-]/g, "").replace(/^(\+91|0091|91|0)(?=\d{10}$)/, ""))

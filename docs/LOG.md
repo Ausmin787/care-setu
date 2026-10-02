@@ -314,3 +314,20 @@ Template:
 - Device audit on /nope (MSYS_NO_PATHCONV=1, 9 sizes): all OK. Committed on Sasanka's instruction.
 - Not verified: real devices, open-state robots/sitemap output outside the unit test.
 - Next: Sasanka's check, then the remaining heavy pages; content swaps and still-lifes after the front end is complete.
+
+## 2026-10-02 · Stage 5 · Partner page (heavy): the re-deal, the check file, a form that sends nothing (D-038)
+- Model/effort: Opus 5.5. Plan mode first; plan approved; all three recommended options picked.
+- Read: Blueprint in full (§19 included), OWNER-TASTE, D-013/D-033/D-036/D-037, Q16; the founders' deck p.24A/24B/25
+  rendered at full size (PyMuPDF; the deck pages are images, not text).
+- Research: Cue Kit (Morphing Bento Prompt spec read in full; Sticky Cascade, Stacker Bento, Segmented Progress, Helix
+  Ribbon previews as frame sheets), GetLayers sections, Godly, Mobbin (logged in: Kajabi, Maze, Webflow, Zendesk
+  partner sections), Honor (genre), Design Spells (sitemap search; Uber seats, Claude effort, Figma, Lost Post),
+  Unlumen, Smooth UI, Skiper, 21st.dev. Ledger and skipped list in `docs/plans/stage-5-partner.md`.
+- Legal check: IMC Regulations 2002 cl. 6.4.1 (no commission for referring a patient; the NMC 2023 rules are in
+  abeyance) → the deck's referral money left out (C-085), Q21 asked, the claims test bans the words.
+- Built: see D-038. Commands → result: `npm run green` passed (137 tests); Playwright motion probes, keyboard, form,
+  reduced motion; device audit 9 sizes; impeccable 1280/390 (one contrast fix); production on :3100 (stopped by PID).
+- Slips: captures first saved into `refs/` while in plan mode, moved to the scratchpad, copied back after approval.
+- Home reel finding: measured as a clipped-by-design mid-slide panel, not a bug; the device audit now skips controls
+  clipped out by an ancestor (overlay negative test still caught). Home, Services, About, Partner x 9 sizes: clean.
+- Not verified: real devices, a screen reader, owner review (Q15, Q16, Q21).

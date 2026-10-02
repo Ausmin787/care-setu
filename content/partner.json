@@ -1,0 +1,115 @@
+{
+  "_note": "Partner page (D-038). The founders' deck p.24A (hospitals), 24B (doctors) and 25 (professionals, the five checks), cut only: the referral money, the hospital names, the certifications, tele-consult, the doctor app and digital integration are left out (C-085, C-006, C-001..C-005, D-001). Every block is pending (Q15, Q16, Q21), so it renders in development only (D-029). The service names in each stack are the approved launch services (D-024).",
+  "audiences": [
+    {
+      "slug": "hospital",
+      "claim": "C-080",
+      "pending": true,
+      "headline": { "lead": "Patient care doesn’t end", "rest": "at discharge." },
+      "lede": "Care Setu partners with hospitals to extend quality care beyond hospital walls to the patient’s home.",
+      "stack": {
+        "title": "What we take on",
+        "items": ["Nurse at Home", "GDA at Home", "Nursing procedures", "ICU care at home", "Doctor at Home", "Physiotherapy", "Lab sample collection", "Equipment"]
+      },
+      "why": {
+        "title": "Why hospitals partner with us",
+        "items": [
+          { "head": "Continuity of care", "text": "Continuity of care improves outcomes and reduces readmissions." },
+          { "head": "No home care team?", "text": "Hospitals without in-house home care struggle to provide post-discharge care, follow-ups and chronic care management." },
+          { "head": "Your extended care arm", "text": "Care Setu becomes your extended care arm, without any operational investment." }
+        ]
+      },
+      "offer": {
+        "title": "What we bring",
+        "items": [
+          { "head": "End-to-end home care", "text": "Post-discharge care, nursing, physiotherapy and diagnostics." },
+          { "head": "Quality assurance", "text": "Trained professionals, protocol-driven care, regular audits and feedback loops." },
+          { "head": "Loyalty and trust", "text": "Build patient loyalty and trust with seamless home care experiences." }
+        ]
+      },
+      "quote": "Together, we create a seamless continuum of care, from hospital to home."
+    },
+    {
+      "slug": "doctor",
+      "claim": "C-081",
+      "pending": true,
+      "headline": { "lead": "Stay connected with your patients", "rest": "even after discharge." },
+      "lede": "A strong, continuous relationship between doctors and patients.",
+      "stack": {
+        "title": "What we arrange at home",
+        "items": ["Nurse at Home", "GDA at Home", "Nursing procedures", "ICU care at home", "Doctor at Home", "Physiotherapy", "Lab sample collection", "Equipment"]
+      },
+      "why": {
+        "title": "Why doctors work with us",
+        "items": [
+          { "head": "A direct relationship", "text": "Extended reach to your patients beyond the clinic." },
+          { "head": "Better compliance", "text": "Regular follow-ups and support improve treatment adherence." },
+          { "head": "Focus on what you do best", "text": "You treat. We take care of the rest, at the patient’s home." }
+        ]
+      },
+      "offer": {
+        "title": "What your patients get",
+        "items": [
+          { "head": "Care in the comfort of home" },
+          { "head": "Continuous monitoring" },
+          { "head": "Fewer hospital visits" },
+          { "head": "Peace of mind for the family" }
+        ]
+      },
+      "quote": "One patient. One family. One continuous care experience."
+    },
+    {
+      "slug": "professional",
+      "claim": "C-082",
+      "pending": true,
+      "headline": { "lead": "Join the network", "rest": "and take on home visits." },
+      "lede": "We handle the operational complexity, with professionalism and compassion, so you can focus on patient care.",
+      "stack": {
+        "title": "Visits you could take on",
+        "items": ["Nurse at Home", "GDA at Home", "Nursing procedures", "ICU care at home", "Doctor at Home", "Physiotherapy", "Lab sample collection", "Equipment"]
+      },
+      "why": {
+        "title": "Who we’re looking for",
+        "items": [
+          { "head": "Doctors", "text": "MBBS, MD/MS, DM/MCh specialists." },
+          { "head": "Nurses", "text": "GNM, B.Sc Nursing; trained and experienced." },
+          { "head": "Physiotherapists", "text": "BPT / MPT, rehabilitation experts." },
+          { "head": "Lab technicians", "text": "Certified and trained." },
+          { "head": "Care experts", "text": "Trained attendants, counsellors and wellness coaches." }
+        ]
+      },
+      "offer": {
+        "title": "How we work",
+        "items": [
+          { "head": "Standard operating procedures", "text": "Defined for every service and situation." },
+          { "head": "Training and upskilling", "text": "Clinical skills, safety and soft skills." },
+          { "head": "Audits and feedback", "text": "Routine service audits and patient feedback." }
+        ]
+      },
+      "quote": "Care Setu works hand in hand with hospitals, doctors and healthcare professionals to extend seamless care to patients at home."
+    }
+  ],
+  "start": {
+    "claim": "C-084",
+    "pending": true,
+    "title": "How it starts",
+    "steps": {
+      "hospital": ["Tell us about your hospital", "We call you back", "We meet and agree how we work together"],
+      "doctor": ["Tell us about your practice", "We call you back", "We meet and agree how we work together"],
+      "professional": ["Tell us about you", "The five checks", "Your first visits, reviewed"]
+    }
+  },
+  "checks": {
+    "claim": "C-083",
+    "pending": true,
+    "title": "How we check everyone who goes into a home",
+    "lede": "Five checks, before anyone visits a family.",
+    "items": [
+      { "name": "Documents", "text": "Degrees, registration, ID proof and experience certificates." },
+      { "name": "Background", "text": "Professional history, references and an employment check." },
+      { "name": "Clinical assessment", "text": "A knowledge test or skill assessment, where it applies." },
+      { "name": "Trial and review", "text": "First assignments are monitored for the quality of care." },
+      { "name": "Continuous monitoring", "text": "Regular performance reviews and patient feedback." }
+    ]
+  }
+}

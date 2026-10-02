@@ -60,6 +60,8 @@ cited decision is the authority. Read it before acting on an edge case.
 
 30. **Search engines are kept out unless the environment is production with an https `APP_BASE_URL`**: otherwise `/robots.txt` disallows everything and the sitemap is empty. Private and draft paths (`/pay`, `/api/`, `/dev`, legal drafts) never enter the sitemap. The promotions banner renders only when `promotion` is set in config, and never computes a discount. (D-037, D-013)
 
+31. **The partner form runs in development only (`partnerEnquiryLive: false`) and sends nothing**: it checks input against the zod contract and shows a sample confirmation; production shows the phone and email only, until a D-entry answers Q16 (form wanted, recipient), wires the Partner API and extends the privacy notice to partner data. **No copy offers money for referrals** (incentives, revenue share, commission; IMC Regulations 2002 cl. 6.4.1) unless Q21 is answered with legal advice. (D-038)
+
 ---
 
 ## Open — do NOT treat these as decided

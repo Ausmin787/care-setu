@@ -1,0 +1,273 @@
+/* The partner form (D-038): the enquiry's field system (components/contact/Enquiry.module.css: GOV.UK label, hint,
+   error, input; yellow focus ring with an ink edge; errors in ink, bold, with the warning icon, never red) on one page. */
+.form {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+.fieldset {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.field {
+  width: 100%;
+  min-width: 0;
+}
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  align-items: end;
+  width: 100%;
+  max-width: 720px;
+}
+.label {
+  display: block;
+  margin: 24px 0 6px;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.fieldset .label {
+  margin-top: 0;
+}
+.hint {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: var(--c-muted);
+}
+.input {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 2px solid var(--c-muted);
+  border-radius: 16px;
+  background: var(--c-canvas);
+  color: var(--c-ink);
+  font: 400 20px/1.4 var(--sans);
+}
+textarea.input {
+  min-height: 160px;
+  resize: vertical;
+}
+.input:focus-visible {
+  outline: 4px solid var(--c-heat);
+  outline-offset: 0;
+  border-color: var(--c-ink);
+  box-shadow: inset 0 0 0 1px var(--c-ink);
+}
+.input[aria-invalid] {
+  border-width: 3px;
+  border-color: var(--c-ink);
+}
+
+/* "I'm writing as": three option cards, each with its line colour in the dot (a disc, INVARIANT 27). */
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 720px;
+  margin-top: 12px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 16px;
+  border: 2px solid var(--c-muted);
+  border-radius: 16px;
+  background: var(--c-canvas);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.option:hover {
+  border-color: var(--c-ink);
+}
+.option:has(:checked) {
+  border-color: var(--c-ink);
+  background: var(--c-ink);
+  color: var(--c-canvas);
+}
+.option:has(:focus-visible) {
+  outline: 3px solid var(--c-ink);
+  outline-offset: 3px;
+}
+.option i {
+  display: none;
+}
+.radio {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+.radio::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  scale: 0;
+  transition: scale 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.radio:checked::before {
+  scale: 1;
+}
+.radio:focus-visible {
+  outline: none;
+  background: none;
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0 0;
+  max-width: 48ch;
+  padding-left: 14px;
+  border-left: 4px solid var(--c-ink);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.error svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+}
+.summary {
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 20px;
+  padding: 18px 22px;
+  border: 3px solid var(--c-ink);
+  border-radius: 16px;
+}
+.summary:focus {
+  outline: 4px solid var(--c-heat);
+  outline-offset: 2px;
+}
+/* Tailwind preflight resets heading weights and list markers (Blueprint §11). */
+.summary h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+.summary ul {
+  margin: 8px 0 0;
+  padding-left: 22px;
+  list-style: disc;
+  font-size: 19px;
+}
+.summary a {
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 56ch;
+  margin-top: 28px;
+  font-size: 19px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.consent input {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--color-ink);
+}
+.consent a {
+  font-weight: 700;
+}
+.hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* The development sample marker (D-029's dashed "awaiting owner" language, as a line). */
+.sample {
+  max-width: 56ch;
+  margin: 24px 0 20px;
+  padding: 10px 14px;
+  border: 1.5px dashed currentColor;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.done {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.done .sample {
+  margin: 0 0 8px;
+}
+.done h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1;
+}
+.done h3:focus {
+  outline: none;
+}
+.next {
+  margin: 0;
+  max-width: 44ch;
+  font-size: 20px;
+  line-height: 1.45;
+}
+.again {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--c-ink);
+  font: 700 19px/1.3 var(--sans);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  cursor: pointer;
+}
+.again:focus-visible {
+  outline: 3px solid var(--c-ink);
+  outline-offset: 3px;
+  background: var(--c-heat);
+}
+
+@media (max-width: 720px) {
+  .pair,
+  .options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { IconCircleArrowRightFilled } from "@tabler/icons-react";
-import { lines, t } from "@/lib/content";
+import { lines, shown, t } from "@/lib/content";
 import { Thread } from "@/components/motion/Thread";
 import s from "./Colonnade.module.css";
 
@@ -89,12 +89,19 @@ export function Colonnade() {
               <div className={s.detail} id={id} hidden={i !== active}>
                 <div className={s.foot}>
                   <ul className={s.svcs}>
-                    {line.services.map((svc, j) => (
-                      <li key={svc.slug} style={{ "--i": j } as React.CSSProperties}>
-                        <span>{svc.name}</span>
-                        <span>{svc.who}</span>
+                    {/* The equipment ways await the owners (C-099, D-044): production names none, only the summary. */}
+                    {line.summary && !shown(line.ways) ? (
+                      <li style={{ "--i": 0 } as React.CSSProperties}>
+                        <span>{line.summary.text}</span>
                       </li>
-                    ))}
+                    ) : (
+                      line.services.map((svc, j) => (
+                        <li key={svc.slug} style={{ "--i": j } as React.CSSProperties}>
+                          <span>{svc.name}</span>
+                          <span>{svc.who}</span>
+                        </li>
+                      ))
+                    )}
                   </ul>
                   <Link className="btn sm" href="/contact">
                     {c.ask}

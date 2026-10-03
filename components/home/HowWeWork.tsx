@@ -8,7 +8,7 @@ import s from "./HowWeWork.module.css";
 
 const p = t.promise;
 
-// How we work with you (D-030): the approved promises (C-024, C-025, C-031, C-032) as one statement that inks in
+// How we work with you (D-030): the approved promises (C-024, C-025, C-031, C-097) as one statement that inks in
 // as it is read, beside the live call status (the instrument, Blueprint 8.3) and the two ways to reach us.
 export function HowWeWork() {
   const kicker = shown(t.story.line);
@@ -38,9 +38,11 @@ export function HowWeWork() {
         {kicker && (
           <p className={s.kicker}>
             {kicker.text}
-            <span className="pending" title={t.pending.title}>
-              {t.pending.tag}
-            </span>
+            {kicker.pending && (
+              <span className="pending" title={t.pending.title}>
+                {t.pending.tag}
+              </span>
+            )}
           </p>
         )}
         <InkStatement className={s.statement}>

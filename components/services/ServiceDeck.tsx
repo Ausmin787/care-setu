@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { IconCircleArrowRightFilled, IconCircleCheckFilled } from "@tabler/icons-react";
-import { formatPaise, lines, shown, shownPrice, t, type Line } from "@/lib/content";
+import { formatPaise, lines, serviceDetailsOpen, shown, shownPrice, t, type Line } from "@/lib/content";
+import { morphName } from "@/lib/services";
 import { Deck } from "@/components/motion/Deck";
 import s from "./ServiceDeck.module.css";
 
@@ -11,12 +13,17 @@ const d = p.deck;
 type Service = (typeof lines)[number]["services"][number];
 export type DeckCard = {
   id: string;
+  // The card's detail page, /services/<slug> (D-043).
+  slug: string;
   line: Line;
   lineName: string;
   name: string;
   who: string;
   text?: string;
   parts?: Service[];
+  // The equipment card (D-044): its parts show only while their row is shown; otherwise the approved summary.
+  ways?: { claim: string; pending: boolean };
+  summary?: { text: string; who: string };
   scope?: Service["scope"];
   price?: Service["price"];
   image?: Service["image"];
@@ -31,11 +38,14 @@ export const deckCards: DeckCard[] = lines.flatMap((line): DeckCard[] =>
     ? [
         {
           id: `card-${line.slug}`,
+          slug: line.slug,
           line: line.line,
           lineName: line.name,
           name: line.name,
           who: d.equipmentWho,
           parts: line.services,
+          ways: line.ways,
+          summary: line.summary,
           // No item list here: the equipment sheet right after the deck lists the items side by side.
           price: line.services[0].price,
           image: line.services[0].image,
@@ -44,6 +54,7 @@ export const deckCards: DeckCard[] = lines.flatMap((line): DeckCard[] =>
       ]
     : line.services.map((svc) => ({
         id: `card-${svc.slug}`,
+        slug: svc.slug,
         line: line.line,
         lineName: line.name,
         name: svc.name,
@@ -72,6 +83,7 @@ function PendingTag({ pending }: { pending: boolean }) {
 // Cascade's chapter counter. Resting state (no JS, touch, reduced motion) is the cards in order; Deck pins and deals them.
 export function ServiceDeck() {
   const total = two(deckCards.length);
+  const detailLink = serviceDetailsOpen();
   return (
     <section className={s.sec} data-mode="ink" id="services" aria-labelledby="deck-title">
       <Deck className={s.stage}>
@@ -86,6 +98,8 @@ export function ServiceDeck() {
             {deckCards.map((card, i) => {
               const scope = shown(card.scope);
               const price = shownPrice(card.price);
+              const parts = card.parts && shown(card.ways) ? card.parts : undefined;
+              const generic = card.summary && !parts ? card.summary : undefined;
               return (
                 <li
                   key={card.id}
@@ -106,12 +120,12 @@ export function ServiceDeck() {
                       </div>
                       <p className={s.meta}>
                         <i aria-hidden="true" />
-                        {card.who} · {card.lineName}
+                        {generic ? generic.who : card.who} · {card.lineName}
                       </p>
-                      {card.text && <p className={s.lede}>{card.text}</p>}
-                      {card.parts && (
+                      {(card.text ?? generic?.text) && <p className={s.lede}>{card.text ?? generic?.text}</p>}
+                      {parts && (
                         <dl className={s.parts}>
-                          {card.parts.map((part) => (
+                          {parts.map((part) => (
                             <div key={part.slug}>
                               <dt>{part.name}</dt>
                               <dd>{part.text}</dd>
@@ -151,28 +165,41 @@ export function ServiceDeck() {
                           {p.ask} {card.ask}
                           <IconCircleArrowRightFilled aria-hidden="true" />
                         </Link>
+                        {/* The card opens into its page (D-043), in development until serviceDetailsLive. */}
+                        {detailLink && (
+                          <Link
+                            className={s.more}
+                            href={`/services/${card.slug}`}
+                            aria-label={`${t.serviceDetail.open}: ${card.name}`}
+                          >
+                            {t.serviceDetail.open}
+                          </Link>
+                        )}
                       </div>
                     </div>
-                    <div className={s.media}>
-                      {card.image ? (
-                        <Image
-                          className={s.img}
-                          src={card.image.src}
-                          alt={card.image.alt}
-                          fill
-                          sizes="(max-width: 900px) 92vw, 540px"
-                          style={{ objectPosition: `50% ${card.image.focus}` }}
-                        />
-                      ) : (
-                        <>
-                          <span className={s.n} aria-hidden="true">
-                            {two(i + 1)}
-                          </span>
-                          {/* A note for the owners' review only; visitors see the type-led slot. */}
-                          {process.env.NODE_ENV !== "production" && <span className={s.soon}>{d.imageSlot}</span>}
-                        </>
-                      )}
-                    </div>
+                    {/* The shared element: this panel morphs into the detail page's hero (D-043). */}
+                    <ViewTransition name={morphName(card.slug)} share="morph" default="none">
+                      <div className={s.media}>
+                        {card.image ? (
+                          <Image
+                            className={s.img}
+                            src={card.image.src}
+                            alt={card.image.alt}
+                            fill
+                            sizes="(max-width: 900px) 92vw, 540px"
+                            style={{ objectPosition: `50% ${card.image.focus}` }}
+                          />
+                        ) : (
+                          <>
+                            <span className={s.n} aria-hidden="true">
+                              {two(i + 1)}
+                            </span>
+                            {/* A note for the owners' review only; visitors see the type-led slot. */}
+                            {process.env.NODE_ENV !== "production" && <span className={s.soon}>{d.imageSlot}</span>}
+                          </>
+                        )}
+                      </div>
+                    </ViewTransition>
                   </article>
                 </li>
               );

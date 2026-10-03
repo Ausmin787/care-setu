@@ -21,6 +21,8 @@ const SiteConfig = z.object({
   paymentsLive: z.boolean(),
   // The partner form goes live only when a D-entry answers Q16 and wires the Partner API (D-038, INVARIANT 31).
   partnerEnquiryLive: z.boolean(),
+  // The service detail pages go live only when a D-entry turns them on after C-088..C-095 are approved (D-043).
+  serviceDetailsLive: z.boolean(),
 });
 
 export const LINES = ["lime", "blue", "olive"] as const;
@@ -46,6 +48,19 @@ export const Illustration = z.object({
   claim: z.string().regex(/^C-\d{3}$/),
 });
 
+// A stop on a service's route: a short title and one sentence.
+const Stop = z.object({ title: z.string().min(1), text: z.string().min(1) });
+// A detail page's own content (D-043): the founders' deck lists, pending until the owners approve the row. Empty lists
+// hide their section; `assess` is the service's own step between the callback and the quote, `begins` its last stop.
+const Detail = z.object({
+  ...claimed,
+  forWhom: z.array(z.string()),
+  includes: z.array(z.string()),
+  assess: Stop.optional(),
+  begins: Stop,
+});
+export type Detail = z.infer<typeof Detail>;
+
 const Service = z.object({
   slug: z.string(),
   name: z.string(),
@@ -54,9 +69,10 @@ const Service = z.object({
   scope: z.object({ ...claimed, items: z.array(z.string()).min(1) }).optional(),
   price: Price.optional(),
   image: Illustration.optional(),
+  detail: Detail.optional(),
 });
 
-// The eight launch services (D-024) in three lines (D-025).
+// The eight launch services (D-024) in three lines (D-025). The equipment line is one page, so it carries its detail.
 const CatalogueLine = z.object({
   slug: z.string(),
   number: z.string(),
@@ -64,6 +80,11 @@ const CatalogueLine = z.object({
   name: z.string(),
   whoLabel: z.string(),
   services: z.array(Service).min(1),
+  detail: Detail.optional(),
+  // The equipment line (D-044): its ways (rent, buy, sell back) await the owners (C-099), so production shows the
+  // approved summary (C-098) instead.
+  summary: z.object({ ...claimed, text: z.string().min(1), who: z.string().min(1) }).optional(),
+  ways: z.object(claimed).optional(),
 });
 
 const Equipment = z.object({
@@ -101,6 +122,11 @@ export function paymentsOpen(): boolean {
 // D-038: the partner form runs in development (and sends nothing) until `partnerEnquiryLive` is set by a D-entry.
 export function partnerEnquiryOpen(): boolean {
   return config.partnerEnquiryLive || process.env.NODE_ENV !== "production";
+}
+
+// D-043: the service detail pages run in development until `serviceDetailsLive` is set by a D-entry.
+export function serviceDetailsOpen(): boolean {
+  return config.serviceDetailsLive || process.env.NODE_ENV !== "production";
 }
 
 export function shownPrice(price: Price | undefined): Price | undefined {

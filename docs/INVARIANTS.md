@@ -49,7 +49,7 @@ cited decision is the authority. Read it before acting on an edge case.
 ## Platform and process
 
 21. **Vendor-neutral: Drizzle over plain Postgres, PGlite in dev.** No vendor-only feature as the sole access control. (D-002)
-22. **Nothing is hosted until the owners choose; Vercel Hobby is never used.** (D-002)
+22. **Hosting is the owners' choice; Vercel Hobby is never used.** The only deploy is the owners' public Netlify staging site, auto-publishing from `main`: `main` is the release branch, so a push is a release. Production host, database and email remain open (Q1). (D-002, D-042)
 23. **Git commit, push, repo creation and deploy need Sasanka's explicit permission, every time.** (D-015)
 24. **Agent reports are evidence, not truth.** Spot-check load-bearing claims. Platform and legal claims need a current primary-source citation. (D-016)
 25. **Open owner questions are never answered by a default.** Build behind configuration and keep the question open. (D-016)
@@ -61,6 +61,8 @@ cited decision is the authority. Read it before acting on an edge case.
 30. **Search engines are kept out unless the environment is production with an https `APP_BASE_URL`**: otherwise `/robots.txt` disallows everything and the sitemap is empty. Private and draft paths (`/pay`, `/api/`, `/dev`, legal drafts) never enter the sitemap. The promotions banner renders only when `promotion` is set in config, and never computes a discount. (D-037, D-013)
 
 31. **The partner form runs in development only (`partnerEnquiryLive: false`) and sends nothing**: it checks input against the zod contract and shows a sample confirmation; production shows the phone and email only, until a D-entry answers Q16 (form wanted, recipient), wires the Partner API and extends the privacy notice to partner data. **No copy offers money for referrals** (incentives, revenue share, commission; IMC Regulations 2002 cl. 6.4.1) unless Q21 is answered with legal advice. (D-038)
+
+32. **Service detail pages (`/services/<slug>`) run in development only (`serviceDetailsLive: false`)**: production 404s them, the deck cards don't link there and the sitemap omits them, until a D-entry turns them on after the owners approve their rows (C-088..C-095). (D-043)
 
 ---
 

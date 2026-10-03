@@ -1,0 +1,626 @@
+/* A service detail page (D-043, "the card opens"). Skeleton from GetLayers Aerra (refs/care-setu/service-detail/):
+   headline + an inset image that opens to full bleed, "About", facts, "Who this is for", a close. Warm Room surfaces:
+   the hero is the Services deck's ink stage, the rest parchment, the close sand. The service's line colour (from
+   `data-line` on the article) tints its panel and marks its discs, the only chroma (INVARIANT 27). */
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-top: calc(var(--nav-h) + 24px);
+  background: var(--c-canvas);
+  color: var(--c-ink);
+}
+.heroTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.crumbs li + li::before {
+  content: "/" / "";
+  margin-right: 10px;
+  color: var(--c-muted);
+}
+.crumbs a {
+  display: inline-block;
+  padding-block: 10px;
+  color: var(--c-muted);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+.crumbs a:hover {
+  color: var(--c-ink);
+}
+/* The deck card's number, as the Cards Cascade counter on the Services page. */
+.count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--serif);
+  font-size: 34px;
+  line-height: 1;
+}
+.count small {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.heroHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 24px clamp(24px, 5vw, 80px);
+  align-items: end;
+  padding-block: clamp(20px, 4vh, 48px) clamp(28px, 5vh, 56px);
+}
+/* Height-aware (Blueprint 6.2): two lines at 0.94 should take at most ~30% of a short laptop screen. */
+.title {
+  margin: 0;
+  font-size: clamp(52px, min(8.4vw, 15vh), 136px);
+  text-wrap: balance;
+}
+.heroSide {
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+}
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.meta i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--line);
+  flex: none;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+.tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 19px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.tel svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* The dolly: --open 0 (resting: an inset card with 20px corners, the deck card's tint behind the image) to 1 (full
+   bleed), scrubbed by Dolly. Only the clip window moves; the image never scales. */
+.dolly {
+  --open: 0;
+  --inset: var(--gutter);
+}
+.panel {
+  position: relative;
+  height: clamp(280px, 62svh, 760px);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--line) 62%, var(--color-parchment));
+  clip-path: inset(
+    0 calc((1 - var(--open)) * var(--inset)) calc((1 - var(--open)) * var(--inset))
+      round calc((1 - var(--open)) * 20px)
+  );
+}
+.img {
+  object-fit: cover;
+}
+/* Type-led slot when a service has no still-life: its number set huge. */
+.n {
+  position: absolute;
+  left: 24px;
+  bottom: 12px;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--serif);
+  font-size: clamp(120px, 16vw, 220px);
+  font-weight: 300;
+  line-height: 0.8;
+  color: color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+
+/* ---------- Parchment sections ---------- */
+.sec {
+  padding-block: clamp(64px, 9vw, 128px) 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 24px clamp(24px, 5vw, 80px);
+  align-items: start;
+}
+/* The label column stays beside its long list (Aerra keeps the label at the left). */
+.split > :first-child {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+}
+/* Section label (Aerra's "• About the house"): sentence case, a disc in the line colour. */
+.label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.label i,
+.disc {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  box-shadow: 0 0 0 2px var(--c-ink);
+  flex: none;
+}
+.lede {
+  max-width: 30ch;
+  margin: 10px 0 0;
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--c-muted);
+}
+
+.aboutText {
+  max-width: 24ch;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 350;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.parts {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+}
+.parts dt {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 350;
+  line-height: 1.05;
+}
+.parts dd {
+  max-width: 46ch;
+  margin: 6px 0 0;
+  font-size: 19px;
+  line-height: 1.45;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px clamp(16px, 3vw, 40px);
+  margin: 40px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--c-line);
+}
+.facts dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--c-muted);
+}
+.facts dt svg {
+  width: 20px;
+  height: 20px;
+  color: var(--c-ink);
+  flex: none;
+}
+.facts dd {
+  margin: 8px 0 0;
+  font-size: 19px;
+  line-height: 1.4;
+}
+.price {
+  margin: 24px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.fine {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--c-muted);
+}
+
+/* Who it's for: a numbered serif index (Aerra's numbered situations, set as rows). */
+.index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--c-line);
+}
+.index li {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding-block: clamp(16px, 2.2vw, 26px);
+  border-bottom: 1px solid var(--c-line);
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.6vw, 36px);
+  font-weight: 350;
+  /* Display serif (Blueprint 6.1): tighter than body, eased from 1.15 so two-line rows breathe on phones. */
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+.num {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--c-muted);
+}
+
+/* What's included: the still-life sticks beside the list while it ticks. */
+.kitSec {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 32px clamp(24px, 5vw, 80px);
+  align-items: start;
+}
+.kitAside {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+}
+.kitFrame {
+  position: relative;
+  margin-top: 28px;
+  aspect-ratio: 4 / 3;
+  max-height: 48svh;
+  overflow: hidden;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+}
+.kit {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--c-line);
+}
+.kit li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--c-line);
+}
+.kit li p {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.35;
+}
+.tick {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--line);
+  box-shadow: 0 0 0 2.5px var(--c-ink);
+  transition:
+    background-color 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tick svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tick path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+/* Live (JS-added by Ticks): unticked rows show an empty ring until they cross 70% of the screen. */
+.kit[data-live] li:not([data-ticked]) .tick {
+  background: var(--c-canvas);
+  transform: scale(0.86);
+}
+.kit[data-live] li:not([data-ticked]) .tick path {
+  stroke-dashoffset: 1;
+}
+
+/* Your route: a horizontal strip in the line colour (Home's trip is vertical and scrubbed; this one is drawn once as it
+   comes into view, CSS only). The line is cased in ink so lime reads on parchment. */
+.routeHead {
+  margin-bottom: 40px;
+}
+.stops {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stops::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  /* Ends at the centre of the last disc: one column's width (less the 24px gaps) from the right, plus half a disc. */
+  right: calc((100% - (var(--n) - 1) * 24px) / var(--n) - 19px);
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  box-shadow: 0 0 0 2px var(--c-ink);
+  transform-origin: 0 50%;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stops::before {
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+  }
+}
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes drawY {
+  from {
+    transform: scaleY(0);
+  }
+}
+.stops li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+.stopDisc {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--c-canvas);
+  box-shadow: 0 0 0 3px var(--c-ink);
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.stops h3 {
+  margin: 0;
+  text-wrap: balance;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+.stops p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-muted);
+  box-shadow: 0 0 0 2px var(--c-ink);
+}
+.status[data-open="true"] .dot {
+  background: var(--color-line-lime);
+}
+
+/* The other services in the line: tiles whose still-life becomes the next page's hero. */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 20px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tile {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 12px 12px 18px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.tile:hover {
+  background: color-mix(in srgb, var(--line) 55%, var(--color-parchment));
+}
+.tileStill {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--line) 62%, var(--color-parchment));
+}
+.tileStill .n {
+  font-size: 88px;
+  left: 14px;
+}
+.tileText {
+  display: grid;
+  gap: 4px;
+  padding-inline: 6px;
+  padding-right: 52px;
+}
+.tileLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+.tileName {
+  text-wrap: balance;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.05;
+}
+.tileWho {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+.tileArrow {
+  position: absolute;
+  right: 16px;
+  bottom: 18px;
+  width: 38px;
+  height: 38px;
+  color: var(--color-ink);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tile:hover .tileArrow {
+  transform: translateX(3px);
+}
+
+/* ---------- Close (sand, as the Services page's closing band) ---------- */
+.close {
+  margin-top: clamp(72px, 10vw, 140px);
+  padding-block: clamp(64px, 9vw, 120px);
+  background: var(--c-sand);
+}
+.closeIn {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px clamp(24px, 5vw, 80px);
+  align-items: start;
+}
+.closeIn h2 {
+  margin: 0;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.back {
+  display: inline-block;
+  margin-top: 24px;
+  padding-block: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+.back:hover {
+  text-decoration-thickness: 3px;
+}
+.closeSide {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+.closeText {
+  max-width: 36ch;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.45;
+}
+.promise {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ---------- Phones and narrow tablets ---------- */
+@media (max-width: 900px) {
+  .heroHead,
+  .split,
+  .kitSec,
+  .closeIn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .panel {
+    height: clamp(240px, 58vw, 420px);
+  }
+  .kitAside,
+  .split > :first-child {
+    position: static;
+  }
+  .kitFrame {
+    display: none;
+  }
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* The route turns vertical: the line runs down the left, through the discs. */
+  .stops {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .stops::before {
+    top: 18px;
+    bottom: 18px;
+    left: 16px;
+    right: auto;
+    width: 6px;
+    height: auto;
+    transform-origin: 50% 0;
+    animation-name: drawY;
+  }
+  .stops li {
+    padding-left: 56px;
+  }
+  .stopDisc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+  }
+}

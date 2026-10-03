@@ -2,7 +2,7 @@
   "_note": "Draft copy (D-021). Owners approve before launch. Every factual line maps to an approved row in docs/CLAIMS.md.",
   "meta": {
     "title": "Care Setu: care after hospital, at home",
-    "description": "Care Setu arranges care at home after a hospital stay in Noida and Delhi. Tell us what is needed and a coordinator calls you back with a care plan and a quote."
+    "description": "Care Setu arranges care at home after a hospital stay, across India. Tell us what is needed and a coordinator calls you back with a care plan and a quote."
   },
   "nav": {
     "home": "Care Setu home",
@@ -21,13 +21,29 @@
     "lede": "Tell us what the patient needs after a hospital stay. We arrange the care at home as one plan.",
     "cta": "Talk to us",
     "reassure": [
-      { "icon": "phone", "text": "A coordinator calls you back", "claim": "C-025" },
-      { "icon": "invoice", "text": "A care plan and a quote before you pay", "claim": "C-024" },
-      { "icon": "pin", "text": "Care at home in Noida and Delhi", "claim": "C-032" }
+      {
+        "icon": "phone",
+        "text": "A coordinator calls you back",
+        "claim": "C-025"
+      },
+      {
+        "icon": "invoice",
+        "text": "A care plan and a quote before you pay",
+        "claim": "C-024"
+      },
+      {
+        "icon": "pin",
+        "text": "Care at home across India",
+        "claim": "C-097"
+      }
     ],
     "emergencyTitle": "Emergency? Call 112.",
     "emergencyText": "Home care is not emergency care.",
-    "status": { "open": "Taking calls now, until 10 PM", "closed": "Calls open again at 7 AM", "claim": "C-031" },
+    "status": {
+      "open": "Taking calls now, until 10 PM",
+      "closed": "Calls open again at 7 AM",
+      "claim": "C-031"
+    },
     "videoPause": "Pause background video",
     "videoPlay": "Play background video"
   },
@@ -36,27 +52,51 @@
     "lede": "Every family follows the same route. You always know which stop you are at.",
     "legEnquiry": "Your enquiry",
     "legEnquiryDir": "Takes a few minutes",
-    "stopAsk": { "title": "You tell us what is needed", "text": "Five short questions online. Nothing is shared until you agree." },
-    "stopAskCall": { "title": "You tell us what is needed", "text": "Call or WhatsApp us and tell us about the patient." },
-    "walk": { "title": "A coordinator calls you back", "text": "To understand the patient, the home and the doctor's advice." },
+    "stopAsk": {
+      "title": "You tell us what is needed",
+      "text": "Five short questions online. Nothing is shared until you agree."
+    },
+    "stopAskCall": {
+      "title": "You tell us what is needed",
+      "text": "Call or WhatsApp us and tell us about the patient."
+    },
+    "walk": {
+      "title": "A coordinator calls you back",
+      "text": "To understand the patient, the home and the doctor's advice."
+    },
     "legCareDir": "Towards home",
-    "stopPlan": { "title": "Care plan and quote", "text": "One plan and one quote, with a reference number." },
-    "stopPay": { "title": "Pay the quote, care begins", "text": "You pay against the quote reference, never before it." },
-    "stopHome": { "title": "Care at home", "text": "Questions and changes go to the Care Setu team." }
+    "stopPlan": {
+      "title": "Care plan and quote",
+      "text": "One plan and one quote, with a reference number."
+    },
+    "stopPay": {
+      "title": "Pay the quote, care begins",
+      "text": "You pay against the quote reference, never before it."
+    },
+    "stopHome": {
+      "title": "Care at home",
+      "text": "Questions and changes go to the Care Setu team."
+    }
   },
   "services": {
     "lineLabel": "Line"
   },
   "servicesPage": {
     "metaTitle": "Services | Care Setu",
-    "metaDescription": "Nursing, attendants, ICU care, doctor visits, physiotherapy, lab sample collection and medical equipment at home in Noida and Delhi.",
+    "metaDescription": "Nursing, attendants, ICU care, doctor visits, physiotherapy, lab sample collection and medical equipment at home, across India.",
     "title": "What we arrange at home",
-    "lede": "Eight services in Noida and Delhi, in three lines.",
-    "promise": { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
+    "lede": "Eight services across India, in three lines.",
+    "promise": {
+      "text": "We call back within 2 hours, every day 7 AM to 10 PM.",
+      "claim": "C-031"
+    },
     "cta": "Talk to us",
     "linesLabel": "Go to a line",
     "ask": "Talk to us about",
-    "note": { "text": "Arranged after a call, with a care plan and a quote before you pay.", "claim": "C-024" },
+    "note": {
+      "text": "Arranged after a call, with a care plan and a quote before you pay.",
+      "claim": "C-024"
+    },
     "covers": "What it covers",
     "from": "From",
     "priceNote": "A guide only. You pay against your quote.",
@@ -84,7 +124,7 @@
   },
   "aboutPage": {
     "metaTitle": "About | Care Setu",
-    "metaDescription": "Why Care Setu exists: care after hospital, at home in Noida and Delhi, and the people building it.",
+    "metaDescription": "Why Care Setu exists: care after hospital, at home across India, and the people building it.",
     "kicker": "About Care Setu",
     "fallbackTitle": "Care after hospital, at home.",
     "fallbackLede": "Connecting Care. Empowering Lives.",
@@ -112,7 +152,7 @@
     "line": {
       "text": "Treatment begins in a hospital. Healing continues at home.",
       "claim": "C-043",
-      "pending": true
+      "pending": false
     },
     "founding": {
       "text": "Care Setu was founded on a simple observation: while Indian tertiary hospitals offer world-class clinical care, discharge often leaves families anxious, isolated and unprepared. We built Setu to bridge that vulnerable threshold with dignity and clinical precision.",
@@ -122,7 +162,10 @@
   },
   "colonnade": {
     "title": "What we arrange at home",
-    "lede": { "text": "Eight services in three lines, across Noida and Delhi.", "claim": "C-032" },
+    "lede": {
+      "text": "Eight services in three lines, across India.",
+      "claim": "C-097"
+    },
     "all": "See every service",
     "ask": "Talk to us",
     "show": "Show",
@@ -144,10 +187,21 @@
   "promise": {
     "label": "How we work with you",
     "sentences": [
-      { "text": "Tell us what the patient needs after a hospital stay." },
-      { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
-      { "text": "You get a care plan and a quote before you pay, and you pay against the quote.", "claim": "C-024" },
-      { "text": "Care at home in Noida and Delhi.", "claim": "C-032" }
+      {
+        "text": "Tell us what the patient needs after a hospital stay."
+      },
+      {
+        "text": "We call back within 2 hours, every day 7 AM to 10 PM.",
+        "claim": "C-031"
+      },
+      {
+        "text": "You get a care plan and a quote before you pay, and you pay against the quote.",
+        "claim": "C-024"
+      },
+      {
+        "text": "Care at home across India.",
+        "claim": "C-097"
+      }
     ],
     "cta": "Talk to us"
   },
@@ -155,9 +209,30 @@
     "title": "Do you discharge patients, or care for them?",
     "cta": "Partner with us",
     "roles": [
-      { "for": "hospital", "tab": "Hospital", "line": "lime", "lineName": "Line 01", "title": "Hospitals and discharge desks", "text": "Hand a patient over to one team instead of five phone numbers." },
-      { "for": "doctor", "tab": "Doctor or clinic", "line": "blue", "lineName": "Line 02", "title": "Doctors and clinics", "text": "Refer a patient and know who is following your instructions at home." },
-      { "for": "professional", "tab": "Care professional", "line": "olive", "lineName": "Line 03", "title": "Nurses, attendants, therapists", "text": "Join the network and take on home visits." }
+      {
+        "for": "hospital",
+        "tab": "Hospital",
+        "line": "lime",
+        "lineName": "Line 01",
+        "title": "Hospitals and discharge desks",
+        "text": "Hand a patient over to one team instead of five phone numbers."
+      },
+      {
+        "for": "doctor",
+        "tab": "Doctor or clinic",
+        "line": "blue",
+        "lineName": "Line 02",
+        "title": "Doctors and clinics",
+        "text": "Refer a patient and know who is following your instructions at home."
+      },
+      {
+        "for": "professional",
+        "tab": "Care professional",
+        "line": "olive",
+        "lineName": "Line 03",
+        "title": "Nurses, attendants, therapists",
+        "text": "Join the network and take on home visits."
+      }
     ]
   },
   "footer": {
@@ -180,10 +255,10 @@
   },
   "contactPage": {
     "metaTitle": "Talk to us | Care Setu",
-    "metaDescription": "Call or WhatsApp Care Setu, or leave your details and a coordinator calls you back. Care at home in Noida and Delhi.",
+    "metaDescription": "Call or WhatsApp Care Setu, or leave your details and a coordinator calls you back. Care at home across India.",
     "title": "Talk to us.",
     "lede": "Call us now, or leave your details and a coordinator calls you back.",
-    "metaDescriptionClosed": "Call or WhatsApp Care Setu, every day 7 AM to 10 PM. Care at home in Noida and Delhi.",
+    "metaDescriptionClosed": "Call or WhatsApp Care Setu, every day 7 AM to 10 PM. Care at home across India.",
     "ledeClosed": "Call or WhatsApp us now, every day 7 AM to 10 PM.",
     "leave": "Leave your details",
     "cardTitle": "Call or WhatsApp",
@@ -191,7 +266,10 @@
     "whatsapp": "WhatsApp",
     "emailLabel": "Email",
     "officeLabel": "Office",
-    "office": { "text": "4B Grover Chamber, Karol Bagh, Delhi 110005", "claim": "C-030" },
+    "office": {
+      "text": "4B Grover Chamber, Karol Bagh, Delhi 110005",
+      "claim": "C-030"
+    },
     "noscript": "Leaving your details online needs JavaScript. You can call, WhatsApp or email us using the details above."
   },
   "enquiry": {
@@ -204,7 +282,11 @@
     "location": {
       "question": "Where is the patient now?",
       "why": "So the coordinator knows where care starts.",
-      "options": { "hospital": "In hospital", "home": "At home", "not_sure": "Not sure" },
+      "options": {
+        "hospital": "In hospital",
+        "home": "At home",
+        "not_sure": "Not sure"
+      },
       "error": "Choose where the patient is now"
     },
     "service": {
@@ -215,9 +297,13 @@
     },
     "area": {
       "question": "Where is the patient?",
-      "why": "We arrange care in Noida and Delhi right now.",
-      "options": { "noida": "Noida", "delhi": "Delhi", "other": "Somewhere else" },
-      "otherNote": "You can still send this. The coordinator will tell you what is possible.",
+      "why": "We arrange care across India.",
+      "options": {
+        "noida": "Noida",
+        "delhi": "Delhi",
+        "other": "Somewhere else"
+      },
+      "otherNote": "Tell the coordinator the city when they call you back.",
       "error": "Choose where the patient is"
     },
     "needs": {
@@ -460,20 +546,39 @@
     "stationsTitle": "Where were you headed?",
     "here": "You are here",
     "stations": [
-      { "href": "/", "label": "Home", "meta": "Start again" },
-      { "href": "/services", "label": "Services", "meta": "Care at home" },
-      { "href": "/about", "label": "About", "meta": "Who we are" },
-      { "href": "/contact", "label": "Talk to us", "meta": "Call or leave details" }
+      {
+        "href": "/",
+        "label": "Home",
+        "meta": "Start again"
+      },
+      {
+        "href": "/services",
+        "label": "Services",
+        "meta": "Care at home"
+      },
+      {
+        "href": "/about",
+        "label": "About",
+        "meta": "Who we are"
+      },
+      {
+        "href": "/contact",
+        "label": "Talk to us",
+        "meta": "Call or leave details"
+      }
     ],
     "needPerson": "Rather speak to a person?",
     "call": "Call"
   },
   "partnerPage": {
     "metaTitle": "Partner with us | Care Setu",
-    "metaDescription": "For hospitals, doctors and care professionals in Noida and Delhi: how Care Setu works with you to carry care on at home.",
+    "metaDescription": "For hospitals, doctors and care professionals across India: how Care Setu works with you to carry care on at home.",
     "kicker": "Partner with us",
     "switchLabel": "I’m a",
-    "area": { "text": "Visits in Noida and Delhi", "claim": "C-032" },
+    "area": {
+      "text": "Visits across India",
+      "claim": "C-097"
+    },
     "cards": {
       "stack": "One team",
       "why": "Why",
@@ -528,12 +633,15 @@
   },
   "faqPage": {
     "metaTitle": "Questions families ask | Care Setu",
-    "metaDescription": "Answers about care at home after a hospital stay in Noida and Delhi: the call back, the care plan and quote, paying, and equipment.",
+    "metaDescription": "Answers about care at home after a hospital stay, across India: the call back, the care plan and quote, paying, and equipment.",
     "title": "Questions families ask us",
     "lede": "Plain answers, in the order families usually need them.",
     "card": {
       "name": "Care Setu",
-      "promise": { "text": "We call back within 2 hours, every day 7 AM to 10 PM.", "claim": "C-031" },
+      "promise": {
+        "text": "We call back within 2 hours, every day 7 AM to 10 PM.",
+        "claim": "C-031"
+      },
       "index": "Questions about",
       "call": "Call",
       "whatsapp": "WhatsApp"
@@ -549,5 +657,49 @@
   "stub": {
     "text": "This page is built in Stage 4, one page at a time.",
     "back": "Back to home"
+  },
+  "serviceDetail": {
+    "metaTitle": "{name} | Care Setu",
+    "crumbs": "Breadcrumb",
+    "services": "Services",
+    "open": "What's included",
+    "about": "About this service",
+    "facts": {
+      "who": "Who comes",
+      "line": "Line",
+      "quote": "Before you pay"
+    },
+    "forWhom": {
+      "title": "Who it's for",
+      "lede": "The situations this service is meant for."
+    },
+    "includes": {
+      "title": "What's included",
+      "lede": "Agreed with you in the care plan, before you pay."
+    },
+    "parts": "How it works",
+    "route": {
+      "title": "Your route",
+      "lede": "From your call to care at home.",
+      "call": {
+        "title": "You call us",
+        "text": "Call or WhatsApp us and tell us about the patient."
+      },
+      "callback": {
+        "title": "A coordinator calls back",
+        "text": "Within 2 hours, every day 7 AM to 10 PM."
+      },
+      "quote": {
+        "title": "A plan and a quote",
+        "text": "A care plan and a quote before you pay."
+      }
+    },
+    "siblings": "Also in {line}",
+    "nextLine": "Next: {line}",
+    "close": {
+      "title": "Talk to us about {name}",
+      "text": "Tell us what the patient needs. We call back and work out the care plan with you."
+    },
+    "back": "All services"
   }
 }

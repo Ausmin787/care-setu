@@ -125,7 +125,7 @@ export function Switchboard(props: { views: View[]; initial: PartnerKind; startT
           </p>
         </div>
 
-        {/* The instrument (Blueprint 8.3): where visits happen (C-032) and whether calls are taken right now. */}
+        {/* The instrument (Blueprint 8.3): where visits happen (C-097) and whether calls are taken right now. */}
         <div className={s.instrument}>
           <p className={s.area}>
             <IconMapPinFilled aria-hidden="true" />

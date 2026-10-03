@@ -1204,3 +1204,131 @@ card) are by design. Taste pre-flight: the sender label made sentence case, one 
 scroll listener; dark mode waived (light-only Warm Room). Vercel guidelines: translate="no" on the brand, text-wrap,
 overflow-wrap, link hover fixed.
 **Not verified:** real Safari and devices; trackpad feel of the eased scroll; owner review. Founder copy approval (Q15).
+
+## D-042 · 2026-10-03 · The owners' Netlify staging deploy is recorded; Q1 stays open (partially supersedes D-002: "nothing is hosted until the owners choose")
+On 2026-10-02 the owners' tech team deployed the site to Netlify without a D-entry first. Read on 2026-10-03 in the Netlify
+dashboard (Chrome) and by probing the live URL. Facts: project `caresetu-app-staging`, `caresetu-app-staging.netlify.app`,
+visibility "Public", framework Next.js, deploys from the private repo `Ausmin787/care-setu` branch `main` with **auto
+publishing on** (every push or merged PR to `main` goes live in about a minute), no custom domain, no `netlify.toml`.
+The tech team works through GitHub: PR #1 (`test-branch-1`, a one-line README commit by Divyak Pratap Singh, merged
+2026-10-02) is what Netlify built (`main@a1ea98a`). Probe of the live site: per-request CSP and security headers present
+(D-022); `/robots.txt` disallows everything and the sitemap is empty (D-037); `/dev`, `/admin`, `/terms`, unbuilt service
+slugs 404; `POST /api/v1/queries` answers 404 `not_available`; `/pay` renders the closed card; the Home hero renders
+(D-040). So INVARIANTS 28, 29, 30 and 31 hold in production.
+This is **staging**, not launch: the owners said domain and hosting are "for later" and wanted the site public meanwhile.
+- **What it changes.** Anything pushed to `main` is public within a minute. D-015 (commit and push need Sasanka's explicit
+  permission) is now also the release gate. Work that is not ready goes on a branch; Netlify builds branches as deploy
+  previews only if the owners enable them (not checked).
+- **What it doesn't change.** Q1 (production host, database, email provider, budget, account ownership), Q2 (domain), the
+  enquiry/pay/partner flags and the claims register all stay as they were. No default answers any of them (INVARIANT 25).
+**Why:** a decision made outside the process still has to be written down, or the docs say "no hosting" while the site is
+live (stale docs are bugs).
+**Rejected:** objecting to a public staging deploy (the owners decided; Sasanka asked that it not be re-litigated);
+treating this as the answer to Q1; changing `main` protections or Netlify settings from here.
+**Verified:** the Netlify overview and deploys pages (read-only), response headers, `robots.txt`, `sitemap.xml`, status
+codes for 9 paths, the Home hero in Chrome, `git log origin/main`.
+**Not verified:** environment-variable names (the browser tool was denied that page; values must never be read anyway);
+whether `APP_ENV`/`APP_BASE_URL` are set (robots output implies production without an https base URL); whether Netlify's
+free plan allows commercial use and what happens past its 300-credit limit (the pricing page did not say; check the terms
+before launch); who owns the Netlify and GitHub accounts; whether deploy previews or branch deploys are on; the device
+matrix on the live URL.
+
+## D-043 · 2026-10-03 · Service detail pages: "the card opens", development only, the deck's who / includes / steps as pending
+D-013's per-service pages are kept (Sasanka asked for the template on 2026-10-03; D-036 had left keep-or-drop open).
+Research and the sample ledger: `docs/plans/stage-4-service-detail.md` (GetLayers Aerra and House, Cue Kit Cell-to-Card,
+Design Spells [untitled] morph, Motion.dev App Store layout, React Bits Scroll Expand, Skiper 23, Superpower via Mobbin,
+Unlumen Stacked Feature Cards, UI Guideline breadcrumbs; opened and skipped tools listed there). Sasanka picked the
+recommended option on all three questions:
+- **Design A, "the card opens".** `/services/<slug>`, eight pages, one per deck card (nurse, gda, procedures, icu,
+  doctor, physiotherapy, lab-samples, equipment). Each deck card's still-life panel and the page's hero panel share a
+  React `<ViewTransition>` name, so clicking "What's included" morphs the card into the page (600ms
+  `cubic-bezier(0.22, 1, 0.36, 1)`, Cue Kit's FLIP timing; Back reverses). The hero is an ink stage like the deck: the
+  service's tinted panel with its still-life, the name's words at its corners (House); scrolling opens the still-life to
+  full bleed (Aerra; `clip-path` driven by a CSS variable, Blueprint trap #860). Then parchment: about + facts, "Who
+  it's for" as a numbered serif index, "What's included" ticking beside the sticky still-life (the mechanic of About's
+  wishes, `Ticks`, D-032, given a new job: the kit), this service's route as a horizontal strip in its line colour with
+  the live call status at the first stop, the other services in the line as tiles that morph into their page (Skiper
+  23), the next line's first service, and the Talk to us close (pre-selects the service on `/contact`, D-033).
+- **Development only:** new `serviceDetailsLive: false` (the `enquiryLive`/`paymentsLive`/`partnerEnquiryLive`
+  pattern). Production 404s every `/services/<slug>`, the deck cards carry no link there and the sitemap omits them,
+  until a D-entry turns it on. With only approved rows a public page would repeat its deck card (D-040's thin-page
+  problem).
+- **Content: the deck's who it's for, what's included and the service-specific steps** (p.11-14, 18, 20, 21), as
+  pending rows C-088..C-095, shown in development only. Left out: every "Key benefits" list (outcome claims), "24x7"
+  (C-016), "trained and verified" (C-015), "hospital-level/-grade", the app in "We stay connected" (D-001), EMI (C-019),
+  taglines and intros (marketing promises; the owners' approved one-line description, C-033, carries the about).
+  Nursing procedures and lab samples have no full deck page, so their pages are short; the owners can supply more
+  (Q17). The deck's post-surgery, palliative, maternity, elderly-care and vaccination/medicine pages get no page: not
+  launch services (D-024). The route's shared stops are approved copy (C-024, C-025, C-028, C-031).
+**Why:** the deck card is the page's promise in brief; opening it keeps the visitor's place and gives each service the
+room the deck has no space for, from the owners' own lists, without shipping anything unconfirmed.
+**Rejected:** B, the service sheet (a sticky ink card beside chapters: repeats FAQ's and Contact's sticky cards); C, the
+unfolded card (a second pinned scrub beside the Services deck); live in production with the approved subset (eight
+thin public pages); the benefits as pending (medical outcome claims with no evidence, Q10); the sample-site scope only
+(drops who it's for and the steps).
+**Built (2026-10-03):** `app/services/[slug]/page.tsx`, `components/services/Detail.{tsx,module.css}`,
+`components/motion/Dolly.tsx`, `lib/services.ts`, the `detail` blocks in `content/services.json`, `serviceDetail`
+messages, `serviceDetailsLive` + `serviceDetailsOpen()`, the deck card's "What's included" link and shared element, the
+nav marking Services as the current section on its subpages (`aria-current="true"`), the view-transition rules in
+`globals.css`, `tests/service-detail.test.ts`. Two calls made in the build: the name sits on the ink above the panel,
+not on the image's corners as the comp showed (cream type over the light still-lifes can't hold AA contrast); tiles
+arriving on the next page carry their own class (`share="tile"`, not animated) so only the clicked card or tile morphs
+(with `share="none"` the clicked tile's own morph was cancelled too, tested).
+**Verified:** green (lint, typecheck, 155 tests, build). Headless Chrome over CDP, 1280x800: deck card → nurse page
+morphs (`::view-transition-group(svc-nurse)` with old and new snapshots; frames at 120/280/450ms show the still-life
+growing into the hero, blurred mid-flight); nurse → GDA tile morphs into the hero with the other tiles still. Device
+audit (9 sizes) on nurse, equipment, procedures, lab-samples, icu and `/services`: no overflow, nothing covered, scroll
+never sticks. Wheel frames at 1422x597, 1280x537 and 390x844 (dolly opens to full bleed, ticks, route, tiles, close;
+fixed: crumbs baseline, sticky labels overlapping on phones, route line past the last stop, the equipment page's facts).
+Production build on :3100 (killed by PID): `/services/nurse|equipment|gda` 404, no detail link or "What's included" on
+`/services`, sitemap empty. SSR HTML carries no `data-live`, `data-ticked` or `--open` (reduced motion and no-JS get the
+resting page). impeccable 1280 + 390: tight-leading on the Petrona display rows (index eased to 1.22; the rest kept,
+Blueprint 6.1), the footer gradient and Warm Room cream (standing waivers). Taste pre-flight and the Web Interface
+Guidelines: heading balance and a hover state added; sentence case kept.
+**Not verified:** the morph in Safari and Firefox (Chromium only; without support the page simply swaps); Back-button
+morph; a real phone; screen reader; reduced motion emulated (checked structurally). In a background tab Chrome aborts
+the transition with an `InvalidStateError` in the console; navigation still completes. Owner review and copy (Q15, Q17).
+
+## D-044 · 2026-10-03 · Owner answers: service scopes confirmed, area all of India, equipment generic until confirmed (partially supersedes D-024: the service area; D-029: the equipment availability text)
+The owners answered most of Q17 and parts of Q10, Q19 and Q20 on 2026-10-03, relayed by Sasanka (text kept in this
+session's transcript; summarised here). Recorded as evidence in CLAIMS.md:
+- **(a) Service scopes, confirmed:** nursing (IV infusion, post-operative dressing, catheter and tracheostomy care,
+  C-035), GDA (companionship, memory-care support, mobility supervision, assisted bathing, health records; 12- and
+  24-hour options, C-036), ICU at home (ventilator, patient monitor, syringe pumps, C-037: "multi-channel monitor" is
+  now "patient monitor", their word), doctors (general physicians and geriatricians, C-038: the sample's "check-ups,
+  treatment reviews, new symptoms" were not confirmed and are removed), physiotherapy (orthopaedic, neurological,
+  cardiopulmonary, C-039), lab (CBC, LFT, KFT, HbA1c, C-040). All approved. Prices stay off (Q18 unanswered).
+- **(b) Equipment: not confirmed.** The inventory and whether each item is for rent, sale or both await the owners, and
+  "do not publish any unconfirmed equipment availability". C-041, C-051..C-057 and C-095 stay pending, and the live
+  equipment wording from their earlier site (rent hospital beds, concentrators, wheelchairs and monitors; buy; sell
+  back: part of C-033) becomes pending too (C-099). **Production shows a generic line instead** (Sasanka's pick):
+  "Medical equipment for care at home. Tell us what you need and we confirm what's available." (C-098), in the
+  Services deck, the FAQ and wherever the equipment ways appeared.
+- **(c) Qualifications and checks, confirmed:** nurses GNM or B.Sc, physiotherapists BPT or MPT; credentials and
+  documents verified before onboarding or assignment (C-096, approved). The sample's "100% verified", Aadhaar and
+  fitness checks (rest of C-071) and the deck's other four checks (C-083) stay unconfirmed. Not placed on a page yet.
+- **(d) NABL:** never claimed until a lab partner and a valid certificate are provided (C-060 stays pending).
+- **(e) Brand line approved** ("Treatment begins in a hospital. Healing continues at home.", C-043; the kicker above Home's "how we work"; its hard-coded pending tag now follows the row). The founding story
+  may be used once Care Setu approves the final text, so it stays pending (C-044, C-074).
+- **(f) Reviews:** none until genuine and with written consent; the named sample reviews and the 4.92 rating never
+  ship (C-058, C-059 stay rejected).
+- **Service area: all of India.** The owner asked for "pan India… not only NCR"; Sasanka confirmed it means Care Setu
+  serves patients anywhere in India today. **Supersedes D-024's "Noida and Delhi"** (C-032 superseded by C-097, "across
+  India"). Every area line changes (Home fact row and how-we-work, Services lede, Partner chip, FAQ, meta
+  descriptions). The office address (C-030) and the callback promise (C-031) are unchanged. The enquiry's area step
+  keeps its stored values (noida, delhi, other; migration 0000) and only its copy changes; a city field would be a
+  schema change (a migration), left as a follow-up.
+**Why:** owner answers are the evidence the claims register waits for (D-007); approving exactly what they confirmed,
+and no more, ships the confirmed scopes and keeps the unconfirmed equipment off the public site.
+**Rejected:** approving the whole sample rows (the doctor row carried unconfirmed items); leaving the live equipment
+text up (contradicts answer b); hiding equipment entirely (Sasanka's pick was the generic line); "Noida and Delhi,
+growing across India" (Sasanka confirmed all of India today); changing the enquiry's stored area values now (a
+migration for a development-only form).
+**Verified:** green (lint, typecheck, 155 tests, build). Production build on :3100 (stopped by PID): no "Noida and
+Delhi" on `/`, `/services`, `/faq`, `/partner`, `/about`; "across India" present on each; no equipment item or
+rent/buy wording, the summary line instead; the confirmed scopes render (IV infusion, patient monitor, GPs and
+geriatricians, cardiopulmonary, HbA1c) and "treatment reviews" and "multi-channel" do not; Home shows the brand line
+with no pending tag; detail pages still 404. Device audit on the production build (1280x537, 1093x490, 768x1024,
+390x844) for `/`, `/services`, `/faq`: OK.
+**Not verified:** the owners seeing the new wording before it ships (Q15 still has no named approver; these lines are
+their own answers, applied as given).

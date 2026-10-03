@@ -253,11 +253,45 @@
   --line: var(--color-line-olive);
 }
 
+/* The service card morph (D-043): React <ViewTransition share="morph"> pairs a deck card's still-life with its detail
+   page's hero. Cue Kit Cell-to-Card's 600ms ease, blurred mid-flight to hide the image interpolation (Next 16
+   view-transitions guide). Clicks pass through the overlay to the live page. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(.morph) {
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+/* A tile pairing with a tile on the next page jumps instead of sliding; only the clicked card or tile morphs. */
+::view-transition-group(.tile),
+::view-transition-old(.tile),
+::view-transition-new(.tile) {
+  animation: none;
+}
+::view-transition-old(.tile) {
+  display: none;
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

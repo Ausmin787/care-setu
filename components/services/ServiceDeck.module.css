@@ -183,11 +183,25 @@
   color: var(--color-ink-soft);
 }
 .foot {
-  display: grid;
-  gap: 10px;
-  justify-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
   margin-top: auto;
   padding-top: 6px;
+}
+/* The card's own page (D-043): a text link beside the ask, so the card keeps its height. */
+.more {
+  display: inline-block;
+  padding-block: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.more:hover {
+  text-decoration-thickness: 3px;
 }
 
 /* Image column: fills its half (the sample removed the aspect cap). Nested radius 20 - padding. */

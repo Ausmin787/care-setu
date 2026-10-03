@@ -71,7 +71,7 @@
   text-underline-offset: 6px;
 }
 /* The page you are on: a heavier underline in the logo's green (the one chroma, on ink it reads 9:1). */
-.links a[aria-current="page"] {
+.links a[aria-current] {
   text-decoration: underline;
   text-decoration-color: var(--color-line-lime);
   text-decoration-thickness: 3px;
@@ -148,7 +148,7 @@
 .sheet a:last-child {
   border-bottom: 0;
 }
-.sheet a[aria-current="page"] {
+.sheet a[aria-current] {
   box-shadow: inset 4px 0 0 var(--color-line-olive);
   background: var(--color-parchment-deep);
 }

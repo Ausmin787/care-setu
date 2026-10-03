@@ -11,29 +11,45 @@
           "a": [
             "We arrange care at home after a hospital stay. You tell us what the patient needs, and we arrange it as one plan."
           ],
-          "claims": ["C-033"],
+          "claims": [
+            "C-033"
+          ],
           "pending": false
         },
         {
           "slug": "areas",
           "q": "Which areas do you cover?",
-          "a": ["Noida and Delhi."],
-          "claims": ["C-032"],
+          "a": [
+            "Across India."
+          ],
+          "claims": [
+            "C-097"
+          ],
           "pending": false
         },
         {
           "slug": "services",
           "q": "Which services can you arrange?",
-          "a": ["Eight services, in three lines:"],
+          "a": [
+            "Eight services, in three lines:"
+          ],
           "list": "services",
-          "link": { "href": "/services", "label": "See every service" },
-          "claims": ["C-033"],
+          "link": {
+            "href": "/services",
+            "label": "See every service"
+          },
+          "claims": [
+            "C-033"
+          ],
           "pending": false
         },
         {
           "slug": "emergency",
           "q": "Is Care Setu emergency care?",
-          "a": ["No. In an emergency, call 112.", "Home care is not emergency care."],
+          "a": [
+            "No. In an emergency, call 112.",
+            "Home care is not emergency care."
+          ],
           "claims": [],
           "pending": false
         }
@@ -46,15 +62,26 @@
         {
           "slug": "reach",
           "q": "How do I reach you?",
-          "a": ["Call or WhatsApp {phone}, or email {email}.", "Our office is at {office}."],
-          "claims": ["C-028", "C-029", "C-030"],
+          "a": [
+            "Call or WhatsApp {phone}, or email {email}.",
+            "Our office is at {office}."
+          ],
+          "claims": [
+            "C-028",
+            "C-029",
+            "C-030"
+          ],
           "pending": false
         },
         {
           "slug": "callback",
           "q": "When will someone call me back?",
-          "a": ["We call back within 2 hours, every day 7 AM to 10 PM."],
-          "claims": ["C-031"],
+          "a": [
+            "We call back within 2 hours, every day 7 AM to 10 PM."
+          ],
+          "claims": [
+            "C-031"
+          ],
           "pending": false
         },
         {
@@ -64,9 +91,16 @@
           "a": [
             "Yes. Answer five short questions on the Talk to us page, and a coordinator calls you back. Nothing is shared until you agree."
           ],
-          "aClosed": ["Not yet. Please call or WhatsApp us on {phone}."],
-          "link": { "href": "/contact", "label": "Talk to us" },
-          "claims": ["C-025"],
+          "aClosed": [
+            "Not yet. Please call or WhatsApp us on {phone}."
+          ],
+          "link": {
+            "href": "/contact",
+            "label": "Talk to us"
+          },
+          "claims": [
+            "C-025"
+          ],
           "pending": false
         }
       ]
@@ -81,14 +115,21 @@
           "a": [
             "A coordinator talks with you to understand the patient, the home and the doctor's advice. Then we put together a care plan and a quote."
           ],
-          "claims": ["C-025", "C-024"],
+          "claims": [
+            "C-025",
+            "C-024"
+          ],
           "pending": false
         },
         {
           "slug": "cost-first",
           "q": "Will I know the cost before care begins?",
-          "a": ["Yes. You get one care plan and one quote, with a reference number, before you pay."],
-          "claims": ["C-024"],
+          "a": [
+            "Yes. You get one care plan and one quote, with a reference number, before you pay."
+          ],
+          "claims": [
+            "C-024"
+          ],
           "pending": false
         },
         {
@@ -97,7 +138,9 @@
           "a": [
             "It depends on the care the patient needs. Your coordinator works it out with you and gives you a quote before you pay."
           ],
-          "claims": ["C-024"],
+          "claims": [
+            "C-024"
+          ],
           "pending": false
         }
       ]
@@ -110,16 +153,27 @@
           "slug": "pay",
           "q": "How do I pay?",
           "gate": "payments",
-          "a": ["On the Pay a quote page, with the reference on your quote. You pay against the quote, never before it."],
-          "aClosed": ["Online payment isn’t open yet. To pay for care, call us and a coordinator will help."],
-          "link": { "href": "/pay", "label": "Pay a quote" },
-          "claims": ["C-024"],
+          "a": [
+            "On the Pay a quote page, with the reference on your quote. You pay against the quote, never before it."
+          ],
+          "aClosed": [
+            "Online payment isn’t open yet. To pay for care, call us and a coordinator will help."
+          ],
+          "link": {
+            "href": "/pay",
+            "label": "Pay a quote"
+          },
+          "claims": [
+            "C-024"
+          ],
           "pending": false
         },
         {
           "slug": "refunds",
           "q": "Can I cancel, or get a refund?",
-          "a": ["To be confirmed by the owners (Q8)."],
+          "a": [
+            "To be confirmed by the owners (Q8)."
+          ],
           "claims": [],
           "pending": true
         }
@@ -132,18 +186,23 @@
         {
           "slug": "during",
           "q": "Who do I talk to once care has begun?",
-          "a": ["The Care Setu team. Questions and changes go to us, on {phone}."],
-          "claims": ["C-028"],
+          "a": [
+            "The Care Setu team. Questions and changes go to us, on {phone}."
+          ],
+          "claims": [
+            "C-028"
+          ],
           "pending": false
         },
         {
           "slug": "equipment",
-          "q": "Can I rent equipment, or sell it back?",
+          "q": "Can you arrange medical equipment?",
           "a": [
-            "Yes. Rent hospital beds, oxygen concentrators, wheelchairs and monitors, short or long term, delivered and set up at home.",
-            "You can also buy equipment outright, or sell it back when you no longer need it, and we collect it from your home."
+            "Yes. Tell us what you need and we confirm what's available."
           ],
-          "claims": ["C-033"],
+          "claims": [
+            "C-098"
+          ],
           "pending": false
         },
         {
@@ -152,14 +211,20 @@
           "a": [
             "Five checks before anyone visits a family: documents, background, a clinical assessment where it applies, a trial and review of first assignments, and continuous monitoring."
           ],
-          "claims": ["C-083"],
+          "claims": [
+            "C-083"
+          ],
           "pending": true
         },
         {
           "slug": "languages",
           "q": "Which languages do you speak?",
-          "a": ["Hindi, English, Marathi, Gujarati, Bengali, Tamil, Telugu and Kannada."],
-          "claims": ["C-020"],
+          "a": [
+            "Hindi, English, Marathi, Gujarati, Bengali, Tamil, Telugu and Kannada."
+          ],
+          "claims": [
+            "C-020"
+          ],
           "pending": true
         }
       ]
@@ -171,9 +236,17 @@
         {
           "slug": "partner",
           "q": "I work at a hospital or clinic, or I'm a care professional. How do we work together?",
-          "a": ["Start on the Partner with us page, or call {phone} or email {email}."],
-          "link": { "href": "/partner", "label": "Partner with us" },
-          "claims": ["C-028", "C-029"],
+          "a": [
+            "Start on the Partner with us page, or call {phone} or email {email}."
+          ],
+          "link": {
+            "href": "/partner",
+            "label": "Partner with us"
+          },
+          "claims": [
+            "C-028",
+            "C-029"
+          ],
           "pending": false
         }
       ]

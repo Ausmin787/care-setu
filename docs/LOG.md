@@ -361,3 +361,35 @@ Template:
   impeccable at 2 viewports triaged; production build audited.
 - Slips: `lib/faq.ts` written before its `faqPage` messages, and a `useState` type, tripped the post-edit hook twice (#9/#46).
 - Not verified: real devices, owner review. No commit yet.
+
+## 2026-10-03 · Netlify staging recorded (D-042)
+- Model/effort: Sonnet 5.5.
+- Read the Netlify overview and deploys pages in Chrome (read-only; the env-vars page was denied by the permission gate and
+  was not retried), probed the live URL with curl, fetched `origin/main` and fast-forwarded local `main` (2 commits: the
+  tech team's README test commit and the PR #1 merge).
+- Docs: D-042, STATUS, INVARIANTS 22, Q1 status, this entry, memory `launch-day-hosting-review`.
+- Not verified: env var names, account ownership, Netlify free-plan commercial terms, deploy previews, device matrix on the live URL. No commit.
+
+## 2026-10-03 · Stage 4 · Service detail template "the card opens" (D-043)
+- Model/effort: Opus 5.5.
+- Research: the founders' deck p.10-21 rendered (PyMuPDF) and read; the tool list (ledger and opened/skipped list in
+  `docs/plans/stage-4-service-detail.md`); options round, recommended option picked on all three questions.
+- Built: `app/services/[slug]/page.tsx`, `components/services/Detail.{tsx,module.css}`, `components/motion/Dolly.tsx`,
+  `lib/services.ts`, detail blocks + `serviceDetail` messages + `serviceDetailsLive`, deck link + shared element,
+  nav section state, view-transition CSS, `tests/service-detail.test.ts`; CLAIMS C-088..C-095; INVARIANT 32.
+- Commands → result: `npm run green` passed (155 tests); CDP morph probe (deck → page, tile → page); device audit 9 sizes
+  on 5 detail pages + /services OK; impeccable 1280 + 390 triaged; production build probed (404s, no links, sitemap empty).
+- Slips: a type field added one Edit before its constructors, and a JSX usage before its declaration (#9/#14 again; the
+  post-edit hook fired twice). A first dev server outlived its task and served 500s until its PID was stopped.
+- Not verified: Safari/Firefox morph, Back-button morph, real devices, screen reader. No commit.
+
+## 2026-10-03 · Owner answers recorded; area all of India; equipment generic (D-044)
+- Model/effort: Opus 5.5.
+- Owner answers (Q17 and parts of Q10, Q19, Q20) mapped row by row onto CLAIMS: C-035..C-040 and C-043 approved
+  (C-037 and C-038 reworded to what was confirmed), C-096..C-099 added, C-032 superseded by C-097.
+- "Pan India": objected (contradicted D-024, INVARIANT 18) and asked; Sasanka confirmed all of India today.
+- Code: the equipment line's `summary`/`ways` (deck, Colonnade, FAQ, detail page), area copy in 15 places, Home's
+  brand-line tag now follows its row (it was hard-coded).
+- Commands → result: `npm run green` passed (155 tests); production probe and a 4-size device audit on it OK.
+- Not done: the enquiry's stored area values (noida/delhi/other) need a migration for a city field; follow-up.
+  The dev server's node child outlived its task again and was stopped by PID. No commit.

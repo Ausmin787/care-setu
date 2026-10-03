@@ -1,5 +1,5 @@
 {
-  "_note": "Launch services (D-024), grouped into three lines (D-025). Owners' own descriptions with quality claims removed (C-033). Scope and prices come from the owner's sample site (D-029): each carries its CLAIMS.md id and `pending: true` until that row is approved; pending items render in development only. Prices are integer paise (D-004) and also need `showPrices` in site.config.json. Draft copy until the owners approve (Q15).",
+  "_note": "Launch services (D-024), grouped into three lines (D-025). Owners' own descriptions with quality claims removed (C-033). Scope and prices come from the owner's sample site (D-029): each carries its CLAIMS.md id and `pending: true` until that row is approved; pending items render in development only. Prices are integer paise (D-004) and also need `showPrices` in site.config.json. The equipment line's ways (rent, buy, sell back) are pending (C-099, D-044): production shows its approved `summary` (C-098) instead. Each service (and the equipment line) also carries a `detail` block for its page `/services/<slug>` (D-043): who it's for, what's included and the service's own route steps from the founders' deck, pending as C-088..C-095. Draft copy until the owners approve (Q15).",
   "catalogue": [
     {
       "slug": "care-at-home",
@@ -21,7 +21,7 @@
           },
           "scope": {
             "claim": "C-035",
-            "pending": true,
+            "pending": false,
             "items": [
               "IV infusion",
               "Post-operative dressing",
@@ -35,6 +35,35 @@
             "paise": 180000,
             "from": true,
             "unit": "per 12-hour shift"
+          },
+          "detail": {
+            "claim": "C-088",
+            "pending": true,
+            "forWhom": [
+              "Patients recovering after surgery, illness or injury",
+              "Elderly people who need daily medical and personal care",
+              "Patients with chronic conditions who need regular monitoring",
+              "New mothers and newborns who need special care",
+              "Families who need short-term or long-term nursing support"
+            ],
+            "includes": [
+              "Vital signs monitoring (BP, pulse, temperature, SpO2)",
+              "Wound care and dressing",
+              "Medication management and reminders",
+              "Injections and IV administration",
+              "Catheter and tracheostomy care",
+              "Post-surgical care and drain management",
+              "Elder care and care for bed-ridden patients",
+              "Health monitoring and reports to the family and doctors"
+            ],
+            "assess": {
+              "title": "We match a nurse",
+              "text": "We understand what the patient needs and assign a suitable nurse."
+            },
+            "begins": {
+              "title": "Nursing at home",
+              "text": "The nurse gives the care in the patient's home."
+            }
           }
         },
         {
@@ -50,7 +79,7 @@
           },
           "scope": {
             "claim": "C-036",
-            "pending": true,
+            "pending": false,
             "items": [
               "Companionship",
               "Memory care support",
@@ -66,6 +95,35 @@
             "paise": 2200000,
             "from": false,
             "unit": "per month"
+          },
+          "detail": {
+            "claim": "C-089",
+            "pending": true,
+            "forWhom": [
+              "Elderly people who need help with daily activities",
+              "Patients recovering from illness, surgery or a hospital stay",
+              "People with limited mobility or disabilities",
+              "Families who need part-time or full-time support at home",
+              "People who need companionship and day-to-day help"
+            ],
+            "includes": [
+              "Help with bathing, dressing and grooming",
+              "Help with eating and meals",
+              "Mobility support and help moving around",
+              "Medication reminders",
+              "Companionship and emotional support",
+              "Light housekeeping related to the patient's needs",
+              "Going with the patient to hospital or for walks",
+              "Keeping an eye on well-being and reporting updates"
+            ],
+            "assess": {
+              "title": "We suggest a match",
+              "text": "We understand your requirements and suggest the right attendant."
+            },
+            "begins": {
+              "title": "Support at home",
+              "text": "The attendant helps the patient through the day at home."
+            }
           }
         },
         {
@@ -78,6 +136,16 @@
             "alt": "Illustration: a steel dressing tray with gauze packs, a rolled bandage, surgical tape and scissors on a white cloth",
             "focus": "62%",
             "claim": "C-087"
+          },
+          "detail": {
+            "claim": "C-090",
+            "pending": true,
+            "forWhom": [],
+            "includes": [],
+            "begins": {
+              "title": "The procedure at home",
+              "text": "A nurse does the procedure in the patient's home."
+            }
           }
         },
         {
@@ -93,10 +161,10 @@
           },
           "scope": {
             "claim": "C-037",
-            "pending": true,
+            "pending": false,
             "items": [
               "Ventilator",
-              "Multi-channel monitor",
+              "Patient monitor",
               "Syringe pumps"
             ]
           },
@@ -106,6 +174,36 @@
             "paise": 850000,
             "from": false,
             "unit": "per day"
+          },
+          "detail": {
+            "claim": "C-091",
+            "pending": true,
+            "forWhom": [
+              "Patients discharged from the ICU who need continued support",
+              "Patients with respiratory conditions",
+              "Patients with cardiac conditions or post-surgery care needs",
+              "Elderly patients with several medical needs",
+              "Patients who need long-term critical care"
+            ],
+            "includes": [
+              "Ventilator support (invasive and non-invasive)",
+              "Cardiac monitoring and management",
+              "Oxygen therapy and monitoring",
+              "IV fluids and injections",
+              "Tracheostomy care",
+              "Suctioning and airway management",
+              "Giving medicines",
+              "Regular doctor visits and clinical supervision",
+              "Health monitoring and reports to the family"
+            ],
+            "assess": {
+              "title": "We assess and plan",
+              "text": "Our clinical team assesses the condition and plans the team and equipment."
+            },
+            "begins": {
+              "title": "Critical care at home",
+              "text": "Care is given at home, with the equipment it needs."
+            }
           }
         }
       ]
@@ -130,12 +228,9 @@
           },
           "scope": {
             "claim": "C-038",
-            "pending": true,
+            "pending": false,
             "items": [
-              "General physicians and geriatricians",
-              "Check-ups",
-              "Treatment reviews",
-              "New symptoms"
+              "General physicians and geriatricians"
             ]
           },
           "price": {
@@ -144,6 +239,36 @@
             "paise": 150000,
             "from": false,
             "unit": "per visit"
+          },
+          "detail": {
+            "claim": "C-092",
+            "pending": true,
+            "forWhom": [
+              "Elderly people who need regular medical care",
+              "People who find it hard to travel to a clinic",
+              "Patients recovering at home after illness or surgery",
+              "Families who want a doctor to come home",
+              "Busy people who need care at home"
+            ],
+            "includes": [
+              "General check-up and consultation",
+              "Diagnosis and treatment of common illnesses",
+              "Prescriptions and medication guidance",
+              "Management of chronic conditions",
+              "Health screening and preventive care",
+              "Advice on diet, lifestyle and wellness",
+              "Follow-up visits",
+              "Coordination with specialists if needed",
+              "Keeping the health records"
+            ],
+            "assess": {
+              "title": "We schedule the visit",
+              "text": "We confirm the details and book a time for the doctor."
+            },
+            "begins": {
+              "title": "The doctor visits",
+              "text": "The doctor examines the patient at home and advises."
+            }
           }
         },
         {
@@ -159,7 +284,7 @@
           },
           "scope": {
             "claim": "C-039",
-            "pending": true,
+            "pending": false,
             "items": [
               "Orthopaedic rehabilitation",
               "Neurological rehabilitation",
@@ -172,6 +297,35 @@
             "paise": 120000,
             "from": false,
             "unit": "per session"
+          },
+          "detail": {
+            "claim": "C-093",
+            "pending": true,
+            "forWhom": [
+              "Patients recovering after surgery or a hospital stay",
+              "People with back pain, neck pain or joint problems",
+              "Elderly people with mobility or balance difficulties",
+              "Patients recovering from injuries, fractures or sprains",
+              "People with neurological conditions"
+            ],
+            "includes": [
+              "Pain relief and movement",
+              "Strengthening and conditioning exercises",
+              "Joint mobilisation and flexibility",
+              "Posture correction and ergonomic guidance",
+              "Gait training and balance",
+              "Neuro-rehabilitation",
+              "Breathing exercises and relaxation",
+              "A home exercise programme made for the patient"
+            ],
+            "assess": {
+              "title": "We assess and plan",
+              "text": "We assess the condition and plan the therapy."
+            },
+            "begins": {
+              "title": "Sessions at home",
+              "text": "Sessions happen at home, and the plan changes as the patient progresses."
+            }
           }
         },
         {
@@ -187,7 +341,7 @@
           },
           "scope": {
             "claim": "C-040",
-            "pending": true,
+            "pending": false,
             "items": [
               "Blood tests such as CBC, LFT, KFT and HbA1c"
             ]
@@ -198,6 +352,19 @@
             "paise": 45000,
             "from": true,
             "unit": "home visit included"
+          },
+          "detail": {
+            "claim": "C-094",
+            "pending": true,
+            "forWhom": [],
+            "includes": [
+              "Samples collected at home",
+              "Blood tests and health packages"
+            ],
+            "begins": {
+              "title": "Samples at home",
+              "text": "Samples are collected in the patient's home."
+            }
           }
         }
       ]
@@ -252,7 +419,38 @@
           "who": "We pick it up",
           "text": "No longer need it? Sell it back to us and we collect it from your home."
         }
-      ]
+      ],
+      "summary": {
+        "claim": "C-098",
+        "pending": false,
+        "text": "Medical equipment for care at home. Tell us what you need and we confirm what's available.",
+        "who": "We confirm what's available"
+      },
+      "ways": {
+        "claim": "C-099",
+        "pending": true
+      },
+      "detail": {
+        "claim": "C-095",
+        "pending": true,
+        "forWhom": [
+          "Short-term needs, such as after surgery: rent",
+          "Long-term use, chronic care and elderly support: buy"
+        ],
+        "includes": [
+          "Oxygen concentrators",
+          "Hospital beds and mattresses, manual and motorised",
+          "Wheelchairs: standard, lightweight and reclining",
+          "Walkers and walking sticks",
+          "Nebulisers",
+          "BP and sugar monitors",
+          "Suction machines, commodes, backrests and more"
+        ],
+        "begins": {
+          "title": "Delivered and set up",
+          "text": "The equipment is delivered and set up at home."
+        }
+      }
     }
   ],
   "equipment": [

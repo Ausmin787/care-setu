@@ -83,6 +83,13 @@ colour: no honey, terracotta or brass accent. Lime is ink-cased on light grounds
   colour is the only accent on the page at a time (discs, inked stack pills and step numbers carry ink text). **Check
   file**: sand and parchment-deep folders with an ink edge and a tab, stacked by CSS `position: sticky`, a ghost
   numeral on each sheet. Partner form: the Contact field system on one page.
+- **Service detail pieces** (D-043): the hero panel is the deck card's still-life in its 62% line tint, inset by the
+  gutter with 20px corners and opened to full bleed by a scrubbed `clip-path` (`--open` 0 to 1); the shared element
+  (React `<ViewTransition>`, 600ms `cubic-bezier(0.22, 1, 0.36, 1)`, blurred mid-flight) between a deck card or tile and
+  that panel. Section labels are sentence-case bold with a line-colour disc (Aerra's "• About"), sticky beside their
+  list on desktop. "Who it's for" is a numbered Petrona index with hairlines; "What's included" ticks like About's
+  wishes; the route is a horizontal strip in the line colour (vertical on phones) whose line draws once in view (CSS
+  `animation-timeline: view()`). Tiles: 40% line tint, a 4:3 still-life, Petrona name, a filled arrow disc.
 - **Pending mark `.pending`**: a dashed uppercase 12px tag on owner-unconfirmed content, development only (D-029).
 - Icons: Tabler **filled**, never thin text arrows.
 
@@ -97,6 +104,10 @@ Bands alternate parchment / ink / sand; a section never repeats another page's i
 - **About:** founder's question → letter beside a sticky portrait → inline-image manifesto → the mission on an ink
   panel, its six groups drawn as stations whose lines merge into one (GetLayers Relay) → pinned values odometer on sand
   → collapsing founder cards on ink (Cue Kit) → close with the status. All pending (Q20).
+- **Service detail** (`/services/<slug>`, dev only, D-043): crumbs and the card number on the ink stage, the name
+  (Petrona display) beside who comes and the ask, the still-life panel opening to full bleed → about + facts → who
+  it's for (index) → what's included (ticks beside the sticky still-life) → your route (live status at the first
+  stop) → the other services in the line + the next line's first → close on sand.
 - **Pay** (dev only, D-036): the ask with the reference field beside Ridgeline's four numbered steps; a quote is an
   editorial split (reference, "Your care plan, *priced*.", ruled rows) beside the ink payment card. Production shows
   the ask beside the ink call card.

@@ -428,3 +428,9 @@ Template:
   receipt already feeding out (the old code showed "Printing your receipt" for 2.0s before "Paid"). Dev server stopped by PID.
 - Not verified: a real phone, iPad or Safari, a screen reader, the exact milliseconds (the probe shows order, not timing), real gateway latency.
 - Not audited: a render of any page, keyboard or screen-reader use, a real-user test.
+
+## 2026-10-04 · Review split and ownership recorded (D-048)
+- Model/effort: Sonnet 5.5.
+- Recorded who authors and who reviews: nobody reviews their own change now; Codex owns backend, security and money logic from the
+  start of the backend phase. Edited CLAUDE.md "Delegation", AGENT-OPS §6 and AGENTS.md to match.
+- Not done: no code changes; Hungry Anna's equivalent is not written; the Backend Master Blueprint is still a draft.

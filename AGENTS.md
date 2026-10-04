@@ -41,8 +41,8 @@ Sasanka/Claude into a D-entry (accepted or rejected with a reason).
 The repo is public and every change reaches `main` by pull request. CI and CodeRabbit (`.coderabbit.yaml`, which
 reads this file and `CLAUDE.md`) review each PR. As the author: work on a branch; read every CodeRabbit comment as
 evidence, not truth; fix it or answer it with a reason; stop after 3 fix attempts and ask; report the findings to
-Sasanka. Codex is an optional third
-opinion for money, webhook and auth changes (see above). Only Sasanka merges, and a merge is a release. Never commit
+Sasanka. Codex reviews Claude's changes and, once the
+backend phase starts, authors backend, security and money work that Claude reviews (D-048). Only Sasanka merges, and a merge is a release. Never commit
 secrets or owner-confidential documents.
 
 <!-- BEGIN:nextjs-agent-rules -->

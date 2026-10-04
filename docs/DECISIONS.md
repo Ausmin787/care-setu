@@ -1335,26 +1335,31 @@ their own answers, applied as given).
 
 ## D-045 · 2026-10-04 · Repo made public; every change goes by pull request, reviewed by CodeRabbit (partially supersedes D-002: "private GitHub repo")
 Sasanka asked for CodeRabbit as an independent second reviewer (Claude reviewing its own work shares its blind spots).
-CodeRabbit is free only on public repositories, so `care-setu` (and `hungry-anna`; `dip-alert-app` was already public)
-was made public on 2026-10-04 with Sasanka's explicit instruction, after a full-history pattern scan of both repos found
-no secrets (`.env.example` is the only env file ever tracked).
+CodeRabbit is free only on public repositories, so `care-setu` (`dip-alert-app` was already public)
+was made public on 2026-10-04 with Sasanka's explicit instruction, after a full-history pattern scan found
+no secrets (`.env.example` is the only env file ever tracked). **`hungry-anna` was also made public that day and returned
+to private the same day:** its INVARIANT 12 forbids it (the owner's FSSAI certificate, phone numbers, address and
+conversation record are tracked), and that file had not been read first. It gets the local CLI review instead (the Free
+plan covers CLI reviews). Lesson: read the target repo's invariants and sweep for owner data before any visibility change.
 - **Pipeline:** work on a branch, open a pull request, CI ("green", D-033) and CodeRabbit run, the author triages every
   CodeRabbit comment as evidence (fix, or answer with a reason; fix loops capped at 3, as AGENT-OPS), Codex is an optional
   third opinion on money, webhook and auth changes (`AGENTS.md` → "Review handoff"), **Sasanka merges**. A merge to `main`
   is a release (Netlify, D-042), so it needs his permission like a push (D-015).
 - **`.coderabbit.yaml`** carries the invariants as per-path review instructions and reads `CLAUDE.md`, `AGENTS.md` and
   `docs/INVARIANTS.md` as guidelines. It restates them; they win on any disagreement.
-- **The GitHub App is limited to three repos** (`care-setu`, `hungry-anna`, `dip-alert-app`), checked in GitHub's installed
+- **The GitHub App is limited to three repos** (`care-setu`, `dip-alert-app` and the now-private `hungry-anna`), checked in GitHub's installed
   apps page; the private `Cognest-app` and `hungry-anna-inventory` are not reachable by it.
 - **Now public:** all of `docs/` (open owner questions, the claims register, contact details already on the site) and the
   full history. Owner-confidential documents (the vision PDF, the brief) must never be committed.
+- **Standing rule (Sasanka, 2026-10-04):** every change, however small, goes through a pull request. CodeRabbit's findings
+  are reported to him with what was fixed and what was rejected and why.
 **Why:** an independent reviewer catches what the author's own model repeats; the free tier needs a public repo; the
 invariants are mechanical enough that a second reader can enforce them on every pull request.
-**Rejected:** staying private (the free plan there is PR summaries only); the paid Essentials plan ($24 per developer per
+**Rejected:** keeping `hungry-anna` public (its own INVARIANT 12); staying private for `care-setu` (the free plan there is PR summaries only); the paid Essentials plan ($24 per developer per
 month, by Sasanka's choice of free); Claude-only review; installing CodeRabbit on all repos (it first came in that way and
 was narrowed the same day); putting Sasanka's global instructions into CodeRabbit (private context on a third-party service).
 **Verified:** CodeRabbit's pricing, open-source and plans pages state public repos are free (open-source plan with Team
-features); `gh repo list` shows the three repos public; both histories scanned with secret and key patterns, clean; the
+features); `gh repo list` shows `care-setu` and `dip-alert-app` public and `hungry-anna` private; `care-setu`'s history scanned with secret and key patterns, clean; the
 installed-app page lists exactly three repos with "Only select repositories"; `.coderabbit.yaml` validates against
 CodeRabbit's published `schema.v2.json`, and a deliberately wrong document is rejected by the same check.
 **Not verified:** that CodeRabbit comments on a pull request here (this branch's PR is the first test); the open-source

@@ -397,8 +397,9 @@ Template:
 ## 2026-10-04 · Repo public; CodeRabbit review pipeline (D-045)
 - Model/effort: Sonnet 5.5.
 - Sasanka asked to integrate CodeRabbit. Pricing read from the vendor's own pages: free only for public repos. On his
-  instruction `care-setu` and `hungry-anna` were made public (`dip-alert-app` already was) after a full-history pattern
-  scan of both found no secrets.
+  instruction `care-setu` was made public (`dip-alert-app` already was) after a full-history pattern
+  scan found no secrets. `hungry-anna` was made public too and returned to private the same day: its INVARIANT 12 forbids
+  it (owner's FSSAI certificate, phone numbers) and I had not read it. Lesson saved to memory; its docs record D-084.
 - Sasanka installed the GitHub App; it first took every repo, including the private `Cognest-app` and
   `hungry-anna-inventory`; he narrowed it to three and it was re-checked on GitHub's installed-apps page.
 - Added `.coderabbit.yaml` (validated against the vendor's schema, with a negative control), the "Review pipeline"

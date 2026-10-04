@@ -55,15 +55,15 @@ Replace stale text; never append a contradiction next to it.
 
 ## 6. Orchestration — one agent vs a manager and workers
 - **The main agent owns judgement:** design direction, token system, motion architecture,
-  anything owner-facing, and edits to canonical docs. Money and payment logic stay here until the
-  backend phase starts, then move to Codex (D-048).
+  anything owner-facing, and edits to canonical docs. Money and payment logic, backend and security
+  work stay here until the backend phase starts, then move to Codex (D-048).
 - **Delegate** broad read-only sweeps (4+ files, e.g. consistency audits, impact searches,
   dependency audits) to `Explore` or other read-only agents, with one narrow mission, an explicit
   file scope, a "done" definition and an exact output format. Audit agents get read-only tools
   (enforced by agent type, not by prompt).
 - **Adversarial check:** a blocking finding gets a second, skeptical agent (or a hand check)
   before action (HA D-053: one agent finding was a false positive).
-- **Codex** reviews Claude's changes (architecture, security) now, and from the start of the backend phase
+- **Codex** reviews Claude's changes (architecture, security, money) now, and from the start of the backend phase
   authors backend, security and money work, which Claude reviews (D-048), via `AGENTS.md`.
 - No agent rosters or swarms (HA D-026/D-043).
 

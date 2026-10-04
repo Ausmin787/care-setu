@@ -406,3 +406,10 @@ Template:
   section in AGENTS.md, a pull-request bullet in CLAUDE.md, INVARIANT 33; STATUS decision head and remote line.
 - Not done: the first CodeRabbit review (this branch's PR is the test); config for `hungry-anna` and `dip-alert-app`.
   Sasanka's earlier uncommitted STATUS and LOG changes were left out of this PR on purpose.
+
+## 2026-10-04 · UX ethics overlay recorded (D-046)
+- Model/effort: Sonnet 5.5.
+- Wrote `~/.claude/UX-MASTER-BLUEPRINT.md` (beside the frontend blueprint) from the growth.design study, then reworked it on Sasanka's
+  instruction to carry value, psychology and principle instead of example patterns. He approved the Care Setu overlay; it is recorded
+  here as D-046 and INVARIANT 34.
+- Not done: no built page audited against it; no real-user test; the blueprint's psychology is heuristic until checked at primary sources.

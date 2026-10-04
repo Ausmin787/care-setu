@@ -1332,3 +1332,76 @@ with no pending tag; detail pages still 404. Device audit on the production buil
 390x844) for `/`, `/services`, `/faq`: OK.
 **Not verified:** the owners seeing the new wording before it ships (Q15 still has no named approver; these lines are
 their own answers, applied as given).
+
+## D-045 · 2026-10-04 · Repo made public; every change goes by pull request, reviewed by CodeRabbit (partially supersedes D-002: "private GitHub repo")
+Sasanka asked for CodeRabbit as an independent second reviewer (Claude reviewing its own work shares its blind spots).
+CodeRabbit is free only on public repositories, so `care-setu` (`dip-alert-app` was already public)
+was made public on 2026-10-04 with Sasanka's explicit instruction, after a full-history pattern scan found
+no secrets (`.env.example` is the only env file ever tracked). **`hungry-anna` was also made public that day and returned
+to private the same day:** its INVARIANT 12 forbids it (the owner's FSSAI certificate, phone numbers, address and
+conversation record are tracked), and that file had not been read first. It gets the local CLI review instead (the Free
+plan covers CLI reviews). Lesson: read the target repo's invariants and sweep for owner data before any visibility change.
+- **Pipeline:** work on a branch, open a pull request, CI ("green", D-033) and CodeRabbit run, the author triages every
+  CodeRabbit comment as evidence (fix, or answer with a reason; fix loops capped at 3, as AGENT-OPS), Codex is an optional
+  third opinion on money, webhook and auth changes (`AGENTS.md` → "Review handoff"), **Sasanka merges**. A merge to `main`
+  is a release (Netlify, D-042), so it needs his permission like a push (D-015).
+- **`.coderabbit.yaml`** carries the invariants as per-path review instructions and reads `CLAUDE.md`, `AGENTS.md` and
+  `docs/INVARIANTS.md` as guidelines. It restates them; they win on any disagreement.
+- **The GitHub App is limited to three repos** (`care-setu`, `dip-alert-app` and the now-private `hungry-anna`), checked in GitHub's installed
+  apps page; the private `Cognest-app` and `hungry-anna-inventory` are not reachable by it.
+- **Now public:** all of `docs/` (open owner questions, the claims register, contact details already on the site) and the
+  full history. Owner-confidential documents (the vision PDF, the brief) must never be committed.
+- **Standing rule (Sasanka, 2026-10-04):** every change, however small, goes through a pull request. CodeRabbit's findings
+  are reported to him with what was fixed and what was rejected and why.
+**Why:** an independent reviewer catches what the author's own model repeats; the free tier needs a public repo; the
+invariants are mechanical enough that a second reader can enforce them on every pull request.
+**Rejected:** keeping `hungry-anna` public (its own INVARIANT 12); staying private for `care-setu` (the free plan there is PR summaries only); the paid Essentials plan ($24 per developer per
+month, by Sasanka's choice of free); Claude-only review; installing CodeRabbit on all repos (it first came in that way and
+was narrowed the same day); putting Sasanka's global instructions into CodeRabbit (private context on a third-party service).
+**Verified:** CodeRabbit's pricing, open-source and plans pages state public repos are free (open-source plan with Team
+features); `gh repo list` shows `care-setu` and `dip-alert-app` public and `hungry-anna` private; `care-setu`'s history scanned with secret and key patterns, clean; the
+installed-app page lists exactly three repos with "Only select repositories"; `.coderabbit.yaml` validates against
+CodeRabbit's published `schema.v2.json`, and a deliberately wrong document is rejected by the same check.
+**Not verified:** that CodeRabbit comments on a pull request here (this branch's PR is the first test); the open-source
+rate limits (the plans page table did not render) and whether Dashboard and Reports are excluded for open-source (a
+knowledge-base article from October 2025 says so); that the free offer persists; the scan was by pattern, not a dedicated
+scanner; the owners being told the repo is public (Sasanka decided; not raised in-session).
+
+## D-046 · 2026-10-04 · UX ethics for a health service: no fear or shame, no manufactured urgency, a neutral way out (adds INVARIANT 34; builds on D-012, D-033; supersedes nothing)
+Sasanka approved this overlay on 2026-10-04 after the UX Master Blueprint was written (`~/.claude/UX-MASTER-BLUEPRINT.md`; it keeps
+project rules out of the portable file and defers them to each repo). It states what Care Setu's pages must never do to a person,
+because the people arriving are often anxious about someone they love:
+- **No fear- or shame-based copy,** anywhere (no scare lines, no guilt on a declined offer).
+- **No manufactured urgency or scarcity.** Only limits that really exist (service hours, the callback window, D-024) are stated, and
+  they come from `content/` config, never typed into a component.
+- **Declining is one neutral tap.** The call card is always an alternative wherever a form asks for details (D-033).
+- **An emergency note** stays wherever someone may be in crisis (as the enquiry has, D-033).
+- **Money screens** show every cost early and confirm instantly and plainly, with amounts only from the server quote (INVARIANT 4, unchanged).
+- **Consent** stays unticked and versioned (INVARIANT 12, unchanged).
+Every UI plan also owes the blueprint's UX intent block and its eight-question dark-pattern audit before sign-off.
+**Why:** an independent, written line lets a request that crosses it be objected to before it is built, like the other invariants; the
+rules restate and extend INVARIANTS 4, 12, 15 and 18 and D-033, so they conflict with no existing decision.
+**Rejected:** applying the growth.design case-study patterns as written (practitioner heuristics, not verified, and copying an example
+is the failure the blueprint now forbids); leaving the overlay as a blueprint note only (it would bind nothing in this repo);
+one blanket "psychology to raise conversion" rule (it points the wrong way for a health service).
+**Verified:** the overlay's rules were checked against INVARIANTS 4, 12, 15, 18 and D-033/D-024 and contradict none; `docs-check` run.
+**Not verified:** that any built page complies. No audit of Home, Services, About, Contact, Pay, Partner, FAQ or the 404 has been run
+against it. The psychology behind the rules is `[HEURISTIC]` in the blueprint, not checked against primary sources, and no real-user
+test exists. Follow-up: audit the built pages against INVARIANT 34 and the dark-pattern audit.
+
+## D-047 · 2026-10-04 · Pay confirms at once and the receipt prints after; the enquiry's privacy line is softened (partially supersedes D-036: the stage timing; applies INVARIANT 34)
+The audit of the built pages against INVARIANT 34 (run the same day) found two things. Sasanka chose Option A for the first and to soften the second.
+- **Pay:** D-036 held the bank stage for at least 1.4s even when the answer was already there, then showed "Printing your receipt" for 2.0s before
+  "Paid". That put a fixed delay between an accepted payment and its confirmation. Now the status says **Paid** the moment the result arrives, and the
+  receipt feeds out as a flourish nothing waits on (the 2.0s hum, the stepped feed and the rows landing are unchanged; reduced motion is unchanged). No
+  artificial hold remains. The "printing" stage and its message are removed.
+- **Enquiry:** the line under "What does the patient need?" said "Only the Care Setu team reads this." That claim had no approved CLAIMS row, and the draft
+  privacy notice itself says the email and hosting providers are not chosen yet. It now reads "The Care Setu team who arrange care will read this. Please
+  share only what the care needs.", the notice's own "Who sees it" wording. The owners still approve copy under Q15.
+**Why:** a confirmation that is held back to look busy is the "delay added to seem busy" the UX blueprint forbids and INVARIANT 34 ("confirm instantly")
+rules out; a trust claim nobody has checked is the "would it be true if checked" test failing (INVARIANTS 15 and 18).
+**Rejected:** keeping the staged print as an exception to INVARIANT 34 (Option B); a short anti-flash floor on the bank stage (nothing needs it, and the
+blueprint's own test is "is the wait real"); getting owner evidence for "only" (it cannot be true while providers are unchosen).
+**Verified:** see the LOG entry for this date: `npm run green` and a browser probe of the sample flow.
+**Not verified:** a real phone, iPad or Safari; a screen reader on the new order of announcements; real gateway latency (sample quotes only); the owners
+approving the softened line (Q15 has no named approver).

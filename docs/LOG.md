@@ -393,3 +393,35 @@ Template:
 - Commands → result: `npm run green` passed (155 tests); production probe and a 4-size device audit on it OK.
 - Not done: the enquiry's stored area values (noida/delhi/other) need a migration for a city field; follow-up.
   The dev server's node child outlived its task again and was stopped by PID. No commit.
+
+## 2026-10-04 · Repo public; CodeRabbit review pipeline (D-045)
+- Model/effort: Sonnet 5.5.
+- Sasanka asked to integrate CodeRabbit. Pricing read from the vendor's own pages: free only for public repos. On his
+  instruction `care-setu` was made public (`dip-alert-app` already was) after a full-history pattern
+  scan found no secrets. `hungry-anna` was made public too and returned to private the same day: its INVARIANT 12 forbids
+  it (owner's FSSAI certificate, phone numbers) and I had not read it. Lesson saved to memory; its docs record D-084.
+- Sasanka installed the GitHub App; it first took every repo, including the private `Cognest-app` and
+  `hungry-anna-inventory`; he narrowed it to three and it was re-checked on GitHub's installed-apps page.
+- Added `.coderabbit.yaml` (validated against the vendor's schema, with a negative control), the "Review pipeline"
+  section in AGENTS.md, a pull-request bullet in CLAUDE.md, INVARIANT 33; STATUS decision head and remote line.
+- Not done: the first CodeRabbit review (this branch's PR is the test); config for `hungry-anna` and `dip-alert-app`.
+  Sasanka's earlier uncommitted STATUS and LOG changes were left out of this PR on purpose.
+
+## 2026-10-04 · UX ethics overlay recorded (D-046)
+- Model/effort: Sonnet 5.5.
+- Wrote `~/.claude/UX-MASTER-BLUEPRINT.md` (beside the frontend blueprint) from the growth.design study, then reworked it on Sasanka's
+  instruction to carry value, psychology and principle instead of example patterns. He approved the Care Setu overlay; it is recorded
+  here as D-046 and INVARIANT 34.
+- Not done: no built page audited against it; no real-user test; the blueprint's psychology is heuristic until checked at primary sources.
+
+## 2026-10-04 · INVARIANT 34 audit; Pay confirms at once (D-047)
+- Model/effort: Sonnet 5.5.
+- Audited the built pages against INVARIANT 34 and the UX blueprint's eight dark-pattern questions: copy read line by line for Home, the enquiry,
+  Contact, Pay, the 404 and the promo banner; keyword sweep only for Services, About, FAQ and Partner. Two findings, both fixed (D-047): Pay held a
+  fixed delay before "Paid", and the enquiry claimed "only the team reads this" with no CLAIMS row.
+- Code: `components/pay/PayCard.tsx` and `Pay.module.css` (the print animation now hangs off `data-printing`, not a stage), `en.json`.
+- Commands -> result: `npm run lint` clean, `npm run typecheck` clean, `npm test` 155 passed, `npm run build` succeeded, `docs-check` OK (47 decisions).
+  Browser probe of the sample quote `QT 4K7M 9P2X` on the dev server: first frame after pressing Pay says "Waiting for the bank", the next says "Paid" with the
+  receipt already feeding out (the old code showed "Printing your receipt" for 2.0s before "Paid"). Dev server stopped by PID.
+- Not verified: a real phone, iPad or Safari, a screen reader, the exact milliseconds (the probe shows order, not timing), real gateway latency.
+- Not audited: a render of any page, keyboard or screen-reader use, a real-user test.

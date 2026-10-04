@@ -309,7 +309,7 @@
     "needs": {
       "question": "What does the patient need?",
       "why": "A few lines are enough.",
-      "privacy": "Only the Care Setu team reads this. Please share only what the care needs.",
+      "privacy": "The Care Setu team who arrange care will read this. Please share only what the care needs.",
       "error": "Tell us what the patient needs",
       "tooLong": "Keep it under 1000 characters"
     },
@@ -502,7 +502,6 @@
       "label": "Care Setu · payment",
       "ready": "Ready to pay",
       "waiting": "Waiting for the bank",
-      "printing": "Printing your receipt",
       "paid": "Paid",
       "failed": "The bank didn’t take the payment",
       "failedText": "No money was taken. You can try again, or call us.",

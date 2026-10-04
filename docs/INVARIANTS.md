@@ -64,6 +64,10 @@ cited decision is the authority. Read it before acting on an edge case.
 
 32. **Service detail pages (`/services/<slug>`) run in development only (`serviceDetailsLive: false`)**: production 404s them, the deck cards don't link there and the sitemap omits them, until a D-entry turns them on after the owners approve their rows (C-088..C-095). (D-043)
 
+33. **Changes reach `main` by pull request, reviewed by CodeRabbit (`.coderabbit.yaml`) and CI; the merge is Sasanka's and needs his permission** (a merge is a release, INVARIANT 22). The repo is public: never commit secrets, owner-confidential documents or personal data. (D-045)
+
+34. **UX ethics for a health service**: no fear- or shame-based copy; no manufactured urgency or scarcity (only real limits, from `content/` config); declining is one neutral tap and the call card is always an alternative to a form; an emergency note wherever someone may be in crisis. Money screens show every cost early and confirm instantly (amounts only from the quote, INVARIANT 4); consent stays unticked and versioned (INVARIANT 12). Every UI plan owes the UX blueprint's intent block and dark-pattern audit. (D-046)
+
 ---
 
 ## Open — do NOT treat these as decided

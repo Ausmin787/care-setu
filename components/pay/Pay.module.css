@@ -284,8 +284,8 @@
   color: var(--color-cream);
 }
 
-/* Printing: the paper feeds in steps, the rows land one by one, the chassis hums. */
-[data-stage="printing"] .paper {
+/* Printing: the paper feeds in steps, the rows land one by one, the chassis hums. Starts after "Paid" shows (D-047). */
+[data-printing] .paper {
   animation: feed 1.75s steps(20, end) both;
 }
 @keyframes feed {
@@ -298,7 +298,7 @@
     opacity 0.18s ease,
     transform 0.18s ease;
 }
-[data-stage="printing"] .row {
+[data-printing] .row {
   animation: row 0.18s ease both;
   animation-delay: calc(60ms + var(--i) * 260ms);
 }
@@ -309,7 +309,7 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  [data-stage="printing"] .machine {
+  [data-printing] .machine {
     animation: hum 0.09s linear infinite;
   }
 }
@@ -323,7 +323,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .checks path,
-  [data-stage="printing"] .row {
+  [data-printing] .row {
     animation-delay: 0s;
   }
 }

@@ -16,13 +16,14 @@ import s from "./Pay.module.css";
 const c = t.payPage.card;
 const r = t.payPage.receipt;
 
-type Stage = "ready" | "waiting" | "printing" | "paid" | "failed" | "pending" | "expired" | "cancelled";
+type Stage = "ready" | "waiting" | "paid" | "failed" | "pending" | "expired" | "cancelled";
 type Paid = { at: string; paymentId: string };
 
 // The ink payment card (D-036, Option A): Cue Kit's Thermal Cut Invoice replicated from its written spec. The screen
-// shows the checks the server made, then the bank, then a parchment receipt prints out of the card's slot: the bank
-// stage holds at least 1.4s, the printing stage 2.0s, the paper feeds in 20 steps over 1.75s, and a row lands every
-// 260ms from +60ms. Reduced motion skips the holds and the travel. Only the reference is ever sent (INVARIANT 4).
+// shows the checks the server made, then the bank, then a parchment receipt prints out of the card's slot. The status says
+// Paid the moment the bank accepts (D-047, INVARIANT 34); the print is a flourish nothing waits on: the machine hums for 2.0s,
+// the paper feeds in 20 steps over 1.75s, and a row lands every 260ms from +60ms. Reduced motion skips the travel. Only the
+// reference is ever sent (INVARIANT 4).
 export function PayCard(props: {
   reference: string;
   shown: string;
@@ -36,6 +37,7 @@ export function PayCard(props: {
   const [stage, setStage] = useState<Stage>(props.initial);
   const [paid, setPaid] = useState<Paid | undefined>(props.paid);
   const [network, setNetwork] = useState(false);
+  const [printing, setPrinting] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   // The Pay button leaves the page when pressed; focus moves to the status line so keyboard users keep their place.
   const statusRef = useRef<HTMLParagraphElement>(null);
@@ -51,7 +53,6 @@ export function PayCard(props: {
     setNetwork(false);
     setStage("waiting");
     statusRef.current?.focus();
-    const started = Date.now();
     let result: PayResult | undefined;
     try {
       const res = await fetch("/api/v1/payments", {
@@ -64,7 +65,6 @@ export function PayCard(props: {
     } catch {
       result = undefined;
     }
-    await hold(Math.max(0, 1400 - (Date.now() - started)));
     if (!result) {
       setNetwork(true);
       setStage("failed");
@@ -75,17 +75,17 @@ export function PayCard(props: {
       return;
     }
     setPaid({ at: formatIst(new Date(result.paidAt), true), paymentId: result.paymentId });
-    setStage("printing");
-    await hold(2000);
     setStage("paid");
+    setPrinting(true);
+    await hold(2000);
+    setPrinting(false);
   }
 
-  const checks = stage === "ready" || stage === "waiting" || stage === "printing" || stage === "paid";
-  const printed = (stage === "printing" || stage === "paid") && paid;
+  const checks = stage === "ready" || stage === "waiting" || stage === "paid";
+  const printed = stage === "paid" && paid;
   const status = {
     ready: c.ready,
     waiting: c.waiting,
-    printing: c.printing,
     paid: c.paid,
     failed: c.failed,
     pending: c.pending,
@@ -94,7 +94,7 @@ export function PayCard(props: {
   }[stage];
 
   return (
-    <div className={s.device} data-stage={stage}>
+    <div className={s.device} data-stage={stage} data-printing={printing || undefined}>
       <div className={s.machine} data-mode="ink">
         <p className={s.head}>
           <span>{c.label}</span>
@@ -105,7 +105,7 @@ export function PayCard(props: {
           <p className={s.sub}>{props.detail}</p>
           <p className={s.amt}>{props.amount}</p>
           <p className={s.status} role="status" ref={statusRef} tabIndex={-1}>
-            {stage === "waiting" || stage === "printing" ? (
+            {stage === "waiting" ? (
               <i className={s.spin} aria-hidden="true" />
             ) : stage === "paid" ? (
               <IconCircleCheckFilled className={s.ok} aria-hidden="true" />

@@ -63,8 +63,8 @@ even a "harmless" one (HA D-022).
 
 ## Delegation (see docs/AGENT-OPS.md)
 Delegate read-only sweeps of 4+ files to Explore/read-only agents with a narrow mission and output
-format. Keep design direction, money logic, owner-facing text and canonical-doc edits in the main
-thread. Blocking findings get an adversarial second check. Fix loops are capped at 3 attempts.
+format. Keep design direction, owner-facing text and canonical-doc edits in the main
+thread. Money logic and backend work stay here until the backend phase starts, then move to Codex (D-048). Blocking findings get an adversarial second check. Fix loops are capped at 3 attempts.
 
 ## Doc sync and close-out
 After any change to scope, schema, structure or a decision: update every affected doc and

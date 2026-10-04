@@ -1405,3 +1405,25 @@ blueprint's own test is "is the wait real"); getting owner evidence for "only" (
 **Verified:** see the LOG entry for this date: `npm run green` and a browser probe of the sample flow.
 **Not verified:** a real phone, iPad or Safari; a screen reader on the new order of announcements; real gateway latency (sample quotes only); the owners
 approving the softened line (Q15 has no named approver).
+
+## D-048 · 2026-10-04 · Codex owns backend, security and money logic once the backend phase starts; authors never review their own work (partially supersedes D-016 / AGENT-OPS §6: the main agent owns money and payment logic; AGENTS.md: Codex as an optional third opinion)
+Sasanka set this split on 2026-10-04 while building a shared engineering process for Care Setu and Hungry Anna:
+- **Now:** nobody reviews their own change. Codex reviews Claude's changes (architecture, security, money), Claude reviews Codex's,
+  and CodeRabbit reviews every pull request (D-045). Findings are reported to Sasanka as fixed or rejected, with the reason.
+  Until the backend phase starts, backend, security and money code stay with Claude, as in D-016.
+- **From the start of the backend phase** (pay wiring, the Partner API, Admin; Stage 5 in STATUS "Then"; the day it starts is
+  Sasanka's call and is recorded in STATUS): Codex authors backend, security and money and payment logic (INVARIANTS 4..8, 28, 29),
+  working to its Backend Master Blueprint, which is a draft until reviewed and never overrides an invariant or a decision.
+- **Claude** keeps the frontend, UI and UX (INVARIANT 34), owner-facing text and edits to the canonical docs.
+- **Unchanged:** Sasanka merges and a merge is a release (INVARIANTS 22, 23, 33). The client never sends a price and money is
+  integer paise (INVARIANTS 4, 5). Phase 1 stays the website only (INVARIANT 1). No dev-only flag changes.
+**Why:** an author's own review repeats the author's blind spots, and money and security code deserves a different author and a
+second reviewer. The ownership change waits for the backend phase because the existing data layer and API were built and reviewed
+under D-016 and nothing is gained by moving them mid-build.
+**Rejected:** one agent owning and reviewing everything; Codex as only an optional third opinion (the previous setup); moving
+ownership today (no backend work is in flight); letting either agent merge.
+**Verified:** the passages this replaces were read: CLAUDE.md "Delegation", AGENT-OPS §6 and AGENTS.md "Review pipeline". They are
+edited in this same change.
+**Not verified:** that Codex's output meets this bar, since it has not authored backend code for this project; that the Backend
+Master Blueprint is sound (draft, unreviewed); how the two agents' commits will be sequenced day to day. Hungry Anna is a separate
+project and needs its own entry; none is made here.

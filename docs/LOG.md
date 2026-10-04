@@ -413,3 +413,15 @@ Template:
   instruction to carry value, psychology and principle instead of example patterns. He approved the Care Setu overlay; it is recorded
   here as D-046 and INVARIANT 34.
 - Not done: no built page audited against it; no real-user test; the blueprint's psychology is heuristic until checked at primary sources.
+
+## 2026-10-04 · INVARIANT 34 audit; Pay confirms at once (D-047)
+- Model/effort: Sonnet 5.5.
+- Audited the built pages against INVARIANT 34 and the UX blueprint's eight dark-pattern questions: copy read line by line for Home, the enquiry,
+  Contact, Pay, the 404 and the promo banner; keyword sweep only for Services, About, FAQ and Partner. Two findings, both fixed (D-047): Pay held a
+  fixed delay before "Paid", and the enquiry claimed "only the team reads this" with no CLAIMS row.
+- Code: `components/pay/PayCard.tsx` and `Pay.module.css` (the print animation now hangs off `data-printing`, not a stage), `en.json`.
+- Commands -> result: `npm run lint` clean, `npm run typecheck` clean, `npm test` 155 passed, `npm run build` succeeded, `docs-check` OK (47 decisions).
+  Browser probe of the sample quote `QT 4K7M 9P2X` on the dev server: first frame after pressing Pay says "Waiting for the bank", the next says "Paid" with the
+  receipt already feeding out (the old code showed "Printing your receipt" for 2.0s before "Paid"). Dev server stopped by PID.
+- Not verified: a real phone, iPad or Safari, a screen reader, the exact milliseconds (the probe shows order, not timing), real gateway latency.
+- Not audited: a render of any page, keyboard or screen-reader use, a real-user test.

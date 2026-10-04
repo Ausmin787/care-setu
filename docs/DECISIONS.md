@@ -1388,3 +1388,20 @@ one blanket "psychology to raise conversion" rule (it points the wrong way for a
 **Not verified:** that any built page complies. No audit of Home, Services, About, Contact, Pay, Partner, FAQ or the 404 has been run
 against it. The psychology behind the rules is `[HEURISTIC]` in the blueprint, not checked against primary sources, and no real-user
 test exists. Follow-up: audit the built pages against INVARIANT 34 and the dark-pattern audit.
+
+## D-047 · 2026-10-04 · Pay confirms at once and the receipt prints after; the enquiry's privacy line is softened (partially supersedes D-036: the stage timing; applies INVARIANT 34)
+The audit of the built pages against INVARIANT 34 (run the same day) found two things. Sasanka chose Option A for the first and to soften the second.
+- **Pay:** D-036 held the bank stage for at least 1.4s even when the answer was already there, then showed "Printing your receipt" for 2.0s before
+  "Paid". That put a fixed delay between an accepted payment and its confirmation. Now the status says **Paid** the moment the result arrives, and the
+  receipt feeds out as a flourish nothing waits on (the 2.0s hum, the stepped feed and the rows landing are unchanged; reduced motion is unchanged). No
+  artificial hold remains. The "printing" stage and its message are removed.
+- **Enquiry:** the line under "What does the patient need?" said "Only the Care Setu team reads this." That claim had no approved CLAIMS row, and the draft
+  privacy notice itself says the email and hosting providers are not chosen yet. It now reads "The Care Setu team who arrange care will read this. Please
+  share only what the care needs.", the notice's own "Who sees it" wording. The owners still approve copy under Q15.
+**Why:** a confirmation that is held back to look busy is the "delay added to seem busy" the UX blueprint forbids and INVARIANT 34 ("confirm instantly")
+rules out; a trust claim nobody has checked is the "would it be true if checked" test failing (INVARIANTS 15 and 18).
+**Rejected:** keeping the staged print as an exception to INVARIANT 34 (Option B); a short anti-flash floor on the bank stage (nothing needs it, and the
+blueprint's own test is "is the wait real"); getting owner evidence for "only" (it cannot be true while providers are unchosen).
+**Verified:** see the LOG entry for this date: `npm run green` and a browser probe of the sample flow.
+**Not verified:** a real phone, iPad or Safari; a screen reader on the new order of announcements; real gateway latency (sample quotes only); the owners
+approving the softened line (Q15 has no named approver).

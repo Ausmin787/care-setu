@@ -393,6 +393,9 @@ Template:
 - Commands → result: `npm run green` passed (155 tests); production probe and a 4-size device audit on it OK.
 - Not done: the enquiry's stored area values (noida/delhi/other) need a migration for a city field; follow-up.
   The dev server's node child outlived its task again and was stopped by PID. No commit.
+- Close-out: committed and pushed D-042..D-044 as c6b7465 (Sasanka's permission); Netlify published in ~1 min; the
+  live site checked: "across India" on /, /services, /faq, /partner, no "Noida and Delhi", no pending tags, scope lists
+  live, /services/<slug> 404.
 
 ## 2026-10-04 · Repo public; CodeRabbit review pipeline (D-045)
 - Model/effort: Sonnet 5.5.

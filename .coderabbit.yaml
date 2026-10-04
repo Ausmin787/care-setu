@@ -16,12 +16,9 @@ reviews:
     base_branches:
       - main
   path_filters:
-    - "!package-lock.json"
-    - "!.next/**"
-    - "!.pglite/**"
-    - "!drizzle/meta/**"
+    # public/ holds only binary media (webp, png, mp4, webm); nothing there can be reviewed as text.
+    # Everything else stays reviewable on purpose, lockfile and drizzle/meta included.
     - "!public/**"
-    - "!refs/**"
   path_instructions:
     - path: "**/*.{ts,tsx}"
       instructions: |

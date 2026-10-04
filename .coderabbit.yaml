@@ -1,0 +1,75 @@
+# CodeRabbit review config (D-045). The rules below restate CLAUDE.md and docs/INVARIANTS.md for the
+# reviewer; if they ever disagree, those files win and this one is the bug.
+language: en-US
+tone_instructions: "Direct and concrete. Name the invariant or D-entry a change breaks. Flag overbuilt code, speculative features and drive-by edits. No praise filler."
+early_access: false
+
+reviews:
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  collapse_walkthrough: true
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - main
+  path_filters:
+    - "!package-lock.json"
+    - "!.next/**"
+    - "!.pglite/**"
+    - "!drizzle/meta/**"
+    - "!public/**"
+    - "!refs/**"
+  path_instructions:
+    - path: "**/*.{ts,tsx}"
+      instructions: |
+        Money is integer paise, never a float and never rupees as a Number (INVARIANT 5). The client never
+        sends a price or amount; every amount comes from the server-side quote (INVARIANT 4). The revenue
+        split is configuration, never a literal in code, copy or tests (INVARIANT 8).
+    - path: "{app/api/**,server/**}"
+      instructions: |
+        Every input is parsed by a zod schema at the boundary and SQL goes only through Drizzle (INVARIANT 10).
+        No personal data in logs or error text: names, phones, emails, query text, payment identifiers beyond
+        the internal id (INVARIANT 11). Payment status comes only from a signature-verified, idempotent
+        gateway event, never from a browser redirect (INVARIANT 7). Gateway calls go through the PaymentProvider
+        adapter (INVARIANT 6). Nothing here may send patient or visitor data to a third-party AI (INVARIANT 9).
+    - path: "{drizzle/**,server/db/**}"
+      instructions: |
+        Schema changes ship only as migration files, never db push (INVARIANT 14). Plain Postgres, no vendor-only
+        feature as the sole access control (INVARIANT 21). Money columns are bigint or numeric.
+    - path: "{app/**,components/**,content/**,lib/**}"
+      instructions: |
+        Nothing factual ships (stats, certifications, partner names, testimonials, contact details, photos)
+        unless its row in docs/CLAIMS.md is approved (INVARIANT 15). No invented numbers and no control that
+        does not work (INVARIANT 18). No copy offering money for referrals (INVARIANT 31). Dev-only features
+        stay behind their flags (enquiryLive, paymentsLive, partnerEnquiryLive, serviceDetailsLive) and
+        production must show the closed state (INVARIANTS 28, 29, 31, 32). Copy lives in content/ message files.
+    - path: "**/*.css"
+      instructions: |
+        Design direction is Warm Room (INVARIANT 27): the logo's green, blue and white are the only chroma.
+        Flag any new accent colour. Lint and tsc do not parse CSS, so read it carefully.
+    - path: "{eslint.config.mjs,tsconfig.json,vitest.config.mts,.github/workflows/**}"
+      instructions: |
+        Checker configs are never loosened to silence a finding. Flag any removed rule, widened ignore,
+        skipped step or lowered threshold.
+    - path: "tests/**"
+      instructions: |
+        Flag skipped, weakened or deleted assertions. Tests must fail for the bug they claim to cover.
+    - path: "docs/**"
+      instructions: |
+        Stale text is a bug: replace it, do not append a contradiction. Decision entries need Why and Rejected,
+        plus Verified and Not verified when work was done. STATUS.md "Decision head" must match the newest
+        D-entry in DECISIONS.md.
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - CLAUDE.md
+      - AGENTS.md
+      - docs/INVARIANTS.md
+
+chat:
+  auto_reply: true

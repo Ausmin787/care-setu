@@ -393,3 +393,15 @@ Template:
 - Commands → result: `npm run green` passed (155 tests); production probe and a 4-size device audit on it OK.
 - Not done: the enquiry's stored area values (noida/delhi/other) need a migration for a city field; follow-up.
   The dev server's node child outlived its task again and was stopped by PID. No commit.
+
+## 2026-10-04 · Repo public; CodeRabbit review pipeline (D-045)
+- Model/effort: Sonnet 5.5.
+- Sasanka asked to integrate CodeRabbit. Pricing read from the vendor's own pages: free only for public repos. On his
+  instruction `care-setu` and `hungry-anna` were made public (`dip-alert-app` already was) after a full-history pattern
+  scan of both found no secrets.
+- Sasanka installed the GitHub App; it first took every repo, including the private `Cognest-app` and
+  `hungry-anna-inventory`; he narrowed it to three and it was re-checked on GitHub's installed-apps page.
+- Added `.coderabbit.yaml` (validated against the vendor's schema, with a negative control), the "Review pipeline"
+  section in AGENTS.md, a pull-request bullet in CLAUDE.md, INVARIANT 33; STATUS decision head and remote line.
+- Not done: the first CodeRabbit review (this branch's PR is the test); config for `hungry-anna` and `dip-alert-app`.
+  Sasanka's earlier uncommitted STATUS and LOG changes were left out of this PR on purpose.

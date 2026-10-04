@@ -37,6 +37,13 @@ failure scenario · suggested fix`. Separate **verified** findings (you reproduc
 from **suspected** ones. Don't edit code during a review unless asked. Findings are triaged by
 Sasanka/Claude into a D-entry (accepted or rejected with a reason).
 
+## Review pipeline (D-045)
+The repo is public and every change reaches `main` by pull request. CI and CodeRabbit (`.coderabbit.yaml`, which
+reads this file and `CLAUDE.md`) review each PR. As the author: work on a branch; read every CodeRabbit comment as
+evidence, not truth; fix it or answer it with a reason; stop after 3 fix attempts and ask. Codex is an optional third
+opinion for money, webhook and auth changes (see above). Only Sasanka merges, and a merge is a release. Never commit
+secrets or owner-confidential documents.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

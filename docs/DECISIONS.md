@@ -1450,7 +1450,7 @@ would catch a broken form or an inaccessible page, and the rate limit could be w
 other element is still checked); changing the faint decorative numerals and ghost words to pass axe (a look decision under D-031/D-038, not a
 test's to make); a copy-paste detector (jscpd) in the gate (report-only noise, no failing signal); `llms.txt` (INVARIANT 30 keeps the site out
 of search); putting the manual device audit in CI (it drives a Windows Chrome path and 9 viewport sizes; it stays a pre-release check).
-**Verified:** `npm run lint`, `typecheck`, `unused`, `npm test`, and `npx playwright test` (20 browser tests, both projects) passed locally on
+**Verified:** `npm run lint`, `typecheck`, `unused`, `npm test`, and `npx playwright test` (20 browser tests, both projects, before D-050 added the phone-size pass; 28 after) passed locally on
 Windows with Chrome; the spoofed-header test fails against the old key. Netlify's behaviour is from Netlify staff answers on
 answers.netlify.com (they say `x-nf-client-connection-ip` is the supported header and `x-forwarded-for` is not parsed): a forum, not
 primary documentation, and the primary docs page for functions does not mention headers.
@@ -1460,16 +1460,15 @@ Pixel 7; the axe helper now re-looks for up to 1.5 s so a colour caught mid-tran
 headers, rewrites) do not mention `x-nf-client-connection-ip` at all, so that header rests on Netlify staff answers only.
 **Not verified:** GitHub CI itself (needs a push, which needs Sasanka's permission); a screen reader and a real device; the `prod` project on WebKit
 (Safari applies the production CSP's `upgrade-insecure-requests` to http://localhost, so every asset fails there; a deployed https URL is the way to test it);
-that Netlify really sends `x-nf-client-connection-ip` to a Next.js route (needs a deploy); the rate limit is still per server instance (Q1).
-**Found, not changed (look decisions):** on a phone-size window (Pixel 7) the Home statement's unread words (`HowWeWork`, ghost colour) measure 1.83:1,
-below 3:1, though the CSS comment says 2.4:1; they ink in as the visitor scrolls, so this is a moving state, but it stays dim for anyone who stops
-mid-statement. `npm audit`'s `braces` advisory has no patched release (3.0.3 is latest) and the only offered fix is a breaking downgrade of
+that Netlify really sends `x-nf-client-connection-ip` to a Next.js route and overwrites a client-sent copy (needs a deploy; until then, on any host that does not overwrite it, a client could set it and choose its own rate-limit key; an automated security review of the commit flagged this header trust too); the rate limit is still per server instance (Q1).
+**Found, then fixed in D-050:** on a phone-size window (Pixel 7) the Home statement's unread words measured 1.83:1 (D-050 raises them to 3.85:1).
+**Found, not changed:** `npm audit`'s `braces` advisory has no patched release (3.0.3 is latest) and the only offered fix is a breaking downgrade of
 `eslint-config-next`; it is dev tooling.
 
 ## D-050 · 2026-10-05 · The Home statement's unread words stay readable: ghost colour 28% to 55% ink (partially supersedes D-030: the ghost value of the ink-in reveal; adds nothing else)
 Found by the phone-size axe pass in D-049: the statement's not-yet-inked words measured 1.83:1 on parchment (the CSS comment claimed 2.4:1, which was
 also wrong), below the 3:1 WCAG asks of large text, and they stay that dim for anyone who stops scrolling mid-statement. Sasanka asked for it fixed.
-The ghost is now `color-mix(in srgb, var(--c-ink) 55%, var(--c-canvas))`: 3.85:1 against the page, 4.25:1 against the inked word, which is 16.9:1, so the
+The ghost is now `color-mix(in srgb, var(--c-ink) 55%, var(--c-canvas))`: 3.85:1 against the page, 4.25:1 against the inked word, which is 16.4:1, so the
 words still visibly darken as they are read. The reveal itself (order, trigger, timing, reduced-motion fallback) is unchanged; one CSS value and its comment.
 The blueprint's own physics (§9.3: "content stays readable the whole way") and the About manifesto (never below about 7:1) already hold this line.
 **Why:** unread text that cannot be read at rest is the transient state becoming a permanent one on a phone, and an unaffordable one for low-vision readers.

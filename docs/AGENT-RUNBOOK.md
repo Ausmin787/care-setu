@@ -10,7 +10,7 @@ Node 24, no Docker. From the repo root:
 
 ## 2. Verify a change ("green", INVARIANT 26)
 Run `npm run green`: lint, typecheck, unit tests, `knip` (unused code), `next build`, then Playwright with axe against the build (`prod`)
-and `next dev` (`dev`). Locally the browser is the installed Chrome; CI installs Chromium.
+and `next dev` (`dev`). `playwright.config.ts` picks the browser from the `CI` variable: unset (a developer machine) uses the installed Google Chrome, set (CI) uses Playwright's Chromium, installed with `npx playwright install chromium`. On a machine without Chrome, run with `CI=1`.
 - A failing axe check is a real finding. Fix the page, or if the text is pure decoration add it to `e2e/axe.ts` with the reason. Never widen a rule.
 - Stop after 3 attempts on the same failure and report (AGENT-OPS §2).
 - The 9-size device audit stays manual and is run before a release: start `npm run dev`, then `npm run audit:devices`.
@@ -27,7 +27,7 @@ Today: the owners' tech team runs a public Netlify staging site that publishes e
 and email provider are not chosen; do not choose them. When they are, the server needs these values, set by the owners in their host's
 secret store: `DATABASE_URL`, `EMAIL_TRANSPORT`, `EMAIL_TEAM_INBOX` (Q12), and `APP_BASE_URL` (an https address; without it the site hides
 from search, INVARIANT 30). `server/config/env.ts` fails loudly when a production value is missing. Before any go-live, review the
-setup with Sasanka and record it as a D-entry, and set the rate-limit address header for that host (`server/rate-limit.ts`).
+setup with Sasanka and record it as a D-entry, and set the rate-limit address header for that host (`server/rate-limit.ts`): confirm the host overwrites a client-sent copy of the header it names, since the limiter trusts it.
 
 ## 5. Add a page or feature
 Read the decision it touches (`grep -n '^## D-0NN' docs/DECISIONS.md`), the UI blueprint if it is UI work, and plan before code. Build behind its

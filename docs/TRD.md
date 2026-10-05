@@ -91,4 +91,4 @@ Every request body and response is a zod schema in `server/contracts/` (shared).
 | `consent.test.ts` | query without consent is rejected; consent row written in the same transaction |
 | `split.test.ts` | no hardcoded 1600/400/80/20 literals in `server/` (D-005) |
 | e2e (Playwright, Stage 4) | form submit, pay flow in sandbox, admin login and lists, 360/768/1024/1440 no horizontal overflow |
-**"Green"** = `npm run lint && npm run typecheck && npm test && npm run build` (INVARIANT 26).
+**"Green"** = `npm run green`: lint, typecheck, `npm test`, `npm run unused` (knip), `npm run build`, then `npm run test:e2e` (Playwright + axe against the build and `next dev`) (INVARIANT 26, D-049).

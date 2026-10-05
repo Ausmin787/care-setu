@@ -3,7 +3,7 @@ import { emailTransport } from "@/server/adapters/email";
 import { QueryInput } from "@/server/contracts/queries";
 import { getDb } from "@/server/db/client";
 import { createQuery } from "@/server/domain/queries";
-import { allow } from "@/server/rate-limit";
+import { allow, clientKey } from "@/server/rate-limit";
 
 // POST /api/v1/queries (TRD §3, D-006, D-033): parse, then call the domain. Responses never echo submitted values,
 // and nothing personal is logged (INVARIANT 11).
@@ -17,9 +17,7 @@ export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return reply({ error: "unsupported_media_type" }, 415);
   }
-  // The first forwarded address when a proxy sets one; which header is trustworthy depends on the host (Q1).
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "local";
-  if (!allow(ip)) return reply({ error: "rate_limited" }, 429);
+  if (!allow(clientKey(request.headers))) return reply({ error: "rate_limited" }, 429);
 
   const text = await request.text();
   if (text.length > MAX_BODY) return reply({ error: "too_large" }, 413);

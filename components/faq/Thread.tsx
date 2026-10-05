@@ -9,7 +9,7 @@ import { CallStatus } from "@/components/home/CallStatus";
 import { Pending } from "@/components/about/Pending";
 import s from "./Thread.module.css";
 
-export type ThreadItem = {
+type ThreadItem = {
   slug: string;
   q: string;
   answer: string[];

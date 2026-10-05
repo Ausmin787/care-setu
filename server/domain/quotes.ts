@@ -3,7 +3,7 @@ import { z } from "zod";
 // A quote a coordinator issues after the care plan (D-004). The amount is integer paise, read only here, on the
 // server (INVARIANTS 4, 5). Until the quotes table exists, the only quotes are the development samples below (D-036):
 // one per state, so the owners can see every screen. A production build has none.
-export const QUOTE_STATUSES = ["open", "paid", "expired", "cancelled"] as const;
+const QUOTE_STATUSES = ["open", "paid", "expired", "cancelled"] as const;
 
 const Quote = z.object({
   reference: z.string().length(8),

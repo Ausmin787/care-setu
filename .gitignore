@@ -38,3 +38,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.log
+
+# Playwright
+/test-results/
+/playwright-report/

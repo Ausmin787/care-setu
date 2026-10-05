@@ -81,9 +81,10 @@
   line-height: 1.04;
   letter-spacing: -0.02em;
 }
-/* Ghost is a solid mix, not opacity, so it stays readable (contrast 2.4:1 as a transient state only). */
+/* Ghost is a solid mix, not opacity, and it never falls below 3:1 on the page (WCAG large text; measured 3.85:1 at 55% ink on
+   parchment, D-050), so a visitor who stops mid-statement can still read every word. Inked words are 16.9:1. */
 .statement[data-live] [data-w] {
-  color: color-mix(in srgb, var(--c-ink) 28%, var(--c-canvas));
+  color: color-mix(in srgb, var(--c-ink) 55%, var(--c-canvas));
   transition: color 0.35s ease;
 }
 .statement[data-live] [data-w][data-inked] {

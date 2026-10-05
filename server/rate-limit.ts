@@ -22,3 +22,14 @@ export function allow(key: string, now = Date.now()): boolean {
   }
   return allowed;
 }
+
+// The address a request is limited by. A client can put anything at the front of `x-forwarded-for`, so the first value
+// is never trusted. Netlify sets `x-nf-client-connection-ip` itself (Netlify staff, answers.netlify.com: it is the
+// supported header and they do not parse `x-forwarded-for`); on any other host the last forwarded value is the one the
+// nearest proxy appended. Revisit when hosting is chosen (Q1).
+export function clientKey(headers: Headers): string {
+  const platform = headers.get("x-nf-client-connection-ip")?.trim();
+  if (platform) return platform;
+  const forwarded = headers.get("x-forwarded-for")?.split(",");
+  return forwarded?.at(-1)?.trim() || "local";
+}

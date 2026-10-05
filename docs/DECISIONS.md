@@ -1427,3 +1427,52 @@ edited in this same change.
 **Not verified:** that Codex's output meets this bar, since it has not authored backend code for this project; that the Backend
 Master Blueprint is sound (draft, unreviewed); how the two agents' commits will be sequenced day to day. Hungry Anna is a separate
 project and needs its own entry; none is made here.
+
+## D-049 · 2026-10-05 · Agentic-engineering hardening: browser and accessibility checks in "green", an unused-code check, a trusted rate-limit address, an identity rule for the backend, an agent runbook, and anime.js dropped (extends INVARIANT 26 and CLAUDE.md rule 7; partially supersedes D-021: "anime.js + GSAP")
+Sasanka asked for the gaps found when Andrej Karpathy's talk "From Vibe Coding to Agentic Engineering" was read against the repo
+(captions via yt-dlp, 2026-10-05; the talk is a lead, not a source: every item below stands on evidence in this repo). Six changes:
+1. **"Green" now also means `npm run unused` (knip) and `npm run test:e2e` (Playwright + axe).** Two projects: `prod` runs the built site
+   (every built page loads, no console errors, no WCAG 2.1 A/AA axe violations; Terms, Refunds, `/dev` and `/services/<slug>` 404; both APIs
+   closed; robots disallows) and `dev` runs `next dev` (the enquiry end to end with consent unticked and required, the queries API's refusals,
+   Pay, the Partner form sending nothing, a service detail page, all under axe). CI runs both after the build.
+2. **The rate limiter keys on a trusted address.** `clientKey()` in `server/rate-limit.ts` takes `x-nf-client-connection-ip`, else the
+   **last** `x-forwarded-for` value, else one shared key. Before, the first forwarded value was used, which a client can write. A browser-level
+   test proves a spoofed header buys no fresh allowance. Revisit when hosting is chosen (Q1).
+3. **knip** flags unused files, exports and dependencies; four unused exports it found were un-exported.
+4. **INVARIANT 35** (new): records are linked by internal ids, never matched by email, phone or name. Written before the backend phase so
+   Codex's work (D-048) starts under it.
+5. **`docs/AGENT-RUNBOOK.md`**: setup, verify, release and handover steps as instructions an agent can follow.
+6. **`animejs` removed from this project only.** It was never imported: D-021 built the hero entrance in CSS, and every later page plan chose
+   CSS or GSAP. The global skill and Hungry Anna are untouched; reinstalling is one command if a page needs text-splitting or SVG draw.
+**Why:** verifiability is what lets agents move fast without lowering the bar; the only browser check was a manual audit, so nothing in CI
+would catch a broken form or an inaccessible page, and the rate limit could be walked around with one header.
+**Rejected:** loosening any checker to pass (the two decorative-text exclusions are narrow, named in `e2e/axe.ts` and justified there, and every
+other element is still checked); changing the faint decorative numerals and ghost words to pass axe (a look decision under D-031/D-038, not a
+test's to make); a copy-paste detector (jscpd) in the gate (report-only noise, no failing signal); `llms.txt` (INVARIANT 30 keeps the site out
+of search); putting the manual device audit in CI (it drives a Windows Chrome path and 9 viewport sizes; it stays a pre-release check).
+**Verified:** `npm run lint`, `typecheck`, `unused`, `npm test`, and `npx playwright test` (20 browser tests, both projects) passed locally on
+Windows with Chrome; the spoofed-header test fails against the old key. Netlify's behaviour is from Netlify staff answers on
+answers.netlify.com (they say `x-nf-client-connection-ip` is the supported header and `x-forwarded-for` is not parsed): a forum, not
+primary documentation, and the primary docs page for functions does not mention headers.
+**Verified later the same day:** the same 20 tests pass in CI mode (`CI=1`, bundled Chromium, retries on) after raising the dev project's limit to 90 s
+(one enquiry run timed out at 30 s on first compile); the `dev` flows pass on WebKit (Safari's engine) three runs running, and on emulated iPhone 13 and
+Pixel 7; the axe helper now re-looks for up to 1.5 s so a colour caught mid-transition is not reported. Netlify: the primary docs (functions `context.ip`,
+headers, rewrites) do not mention `x-nf-client-connection-ip` at all, so that header rests on Netlify staff answers only.
+**Not verified:** GitHub CI itself (needs a push, which needs Sasanka's permission); a screen reader and a real device; the `prod` project on WebKit
+(Safari applies the production CSP's `upgrade-insecure-requests` to http://localhost, so every asset fails there; a deployed https URL is the way to test it);
+that Netlify really sends `x-nf-client-connection-ip` to a Next.js route (needs a deploy); the rate limit is still per server instance (Q1).
+**Found, not changed (look decisions):** on a phone-size window (Pixel 7) the Home statement's unread words (`HowWeWork`, ghost colour) measure 1.83:1,
+below 3:1, though the CSS comment says 2.4:1; they ink in as the visitor scrolls, so this is a moving state, but it stays dim for anyone who stops
+mid-statement. `npm audit`'s `braces` advisory has no patched release (3.0.3 is latest) and the only offered fix is a breaking downgrade of
+`eslint-config-next`; it is dev tooling.
+
+## D-050 · 2026-10-05 · The Home statement's unread words stay readable: ghost colour 28% to 55% ink (partially supersedes D-030: the ghost value of the ink-in reveal; adds nothing else)
+Found by the phone-size axe pass in D-049: the statement's not-yet-inked words measured 1.83:1 on parchment (the CSS comment claimed 2.4:1, which was
+also wrong), below the 3:1 WCAG asks of large text, and they stay that dim for anyone who stops scrolling mid-statement. Sasanka asked for it fixed.
+The ghost is now `color-mix(in srgb, var(--c-ink) 55%, var(--c-canvas))`: 3.85:1 against the page, 4.25:1 against the inked word, which is 16.9:1, so the
+words still visibly darken as they are read. The reveal itself (order, trigger, timing, reduced-motion fallback) is unchanged; one CSS value and its comment.
+The blueprint's own physics (§9.3: "content stays readable the whole way") and the About manifesto (never below about 7:1) already hold this line.
+**Why:** unread text that cannot be read at rest is the transient state becoming a permanent one on a phone, and an unaffordable one for low-vision readers.
+**Rejected:** 60% (4.5:1, but only 3.6:1 to the inked word, so the reveal nearly disappears); 40% (2.5:1, still below 3:1); an opacity ramp (alpha
+stacking, the trap in the blueprint); leaving it and excluding it from axe (hides a real defect).
+**Verified / Not verified:** see the LOG entry for this date.

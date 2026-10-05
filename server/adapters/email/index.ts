@@ -7,7 +7,7 @@ export interface EmailTransport {
 }
 
 // Development only. Logs that an alert was due, with the internal id and nothing personal (INVARIANT 11).
-export function consoleTransport(teamInbox: string | undefined): EmailTransport {
+function consoleTransport(teamInbox: string | undefined): EmailTransport {
   return {
     async queryAlert({ id }) {
       console.info(

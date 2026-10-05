@@ -434,3 +434,26 @@ Template:
 - Recorded who authors and who reviews: nobody reviews their own change now; Codex owns backend, security and money logic from the
   start of the backend phase. Edited CLAUDE.md "Delegation", AGENT-OPS §6 and AGENTS.md to match.
 - Not done: no code changes; Hungry Anna's equivalent is not written; the Backend Master Blueprint is still a draft.
+
+## 2026-10-05 · Agentic-engineering hardening (D-049)
+- Model/effort: Sonnet 5.5, high on the design of the checks.
+- Source: Karpathy's "From Vibe Coding to Agentic Engineering" talk, captions via yt-dlp; used as a lead, each change rests on repo evidence.
+- Done: `clientKey()` replaces the first-`x-forwarded-for` rate-limit key (both API routes, tests); Playwright + axe (`e2e/prod`, `e2e/dev`);
+  knip (`knip.json`, four unused exports un-exported); CI runs both; INVARIANT 35; `docs/AGENT-RUNBOOK.md`; `animejs` uninstalled (zero imports);
+  README, TRD §1, CLAUDE.md rule 7 and INVARIANT 26 updated to the new "green".
+- Found: /services card numerals (`__idx`) and the Partner ghost words (`__ghost`) fail axe colour contrast (faint decoration by design); excluded
+  by name in `e2e/axe.ts`, look unchanged. Owner-visible: Sasanka may prefer to raise their contrast instead.
+- Commands -> result: see D-049 "Verified". `npm run green` passed (158 unit tests, 20 browser tests, build) after the last edit.
+- Re-checked: CI mode on Chromium, dev flows on WebKit and emulated phones, the Netlify docs (see D-049 "Verified later"). Not verified: GitHub CI, a screen reader, real devices, WebKit on the production CSP. `npm audit` reports a high advisory in `braces` via `eslint-config-next`
+  (dev tooling, existing before this change; its suggested fix is a breaking downgrade, not applied).
+- Not done: nothing committed or pushed (D-015).
+
+## 2026-10-05 · Home statement ghost words readable (D-050)
+- Model/effort: Sonnet 5.5. Read the Frontend Blueprint §0-§13, §19 and the traps list in §11 (not §3, §14-§17 research and tool-shelf sections: a one-value
+  contrast fix has no new section, sample or flow to research).
+- Done: `HowWeWork.module.css` ghost 28% -> 55% ink (1.83:1 -> 3.85:1 on parchment) and its wrong comment; the prod browser spec now also runs every built
+  page at 390x844 (that is how the fault was found); D-050.
+- Commands -> result: `npm run build` ok; `playwright --project=prod` 22 passed (desktop + phone); a wheel-step probe at 390 and 1280 wide showed the reveal intact
+  (0 -> 45 of 45 words inked in order, ghost rgb about 128,124,118, inked rgb 28,24,20); `scripts/device-audit.mjs` on `/` at all nine sizes: OK, no overflow.
+- Not verified: reduced motion by emulation (structure only: the ghost rule applies only under `[data-live]`, which JS adds only when motion is allowed); a real phone;
+  how the owners feel about a slightly stronger ghost (a look change under Q15 review).

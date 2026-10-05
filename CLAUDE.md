@@ -55,7 +55,7 @@ even a "harmless" one (HA D-022).
 4. No personal data in logs, analytics or any third-party AI (D-010).
 5. Schema changes only as migration files (D-002).
 6. The revenue split is configuration, never a literal (D-005).
-7. "Green" = lint + typecheck + test + **build** (lint and tsc don't parse CSS).
+7. "Green" = lint + typecheck + test + unused-code check + **build** + browser checks `npm run test:e2e` (lint and tsc don't parse CSS; D-049).
 8. **Edit boundaries:** an import and its usage, or a signature and its callers, go in ONE edit
    (Blueprint §19.5 #9/#14/#19: split edits trip the post-edit hook three times over).
 9. Checker configs are never loosened to silence a finding (`protect-config.mjs`).

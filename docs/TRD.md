@@ -16,9 +16,9 @@ vendor docs) before it is relied on (INVARIANT 24).
 | Staff auth | Candidate: Better Auth or Auth.js with DB sessions + roles | Portable, not tied to a DB vendor | choose at Stage 3 with a D-entry *(verify)* |
 | Payments | `PaymentProvider` adapter; Razorpay sandbox first | D-003 | Checkout + Orders API + webhook signature *(verify)* |
 | Email | `EmailTransport` adapter; console in dev | D-006 | provider chosen with Q1 |
-| Tests | Vitest (unit/contract), Playwright for e2e at Stage 4 | HA pattern | |
+| Tests | Vitest (unit/contract); Playwright + axe for browser checks (`e2e/`), knip for unused code | HA pattern; D-049 | part of "green" |
 | Lint | ESLint (next core-web-vitals + typescript) | HA pattern | configs protected by hook |
-| CI | GitHub Actions: install, lint, typecheck, test, build | Missing in HA; churn lesson: clean code first | file added D-033; runs once a remote exists (D-015) |
+| CI | GitHub Actions: install, lint, typecheck, test, unused-code check, build, browser checks | Missing in HA; churn lesson: clean code first | file added D-033; runs on every push to `main` and pull request (D-045, D-049) |
 
 ## 2. Data model (`queries` and `consents` built in migration 0001, D-033; the rest is draft)
 All tables have `id` (uuid), `created_at`, `updated_at` (timestamptz). Money is integer paise
@@ -90,5 +90,5 @@ Every request body and response is a zod schema in `server/contracts/` (shared).
 | `payments.test.ts` | server-side amount, idempotent order creation, webhook signature pass/fail, duplicate event no-op, status only from verified events |
 | `consent.test.ts` | query without consent is rejected; consent row written in the same transaction |
 | `split.test.ts` | no hardcoded 1600/400/80/20 literals in `server/` (D-005) |
-| e2e (Playwright, Stage 4) | form submit, pay flow in sandbox, admin login and lists, 360/768/1024/1440 no horizontal overflow |
-**"Green"** = `npm run lint && npm run typecheck && npm test && npm run build` (INVARIANT 26).
+| e2e (Playwright + axe, built D-049) | built pages at 1440 and 390 wide: loads, no console errors, no WCAG A/AA violations; closed and 404 states; enquiry, Pay and Partner flows in dev. Still to add with the backend: pay in the sandbox, admin login and lists |
+**"Green"** = `npm run green`: lint, typecheck, `npm test`, `npm run unused` (knip), `npm run build`, then `npm run test:e2e` (Playwright + axe against the build and `next dev`) (INVARIANT 26, D-049).

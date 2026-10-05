@@ -9,12 +9,13 @@ service pages, a patient query form, payment against a quote, and a staff admin.
 holder to be set once the legal entity exists (Q5). Until then: proprietary, all rights reserved.
 
 ## Setup
-Node 24. Next.js 16 (App Router) + TypeScript strict + Tailwind v4; anime.js + GSAP for motion (D-021).
+Node 24. Next.js 16 (App Router) + TypeScript strict + Tailwind v4; GSAP for scroll motion, the rest CSS (D-021; anime.js dropped, D-049).
 No Docker or cloud account needed. Drizzle + PGlite arrive with the Contact page (D-021).
 ```
 npm install
 npm run dev        # http://localhost:3000
-npm run green      # lint + typecheck + tests + build ("green", INVARIANT 26)
+npm run green      # lint + typecheck + tests + unused + build + browser checks ("green", INVARIANT 26)
+npm run test:e2e   # Playwright + axe on the built site and on `next dev` (needs a build first)
 ```
 Copy lives in `content/` (D-008): `messages/en.json`, `services.json`, and `site.config.json` (public business
 facts; empty until the owners answer, and empty hides the UI). Hero illustration slot:
@@ -38,6 +39,7 @@ facts; empty until the owners answer, and empty hides the UI). Hero illustration
 | Visual design system (Stage 2) | `DESIGN.md` |
 | Owner's design reactions, round by round | `docs/OWNER-TASTE.md` |
 | Prompts for images Sasanka generates | `docs/ASSET-PROMPTS.md` |
+| Setup, verify, release and handover steps for an agent | `docs/AGENT-RUNBOOK.md` |
 | Build plans | `docs/plans/` |
 | Session trace | `docs/LOG.md` |
 | Agent rules | `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex/others) |

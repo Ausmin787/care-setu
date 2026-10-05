@@ -31,7 +31,7 @@ export const faq = z
   .parse(faqData);
 
 // Contact details come from the site config and the Contact copy, never from the FAQ file.
-export function fill(text: string): string {
+function fill(text: string): string {
   return text
     .replaceAll("{phone}", phoneDisplay)
     .replaceAll("{email}", config.email)

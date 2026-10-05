@@ -1,4 +1,5 @@
-# "Green" on every push and pull request (INVARIANT 26, TRD §1): lint, typecheck, tests, build.
+# "Green" on every push and pull request (INVARIANT 26, TRD §1): lint, typecheck, tests, unused-code check, build, then
+# the browser checks (axe + flows, D-049) against the build just made.
 # Created locally (D-033); the repo has no remote yet, and pushing needs Sasanka's permission (D-015).
 name: CI
 
@@ -24,4 +25,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run unused
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e

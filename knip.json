@@ -1,0 +1,5 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [".claude/hooks/*.mjs", "scripts/*.mjs", "e2e/**/*.spec.ts"],
+  "project": ["app/**", "components/**", "lib/**", "server/**", "e2e/**", "tests/**", "scripts/**", ".claude/hooks/**"]
+}

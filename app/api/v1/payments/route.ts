@@ -2,7 +2,7 @@ import { paymentsOpen } from "@/lib/content";
 import { samplePaymentProvider } from "@/server/adapters/payments";
 import { PayInput } from "@/server/contracts/payments";
 import { getQuote } from "@/server/domain/quotes";
-import { allow } from "@/server/rate-limit";
+import { allow, clientKey } from "@/server/rate-limit";
 
 // POST /api/v1/payments (D-004, D-036): pay a quote by its reference. The body carries the reference only; the amount
 // is the server's. Runs in development on sample quotes until `paymentsLive` is set by a D-entry.
@@ -16,8 +16,7 @@ export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return reply({ error: "unsupported_media_type" }, 415);
   }
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "local";
-  if (!allow(ip)) return reply({ error: "rate_limited" }, 429);
+  if (!allow(clientKey(request.headers))) return reply({ error: "rate_limited" }, 429);
 
   const text = await request.text();
   if (text.length > MAX_BODY) return reply({ error: "too_large" }, 413);

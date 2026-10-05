@@ -1481,7 +1481,7 @@ Sasanka supplied a casual selfie of Dr Saurabh (a temple, a crowd, snow) and ask
 (D-034: AI upscaling "would invent detail on a real person's face"; INVARIANT 16: photos need recorded provenance and consent; the deck has no photo of Dr Saurabh, C-021). He chose to go ahead.
 - **Allowed now:** a prompt, written to preserve his likeness (edit, never "a similar person"), Sasanka running it in ChatGPT, and Claude reviewing the result for likeness drift and artefacts.
 - **Not allowed until a later D-entry:** the image entering the repo's `public/` or a page. Claim **C-100** must be `approved`: Dr Saurabh has seen the result, agrees it is him, and consents
-  to its web use and to his photo going through a third-party AI. The About card stays type-only until then (D-032), and the founder-photo test that fails if a photo lands in `public/` stays.
+  to its web use and to his photo going through a third-party AI. His card shows the portrait in development only, like the other three founders (the whole founders block is `pending` and hidden in a production build, C-021, D-032); production shows nothing of it until then. The founder-photo test that fails if a photo lands in `public/` stays.
 - **Unchanged:** D-034 stands for the other founders (classical clean-up only); no other real face goes through AI without its own entry. No white coat, stethoscope or title is added to the image
   (his qualifications are owner-pending, C-096 and the deck). INVARIANT 9 is not touched (this is a founder's own photo, not patient or visitor data).
 **Why:** the owner-side need is a professional portrait like the three others; a selfie with strangers in the frame cannot ship, and the owners' deck has no photo of him.

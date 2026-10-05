@@ -55,3 +55,32 @@ with plain wall around it.
 6. *Care continues with the family:* two steel tea glasses and a small plate of biscuits on a low wooden table.
 7. *Support continues with the patient:* a wooden walking stick leaning against a cream wall beside a chair.
 **Delivery:** `refs/care-setu/stills/` with the number and "about" in the file name; each gets a CLAIMS row (as C-073).
+
+## Dr Saurabh Chauhan's founder portrait (D-051, C-100): one image, portrait 3:4, 1536×2048
+**Rules first.** Attach his photo and use ChatGPT's *edit this image* route, never "generate a person like this". Make 3 or 4 variants and keep the one that looks most like him. Do not upscale or
+"enhance" afterwards. Nothing goes into the repo until C-100 is approved (he has seen it, agrees it is him, consents to web use and to the AI edit). Send me the pick for review.
+
+**Prompt (paste with the photo attached):**
+
+> Edit the attached photo of this man into a professional head-and-shoulders corporate portrait. This is the same real person: keep his face exactly as it is. Preserve his facial structure, face shape, eyes and eye shape, eyebrows, nose, lips, jawline, ears, skin tone and natural skin texture (pores, faint lines, no smoothing or beauty filter), his full black moustache, his short stubble beard exactly as it grows, and his thick, dark, voluminous short hairstyle with its natural parting and volume. Do not make him look younger, slimmer, lighter-skinned or more symmetrical, and do not change his age. If anything is unclear, stay closer to the original.
+>
+> Remove everything behind him and the weather on him: no temple, no crowd, no strangers, no sky, no snow or water drops in his hair or on his face or clothes. Replace the background with a plain, seamless, very light warm-grey studio backdrop (close to #EFEDEA), evenly lit, with only a very faint soft falloff and no texture, no vignette, no gradient glow, no props.
+>
+> Clothing: a well-fitted dark navy blazer over a crisp white shirt with an open collar and no tie, like a founder's profile photo. Hide any chain or jewellery inside the collar. No white coat, no stethoscope, no badge, no logo, no text on the clothes.
+>
+> Expression and pose: relaxed, calm, confident and approachable, looking straight into the camera at eye level, eyebrows level and not furrowed, eyes fully open and not squinting, lips closed with the faintest natural smile. Shoulders square to the camera or turned very slightly, head upright. Correct the wide-angle selfie distortion so the nose and face proportions look natural, as if shot on an 85 mm lens.
+>
+> Framing: vertical 3:4, head and shoulders down to mid-chest, his head filling about 45 to 50 percent of the frame height, a little headroom above the hair, centred. Soft, large, even studio key light from the front-left at a slight angle with gentle fill on the shadow side, natural catchlights in the eyes, accurate colour, realistic camera detail and a natural level of sharpness. It must look like a real photograph, not an illustration, a render or a painting.
+>
+> No text, no watermark, no logo, no border, no extra people, no hands in frame, no glasses, no hat.
+
+**If the first result is close but not right**, reply in the same chat with one fix at a time, and finish each with "keep everything else exactly the same":
+- *Face drifted:* "This no longer looks like him. Go back to the attached original and keep his exact face; change only the background, clothing and lighting."
+- *Too smooth or plastic:* "Restore natural skin texture and fine detail. No smoothing."
+- *Stubble or moustache changed:* "Match the moustache and stubble pattern of the original photo exactly."
+- *Hair changed:* "Match the hairstyle and hair volume of the original photo exactly."
+- *Background not plain:* "Make the background a flat, seamless, very light warm-grey with no gradient."
+
+**Match to the other founders (checked against `refs/care-setu/founders/`):** 3:4 portrait, head and shoulders, dark navy or black blazer, white shirt, light neutral background, soft even light, direct calm gaze. The About card then applies one warm monochrome treatment to all four, so small differences in colour grade disappear; the face and framing are what must match.
+
+**Delivery:** save the pick as `refs/care-setu/founders/saurabh-chatgpt.png` (gitignored). Do not put it in `public/`.

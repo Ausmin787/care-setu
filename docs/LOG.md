@@ -458,8 +458,13 @@ Template:
 - Not verified: reduced motion by emulation (structure only: the ghost rule applies only under `[data-live]`, which JS adds only when motion is allowed); a real phone;
   how the owners feel about a slightly stronger ghost (a look change under Q15 review).
 
-## 2026-10-05 · Phone menu closes by itself (bug fix, branch fix/mobile-nav-closes, uncommitted)
+## 2026-10-05 · Phone menu closes by itself (bug fix, merged in PR #6)
 - Reported by Sasanka on the Netlify staging site on a phone: the 3-bar menu stayed open after scrolling, and after choosing a page (the new page opened with the menu still showing).
 - Cause: the menu is a native `<details>`, which only toggles on its own summary. Fix: `NavMenu` in `components/site/NavLinks.tsx` closes it on a link tap (the `/#how` link changes no route), on a route change, on Escape, on a tap outside, and after a scroll of more than 48 px; `Nav.tsx` uses it.
 - Commands -> result: lint, typecheck, build clean; `e2e/prod/nav.spec.ts` 4 tests pass on the fix and all 4 fail on the old code (bug reproduced); the same spec passes on emulated Pixel 7.
 - Not verified: real iOS Safari or a real phone (the emulated WebKit run hit harness limits: dev-server load timeouts and no mouse wheel in mobile WebKit, so it proves nothing either way); how it feels under a thumb on the staging site (needs a merge).
+
+## 2026-10-05 · Saurabh's founder portrait wired in dev (D-051, C-100)
+- Sasanka chose one ChatGPT result; reviewed, downscaled to 900x1200 WebP in gitignored `refs/care-setu/founders/`, `content/about.json` points his card at it (dev-only route; production unchanged).
+- Merged PR #5 (D-049, D-050) and PR #6 (phone menu) on Sasanka's "whatever you feel right about merging": CI green, CodeRabbit comments answered or none, then merge commits as before.
+- Not verified: likeness; his consent; the card at phone width. C-100 stays pending, so nothing about his photo ships.

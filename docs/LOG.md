@@ -457,3 +457,9 @@ Template:
   (0 -> 45 of 45 words inked in order, ghost rgb about 128,124,118, inked rgb 28,24,20); `scripts/device-audit.mjs` on `/` at all nine sizes: OK, no overflow.
 - Not verified: reduced motion by emulation (structure only: the ghost rule applies only under `[data-live]`, which JS adds only when motion is allowed); a real phone;
   how the owners feel about a slightly stronger ghost (a look change under Q15 review).
+
+## 2026-10-05 · Phone menu closes by itself (bug fix, branch fix/mobile-nav-closes, uncommitted)
+- Reported by Sasanka on the Netlify staging site on a phone: the 3-bar menu stayed open after scrolling, and after choosing a page (the new page opened with the menu still showing).
+- Cause: the menu is a native `<details>`, which only toggles on its own summary. Fix: `NavMenu` in `components/site/NavLinks.tsx` closes it on a link tap (the `/#how` link changes no route), on a route change, on Escape, on a tap outside, and after a scroll of more than 48 px; `Nav.tsx` uses it.
+- Commands -> result: lint, typecheck, build clean; `e2e/prod/nav.spec.ts` 4 tests pass on the fix and all 4 fail on the old code (bug reproduced); the same spec passes on emulated Pixel 7.
+- Not verified: real iOS Safari or a real phone (the emulated WebKit run hit harness limits: dev-server load timeouts and no mouse wheel in mobile WebKit, so it proves nothing either way); how it feels under a thumb on the staging site (needs a merge).

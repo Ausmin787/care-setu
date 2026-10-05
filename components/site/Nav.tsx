@@ -2,7 +2,7 @@ import Link from "next/link";
 import { IconMenu2, IconPhoneFilled } from "@tabler/icons-react";
 import { LogoMark } from "@/components/LogoMark";
 import { config, phoneDisplay, t } from "@/lib/content";
-import { NavLinks, NavTalk } from "./NavLinks";
+import { NavLinks, NavMenu, NavTalk } from "./NavLinks";
 import s from "./Nav.module.css";
 
 const links = [
@@ -33,14 +33,14 @@ export function Nav() {
           </a>
         )}
         <NavTalk label={t.nav.talk} />
-        <details className={s.menu}>
+        <NavMenu className={s.menu}>
           <summary aria-label={t.nav.menu}>
             <IconMenu2 aria-hidden="true" />
           </summary>
           <div className={s.sheet}>
             <NavLinks links={links} />
           </div>
-        </details>
+        </NavMenu>
       </div>
     </header>
   );

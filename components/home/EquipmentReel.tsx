@@ -59,7 +59,7 @@ export function EquipmentReel() {
                         </>
                       )}
                     </div>
-                    <div className={s.caption}>
+                    <div className={s.caption} data-reel-caption>
                       <p className={s.count}>
                         {String(i + 1).padStart(2, "0")} {e.of} {total}
                       </p>

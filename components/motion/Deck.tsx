@@ -64,6 +64,10 @@ export function Deck({ className, children }: { className: string; children: Rea
           // Short windows: scale the deck and rail down to the room left under the header instead of switching the
           // deck off. The cards keep their designed size inside, so their content never overflows.
           el.style.setProperty("--fit", "1");
+          // The deck is as tall as the fullest card's content (prices, wrapped lines, zoom), so nothing is clipped.
+          el.style.removeProperty("--deck-need");
+          const need = Math.max(...cards.map((c) => c.scrollHeight));
+          el.style.setProperty("--deck-need", `${need}px`);
           const deck = el.querySelector<HTMLElement>("[data-deck]");
           const body = deck?.parentElement;
           let fit = 1;
@@ -139,19 +143,28 @@ export function Deck({ className, children }: { className: string; children: Rea
         };
 
         let lastH = window.innerHeight;
+        let lastW = window.innerWidth;
         let timer = 0;
+        const rebuild = () => {
+          teardown();
+          build();
+          ScrollTrigger.refresh();
+        };
         const onResize = () => {
           window.clearTimeout(timer);
           timer = window.setTimeout(() => {
-            if (window.innerHeight === lastH) return;
+            if (window.innerHeight === lastH && window.innerWidth === lastW) return;
             lastH = window.innerHeight;
-            teardown();
-            build();
-            ScrollTrigger.refresh();
+            lastW = window.innerWidth;
+            rebuild();
           }, 200);
         };
 
         build();
+        // Web fonts change how the cards wrap, so measure again once they are in.
+        document.fonts.ready.then(() => {
+          if (el.hasAttribute("data-live")) rebuild();
+        });
         el.addEventListener("focusin", onFocus);
         document.addEventListener("click", onClick);
         window.addEventListener("resize", onResize);

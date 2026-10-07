@@ -272,8 +272,12 @@
 .stage[data-live] {
   --peek: 42px;
   --head: 76px;
-  /* Never below 440px, the height the fullest card needs; shorter windows scale the whole body down (--fit, Deck). */
-  --deck-h: clamp(var(--deck-min), calc(100svh - var(--nav-h) - 56px - var(--head) - 3 * var(--peek)), 540px);
+  /* Never below 440px, and never below the fullest card's measured content (--deck-need, set by Deck on every build, so
+     prices, wrapping and zoom can't crop a card); shorter windows scale the whole body down (--fit, Deck). */
+  --deck-h: max(
+    var(--deck-need, 0px),
+    clamp(var(--deck-min), calc(100svh - var(--nav-h) - 56px - var(--head) - 3 * var(--peek)), 540px)
+  );
   --deck-min: 440px;
   height: 100svh;
   box-sizing: border-box;
@@ -282,20 +286,15 @@
   padding-block: calc(var(--nav-h) + 20px) 16px;
   overflow: clip;
 }
-/* Very short windows (laptops at 125-150% scaling): the section heading is kept for screen readers only (the rail
-   names the line) and the cards stack tighter, so the deck scales less and its text stays readable (~17px at 537). */
+/* Very short windows (laptops at 125-150% scaling): the cards stack tighter and the heading shrinks, so the deck
+   scales less and its text stays readable; the heading is always shown. */
 @media (max-height: 599px) {
   .stage[data-live] {
     --peek: 14px;
-    --head: 0px;
+    --head: 34px;
   }
-  .stage[data-live] .head {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+  .stage[data-live] .title {
+    font-size: 26px;
   }
 }
 /* Narrower windows wrap the card text onto more lines (GDA ran 13px over at 1093x490): a taller design height. */

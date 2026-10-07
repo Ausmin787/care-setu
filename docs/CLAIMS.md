@@ -59,19 +59,19 @@ or owner confirmation recorded as a D-entry. "It's in the deck" is not evidence.
 | C-042 | "Flexible engagements": per visit, per session, per shift, per day or per month | Sample site (D-029), inferred from its price units | — (Q17) | pending | — |
 | C-043 | Brand line "Treatment begins in a hospital. Healing continues at home." | Founders’ deck p.7 ("Our belief": "Treatment may begin in a hospital, but healing continues at home."); also the sample site, whose attribution to "Dr. Ananya Sen" is rejected (C-062) | Owners via Sasanka 2026-10-03 (D-044) | approved | Home (the kicker above how we work) |
 | C-044 | Founding observation: hospitals give strong clinical care, but discharge leaves families anxious and unprepared; Care Setu bridges that step | Sample site `/about` (D-029) | — (owners agree the founding story may be used once Care Setu approves the final text, D-044) | pending | — |
-| C-045 | Nurse at Home from ₹1,800 per 12-hour shift | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | —  |
-| C-046 | Physiotherapy ₹1,200 per session | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-047 | GDA / attendant ₹22,000 per month | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-048 | ICU care at home ₹8,500 per day | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-049 | Doctor at Home ₹1,500 per visit | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-050 | Lab tests from ₹450, home visit included | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-051 | Equipment from ₹1,200 per month | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-052 | Oxygen concentrator rent ₹3,200 per month, buy ₹54,000 | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-053 | Motorised bed rent ₹4,800 per month | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-054 | Wheelchair rent ₹1,500 per month or ₹550 per week | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-055 | Patient monitor rent ₹3,800 per month | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-056 | CPAP machine rent ₹4,200 per month, buy ₹68,500 | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
-| C-057 | Patient hoist rent ₹5,500 per month | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | — |
+| C-045 | Nurse at Home from ₹1,800 per 12-hour shift | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services |
+| C-046 | Physiotherapy ₹1,200 per session | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services |
+| C-047 | GDA / attendant ₹22,000 per month | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services |
+| C-048 | ICU care at home ₹8,500 per day | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services |
+| C-049 | Doctor at Home ₹1,500 per visit | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services |
+| C-050 | Lab tests from ₹450, home visit included | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services |
+| C-051 | Equipment from ₹1,200 per month | Sample site (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
+| C-052 | Oxygen concentrator rent ₹3,200 per month, buy ₹54,000 | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
+| C-053 | Motorised bed rent ₹4,800 per month | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
+| C-054 | Wheelchair rent ₹1,500 per month or ₹550 per week | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
+| C-055 | Patient monitor rent ₹3,800 per month | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
+| C-056 | CPAP machine rent ₹4,200 per month, buy ₹68,500 | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
+| C-057 | Patient hoist rent ₹5,500 per month | Sample site `/equipment` (D-029) | — (Q18) | approved (owners via Sasanka 2026-10-07, D-052: they accepted the prices) | Services (deck and equipment sheet), Home (equipment reel) |
 | C-058 | Named testimonials (Vikram Malhotra, Vasant Vihar; Ritu Khurana, DLF Phase 5; "Sister Priya") | Sample site (D-029) | — (owners, D-044: no reviews until genuine and with written consent) | rejected | — |
 | C-059 | "4.92 / 5 across 2,400+ home care transitions" | Sample site (D-029) | — (owners, D-044: must not be used) | rejected | — |
 | C-060 | NABL-accredited lab / "NABH clinical standards" / "NABH & ISO accredited protocols" | Sample site (D-029) | — (owners, D-044: never claimed until the final lab partner and a valid NABL certificate are provided) | pending | — |

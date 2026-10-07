@@ -1511,8 +1511,8 @@ the web use and the AI edit.
 broader reading with the conflicts named.
 **Rejected:** cards without photos, three photos, and service prices only (Sasanka's alternatives, all offered); a
 `serviceDetailsLive` flip (not part of what the owners saw approved).
-**Not evidenced, flagged for Sasanka:** (1) Dr Saurabh's own consent (D-051); the likeness; (2) the other founders'
-web-use consent beyond "the owners liked About" (Q20a); (3) a named copy approver (Q15 stays open); (4) that "the
+**Consent (added 2026-10-07 after CodeRabbit, PR 8):** Sasanka confirmed in this session that each of the four founders consents to his photo on the website and that Dr Saurabh consents to the AI edit (D-051's condition). It is Sasanka's word; no written record from the founders is in the repo.
+**Not evidenced, flagged for Sasanka:** (1) the likeness; (2) written founder consent, if the owners later want it on file; (3) a named copy approver (Q15 stays open); (4) that "the
 prices we kept" covers the equipment sheet. Home's equipment reel shares the same content, so it now shows the
 equipment items and prices too.
 **Verified:** see LOG 2026-10-07. **Not verified:** see LOG 2026-10-07.

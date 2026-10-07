@@ -474,3 +474,9 @@ Template:
 - Changes: About blocks, C-041, C-045..C-057, C-099 and C-100 approved in CLAIMS.md and content JSON; `showPrices: true`; four photos copied to `public/founders/`; `app/dev/founders` route deleted; `lib/about.ts` photo schema now `/founders/*.webp`; `tests/about.test.ts` and the gate tests in `tests/claims.test.ts` rewritten to the new state.
 - Left off: service detail pages (C-088..C-095, INVARIANT 32), C-072 terms, NABL, time promises.
 - Not evidenced: Dr Saurabh's consent (D-051), the other founders' web consent, a named copy approver (Q15).
+
+## 2026-10-07 · Services deck no longer crops cards; Q12 closed (D-053)
+- Sasanka's Netlify window (1389x669 at 100%, different at 90%): the prices made the fullest card taller than the deck, so the card bottoms (price note, button) were clipped. `Deck.tsx` now measures the fullest card's content (`--deck-need`) on every build and the deck takes that height; the existing `--fit` scales it to the room. Rebuilds on width as well as height (zoom changes both) and after fonts load. The heading "The eight services" is shown at every height (it was screen-reader-only under 600px tall; now 26px there).
+- Probed on a production build: 1389x669, 1543x743, 1736x836, 1280x537, 1422x597, 1920x947, 1100x600, 1366x657: no card overflows; heading visible and viewed at 1389x669.
+- Q12 answered (D-053): alerts go to a team inbox on caresetu.co (not in the repo); response promise unchanged. Enquiry stays off (Q13, Q14, Q1; INVARIANT 28).
+- Not verified: real Chrome zoom steps (probed by window size, not browser zoom), Safari, the live Netlify site.

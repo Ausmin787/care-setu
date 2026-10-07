@@ -4,8 +4,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { about } from "@/lib/about";
 import { shown } from "@/lib/content";
 
-// D-032: the About page's content from the founders' deck is pending (Q20), so a production build shows none of it,
-// and the founder photos are never shipped from public/ (C-021: no web consent yet).
+// D-052: the owners approved About (C-021, C-074..C-078), so a production build shows every block and the founder
+// photos are served from public/founders.
 const root = path.resolve(__dirname, "..");
 const blocks = [
   about.opener.question,
@@ -20,29 +20,24 @@ const blocks = [
   about.promise,
 ];
 
-describe("About content gate (D-032)", () => {
+describe("About content (D-052)", () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it("is all pending until the owners approve it", () => {
-    for (const b of blocks) expect(b.pending).toBe(true);
+  it("is approved", () => {
+    for (const b of blocks) expect(b.pending).toBe(false);
   });
 
-  it("shows in development", () => {
-    vi.stubEnv("NODE_ENV", "development");
+  it("shows every block in a production build", () => {
+    vi.stubEnv("NODE_ENV", "production");
     for (const b of blocks) expect(shown(b)).toBeDefined();
   });
 
-  it("hides every block in a production build", () => {
-    vi.stubEnv("NODE_ENV", "production");
-    for (const b of blocks) expect(shown(b)).toBeUndefined();
-  });
-
-  it("keeps founder photos out of public/", () => {
+  it("serves founder photos from public/founders", () => {
     const photos = [about.letter.photo.src, ...about.founders.people.flatMap((f) => (f.photo ? [f.photo] : []))];
+    expect(photos.length).toBeGreaterThan(0);
     for (const src of photos) {
-      expect(src.startsWith("/dev/founders/")).toBe(true);
-      expect(existsSync(path.join(root, "public", src))).toBe(false);
+      expect(src.startsWith("/founders/")).toBe(true);
+      expect(existsSync(path.join(root, "public", src))).toBe(true);
     }
-    expect(existsSync(path.join(root, "public", "founders"))).toBe(false);
   });
 });

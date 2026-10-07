@@ -6,8 +6,8 @@ import { Illustration, LINES } from "@/lib/content";
 // until the owners approve it (Q20), so `shown()` renders it in development only (D-029).
 const claimed = { claim: z.string().regex(/^C-\d{3}$/), pending: z.boolean() };
 const line = z.enum(LINES);
-// Founder photos are served by a development-only route until consent is recorded (C-021, Q20); never from public/.
-const devPhoto = z.string().regex(/^\/dev\/founders\/[a-z]+\.webp$/);
+// Founder photos live in public/founders (C-021, C-100; shipped by D-052).
+const founderPhoto = z.string().regex(/^\/founders\/[a-z]+\.webp$/);
 
 const About = z.object({
   opener: z.object({
@@ -26,7 +26,7 @@ const About = z.object({
     name: z.string(),
     role: z.string(),
     ...claimed,
-    photo: z.object({ src: devPhoto, alt: z.string(), ...claimed }),
+    photo: z.object({ src: founderPhoto, alt: z.string(), ...claimed }),
   }),
   vision: z.object({
     title: z.string(),
@@ -69,7 +69,7 @@ const About = z.object({
           known: z.string().optional(),
           role: z.string(),
           text: z.string().optional(),
-          photo: devPhoto.optional(),
+          photo: founderPhoto.optional(),
           line,
         }),
       )

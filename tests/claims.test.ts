@@ -95,16 +95,18 @@ describe("claims register (D-007)", () => {
 
 describe("pending content gate (D-029)", () => {
   afterEach(() => vi.unstubAllEnvs());
-  const scoped = lines.flatMap((l) => l.services).filter((svc) => svc.scope?.pending);
+  // The detail pages stay pending until C-088..C-095 are approved (D-043, INVARIANT 32).
+  const details = lines.flatMap((l) => [l.detail, ...l.services.map((svc) => svc.detail)]).filter((d) => d?.pending);
 
   it("shows pending content in development", () => {
     vi.stubEnv("NODE_ENV", "development");
-    expect(scoped.length).toBeGreaterThan(0);
-    for (const svc of scoped) expect(shown(svc.scope)).toBeDefined();
+    expect(details.length).toBeGreaterThan(0);
+    for (const d of details) expect(shown(d)).toBeDefined();
   });
 
   it("hides every pending item in a production build", () => {
     vi.stubEnv("NODE_ENV", "production");
+    for (const d of details) expect(shown(d)).toBeUndefined();
     for (const svc of lines.flatMap((l) => l.services)) {
       if (svc.scope?.pending) expect(shown(svc.scope)).toBeUndefined();
       if (svc.price?.pending) expect(shownPrice(svc.price)).toBeUndefined();
@@ -115,9 +117,11 @@ describe("pending content gate (D-029)", () => {
     }
   });
 
-  it("keeps prices off until the owners confirm them (Q18)", () => {
-    vi.stubEnv("NODE_ENV", "development");
-    expect(config.showPrices).toBe(false);
-    for (const svc of lines.flatMap((l) => l.services)) expect(shownPrice(svc.price)).toBeUndefined();
+  it("shows the approved prices in a production build (Q18, D-052)", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    expect(config.showPrices).toBe(true);
+    for (const svc of lines.flatMap((l) => l.services)) {
+      if (svc.price) expect(shownPrice(svc.price)).toBeDefined();
+    }
   });
 });

@@ -1489,3 +1489,30 @@ Sasanka supplied a casual selfie of Dr Saurabh (a temple, a crowd, snow) and ask
 a fresh photo shoot (recommended, and still the best result; Sasanka chose the prompt route).
 **Done the same day:** Sasanka ran the prompt and picked one result (`Professional Indian Business Headshot.png`, 1086x1448). Claude reviewed it on sight (plain backdrop, no strangers or temple, navy blazer and white shirt, moustache, stubble and hair consistent with the selfie, no visible artefacts), resized it with a plain Lanczos downscale (no AI) to 900x1200 WebP, and saved both in the gitignored `refs/care-setu/founders/` (`saurabh-chatgpt.png`, `saurabh.webp`). `content/about.json` points his card at the dev-only route like the other three (the whole founders block is dev only, `pending`, C-021), so production still shows nothing; C-100 stays `pending`.
 **Verified:** the three founder photos were viewed to set the prompt; `about` and `claims` tests pass; on `next dev` at 1440 wide his card renders in the same warm monochrome treatment and opens like the others (captured and viewed). **Not verified:** likeness (only Dr Saurabh or someone who knows him can say; Claude compared to one selfie); that Dr Saurabh consents (asked of him, not yet answered); the card at phone width.
+
+## D-052 · 2026-10-07 · About and Services published: owners' approval, prices on, four founder photos (partially supersedes D-044 (b): equipment unconfirmed; D-051: consent before the portrait ships; D-032 and D-029: About and prices dev only)
+Sasanka told Claude on 2026-10-07 that the owners liked the About and Services sections and **accepted the prices of the
+services we kept**. Claude named the conflicts before building (objection rule); Sasanka chose, explicitly:
+- **(a) About approved and public.** Every About block (C-021 founders and photos, C-074 letter, C-075 vision and mission,
+  C-076 values, C-077 promise, C-078 the six groups) is `approved`, so a production build shows the whole page.
+- **(b) Prices on.** `showPrices: true`. The six service prices (C-045..C-050) and the equipment prices (C-051..C-057) are
+  `approved`; so are the equipment range (C-041) and the equipment ways (C-099), which the prices need to be readable.
+  Prices stay guide prices ("from", per unit); payment is still only against a quote (INVARIANT 4).
+- **(c) Founder photos public: all four.** The four WebP files (`shiva`, `saurabh`, `ayush`, `aashish`) are copied from the
+  gitignored `refs/care-setu/founders/` into `public/founders/`; `content/about.json` points at them and the dev-only route
+  `app/dev/founders` is deleted. C-100 (Dr Saurabh's AI-edited portrait) is `approved` **on Sasanka's instruction**.
+- **Still off:** the service detail pages and their lists (C-088..C-095, INVARIANT 32), the equipment terms (C-072: zero
+  deposit, EMI), NABL (C-060), time promises (C-068), the legal-name and domain claims.
+**Overrides (named):** D-044 (b) "do not publish any unconfirmed equipment availability" (the owners accepted *prices*
+for equipment; the inventory and rent/buy per item, Q17b, remain unanswered: this is Sasanka's reading, not their words);
+D-051's condition that nothing of the portrait ships before Dr Saurabh has seen it, agrees it is him and consents to
+the web use and the AI edit.
+**Why:** the owners' approval is the evidence the register waits for (D-007); Sasanka is the tech lead and chose the
+broader reading with the conflicts named.
+**Rejected:** cards without photos, three photos, and service prices only (Sasanka's alternatives, all offered); a
+`serviceDetailsLive` flip (not part of what the owners saw approved).
+**Consent (added 2026-10-07 after CodeRabbit, PR 8):** Sasanka confirmed in this session that each of the four founders consents to his photo on the website and that Dr Saurabh consents to the AI edit (D-051's condition). It is Sasanka's word; no written record from the founders is in the repo.
+**Not evidenced, flagged for Sasanka:** (1) the likeness; (2) written founder consent, if the owners later want it on file; (3) a named copy approver (Q15 stays open); (4) that "the
+prices we kept" covers the equipment sheet. Home's equipment reel shares the same content, so it now shows the
+equipment items and prices too.
+**Verified:** see LOG 2026-10-07. **Not verified:** see LOG 2026-10-07.

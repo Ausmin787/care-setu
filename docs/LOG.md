@@ -468,3 +468,9 @@ Template:
 - Sasanka chose one ChatGPT result; reviewed, downscaled to 900x1200 WebP in gitignored `refs/care-setu/founders/`, `content/about.json` points his card at it (dev-only route; production unchanged).
 - Merged PR #5 (D-049, D-050) and PR #6 (phone menu) on Sasanka's "whatever you feel right about merging": CI green, CodeRabbit comments answered or none, then merge commits as before.
 - Not verified: likeness; his consent; the card at phone width. C-100 stays pending, so nothing about his photo ships.
+
+## 2026-10-07 · About and Services published (D-052)
+- Sasanka: the owners liked About and Services and accepted the prices of the services kept. He chose all four founder photos and service plus equipment prices after the conflicts (D-044 b, D-051) were named.
+- Changes: About blocks, C-041, C-045..C-057, C-099 and C-100 approved in CLAIMS.md and content JSON; `showPrices: true`; four photos copied to `public/founders/`; `app/dev/founders` route deleted; `lib/about.ts` photo schema now `/founders/*.webp`; `tests/about.test.ts` and the gate tests in `tests/claims.test.ts` rewritten to the new state.
+- Left off: service detail pages (C-088..C-095, INVARIANT 32), C-072 terms, NABL, time promises.
+- Not evidenced: Dr Saurabh's consent (D-051), the other founders' web consent, a named copy approver (Q15).

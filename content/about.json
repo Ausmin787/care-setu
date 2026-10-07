@@ -4,7 +4,7 @@
     "question": {
       "text": "Why should care become uncertain when a patient returns home?",
       "claim": "C-074",
-      "pending": true
+      "pending": false
     },
     "situations": {
       "items": [
@@ -13,7 +13,7 @@
         "A family bringing a loved one home after hospitalisation and suddenly having to manage everything on their own."
       ],
       "claim": "C-074",
-      "pending": true
+      "pending": false
     }
   },
   "letter": {
@@ -41,12 +41,12 @@
     "name": "Vishwanath Pratap Singh (Shiva)",
     "role": "Founder, Care Setu",
     "claim": "C-074",
-    "pending": true,
+    "pending": false,
     "photo": {
-      "src": "/dev/founders/shiva.webp",
+      "src": "/founders/shiva.webp",
       "alt": "Vishwanath Pratap Singh (Shiva), founder of Care Setu",
       "claim": "C-021",
-      "pending": true
+      "pending": false
     }
   },
   "vision": {
@@ -58,12 +58,12 @@
       { "before": "and support should continue", "after": "with the patient.", "line": "olive", "icon": "heart" }
     ],
     "claim": "C-075",
-    "pending": true
+    "pending": false
   },
   "mission": {
     "title": "To make quality home healthcare easier to find, easier to access and easier to trust.",
     "claim": "C-075",
-    "pending": true,
+    "pending": false,
     "groups": {
       "lead": "Care Setu will bring different parts of the healthcare journey together on one platform:",
       "items": [
@@ -76,7 +76,7 @@
       ],
       "change": "One platform. Multiple services. One trusted connection.",
       "claim": "C-078",
-      "pending": true
+      "pending": false
     }
   },
   "values": {
@@ -112,7 +112,7 @@
       }
     ],
     "claim": "C-076",
-    "pending": true
+    "pending": false
   },
   "founders": {
     "people": [
@@ -121,38 +121,38 @@
         "known": "Shiva",
         "role": "Founder",
         "text": "I have spent years trying to understand society. Now, I want to serve it.",
-        "photo": "/dev/founders/shiva.webp",
+        "photo": "/founders/shiva.webp",
         "line": "lime"
       },
       {
         "name": "Dr Saurabh Chauhan",
         "role": "Founder",
-        "photo": "/dev/founders/saurabh.webp",
+        "photo": "/founders/saurabh.webp",
         "line": "blue"
       },
       {
         "name": "Ayush Srivastava",
         "role": "Co-founder",
         "text": "Computer Science Engineering graduate and alumnus of KIIT University, bringing a technology-driven perspective to healthcare. He contributes through technology, innovation and digital solutions.",
-        "photo": "/dev/founders/ayush.webp",
+        "photo": "/founders/ayush.webp",
         "line": "olive"
       },
       {
         "name": "Aashish Singh",
         "role": "Co-founder",
         "text": "Currently pursuing an Integrated MBA from Doon Business School, Dehradun, bringing a business and management perspective to healthcare. He contributes through strategy, partnerships, marketing and growth initiatives.",
-        "photo": "/dev/founders/aashish.webp",
+        "photo": "/founders/aashish.webp",
         "line": "blue"
       }
     ],
     "claim": "C-021",
-    "pending": true
+    "pending": false
   },
   "promise": {
     "lead": "There is someone we can depend on.",
     "lines": ["Not just during an emergency.", "Not just after discharge.", "But throughout the journey of care."],
     "close": "Because sometimes, the best support we can give a family is simply to be there.",
     "claim": "C-077",
-    "pending": true
+    "pending": false
   }
 }

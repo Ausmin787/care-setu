@@ -31,7 +31,7 @@
           },
           "price": {
             "claim": "C-045",
-            "pending": true,
+            "pending": false,
             "paise": 180000,
             "from": true,
             "unit": "per 12-hour shift"
@@ -91,7 +91,7 @@
           },
           "price": {
             "claim": "C-047",
-            "pending": true,
+            "pending": false,
             "paise": 2200000,
             "from": false,
             "unit": "per month"
@@ -170,7 +170,7 @@
           },
           "price": {
             "claim": "C-048",
-            "pending": true,
+            "pending": false,
             "paise": 850000,
             "from": false,
             "unit": "per day"
@@ -235,7 +235,7 @@
           },
           "price": {
             "claim": "C-049",
-            "pending": true,
+            "pending": false,
             "paise": 150000,
             "from": false,
             "unit": "per visit"
@@ -293,7 +293,7 @@
           },
           "price": {
             "claim": "C-046",
-            "pending": true,
+            "pending": false,
             "paise": 120000,
             "from": false,
             "unit": "per session"
@@ -348,7 +348,7 @@
           },
           "price": {
             "claim": "C-050",
-            "pending": true,
+            "pending": false,
             "paise": 45000,
             "from": true,
             "unit": "home visit included"
@@ -389,7 +389,7 @@
           },
           "scope": {
             "claim": "C-041",
-            "pending": true,
+            "pending": false,
             "items": [
               "Oxygen concentrators, 5 to 10 litres",
               "Motorised beds with an anti-bedsore mattress",
@@ -401,7 +401,7 @@
           },
           "price": {
             "claim": "C-051",
-            "pending": true,
+            "pending": false,
             "paise": 120000,
             "from": true,
             "unit": "per month"
@@ -428,7 +428,7 @@
       },
       "ways": {
         "claim": "C-099",
-        "pending": true
+        "pending": false
       },
       "detail": {
         "claim": "C-095",
@@ -465,18 +465,18 @@
         "claim": "C-073"
       },
       "claim": "C-041",
-      "pending": true,
+      "pending": false,
       "prices": [
         {
           "claim": "C-052",
-          "pending": true,
+          "pending": false,
           "paise": 320000,
           "from": false,
           "unit": "per month to rent"
         },
         {
           "claim": "C-052",
-          "pending": true,
+          "pending": false,
           "paise": 5400000,
           "from": false,
           "unit": "to buy"
@@ -494,11 +494,11 @@
         "claim": "C-073"
       },
       "claim": "C-041",
-      "pending": true,
+      "pending": false,
       "prices": [
         {
           "claim": "C-053",
-          "pending": true,
+          "pending": false,
           "paise": 480000,
           "from": false,
           "unit": "per month to rent"
@@ -516,18 +516,18 @@
         "claim": "C-073"
       },
       "claim": "C-041",
-      "pending": true,
+      "pending": false,
       "prices": [
         {
           "claim": "C-054",
-          "pending": true,
+          "pending": false,
           "paise": 150000,
           "from": false,
           "unit": "per month to rent"
         },
         {
           "claim": "C-054",
-          "pending": true,
+          "pending": false,
           "paise": 55000,
           "from": false,
           "unit": "per week to rent"
@@ -545,11 +545,11 @@
         "claim": "C-073"
       },
       "claim": "C-041",
-      "pending": true,
+      "pending": false,
       "prices": [
         {
           "claim": "C-055",
-          "pending": true,
+          "pending": false,
           "paise": 380000,
           "from": false,
           "unit": "per month to rent"
@@ -567,18 +567,18 @@
         "claim": "C-073"
       },
       "claim": "C-041",
-      "pending": true,
+      "pending": false,
       "prices": [
         {
           "claim": "C-056",
-          "pending": true,
+          "pending": false,
           "paise": 420000,
           "from": false,
           "unit": "per month to rent"
         },
         {
           "claim": "C-056",
-          "pending": true,
+          "pending": false,
           "paise": 6850000,
           "from": false,
           "unit": "to buy"
@@ -596,11 +596,11 @@
         "claim": "C-073"
       },
       "claim": "C-041",
-      "pending": true,
+      "pending": false,
       "prices": [
         {
           "claim": "C-057",
-          "pending": true,
+          "pending": false,
           "paise": 550000,
           "from": false,
           "unit": "per month to rent"

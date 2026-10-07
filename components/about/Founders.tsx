@@ -6,8 +6,8 @@ import s from "./Founders.module.css";
 
 const p = t.aboutPage;
 
-// The founders (D-032): four collapsing cards (FounderCards). The deck's photos and bios are pending (C-021, Q20):
-// development only, photos served from refs/ by a dev route. Dr Saurabh's card is type-only until his photo exists.
+// The founders (D-032): four collapsing cards (FounderCards). Approved with their photos, served from public/founders
+// (C-021, C-100, D-052).
 export function Founders() {
   const founders = shown(about.founders);
   if (!founders) return null;

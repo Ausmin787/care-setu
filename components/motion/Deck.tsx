@@ -32,6 +32,7 @@ export function Deck({ className, children }: { className: string; children: Rea
       const mm = gsap.matchMedia();
       // Down to 480px tall: laptops at 125-150% Windows scaling give 480-600px windows (Sasanka's: 1280x537).
       mm.add("(prefers-reduced-motion: no-preference) and (min-width: 901px) and (min-height: 480px) and (pointer: fine)", () => {
+        let active = true; // this setup's own state: a stale font callback must not rebuild a torn-down deck
         el.setAttribute("data-live", "");
         const cards = gsap.utils.toArray<HTMLElement>("[data-card]", el);
         const n = cards.length;
@@ -163,12 +164,13 @@ export function Deck({ className, children }: { className: string; children: Rea
         build();
         // Web fonts change how the cards wrap, so measure again once they are in.
         document.fonts.ready.then(() => {
-          if (el.hasAttribute("data-live")) rebuild();
+          if (active) rebuild();
         });
         el.addEventListener("focusin", onFocus);
         document.addEventListener("click", onClick);
         window.addEventListener("resize", onResize);
         return () => {
+          active = false;
           window.clearTimeout(timer);
           el.removeEventListener("focusin", onFocus);
           document.removeEventListener("click", onClick);

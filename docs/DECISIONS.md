@@ -1516,3 +1516,20 @@ broader reading with the conflicts named.
 prices we kept" covers the equipment sheet. Home's equipment reel shares the same content, so it now shows the
 equipment items and prices too.
 **Verified:** see LOG 2026-10-07. **Not verified:** see LOG 2026-10-07.
+
+## D-053 · 2026-10-07 · Owner answer: Q12 closed, the new-query alert recipient (extends D-024; supersedes nothing)
+The owners answered the rest of Q12 on 2026-10-07, relayed by Sasanka: new-query alerts go to a team inbox on the
+domain `caresetu.co` (an `admin@` address; the address is kept out of this public repo and is set only as
+`EMAIL_TEAM_INBOX` in the environment, INVARIANT 13); the response time is exactly D-024's: "we call back within 2
+hours, every day 7 AM to 10 PM" (C-031, unchanged, re-confirmed).
+- **Not done here:** `enquiryLive` stays `false` (INVARIANT 28). Still missing: the privacy-notice sign-off (Q14),
+  retention and the grievance officer (Q13), and an email provider and sender (Q1). No domain is printed in any copy (Q2).
+- **Flag:** Q2 asks about `caresetu.com`; the owners' inbox is on `caresetu.co`. Whether they own it, and which of the
+  two is the brand domain, is still open. Until that is answered the address cannot be used for sending, and nothing
+  public names it.
+**Why:** the answer closes one of the three gates on the enquiry going live (D-033) and it is recorded so the next
+session does not ask again.
+**Rejected:** committing the address to the public repo or a config file (an environment value is enough, and the
+repo is public, D-045); turning the enquiry on now (three gates remain); changing the promise's wording (the owners
+said it stays as answered).
+**Verified:** docs-check. **Not verified:** that the inbox exists or receives mail (no provider is wired, Q1).

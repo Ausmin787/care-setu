@@ -480,3 +480,9 @@ Template:
 - Probed on a production build: 1389x669, 1543x743, 1736x836, 1280x537, 1422x597, 1920x947, 1100x600, 1366x657: no card overflows; heading visible and viewed at 1389x669.
 - Q12 answered (D-053): alerts go to a team inbox on caresetu.co (not in the repo); response promise unchanged. Enquiry stays off (Q13, Q14, Q1; INVARIANT 28).
 - Not verified: real Chrome zoom steps (probed by window size, not browser zoom), Safari, the live Netlify site.
+
+## 2026-10-07 · Home equipment reel: images the same size on every card
+- Reported on the live site: the equipment images were different heights. Cause: the caption blocks differ in length once prices show (one or two price lines, wrapping), and the image took whatever height was left over.
+- Fix: `Reel.tsx` measures the tallest caption (`--cap-h`) and the heading above the strip, sets every caption to that height and fits the pinned stage to heading + caption + a 200px minimum image, so all images match. The touch/reduced-motion strip uses a fixed image height (280px, 200px on phones).
+- Probed on a production build at 1389x669, 1543x743, 1736x836, 1280x537, 1920x947, 1100x600, 1024x700 and 390x800: image heights identical on every card (134 to 279px by window); no caption overflows; the 1389x669 screenshot viewed.
+- Not verified: real browser zoom steps, Safari, the live site, tablet widths between 600 and 900.

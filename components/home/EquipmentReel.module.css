@@ -48,8 +48,8 @@
 .panel {
   flex: 0 0 var(--panel);
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  height: 560px;
+  /* The strip (touch, reduced motion): a fixed image height, so the images match whatever the captions hold. */
+  grid-template-rows: var(--img-h, 280px) auto;
   scroll-snap-align: start;
   border: 1.5px solid var(--c-ink);
   border-radius: 20px;
@@ -106,7 +106,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  min-height: 232px;
+  /* --cap-h is the tallest caption's content, measured by Reel, so every caption (and so every image) is one size. */
+  min-height: var(--cap-h, 232px);
   box-sizing: border-box;
   padding: 18px 20px 20px;
   background: color-mix(in srgb, var(--line) 40%, var(--color-parchment));
@@ -219,6 +220,7 @@
   will-change: transform;
 }
 .stage[data-live] .panel {
+  grid-template-rows: minmax(0, 1fr) auto;
   height: 100%;
   max-height: 600px;
 }
@@ -235,7 +237,7 @@
   .track {
     --panel: min(78vw, 320px);
   }
-  .panel {
-    height: 500px;
+  .track {
+    --img-h: 200px;
   }
 }

@@ -486,3 +486,9 @@ Template:
 - Fix: `Reel.tsx` measures the tallest caption (`--cap-h`) and the heading above the strip, sets every caption to that height and fits the pinned stage to heading + caption + a 200px minimum image, so all images match. The touch/reduced-motion strip uses a fixed image height (280px, 200px on phones).
 - Probed on a production build at 1389x669, 1543x743, 1736x836, 1280x537, 1920x947, 1100x600, 1024x700 and 390x800: image heights identical on every card (134 to 279px by window); no caption overflows; the 1389x669 screenshot viewed.
 - Not verified: real browser zoom steps, Safari, the live site, tablet widths between 600 and 900.
+
+## 2026-10-11 · Service detail pages, Partner and FAQ content go public; forms stay off (D-054)
+- Sasanka relayed the owners' green light (detail pages, FAQ, Partner, Pay, About, Contact) and excluded Pay; chose "pages live, forms stay off" after the objection on INVARIANTS 28, 29, 31.
+- `serviceDetailsLive: true`; C-088..C-095 and the Partner audiences and checks (C-080..C-083) `pending: false`, CLAIMS rows approved; the eight detail paths added to the sitemap; INVARIANT 32 rewritten; tests updated.
+- Held back: Partner "How it starts" (C-084, names the form and a callback, Q16) and the FAQ's refunds, checks and languages answers (Q8, C-071, C-020).
+- Not verified: the owners' approval itself (relayed); the live Netlify site (until the merge).

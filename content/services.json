@@ -38,7 +38,7 @@
           },
           "detail": {
             "claim": "C-088",
-            "pending": true,
+            "pending": false,
             "forWhom": [
               "Patients recovering after surgery, illness or injury",
               "Elderly people who need daily medical and personal care",
@@ -98,7 +98,7 @@
           },
           "detail": {
             "claim": "C-089",
-            "pending": true,
+            "pending": false,
             "forWhom": [
               "Elderly people who need help with daily activities",
               "Patients recovering from illness, surgery or a hospital stay",
@@ -139,7 +139,7 @@
           },
           "detail": {
             "claim": "C-090",
-            "pending": true,
+            "pending": false,
             "forWhom": [],
             "includes": [],
             "begins": {
@@ -177,7 +177,7 @@
           },
           "detail": {
             "claim": "C-091",
-            "pending": true,
+            "pending": false,
             "forWhom": [
               "Patients discharged from the ICU who need continued support",
               "Patients with respiratory conditions",
@@ -242,7 +242,7 @@
           },
           "detail": {
             "claim": "C-092",
-            "pending": true,
+            "pending": false,
             "forWhom": [
               "Elderly people who need regular medical care",
               "People who find it hard to travel to a clinic",
@@ -300,7 +300,7 @@
           },
           "detail": {
             "claim": "C-093",
-            "pending": true,
+            "pending": false,
             "forWhom": [
               "Patients recovering after surgery or a hospital stay",
               "People with back pain, neck pain or joint problems",
@@ -355,7 +355,7 @@
           },
           "detail": {
             "claim": "C-094",
-            "pending": true,
+            "pending": false,
             "forWhom": [],
             "includes": [
               "Samples collected at home",
@@ -432,7 +432,7 @@
       },
       "detail": {
         "claim": "C-095",
-        "pending": true,
+        "pending": false,
         "forWhom": [
           "Short-term needs, such as after surgery: rent",
           "Long-term use, chronic care and elderly support: buy"

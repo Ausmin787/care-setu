@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { config, equipment, lines, shown, shownPrice } from "@/lib/content";
+import { partner } from "@/lib/partner";
 
 // D-007 / TRD §6: copy may only carry claims whose CLAIMS.md row is approved or sourced.
 const root = path.resolve(__dirname, "..");
@@ -95,8 +96,8 @@ describe("claims register (D-007)", () => {
 
 describe("pending content gate (D-029)", () => {
   afterEach(() => vi.unstubAllEnvs());
-  // The detail pages stay pending until C-088..C-095 are approved (D-043, INVARIANT 32).
-  const details = lines.flatMap((l) => [l.detail, ...l.services.map((svc) => svc.detail)]).filter((d) => d?.pending);
+  // The detail blocks were approved in D-054; the Partner start steps (C-084, Q16) are what stays pending.
+  const details = [partner.start];
 
   it("shows pending content in development", () => {
     vi.stubEnv("NODE_ENV", "development");

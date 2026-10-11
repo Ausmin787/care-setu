@@ -5,7 +5,7 @@ import { config, serviceDetailsOpen, shown } from "@/lib/content";
 import { morphName, nextLineOf, servicePage, servicePages, siblingsOf } from "@/lib/services";
 import { deckCards } from "@/components/services/ServiceDeck";
 
-// D-043: one detail page per deck card, development only (INVARIANT 32), its deck content pending (C-088..C-095).
+// D-043: one detail page per deck card. Public since D-054 (INVARIANT 32): the owners approved C-088..C-095.
 describe("service detail pages (D-043)", () => {
   afterEach(() => vi.unstubAllEnvs());
 
@@ -21,21 +21,17 @@ describe("service detail pages (D-043)", () => {
     expect(servicePage("nope")).toBeUndefined();
   });
 
-  it("is off in production until a D-entry sets serviceDetailsLive", () => {
-    expect(config.serviceDetailsLive).toBe(false);
+  it("is open in production since D-054 (serviceDetailsLive)", () => {
+    expect(config.serviceDetailsLive).toBe(true);
     vi.stubEnv("NODE_ENV", "production");
-    expect(serviceDetailsOpen()).toBe(false);
-    vi.stubEnv("NODE_ENV", "development");
     expect(serviceDetailsOpen()).toBe(true);
   });
 
-  it("keeps every deck block pending: shown in development, hidden in production", () => {
+  it("shows every approved deck block in production", () => {
+    vi.stubEnv("NODE_ENV", "production");
     for (const p of servicePages) {
-      expect(p.detail.pending, p.slug).toBe(true);
-      vi.stubEnv("NODE_ENV", "development");
-      expect(shown(p.detail)).toBeDefined();
-      vi.stubEnv("NODE_ENV", "production");
-      expect(shown(p.detail)).toBeUndefined();
+      expect(p.detail.pending, p.slug).toBe(false);
+      expect(shown(p.detail), p.slug).toBeDefined();
     }
   });
 
@@ -60,8 +56,8 @@ describe("service detail pages (D-043)", () => {
     }
   });
 
-  it("is left out of the sitemap while it is development only", () => {
+  it("is listed in the sitemap, one entry per page", () => {
     const sitemap = readFileSync(path.resolve(__dirname, "../app/sitemap.ts"), "utf8");
-    expect(sitemap).not.toMatch(/"\/services\/[a-z]/);
+    expect(sitemap).toContain("servicePages.map");
   });
 });

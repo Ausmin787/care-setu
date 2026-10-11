@@ -4,7 +4,7 @@
     {
       "slug": "hospital",
       "claim": "C-080",
-      "pending": true,
+      "pending": false,
       "headline": { "lead": "Patient care doesn’t end", "rest": "at discharge." },
       "lede": "Care Setu partners with hospitals to extend quality care beyond hospital walls to the patient’s home.",
       "stack": {
@@ -32,7 +32,7 @@
     {
       "slug": "doctor",
       "claim": "C-081",
-      "pending": true,
+      "pending": false,
       "headline": { "lead": "Stay connected with your patients", "rest": "even after discharge." },
       "lede": "A strong, continuous relationship between doctors and patients.",
       "stack": {
@@ -61,7 +61,7 @@
     {
       "slug": "professional",
       "claim": "C-082",
-      "pending": true,
+      "pending": false,
       "headline": { "lead": "Join the network", "rest": "and take on home visits." },
       "lede": "We handle the operational complexity, with professionalism and compassion, so you can focus on patient care.",
       "stack": {
@@ -101,7 +101,7 @@
   },
   "checks": {
     "claim": "C-083",
-    "pending": true,
+    "pending": false,
     "title": "How we check everyone who goes into a home",
     "lede": "Five checks, before anyone visits a family.",
     "items": [

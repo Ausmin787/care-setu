@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
+import { servicePages } from "@/lib/services";
 import { indexableOrigin } from "@/lib/seo";
 
 describe("search discovery (D-037)", () => {
@@ -36,6 +37,7 @@ describe("search discovery (D-037)", () => {
     expect(urls).toEqual([
       "https://example.org",
       "https://example.org/services",
+      ...servicePages.map((p) => `https://example.org/services/${p.slug}`),
       "https://example.org/about",
       "https://example.org/contact",
       "https://example.org/partner",

@@ -496,3 +496,7 @@ Template:
 ## 2026-10-11 · Code-graph trial: gbrain vs Graphify (D-055)
 - Same clean clone, 10 questions: gbrain 8/10 (no embeddings, nothing left the machine), Graphify 10/10 (local AST, no LLM). Graphify chosen over gbrain and installed on Sasanka's approval (uv tool, pinned 0.9.85; Claude and Codex skills, post-commit hook, `.gitignore`, a CLAUDE.md paragraph).
 - Not verified: gbrain 0.60.x; Graphify with Codex or on a changing codebase.
+
+## 2026-10-11 · Housekeeping before the backend phase (D-056)
+- AGENTS.md aligned (green, handover), ROADMAP and INVARIANTS stale lines, context7 and memory fixed (global install, ~/.claude.json), Graphify SQL extra, Blueprint review A recorded, npm audit baseline (3 high, not fixed).
+- Not verified: MCP servers in a fresh session; audit exposure on Netlify.

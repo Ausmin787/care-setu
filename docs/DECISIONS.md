@@ -1564,3 +1564,29 @@ Sasanka asked whether gbrain beats Graphify and said the codebase is now large. 
 **Why:** the tool earns its place only if it beats grep on accuracy, and a silent miss is worse than none.
 **Rejected:** adopting gbrain on size alone; adopting Graphify in the same step (needs the permissions above); running the trial on Sasanka's brain (single-writer lock, mixes his notes); upgrading gbrain mid-trial.
 **Verified:** the numbers above, rerun by hand against the code. **Not verified:** gbrain 0.60.x; the post-commit hook firing on a real commit (checked after this commit, below); Codex actually using the skill; token or time savings on a real task.
+
+## D-056 · 2026-10-11 · Housekeeping before the backend phase: AGENTS.md aligned, tooling fixed, Codex handover written (extends D-048, D-049, D-055; supersedes nothing)
+Sasanka asked what was deferred, then for the Backend Master Blueprint to be reviewed and the gaps fixed. Done:
+- **Stale text replaced:** `AGENTS.md` still defined "green" as lint + typecheck + test + build (INVARIANT 26 since D-049 adds the
+  unused-code check and the browser checks) and called Codex a "second-opinion reviewer". Fixed, with a Code navigation section
+  (D-055) and a "Backend phase" handover section for Codex (what exists, the gates, the open questions, the rate-limit risk,
+  the audit baseline, the tools). `ROADMAP.md` ticks `impeccable init`, the README and the code-graph trial; `INVARIANTS.md`
+  drops gbrain from "Open" and adds INVARIANT 36 (Graphify local and AST-only).
+- **Tooling:** context7 took 32.7 s to start through `npx -y ...@latest`, over Claude Code's 30 s limit, so it (and memory) failed
+  to connect. Both are now installed globally, pinned (`@upstash/context7-mcp` 4.3.0, `server-memory` 1.0.0), and `~/.claude.json`
+  points at the installed commands (0.8 s and 0.5 s); effective from the next session. The GitHub MCP package is deprecated
+  ("no longer supported" on npm); left as it is, with its token untouched, because `gh` covers pull requests. Graphify now has its SQL
+  extra, so the migrations are in the graph.
+- **Blueprint review A** (citations; the Blueprint is Codex's and was not edited): all Care Setu citations resolve; findings for
+  Codex: CS-011 repeats the old "green" definition; the overlay predates INVARIANTS 31, 34, 35, 36 and the rate-limit risk and
+  says the index is "through D-048"; CORE-008 cites a passage D-048 partly superseded; CS-008 cites a line range instead of
+  invariant numbers; `backend-plan.md` has no field for the dev-only flags a task touches. Hungry Anna entries from HA-004 on
+  and the brief's line ranges were not checked.
+- **Found, not fixed:** `npm audit --omit=dev` reports 3 high advisories (`next` 16.3.6 to 16.4.0, `sharp`, `source-map-js`).
+  The Next.js ones mention self-hosted caching and `use cache`, which may not apply on Netlify with dynamic rendering (D-022);
+  not assessed. A separate PR.
+**Why:** Codex reads `AGENTS.md` first, and a wrong "green" or a missing gate list is how a backend PR ships without the checks.
+**Rejected:** adding a Blueprint pointer to `AGENTS.md` (still waits for Sasanka's approval and one real backend task); bumping Next.js
+in this change; editing the Blueprint (D-048: reviewers don't edit the author's work); removing the GitHub MCP entry (it holds his token).
+**Verified:** see the PR. **Not verified:** that the MCP servers connect in a fresh session (config checked, handshake tested by hand,
+not a restart); the `npm audit` advisories' real exposure.

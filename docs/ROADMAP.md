@@ -38,9 +38,8 @@ render at 16/32/64/512 px; owners confirm (Q4). Done except owner confirmation (
 - [x] Security headers + strict nonce CSP (D-022) + `security-headers.test.ts`; claims test; Vitest; ESLint
 - [x] **Built with the Contact page (D-021 -> D-033):** Drizzle + PGlite dev, env config (`server/config/env.ts`),
       `POST /api/v1/queries`, CI workflow (`.github/workflows/ci.yml`, not pushed: no remote). Auth library choice → D-entry, moved to Admin.
-- [ ] `impeccable init` (writes PRODUCT.md), README setup instructions (next session)
-- [ ] After the first Stage 4 pages: gbrain trial per D-019 (embedding privacy check → index code from
-      the repo → 10 known-answer questions with/without → keep or drop, recorded as a D-entry)
+- [x] `impeccable init` (PRODUCT.md exists) and README setup instructions
+- [x] Code-graph trial (D-019 gates), 2026-10-11: Graphify 10/10 vs gbrain 8/10, Graphify adopted, AST-only (D-055)
 **Verify:** green (lint, typecheck, test, build); CI green on first push (push needs permission).
 
 ## Stage 4 — Pages, one at a time (check-in after each)

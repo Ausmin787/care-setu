@@ -23,9 +23,9 @@ Care Setu: a home-healthcare startup in Delhi NCR. Phase 1 = marketing + transac
 - No personal data in logs or to any third-party AI.
 - Nothing factual in copy without an `approved` row in `docs/CLAIMS.md`.
 - Open owner questions (`docs/OWNER-QUESTIONS.md`) are never answered by a default.
-- "Green" = lint + typecheck + test + build.
+- "Green" = lint + typecheck + test + unused-code check (knip) + build + browser checks (Playwright with axe): `npm run green` (INVARIANT 26, D-049).
 
-## Review handoff (Codex as second-opinion reviewer)
+## Review handoff (how Sasanka hands you a review)
 Sasanka will hand you a review with:
 - **Stage and scope**: which stage, commit range or files.
 - **Invariants at risk**: the numbered INVARIANTS most relevant to the change.
@@ -36,6 +36,30 @@ Report each finding as: `severity (blocking/major/minor) · file:line · what's 
 failure scenario · suggested fix`. Separate **verified** findings (you reproduced or traced them)
 from **suspected** ones. Don't edit code during a review unless asked. Findings are triaged by
 Sasanka/Claude into a D-entry (accepted or rejected with a reason).
+
+## Code navigation (D-055)
+Before editing or renaming a symbol: `graphify affected "<symbol>" --depth 4` (callers and transitive impact, file:line) and
+`graphify explain "<symbol>"` (definition and importers). Local and AST-only (incl. the SQL migrations); the post-commit hook
+rebuilds it, or run `graphify update .`. New clone: `graphify hook install`. Never run the `/graphify` skill's doc, image or
+`--update` extraction, which sends content to a model (INVARIANT 9, 36). An answer is evidence: grep when it looks incomplete.
+
+## Backend phase: what you are walking into (D-056)
+- **Starts when Sasanka says so and records it in STATUS** (D-048). Until then backend, security and money stay with Claude.
+- **What exists:** `server/` (`contracts/` zod, `db/` Drizzle schema + client, `domain/` queries and quotes, `adapters/`
+  email and payments, `config/env.ts`, `rate-limit.ts`), `drizzle/` migrations, `app/api/v1/queries` and `payments`.
+- **Everything is gated off in production** by `content/site.config.json` flags read through `enquiryOpen()`,
+  `paymentsOpen()`, `partnerEnquiryOpen()` in `lib/content.ts` (INVARIANTS 28, 29, 31). In development they are always open,
+  so a test must stub `NODE_ENV`. A flag flips only through a new D-entry. Pay runs on a dev-only fixture of sample quotes.
+- **Still open, never answered by a default:** the payment gateway and the system design (Sasanka, 2026-10-11), hosting,
+  database and email provider (Q1), domain (Q2), LLP/KYC (Q5), quote and refund policy (Q8), retention and grievance
+  officer (Q13), legal reviewer (Q14), partner form recipient (Q16). The Admin auth library (Better Auth or Auth.js, TRD
+  section 1) needs its own D-entry.
+- **Known risk:** `clientKey()` in `server/rate-limit.ts` trusts `x-nf-client-connection-ip`; verify on the real host
+  before the enquiry or payments go live (D-049). Link records by internal ids only (INVARIANT 35).
+- **Dependencies:** `npm audit --omit=dev` (2026-10-11) shows 3 high: `next` 16.3.6 (fixed in 16.4.0, non-major),
+  `sharp`, `source-map-js`. Not fixed yet; a framework bump is its own PR and release.
+- **Tools:** use context7 for current vendor and library docs (INVARIANT 24), `gh` for pull requests (the GitHub MCP
+  package is deprecated), `npm run green` before any PR.
 
 ## Review pipeline (D-045)
 The repo is public and every change reaches `main` by pull request. CI and CodeRabbit (`.coderabbit.yaml`, which

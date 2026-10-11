@@ -2,9 +2,10 @@ import { expect, test } from "@playwright/test";
 import { violations } from "../axe";
 
 // What a visitor gets from the production build. Every built page loads, has no console errors and no WCAG A/AA axe
-// violations; unbuilt and development-only pages 404 (D-040, D-043); nothing is indexable (INVARIANT 30).
-const built = ["/", "/services", "/about", "/contact", "/faq", "/partner", "/pay", "/privacy"];
-const hidden = ["/terms", "/refunds", "/dev", "/services/nurse"];
+// violations; unbuilt and development-only pages 404 (D-040); the service detail pages are public (D-054); nothing is indexable (INVARIANT 30).
+const details = ["nurse", "gda", "procedures", "icu", "doctor", "physiotherapy", "lab-samples", "equipment"];
+const built = ["/", "/services", ...details.map((d) => `/services/${d}`), "/about", "/contact", "/faq", "/partner", "/pay", "/privacy"];
+const hidden = ["/terms", "/refunds", "/dev"];
 
 // Desktop and a phone: the Home statement's faint unread words only failed at phone size (D-050).
 const sizes = [

@@ -62,7 +62,7 @@ cited decision is the authority. Read it before acting on an edge case.
 
 31. **The partner form runs in development only (`partnerEnquiryLive: false`) and sends nothing**: it checks input against the zod contract and shows a sample confirmation; production shows the phone and email only, until a D-entry answers Q16 (form wanted, recipient), wires the Partner API and extends the privacy notice to partner data. **No copy offers money for referrals** (incentives, revenue share, commission; IMC Regulations 2002 cl. 6.4.1) unless Q21 is answered with legal advice. (D-038)
 
-32. **Service detail pages (`/services/<slug>`) run in development only (`serviceDetailsLive: false`)**: production 404s them, the deck cards don't link there and the sitemap omits them, until a D-entry turns them on after the owners approve their rows (C-088..C-095). (D-043)
+32. **Service detail pages (`/services/<slug>`) are public (`serviceDetailsLive: true`) since the owners approved C-088..C-095.** Turning the flag off again 404s them and drops them from the sitemap. (D-043, D-054)
 
 33. **Changes reach `main` by pull request, reviewed by CodeRabbit (`.coderabbit.yaml`) and CI; the merge is Sasanka's and needs his permission** (a merge is a release, INVARIANT 22). The repo is public: never commit secrets, owner-confidential documents or personal data. (D-045)
 

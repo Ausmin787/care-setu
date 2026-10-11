@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
+import { config } from "@/lib/content";
+import { servicePages } from "@/lib/services";
 import { indexableOrigin } from "@/lib/seo";
 
 describe("search discovery (D-037)", () => {
@@ -36,6 +38,7 @@ describe("search discovery (D-037)", () => {
     expect(urls).toEqual([
       "https://example.org",
       "https://example.org/services",
+      ...servicePages.map((p) => `https://example.org/services/${p.slug}`),
       "https://example.org/about",
       "https://example.org/contact",
       "https://example.org/partner",
@@ -43,5 +46,18 @@ describe("search discovery (D-037)", () => {
     ]);
     expect(urls.some((u) => /pay|privacy|dev|api/.test(u))).toBe(false);
     vi.unstubAllEnvs();
+  });
+
+  it("drops the service detail pages when serviceDetailsLive is off (INVARIANT 32)", () => {
+    vi.stubEnv("APP_ENV", "production");
+    vi.stubEnv("APP_BASE_URL", "https://example.org");
+    vi.stubEnv("NODE_ENV", "production");
+    config.serviceDetailsLive = false;
+    try {
+      expect(sitemap().some((e) => e.url.includes("/services/"))).toBe(false);
+    } finally {
+      config.serviceDetailsLive = true;
+      vi.unstubAllEnvs();
+    }
   });
 });

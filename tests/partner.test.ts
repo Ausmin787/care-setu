@@ -5,22 +5,24 @@ import { NOTICE_VERSION } from "@/lib/privacy";
 import { PARTNER_KINDS } from "@/server/contracts/enums";
 import { PartnerInput, parsePartnerKind } from "@/server/contracts/partners";
 
-// D-038: the Partner page's deck content is pending (development only) and the partner form sends nothing and stays
-// off in production (INVARIANT 31).
-const blocks = [...partner.audiences, partner.start, partner.checks];
+// D-038: the partner form sends nothing and stays off in production (INVARIANT 31). D-054 published the page's content.
 
 describe("Partner content gate (D-038)", () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it("is all pending until the owners approve it", () => {
-    for (const b of blocks) expect(b.pending).toBe(true);
+  // D-054: the audiences and the five checks are approved; "How it starts" names the form and a callback (Q16), so it
+  // stays pending while the form is off.
+  it("approves the audiences and the checks, and holds back the start steps", () => {
+    for (const b of [...partner.audiences, partner.checks]) expect(b.pending).toBe(false);
+    expect(partner.start.pending).toBe(true);
   });
 
-  it("shows in development and hides every block in production", () => {
-    vi.stubEnv("NODE_ENV", "development");
-    for (const b of blocks) expect(shown(b)).toBeDefined();
+  it("shows the approved blocks in production and hides the start steps", () => {
     vi.stubEnv("NODE_ENV", "production");
-    for (const b of blocks) expect(shown(b)).toBeUndefined();
+    for (const b of [...partner.audiences, partner.checks]) expect(shown(b)).toBeDefined();
+    expect(shown(partner.start)).toBeUndefined();
+    vi.stubEnv("NODE_ENV", "development");
+    expect(shown(partner.start)).toBeDefined();
   });
 
   it("keeps the audiences, the Home partner rows and the form kinds in one order", () => {

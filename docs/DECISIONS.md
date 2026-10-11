@@ -1533,3 +1533,21 @@ session does not ask again.
 repo is public, D-045); turning the enquiry on now (three gates remain); changing the promise's wording (the owners
 said it stays as answered).
 **Verified:** docs-check. **Not verified:** that the inbox exists or receives mail (no provider is wired, Q1).
+
+## D-054 · 2026-10-11 · Service detail pages, Partner page and FAQ go public; the forms stay off (extends D-043, D-038, D-041; partially supersedes INVARIANT 32's "development only"; supersedes nothing else)
+Sasanka relayed the owners' green light on 2026-10-11 for the service detail pages, the FAQ, Partner, Pay, About and Contact,
+then excluded Pay: the API choice and the payment system design are still open. Sasanka chose "pages live, forms stay off"
+after the objection (INVARIANTS 28, 29, 31).
+- **On:** `serviceDetailsLive: true`; the eight `/services/<slug>` pages are public and in the sitemap. The detail blocks
+  (C-088..C-095) and the Partner audiences and five checks (C-080..C-083) are `pending: false`, their CLAIMS rows `approved`.
+- **Already public, no change:** About (D-052). Contact shows the call card, email and office; the enquiry form stays dev-only.
+- **Still off:** the enquiry (`enquiryLive`, INVARIANT 28: Q13, Q14, Q1, Q2), the Partner form (`partnerEnquiryLive`,
+  INVARIANT 31: Q16 and the Partner API), and Pay (`paymentsLive`, INVARIANT 29: gateway choice and system design).
+- **Held back, still pending:** the Partner "How it starts" steps (C-084) name the form and a callback whose owner is Q16, so
+  they would promise a control that does not exist (INVARIANT 18). The FAQ answers on refunds (Q8), checks (C-071) and
+  languages (C-020) stay dev-only: Sasanka did not confirm those rows, and Q8 is open (INVARIANT 25).
+**Why:** the owners approved the content, and each page works without a backend; the gated parts are the ones that collect data.
+**Rejected:** turning the forms on (nowhere to send, no signed-off notice); marking C-084 and the three FAQ rows approved on a
+blanket "go ahead"; including Pay.
+**Verified:** see the PR (lint, typecheck, tests, knip, build, e2e). **Not verified:** the owners' approval itself (relayed, not
+seen); that the copy reads correctly in production (checked on the build, not on Netlify until the merge).

@@ -42,3 +42,6 @@ Thumbs.db
 # Playwright
 /test-results/
 /playwright-report/
+
+# Graphify code graph (derived, local; D-055)
+/graphify-out/

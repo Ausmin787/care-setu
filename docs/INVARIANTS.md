@@ -70,6 +70,8 @@ cited decision is the authority. Read it before acting on an edge case.
 
 35. **Records are linked by internal ids, never by matching email, phone or name.** A payment, quote, query and consent are tied by their own ids; a different email on two systems must never decide whose money or data it is. (D-049)
 
+36. **The code graph (Graphify) is local and AST-only, for code navigation, never for decisions or constraints.** Never run its model-based extraction on this repo (documents, images, `/graphify --update`): that sends content to a model (INVARIANT 9). `graphify-out/` stays git-ignored; an answer is evidence, grep when it looks incomplete. gbrain was trialled and not adopted. (D-019, D-055)
+
 ---
 
 ## Open — do NOT treat these as decided
@@ -84,4 +86,3 @@ cited decision is the authority. Read it before acting on an edge case.
 - **Revenue split** — provisional ~80/20, founders + CA. (D-005)
 - **Data retention periods and grievance officer** (Q13). (D-012)
 - **Payment gateway choice for go-live**. (D-003)
-- **Code-graph memory (gbrain)** — trial at Stage 3/4, code navigation only, after the privacy check on embeddings and a 10-question measured test. Never for decisions. (D-019)

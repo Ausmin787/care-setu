@@ -1551,3 +1551,42 @@ after the objection (INVARIANTS 28, 29, 31).
 blanket "go ahead"; including Pay.
 **Verified:** see the PR (lint, typecheck, tests, knip, build, e2e). **Not verified:** the owners' approval itself (relayed, not
 seen); that the copy reads correctly in production (checked on the build, not on Netlify until the merge).
+
+## D-055 · 2026-10-11 · Code-graph trial: Graphify beats gbrain 10/10 to 8/10 and beats plain grep on usefulness; gbrain not adopted (applies D-019's measured-trial gate; supersedes nothing)
+Sasanka asked whether gbrain beats Graphify and said the codebase is now large. The D-019 trigger (Stage 3 and Stage 4 pages exist) is met, so the trial ran.
+- **Gate 1, embeddings:** `embedding_disabled: true` in `~/.gbrain/config.json`, 0 embedded chunks; the trial used `--no-embed`. Nothing was sent to a provider.
+- **Gate 2, derived index:** the trial brain was built from a clean clone of `main` at 11a6f9f in a scratch `GBRAIN_HOME`, so Sasanka's own brain (4 pages) was not touched. Code needs the CLI's `sync --strategy code` (the MCP `sync_brain` tool has no strategy flag and only saw 28 docs) and `gbrain extract --stale`.
+- **Gate 3, 10 questions** (callers, definitions, references, impact), ground truth taken by hand from the code. gbrain v0.42.65 (v0.60.172 exists, not tried): 8 of 10 right. Misses: `serviceDetailsOpen` callers returned 2 of 3 (lost `sitemap.ts`); the transitive-impact question could not be run (`code-blast` is not a CLI command in this version and edges come back `resolved: false`). It also reports callers only as enclosing function names (`POST`, `Page`), not files, and does not list a function passed as a value (`lib/faq.ts` uses `enquiryOpen` and `paymentsOpen` that way), which a rename would miss. The no-tool arm (`git grep`, one call per question, about 17k lines) got all 10, but its ground truth came from the same grep, so that arm is biased in its favour.
+- **Graphify 0.9.85** (PyPI `graphifyy`, installed in a scratch venv only; `graphify update .` is local tree-sitter, no LLM, 8.6 s, 1,012 nodes and 1,939 edges on the same snapshot): **10 of 10**. `affected` returned every caller with file and line, including `sitemap.ts` (which gbrain lost), the function-as-value uses in `lib/faq.ts` (`indirect_call`), and the full transitive chain for `enquiryOpen` (`/api/v1/queries`, `/contact`, Home via `Trip`, `/faq` via `faq.ts`). `explain` gave a symbol's definition and every importer. It also links decisions and docs that mention a symbol (marked INFERRED). Weak points: `affected` on a constant (`NOTICE_VERSION`) returns nothing (use `explain`); `query` in plain English is noisy; community names are file names (no LLM labelling); CSS is not parsed (40 files skipped); `.sql` needs an extra package; `affected` also lists tests and docs, which need filtering.
+- **Verdict:** Graphify clearly wins on this codebase; gbrain does not clearly win, so it is not adopted (D-019 gate 3). The grep arm also got 10 of 10, but its ground truth came from the same grep, and it cannot do the transitive or function-as-value cases in one call. Sasanka then approved adoption (below), the same day.
+- **Adopted (Sasanka, 2026-10-11):** `uv tool install graphifyy==0.9.85`; `graphify install` (Claude Code) and `graphify install --platform codex` copied the skill to `~/.claude/skills` and `~/.codex/skills` and appended a 3-line `# graphify` section to the global CLAUDE.md; `graphify hook install` added local post-commit and post-checkout hooks (AST-only rebuilds; `.git/hooks` is not versioned, so each clone installs its own); `graphify-out/` is in `.gitignore`; a "Code navigation" paragraph in CLAUDE.md tells the agents to use `affected` and `explain` and never the model-based extraction. `graphify claude install` was not run (it rewrites CLAUDE.md and adds a PreToolUse hook to project settings). The merge-driver line it put in `.gitattributes` was reverted: the graph is ignored, so there is nothing to merge. Constraints, kept:
+- **Constraints:** `graphify install` writes a skill into `~/.claude` (global config, needs Sasanka's permission, and `--platform codex` for Codex); `graphify hook install` adds a git hook; `graphify-out/` must be git-ignored (public repo, D-045); keep to AST-only `update` (the `/graphify` skill's doc and image extraction sends content to a model, D-010, INVARIANT 9); the PyPI project points to `Graphify-Labs/graphify` while the README read was under `safishamsi/graphify` (a rename, not verified); version-pin it.
+**Why:** the tool earns its place only if it beats grep on accuracy, and a silent miss is worse than none.
+**Rejected:** adopting gbrain on size alone; adopting Graphify in the same step (needs the permissions above); running the trial on Sasanka's brain (single-writer lock, mixes his notes); upgrading gbrain mid-trial.
+**Verified:** the numbers above, rerun by hand against the code. **Not verified:** gbrain 0.60.x; the post-commit hook firing on a real commit (checked after this commit, below); Codex actually using the skill; token or time savings on a real task.
+
+## D-056 · 2026-10-11 · Housekeeping before the backend phase: AGENTS.md aligned, tooling fixed, Codex handover written (extends D-048, D-049, D-055; supersedes nothing)
+Sasanka asked what was deferred, then for the Backend Master Blueprint to be reviewed and the gaps fixed. Done:
+- **Stale text replaced:** `AGENTS.md` still defined "green" as lint + typecheck + test + build (INVARIANT 26 since D-049 adds the
+  unused-code check and the browser checks) and called Codex a "second-opinion reviewer". Fixed, with a Code navigation section
+  (D-055) and a "Backend phase" handover section for Codex (what exists, the gates, the open questions, the rate-limit risk,
+  the audit baseline, the tools). `ROADMAP.md` ticks `impeccable init`, the README and the code-graph trial; `INVARIANTS.md`
+  drops gbrain from "Open" and adds INVARIANT 36 (Graphify local and AST-only).
+- **Tooling:** context7 took 32.7 s to start through `npx -y ...@latest`, over Claude Code's 30 s limit, so it (and memory) failed
+  to connect. Both are now installed globally, pinned (`@upstash/context7-mcp` 4.3.0, `server-memory` 1.0.0), and `~/.claude.json`
+  points at the installed commands (0.8 s and 0.5 s); effective from the next session. The GitHub MCP package is deprecated
+  ("no longer supported" on npm); left as it is, with its token untouched, because `gh` covers pull requests. Graphify now has its SQL
+  extra, so the migrations are in the graph.
+- **Blueprint review A** (citations; the Blueprint is Codex's and was not edited): all Care Setu citations resolve; findings for
+  Codex: CS-011 repeats the old "green" definition; the overlay predates INVARIANTS 31, 34, 35, 36 and the rate-limit risk and
+  says the index is "through D-048"; CORE-008 cites a passage D-048 partly superseded; CS-008 cites a line range instead of
+  invariant numbers; `backend-plan.md` has no field for the dev-only flags a task touches. Hungry Anna entries from HA-004 on
+  and the brief's line ranges were not checked.
+- **Found, not fixed:** `npm audit --omit=dev` reports 3 high advisories (`next` 16.3.6 to 16.4.0, `sharp`, `source-map-js`).
+  The Next.js ones mention self-hosted caching and `use cache`, which may not apply on Netlify with dynamic rendering (D-022);
+  not assessed. A separate PR.
+**Why:** Codex reads `AGENTS.md` first, and a wrong "green" or a missing gate list is how a backend PR ships without the checks.
+**Rejected:** adding a Blueprint pointer to `AGENTS.md` (still waits for Sasanka's approval and one real backend task); bumping Next.js
+in this change; editing the Blueprint (D-048: reviewers don't edit the author's work); removing the GitHub MCP entry (it holds his token).
+**Verified:** see the PR. **Not verified:** that the MCP servers connect in a fresh session (config checked, handshake tested by hand,
+not a restart); the `npm audit` advisories' real exposure.

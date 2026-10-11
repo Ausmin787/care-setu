@@ -492,3 +492,7 @@ Template:
 - `serviceDetailsLive: true`; C-088..C-095 and the Partner audiences and checks (C-080..C-083) `pending: false`, CLAIMS rows approved; the eight detail paths added to the sitemap; INVARIANT 32 rewritten; tests updated.
 - Held back: Partner "How it starts" (C-084, names the form and a callback, Q16) and the FAQ's refunds, checks and languages answers (Q8, C-071, C-020).
 - Not verified: the owners' approval itself (relayed); the live Netlify site (until the merge).
+
+## 2026-10-11 · Code-graph trial: gbrain vs Graphify (D-055)
+- Same clean clone, 10 questions: gbrain 8/10 (no embeddings, nothing left the machine), Graphify 10/10 (local AST, no LLM). Graphify chosen over gbrain and installed on Sasanka's approval (uv tool, pinned 0.9.85; Claude and Codex skills, post-commit hook, `.gitignore`, a CLAUDE.md paragraph).
+- Not verified: gbrain 0.60.x; Graphify with Codex or on a changing codebase.

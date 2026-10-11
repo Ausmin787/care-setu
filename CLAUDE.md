@@ -80,7 +80,7 @@ edit, supersession (and how much) in the heading, **Why:** + **Rejected:** alway
 entries.
 
 ## Code navigation (D-055)
-Before editing a function or renaming a symbol, ask the code graph: `graphify affected "<symbol>" --depth 4` (callers and
+Before editing or renaming a symbol, ask the code graph: `graphify affected "<symbol>" --depth 4` (callers and
 transitive impact, file:line) and `graphify explain "<symbol>"` (definition and importers). It is local and AST-only, rebuilt
 by the post-commit hook; run `graphify update .` first if the tree is dirty. Never run the `/graphify` skill's doc, image or
 `--update` extraction (it sends content to a model, INVARIANT 9). A graph answer is evidence: grep when it looks incomplete.

@@ -1658,3 +1658,42 @@ INVARIANT 7 to make the fetch rule fit; starting B1 before Sasanka's go-ahead.
 Drizzle neon-http source, the corrigendum PDF, Cashfree retry page re-read, both route files). **Not verified:** the corrected
 modules (they still need Codex's confirmation of the fixes); Codex's claims that rested on pages Claude did not re-read; anything at
 runtime; the Netlify behaviour in the suspected items.
+
+## D-059 · 2026-10-12 · Foundation decisions: quote reference stays 8 characters; a verified late capture on an open, uncontested quote settles it; four Blueprint entries become VERIFIED (applies D-057 and D-058; replaces the TRD's "10 or more" reference line; supersedes nothing else)
+Codex's B1 plan (the Foundation slice) and its B2 review package were reviewed by Claude. Sasanka decided on 2026-10-12:
+- **Foundation scope approved:** a Postgres service in CI, one additive migration for five tables (quotes, payment attempts, gateway
+  events, idempotency keys, outbox), the payment state machine, an idempotency helper, `createQuery` writing its alert to the outbox, a
+  sweeper, a dev-only fake provider, a webhook route skeleton that is 404 unless `paymentsOpen()`, and the request-safety fixes (byte-bounded
+  body reader, `Retry-After` on both 429s, a key cap on the in-memory limiter). Distributed limits are B3. Every flag stays off. No host,
+  driver, gateway, email provider, auth library or retention period is chosen. INVARIANT 7 stands: webhook-only authority; a fetched
+  status or a Checkout response is evidence only. Webhook storage is minimal normalised fields plus a raw-body hash. Idempotency is a tested
+  helper only, with no public header yet.
+- **Quote reference stays 8 characters.** The TRD said 10 or more; the shipped contracts and sample quotes use 8. Claude raised that a
+  reference is a bearer capability that shows a quote summary (about 39.6 bits of entropy at 8 characters) and Sasanka chose to keep 8.
+  Accepted risk, with controls: the per-IP limiter now, durable per-reference attempt limits before payments go live (B3), short quote
+  validity, a reference never logged. The database check allows 8 to 12 characters so a later change needs no migration. The TRD line is
+  replaced in this change.
+- **Late capture settles a quote in one narrow case:** a verified capture from a previously failed attempt settles a quote that is still
+  open, whose attempt was created within the quote's validity, with no competing capture and not already paid. Every other late success
+  (quote expired or cancelled, another attempt already settled) stays review-only, and refund or honour for those stays Q8 (open). This does
+  not amend INVARIANT 7: the settling event is a verified webhook. The fake provider's switch `lateCaptureOnOpenQuote` defaults to `settle`.
+- **Four Blueprint entries promoted to VERIFIED:** DB-001, DB-008, DB-009, DB-010, on Codex's independent re-fetch of the sources
+  (PostgreSQL isolation and index docs, Drizzle 0.45.3 migrator and neon-http source, PGlite docs). Scope: the documented capabilities and
+  restrictions, by reading, not Care Setu's behaviour (Blueprint REC-007).
+- **Claude's review of the B2 package, required changes:** a settlement guard so only one attempt can settle a quote (DATA-008); quote
+  validity judged when the attempt was created, not when a webhook arrives (PAY-011); a relaxed reference-length check; the quote schema
+  reconciled in writing with TRD section 3 (the migration omits the split snapshot, promo and discount fields, `provider_id` and the
+  `draft`/`sent` statuses for now); a note that real providers which treat non-2xx as failure need 2xx plus a review record for a verified
+  but unprocessable event; a larger development overflow bucket; and a proof that the composite foreign key works on a real engine.
+- **Still open, not answered:** the real-gateway hold policy (which failures release a quote) and the refund or honour policy (Q8); 2xx
+  versus 4xx for verified-but-unprocessable events at gateway selection; host and driver (Q1); the gateway; auth and roles; the Netlify
+  rate-limit tier and the deployed header test; the legal readings (Q14).
+**Why:** the Foundation is the first money-path code; its schema and its transition rules are cheapest to correct before the migration
+exists, and the decisions above unblock Codex's Checkpoint 2 without answering any owner question.
+**Rejected:** raising the reference to 10 or more now (Sasanka's call, risk recorded); keeping the late-capture case review-only (a charged
+customer left unsettled is the worse failure and a verified webhook already satisfies INVARIANT 7); promoting any entry beyond the four
+that have an independent source check; letting a fetched status or a Checkout signature mark a payment paid.
+**Verified:** the package files, both front-end consumers (`Enquiry.tsx` and `PayCard.tsx` depend on no changed status), the TRD sections
+cited, and the Blueprint edits. **Not verified:** that the schema and migration run (the package was type-checked only); any behaviour at
+runtime; Codex's later output.
+

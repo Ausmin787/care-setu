@@ -59,7 +59,7 @@ Every request body and response is a zod schema in `server/contracts/` (shared).
 - Parameterized SQL only (Drizzle); no string-built SQL.
 - Rate limiting + honeypot on public forms; no CAPTCHA that ships personal data to a third party
   without it being in the privacy notice.
-- Quote references: ≥ 10 chars from a non-ambiguous alphabet, generated server-side, expiring.
+- Quote references: 8 characters from a non-ambiguous alphabet (D-059, replacing the earlier 10 or more), generated server-side, expiring; a reference is a bearer capability, so per-reference attempt limits are required before payments go live.
 - Webhook: verify signature with raw body before parsing; reject on mismatch; idempotent on
   `provider_event_id`.
 - Admin: `noindex`, `Cache-Control: no-store`, role checks server-side on every handler, session

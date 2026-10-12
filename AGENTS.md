@@ -44,7 +44,8 @@ rebuilds it, or run `graphify update .`. New clone: `graphify hook install`. Nev
 `--update` extraction, which sends content to a model (INVARIANT 9, 36). An answer is evidence: grep when it looks incomplete.
 
 ## Backend phase: what you are walking into (D-056)
-- **Starts when Sasanka says so and records it in STATUS** (D-048). Until then backend, security and money stay with Claude.
+- **Started 2026-10-12 (D-057).** You author backend, security and money; Claude reviews money and contracts (D-048). Work in
+  stages with a check-in after each: B0 independent review of the Blueprint modules (read-only), B1 plan, B2 Foundation.
 - **What exists:** `server/` (`contracts/` zod, `db/` Drizzle schema + client, `domain/` queries and quotes, `adapters/`
   email and payments, `config/env.ts`, `rate-limit.ts`), `drizzle/` migrations, `app/api/v1/queries` and `payments`.
 - **Everything is gated off in production** by `content/site.config.json` flags read through `enquiryOpen()`,

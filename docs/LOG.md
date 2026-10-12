@@ -500,3 +500,10 @@ Template:
 ## 2026-10-11 · Housekeeping before the backend phase (D-056)
 - AGENTS.md aligned (green, handover), ROADMAP and INVARIANTS stale lines, context7 and memory fixed (global install, ~/.claude.json), Graphify SQL extra, Blueprint review A recorded, npm audit baseline (3 high, not fixed).
 - Not verified: MCP servers in a fresh session; audit exposure on Netlify.
+
+## 2026-10-12 · Backend phase starts; Blueprint completed for Codex's review (D-057)
+- Sasanka sent 15 videos for review B; Claude read their captions as leads, checked the load-bearing claims against primary sources (vendor docs, RFCs, official Gazette PDFs), then, on Sasanka's direction, wrote eight modules into the Blueprint and fixed its Care Setu overlay (commit 715455e, local). Statuses: 58 DESIGN, 42 SOURCE-CHECKED, 15 UNVERIFIED, none VERIFIED.
+- Findings that touch our code (nothing changed here): the rate limiter is per-instance memory; the enquiry alert is sent after commit with no outbox; PGlite cannot test concurrency; DPDP Rules rule 6 and 8(3) want logs kept a year, which needs the lawyer's reading beside INVARIANT 11.
+- Backend phase recorded in STATUS and D-057; Codex starts with B0 (independent review of the modules), then B1 plan, then B2 Foundation.
+- Not verified: the modules' correctness until Codex reviews them; the client-IP header on the real host; Codex's output.
+

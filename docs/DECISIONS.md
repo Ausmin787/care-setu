@@ -1590,3 +1590,38 @@ Sasanka asked what was deferred, then for the Backend Master Blueprint to be rev
 in this change; editing the Blueprint (D-048: reviewers don't edit the author's work); removing the GitHub MCP entry (it holds his token).
 **Verified:** see the PR. **Not verified:** that the MCP servers connect in a fresh session (config checked, handshake tested by hand,
 not a restart); the `npm audit` advisories' real exposure.
+
+## D-057 · 2026-10-12 · Backend phase starts: Codex owns backend, security and money; Claude authored the Blueprint's Review-B modules for Codex to review (applies D-048; extends D-056; partially supersedes D-056's "Rejected: editing the Blueprint")
+Sasanka told Claude on 2026-10-12 that he is starting the backend phase in Codex, after asking Claude to make the Backend Master
+Blueprint ready first. Recorded here and in STATUS, as D-048 requires.
+- **Phase start:** from this entry Codex authors backend, security and money and payment logic (INVARIANTS 4..8, 28, 29), working
+  to the Blueprint; Claude keeps the front end, UI and UX (INVARIANT 34), owner-facing text and canonical-doc edits, and reviews
+  Codex's money and contract work. Nobody reviews their own change. Sasanka merges; a merge is a release (INVARIANTS 22, 23, 33).
+- **Blueprint changed, by Sasanka's direction:** `C:\Users\Sasanka\Backend-Master-Blueprint` (local git, no remote; commit
+  715455e) now has eight topic modules written by Claude (payments, data-model, database, auth, abuse-limits, privacy,
+  observability, testing), a rewritten Care Setu overlay (invariant numbers instead of line ranges; the review-A findings of D-056
+  fixed), CORE-011 (decision gates) and amended CORE-002/003, plus a review record. Entries: 58 DESIGN, 42 SOURCE-CHECKED,
+  15 UNVERIFIED (Hungry Anna overlay and one mistake-log rule, untouched); **none is VERIFIED**. Sources read on 2026-10-12 were
+  official docs and the Gazette texts of the DPDP Act, the DPDP Rules 2025 and the CERT-In Directions; 15 videos were leads only.
+- **Review path:** Claude wrote these entries, so Codex is their independent reviewer (D-048: "Codex reviews Claude's changes";
+  CORE-003 amended to say so). Only after that review, with Sasanka's approval of the edit, may an entry become VERIFIED.
+- **Stages, check-in after each (INVARIANT 3):** B0 Codex reads and independently reviews the modules, no code. B1 backend plan for
+  the "Foundation" slice and questions for Sasanka. B2 Foundation by branch and pull request: a Postgres service in CI, one
+  migration (quotes, payment attempts, gateway events, idempotency keys, outbox), the payment state machine, an idempotency
+  helper, `createQuery` writing its alert to the outbox, a sweeper, a dev-only fake provider, a webhook route skeleton that
+  returns 404 unless `paymentsOpen()`. The kickoff prompt is Sasanka's, not a repo file.
+- **Unchanged:** every dev-only flag stays off (INVARIANTS 28, 29, 31); no gateway, host, database driver, email provider, auth
+  library or retention period is chosen; the open questions stay open (INVARIANT 25). The Blueprint's decision gates list them:
+  gateway (Q1, Q5), refunds (Q8), whether a signature-verified Checkout response may mark paid (amends INVARIANT 7), host and
+  driver with interactive transactions, auth library and roles, the Netlify rate-limit tier, retention and grievance officer
+  (Q13), legal questions (Q14). The client-IP header is checked on a deployed site only with Sasanka's permission to deploy.
+**Why:** the backend work (pay wiring, Partner API, Admin) needs a different author and a second reviewer (D-048), and Codex
+works from a Blueprint that was read against primary sources, with its gaps closed, instead of a starter with none of the topic
+modules. Writing the gates down first keeps Codex from answering owner questions by default.
+**Rejected:** Claude continuing to author backend code (D-048); Codex coding before it has reviewed the modules; marking entries
+VERIFIED on their author's own source check; choosing a gateway, host or auth library now; one large slice without check-ins;
+keeping the Blueprint Codex-only (Sasanka asked for Claude to complete it, and D-056 had only deferred that for review reasons).
+**Verified:** D-048 and D-056 re-read; the Blueprint commit and its status counts (git log, grep of status fields); the Gazette
+PDFs, the CERT-In PDF and vendor docs named in the Blueprint's REC-005 were fetched and read. **Not verified:** that Codex's
+output meets the bar (it has not authored code here); that the modules are right until Codex reviews them; that any module
+works in code (nothing was executed); the client-IP header on the real host; Hungry Anna's overlay.

@@ -1625,3 +1625,36 @@ keeping the Blueprint Codex-only (Sasanka asked for Claude to complete it, and D
 PDFs, the CERT-In PDF and vendor docs named in the Blueprint's REC-005 were fetched and read. **Not verified:** that Codex's
 output meets the bar (it has not authored code here); that the modules are right until Codex reviews them; that any module
 works in code (nothing was executed); the client-IP header on the real host; Hungry Anna's overlay.
+
+## D-058 · 2026-10-12 · Codex's Stage B0 review triaged: 14 Blueprint findings accepted, 2 closed as verification gaps, 4 code findings carried into Stage B2 (applies D-048 and D-057; supersedes nothing)
+Codex completed B0 (a read-only, independent review of the Blueprint's Review-B modules) and reported 8 blocking or major Blueprint
+findings, 4 findings in existing code (3 major, 1 minor), 3 suspected items and an entry-by-entry disposition table. Claude checked each against the Blueprint text, the code and the
+primary source (INVARIANT 24), corrected the Blueprint and recorded the triage in its `reviews/B0-TRIAGE-2026-10-12.md` (CORE REC-006).
+- **Accepted and fixed in the Blueprint (14 of the 16 items in the triage record):** a fetched gateway result is evidence only and cannot mark paid, because INVARIANT 7 names
+  a signature-verified callback or webhook (PAY-005, PAY-006); `failed` is not final for every provider, since Razorpay documents a failed
+  payment becoming authorised within a 3-day polling window (new PAY-011); an idempotency record commits with its effect and stale
+  `in_progress` rows are recovered (DATA-006); a stored webhook event has a processing lifecycle with expiring claims so a crash cannot
+  leave an event acknowledged but unprocessed (PAY-002, PAY-004, DATA-004); outbox delivery is at-least-once, not exactly-once (DB-004,
+  TEST-006); OBS-003 no longer lets an email into logs; migrations never use schema push, even locally (DB-006); TEST-005 forges the
+  platform header; Server Action outcomes are typed, not HTTP statuses (AUTH-002); the unidentified-client bucket is one shared strict
+  bucket (LIM-001); the Netlify `rateLimit` reaching a Next route is an unproven precondition (LIM-003, now DESIGN); a retired signing
+  secret is kept for the provider's retry window (PAY-010); the December 2025 DPDP corrigendum G.S.R. 892(E) is added and the statutory
+  date is separated from the planning date (PRIV-001). **One was my own error:** Drizzle's `neon-http` driver throws on a transaction
+  ("No transactions support in neon-http driver"); the Blueprint had said it fails without an error.
+- **Closed as verification gaps, not defects (2):** Codex could not fetch the RBI citation (PAY-009) or confirm Cashfree's retry facts; Claude read both and they stand. Codex has not re-fetched them and will in B1.
+- **Round 2 (Codex's re-check of the fixes, 3 points, all accepted):** staff may investigate and request a resend but never mark paid without a verified event (a manual mark-paid is its own D-entry override); failed webhook events get a retry path with a `dead` end state that never marks paid (PAY-004, DATA-004); the B2 scope keeps the key cap, `Retry-After` and bounded-reader fixes and leaves the durable limiter to B3.
+- **Carried into B2 (existing code, nothing changed here):** body limits count characters after buffering in `app/api/v1/queries` and
+  `payments` (new API-CS-004: a byte-bounded reader); both 429s lack `Retry-After`; the in-memory limiter has no key cap; the alert has no
+  outbox (already planned).
+- **Not answered (INVARIANT 25):** whether an authenticated fetch or a verified Checkout signature may mark paid (amends INVARIANT 7);
+  the refund or honour policy for a late success (Q8); whether the platform rate limit reaches a Next route and how the platform header
+  behaves when forged (needs a deployed test and Sasanka's permission to deploy); the legal readings (Q14), now against the corrected
+  Fourth Schedule.
+**Why:** B0 exists so that the author's blind spots are found before code; the findings changed three rules that would otherwise have
+shipped into the money path.
+**Rejected:** promoting any entry to VERIFIED on a read-only review with no execution; accepting the findings unchecked; changing
+INVARIANT 7 to make the fetch rule fit; starting B1 before Sasanka's go-ahead.
+**Verified:** each finding against the Blueprint text and, where it rested on a source, the source (Razorpay late-authorisation page,
+Drizzle neon-http source, the corrigendum PDF, Cashfree retry page re-read, both route files). **Not verified:** the corrected
+modules (they still need Codex's confirmation of the fixes); Codex's claims that rested on pages Claude did not re-read; anything at
+runtime; the Netlify behaviour in the suspected items.

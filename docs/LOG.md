@@ -507,3 +507,9 @@ Template:
 - Backend phase recorded in STATUS and D-057; Codex starts with B0 (independent review of the modules), then B1 plan, then B2 Foundation.
 - Not verified: the modules' correctness until Codex reviews them; the client-IP header on the real host; Codex's output.
 
+## 2026-10-12 · Codex's B0 review triaged (D-058)
+- Codex reviewed the Blueprint's new modules read-only. Claude checked each finding against the text, the code and the source, then corrected the Blueprint (14 findings accepted, 2 rejected) and recorded the triage in its `reviews/B0-TRIAGE-2026-10-12.md`.
+- Biggest changes: a fetched gateway result is evidence only (INVARIANT 7), failed payments can still succeed late (Razorpay), webhook events get a recoverable lifecycle, idempotency records commit with their effect, outbox delivery is at-least-once. One of Claude's own claims about Drizzle's Neon HTTP driver was wrong and is fixed.
+- Code findings carried into B2: byte-bounded request bodies, `Retry-After` on both 429s, a key cap on the in-memory limiter.
+- Not verified: the corrected modules until Codex confirms; the Netlify rate-limit and header behaviour on a deployed site.
+

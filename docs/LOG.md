@@ -513,3 +513,8 @@ Template:
 - Code findings carried into B2: byte-bounded request bodies, `Retry-After` on both 429s, a key cap on the in-memory limiter.
 - Not verified: the corrected modules until Codex confirms; the Netlify rate-limit and header behaviour on a deployed site.
 
+## 2026-10-12 · Foundation decisions (D-059)
+- Codex's B1 plan and B2 review package were reviewed; Sasanka approved the Foundation scope, kept the quote reference at 8 characters (risk and controls recorded), decided that a verified late capture on an open, uncontested quote settles it, and approved four Blueprint entries as VERIFIED.
+- Required changes sent to Codex: one-settlement guard, validity judged at attempt creation, relaxed reference check, TRD reconciliation note, composite-FK proof, bigger overflow bucket. TRD reference line replaced.
+- Not verified: the migration and schema at runtime (not generated yet); Codex's next output.
+

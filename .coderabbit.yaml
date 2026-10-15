@@ -13,8 +13,12 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+    # Each entry is a regex; the default branch is always reviewed. feat/* and the sandbox base are
+    # where the Hermes loop's draft PRs land (D-060).
     base_branches:
       - main
+      - "^feat/.*$"
+      - "^agent-sandbox-base$"
   path_filters:
     # public/ holds only binary media (webp, png, mp4, webm); nothing there can be reviewed as text.
     # Everything else stays reviewable on purpose, lockfile and drizzle/meta included.

@@ -1697,3 +1697,56 @@ that have an independent source check; letting a fetched status or a Checkout si
 cited, and the Blueprint edits. **Not verified:** that the schema and migration run (the package was type-checked only); any behaviour at
 runtime; Codex's later output.
 
+
+## D-060 · 2026-10-15 · Hermes operates the build loop: agents push to `agent/*` and open draft PRs, Sasanka merges by sending `/merge N` (partially supersedes D-015 and INVARIANT 23: commit and push by agents; D-045 and INVARIANT 33: the mechanics of "Sasanka merges"; applies D-048 and D-057; supersedes nothing else)
+Sasanka found the manual relay (Claude writes a Codex prompt, he pastes it, pastes the output back for review) unsustainable, and approved this on
+2026-10-15. **Hermes Agent** (Nous Research; v0.22.1 installed on his laptop, Telegram gateway; later possibly an always-on VM) is the
+manager and operator layer. It is **not part of the Care Setu codebase** and authors nothing.
+- **Roles unchanged (D-048, D-057).** Codex authors backend, security and money; Claude authors frontend, copy and docs and reviews money and
+  contracts; the builder never reviews itself. Hermes only queues work, runs `codex exec` and `claude -p` as workers, routes the cross-review,
+  runs the green check and reports on Telegram. It does not replace Codex.
+- **Push rule.** Agent workers started by Hermes may commit and push **only to branches named `agent/*`** and open **draft** pull requests.
+  Every push is reported on Telegram. Never `main`, never any other branch, never a force push, never repo creation, never a deploy.
+  The commit secret gate and every other hook still apply. Interactive Claude Code sessions in Sasanka's own tree keep D-015: ask first.
+- **Merge rule.** Hermes merges a PR only on the slash command `/merge N` (a plugin; Hermes exec quick commands take no arguments and plain text goes to the model) from Sasanka's allowlisted Telegram ID, and only when CI and
+  CodeRabbit are green; otherwise it replies with what blocks. The merge stays Sasanka's decision, and a merge to `main` is still a release
+  (INVARIANT 22). The pull request route, CodeRabbit triage (fix loops capped at 3, findings reported as fixed or rejected) and the green
+  definition (INVARIANT 26) are unchanged.
+- **Enforced by GitHub, not by trust.** Classic branch protection on `main` (Sasanka, 2026-10-15): pull request required, required check green,
+  admins included, no force push or deletion; he is adding the CodeRabbit check and required conversation resolution. The agents' GitHub
+  credential is a dedicated fine-grained token (`hermes-care-setu`, this repo only: Contents, Pull requests, Issues) that **only a wrapper
+  script reads**; the Codex and Claude workers never see it and never use Sasanka's `gh` or Git Credential Manager login.
+  A GitHub ruleset, "agent-loop-bases (D-060)" (id 25160742), protects `feat/**` and `agent-sandbox-base` the same way: pull request required,
+  review threads resolved, required checks green and CodeRabbit, no force push, no bypass actors, deletion allowed. **Direct pushes to
+  `feat/backend-foundation` are blocked from now on**, so Unit 3 goes by `agent/b2-unit3` and a sub-PR into it. `.coderabbit.yaml` reviews PRs into
+  `main`, `^feat/.*$` and `^agent-sandbox-base$` (CodeRabbit does not document whether it reads the config from the base or the head branch, so the
+  config is landed on `main` first and the sandbox base and test branch are cut from it).
+  **The push permission is not in force until the protection additions and the token wiring are confirmed in place** (recorded in LOG).
+- **A skipped CodeRabbit check reads as green.** On draft PRs GitHub shows CodeRabbit as `pass` with "Review skipped: draft pull request"
+  (seen on #16). So `/merge N` refuses a draft PR and requires a completed CodeRabbit review on the current head commit, not just a passing check.
+- **Data.** Telegram messages and prompts carry no personal data and no secrets (INVARIANTS 9, 11, 13). Agent credentials live in Hermes's and the
+  CLIs' own stores, never in this repo. The repo is public.
+- **Pilot:** B2 Unit 3 (webhook route, worker, outbox), built by Codex through Hermes, reviewed by Claude, on an `agent/*` branch cut from
+  `feat/backend-foundation` (PR #16 stays the umbrella). A measured trial: it continues only if the green check and both reviews hold.
+**Why:** the relay costs Sasanka's time and tokens and the backend stopped at Unit 3 for it; Hermes keeps the human at the two points that matter
+(what gets built, and the merge) and removes the paste work between. Restricting writes to `agent/*` plus the ruleset gives a bounded blast radius
+on a public repo whose `main` deploys on merge.
+**Rejected:** Hermes replacing Codex or reviewing (D-048); agents merging on their own judgment; pushing to `feat/*` or `main`; one shared token
+with Sasanka's own rights; OpenRouter as Hermes's brain (free tier is rate-capped and its free endpoints can train on prompts); relaxing D-015 for
+interactive sessions too.
+**Verified:** the setup guide (`~/.claude/reference/oracle-hermes-setup-guide.md`, sections G, I, J) and the agent-setup memory were read; D-015,
+D-045 and D-048 were read before this entry. On 2026-10-15, against Hermes v0.22.1's installed docs: it has **no merge tool**; its exit code 75
+(rate-limited, requeue without a failure) and 78 apply only to Hermes-profile kanban workers, and Codex/Claude CLI lanes are "not yet a paved
+path" (the integration must map exit codes itself); approvals default to `smart` (a model judges risk), so a merge gate cannot rest on
+approvals. `claude -p` ran a read-only task (exit 0). `codex exec` reaches the model but hangs unless stdin is closed (`< /dev/null`), and its
+Windows sandbox failed here (`helper_sandbox_lock_failed ... SetNamedSecurityInfoW ... 5`) **while exiting 0**, so exit codes alone prove nothing:
+"done" is judged by the git diff and the green check. #16's red `green` check is the five unused webhook exports Unit 3 consumes
+(`npm run unused`; as the log of run 38239374005 shows). **Built and verified 2026-10-15 (step 2):** `agent-push`, `merge-gate`, an askpass helper and the `/merge` plugin (`docs/AGENT-LOOP.md`); 11 unit
+tests pass; a push `--dry-run` authenticates with the token and no credential helper (a broken askpass fails: control); `merge-gate --dry-run 16`
+refuses the draft with the right reasons; Sasanka re-ran protection (green + CodeRabbit, conversation resolution, admins) and repaired the Codex
+elevated sandbox; sandboxed `codex exec` (read-only and workspace-write) gets `UnauthorizedAccessException` opening the token file while an
+unsandboxed run as Sasanka opens it (nothing was read). Claude's deny rules block the Read tool and a direct `cat`, but **a shell glob walks around
+the Bash rule**, so the ACL and the Codex sandbox are the boundary, and Claude workers get a narrow tool list. **Not verified:** a real push and
+PR end to end; `/merge` inside Telegram (the plugin is validated but not yet enabled); a merge that succeeds; CodeRabbit's wording on a finished
+review (the gate only rejects a "skip"); a Claude worker lane under the narrow tool list; that the green check runs unattended.
+

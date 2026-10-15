@@ -40,9 +40,11 @@ even a "harmless" one (HA D-022).
 ## Git and permissions
 - **git commit, push, repo creation and any deploy require Sasanka's explicit permission** for
   that specific action (D-015). The settings `ask` list and the commit secret gate enforce this.
+  Exception (D-060): workers started by Hermes may commit and push to `agent/*` and open draft PRs, never `main`;
+  interactive sessions here still ask.
 - **Changes go by branch and pull request, not straight to `main`** (a merge is a release). CodeRabbit reviews every
   PR (`.coderabbit.yaml`): treat each comment as evidence, fix or answer it, cap fix loops at 3, and report the findings to
-  Sasanka (fixed, rejected and why), for any change however small. Sasanka merges (D-045).
+  Sasanka (fixed, rejected and why), for any change however small. Sasanka merges (D-045), by sending `/merge N` to Hermes (D-060).
   The repo is public: never commit secrets or owner-confidential documents.
 - Secrets live only in `.env.local` / environment stores. Never read, printed or committed (the
   settings deny `.env*` reads). Never handle Sasanka's API keys; give him the command to run himself.

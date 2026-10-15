@@ -16,7 +16,7 @@ Care Setu: a home-healthcare startup in Delhi NCR. Phase 1 = marketing + transac
 
 ## Binding rules (short form; the invariants are authoritative)
 - Contradicting a decision or invariant → object and propose an override. Don't silently deviate.
-- No commits, pushes or deploys without Sasanka's explicit permission.
+- No commits, pushes or deploys without Sasanka's explicit permission. Exception (D-060): a worker started by Hermes may commit and push to `agent/*` branches and open draft PRs; never `main`, never force-push.
 - Never read, print or commit secrets (`.env*`).
 - The client never sends a price; money is integer paise; payment status only from signature-verified gateway events.
 - zod at every API boundary; Drizzle/parameterized SQL only; migrations as files only.
@@ -67,7 +67,7 @@ The repo is public and every change reaches `main` by pull request. CI and CodeR
 reads this file and `CLAUDE.md`) review each PR. As the author: work on a branch; read every CodeRabbit comment as
 evidence, not truth; fix it or answer it with a reason; stop after 3 fix attempts and ask; report the findings to
 Sasanka. Codex reviews Claude's changes and, once the
-backend phase starts, authors backend, security and money work that Claude reviews (D-048). Only Sasanka merges, and a merge is a release. Never commit
+backend phase starts, authors backend, security and money work that Claude reviews (D-048). Only Sasanka merges (by sending `/merge N` to Hermes, D-060), and a merge is a release. Never commit
 secrets or owner-confidential documents.
 
 <!-- BEGIN:nextjs-agent-rules -->

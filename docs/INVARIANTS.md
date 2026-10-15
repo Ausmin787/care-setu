@@ -50,7 +50,7 @@ cited decision is the authority. Read it before acting on an edge case.
 
 21. **Vendor-neutral: Drizzle over plain Postgres, PGlite in dev.** No vendor-only feature as the sole access control. (D-002)
 22. **Hosting is the owners' choice; Vercel Hobby is never used.** The only deploy is the owners' public Netlify staging site, auto-publishing from `main`: `main` is the release branch, so a push is a release. Production host, database and email remain open (Q1). (D-002, D-042)
-23. **Git commit, push, repo creation and deploy need Sasanka's explicit permission, every time.** (D-015)
+23. **Git commit, push, repo creation and deploy need Sasanka's explicit permission, every time.** One exception: agent workers started by Hermes may commit and push to `agent/*` branches and open draft PRs, each push reported on Telegram; never `main`, never force-push, never repo creation or deploy. In force only once the `main` branch-protection additions and the wrapper-held, care-setu-scoped token are confirmed. (D-015, D-060)
 24. **Agent reports are evidence, not truth.** Spot-check load-bearing claims. Platform and legal claims need a current primary-source citation. (D-016)
 25. **Open owner questions are never answered by a default.** Build behind configuration and keep the question open. (D-016)
 26. **"Green" means lint + typecheck + tests + unused-code check + build + browser checks (Playwright with axe) all pass.** Lint and tsc don't parse CSS. (D-016, D-049)
@@ -64,7 +64,7 @@ cited decision is the authority. Read it before acting on an edge case.
 
 32. **Service detail pages (`/services/<slug>`) are public (`serviceDetailsLive: true`) since the owners approved C-088..C-095.** Turning the flag off again 404s them and drops them from the sitemap. (D-043, D-054)
 
-33. **Changes reach `main` by pull request, reviewed by CodeRabbit (`.coderabbit.yaml`) and CI; the merge is Sasanka's and needs his permission** (a merge is a release, INVARIANT 22). The repo is public: never commit secrets, owner-confidential documents or personal data. (D-045)
+33. **Changes reach `main` by pull request, reviewed by CodeRabbit (`.coderabbit.yaml`) and CI; the merge is Sasanka's and needs his permission, given by sending `/merge N` to Hermes, which merges only if CI and CodeRabbit are green** (a merge is a release, INVARIANT 22). The repo is public: never commit secrets, owner-confidential documents or personal data. (D-045, D-060)
 
 34. **UX ethics for a health service**: no fear- or shame-based copy; no manufactured urgency or scarcity (only real limits, from `content/` config); declining is one neutral tap and the call card is always an alternative to a form; an emergency note wherever someone may be in crisis. Money screens show every cost early and confirm instantly (amounts only from the quote, INVARIANT 4); consent stays unticked and versioned (INVARIANT 12). Every UI plan owes the UX blueprint's intent block and dark-pattern audit. (D-046)
 

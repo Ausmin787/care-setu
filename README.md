@@ -35,6 +35,7 @@ facts; empty until the owners answer, and empty hides the UI). Hero illustration
 | Legal/regulatory watch-list (not legal advice) | `docs/COMPLIANCE.md` |
 | Evidence for every factual claim | `docs/CLAIMS.md` |
 | How AI agents work here (loop, guardrails, evals, Jev, Codex) | `docs/AGENT-OPS.md` |
+| How Hermes drives pushes and merges (D-060) | `docs/AGENT-LOOP.md` |
 | Logo, colours, brand assets | `docs/BRAND.md`, `brand/` |
 | Visual design system (Stage 2) | `DESIGN.md` |
 | Owner's design reactions, round by round | `docs/OWNER-TASTE.md` |

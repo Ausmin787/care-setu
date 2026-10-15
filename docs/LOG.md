@@ -525,7 +525,7 @@ Template:
 
 
 ## 2026-10-15 · Hermes operates the build loop (D-060)
-- Sasanka approved: agent workers started by Hermes push only to `agent/*` and open draft PRs; he merges by typing `merge #N` to Hermes (CI and CodeRabbit green). D-048/D-057 roles unchanged. INVARIANTS 23 and 33, CLAUDE.md, AGENTS.md synced.
+- Sasanka approved: agent workers started by Hermes push only to `agent/*` and open draft PRs; he merges by sending `/merge N` to Hermes (CI and CodeRabbit green). D-048/D-057 roles unchanged. INVARIANTS 23 and 33, CLAUDE.md, AGENTS.md synced.
 - Pilot named: B2 Unit 3 on an `agent/*` branch cut from `feat/backend-foundation`. Nothing wired yet; wiring plan proposed first.
 - Not verified: the GitHub ruleset and the care-setu-scoped token (the push permission is not in force until both are confirmed); Hermes behaviour against its current docs; Telegram gateway.
 - 2026-10-15 checks (D-060): Hermes v0.22.1 docs read locally (no merge tool; exit 75/78 only for Hermes workers; CLI lanes unsupported; approvals `smart`). `claude -p` dry run OK; `codex exec` needs stdin closed and its Windows sandbox failed while exiting 0. #16 `green` red = five unused webhook exports (expected until Unit 3). CodeRabbit shows `pass` on a skipped draft PR. Not verified: token wiring, quick-command arguments, the Telegram loop.

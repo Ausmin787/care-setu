@@ -16,7 +16,7 @@ Care Setu: a home-healthcare startup in Delhi NCR. Phase 1 = marketing + transac
 
 ## Binding rules (short form; the invariants are authoritative)
 - Contradicting a decision or invariant → object and propose an override. Don't silently deviate.
-- No commits, pushes or deploys without Sasanka's explicit permission. Exception (D-060): a worker started by Hermes may commit and push to `agent/*` branches and open draft PRs; never `main`, never force-push.
+- No commits, pushes or deploys without Sasanka's explicit permission. Exception (D-060, in force since the `main` protection, the `feat/**` ruleset and the wrapper-held care-setu token were confirmed on 2026-10-15; it lapses if any is removed): a worker started by Hermes may commit and push to `agent/*` branches and open draft PRs; never `main`, never force-push.
 - Never read, print or commit secrets (`.env*`).
 - The client never sends a price; money is integer paise; payment status only from signature-verified gateway events.
 - zod at every API boundary; Drizzle/parameterized SQL only; migrations as files only.

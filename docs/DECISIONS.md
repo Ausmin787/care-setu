@@ -1723,7 +1723,7 @@ manager and operator layer. It is **not part of the Care Setu codebase** and aut
   config is landed on `main` first and the sandbox base and test branch are cut from it).
   **The push permission is not in force until the protection additions and the token wiring are confirmed in place** (recorded in LOG).
 - **A skipped CodeRabbit check reads as green.** On draft PRs GitHub shows CodeRabbit as `pass` with "Review skipped: draft pull request"
-  (seen on #16). So `merge #N` refuses a draft PR and requires a completed CodeRabbit review on the current head commit, not just a passing check.
+  (seen on #16). So `/merge N` refuses a draft PR and requires a completed CodeRabbit review on the current head commit, not just a passing check.
 - **Data.** Telegram messages and prompts carry no personal data and no secrets (INVARIANTS 9, 11, 13). Agent credentials live in Hermes's and the
   CLIs' own stores, never in this repo. The repo is public.
 - **Pilot:** B2 Unit 3 (webhook route, worker, outbox), built by Codex through Hermes, reviewed by Claude, on an `agent/*` branch cut from

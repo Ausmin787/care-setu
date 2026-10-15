@@ -40,7 +40,7 @@ even a "harmless" one (HA D-022).
 ## Git and permissions
 - **git commit, push, repo creation and any deploy require Sasanka's explicit permission** for
   that specific action (D-015). The settings `ask` list and the commit secret gate enforce this.
-  Exception (D-060): workers started by Hermes may commit and push to `agent/*` and open draft PRs, never `main`;
+  Exception (D-060, in force since the `main` protection, the `feat/**` ruleset and the wrapper-held care-setu token were confirmed on 2026-10-15; it lapses if any is removed): workers started by Hermes may commit and push to `agent/*` and open draft PRs, never `main`;
   interactive sessions here still ask.
 - **Changes go by branch and pull request, not straight to `main`** (a merge is a release). CodeRabbit reviews every
   PR (`.coderabbit.yaml`): treat each comment as evidence, fix or answer it, cap fix loops at 3, and report the findings to

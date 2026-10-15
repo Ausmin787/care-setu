@@ -7,10 +7,12 @@ gate that polices it.
 ## Who may do what
 | Actor | May | May not |
 |---|---|---|
-| Codex / Claude workers | edit and **commit locally** in a worktree on an `agent/*` branch; run the green check | push, open PRs, merge, read the token |
+| Codex / Claude workers | edit and **commit locally** in a worktree on an `agent/*` branch; run the green check | push directly, open PRs, merge, read the token |
 | `agent-push.mjs` (run by Hermes, no model) | push the current `agent/*` branch, open or find its **draft** PR, report on Telegram | push anything else, force-push, touch governance files |
 | `/merge N` (Hermes plugin `care-setu-merge`, no model) | merge PR N when `merge-gate.mjs` agrees | merge a draft, a failing or unreviewed PR |
 | Sasanka | mark a PR ready for review; type `/merge N`; push governance changes himself | |
+
+A worker "push" in D-060 means `agent-push.mjs` pushes the worker's committed `agent/*` branch on its behalf; the worker never holds or reads the token.
 
 ## Rules the scripts enforce
 - **Branch:** only the checked-out branch, only names matching `agent/<a-z0-9._-/>`, pushed to the fixed care-setu URL with a plain refspec (a non-fast-forward is refused, no `+`), git hooks and credential helpers off.

@@ -12,7 +12,8 @@
     "test:e2e": "playwright test",
     "unused": "knip",
     "green": "npm run lint && npm run typecheck && npm test && npm run unused && npm run build && npm run test:e2e",
-    "audit:devices": "node scripts/device-audit.mjs http://localhost:3000"
+    "audit:devices": "node scripts/device-audit.mjs http://localhost:3000",
+    "test:backend": "vitest run tests/backend"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",

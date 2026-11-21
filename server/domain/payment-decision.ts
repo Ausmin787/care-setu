@@ -4,7 +4,7 @@ export const PAYMENT_REVIEW_CODES = [
   "unknown_type", "unknown_order", "payment_identity_conflict", "amount_mismatch",
   "currency_mismatch", "attempt_created_after_validity", "quote_closed",
   "second_capture", "quote_settled_elsewhere", "competing_capture", "late_capture", "unknown_outcome", "unsupported_transition",
-  "hold_released_on_settlement",
+  "hold_released_on_settlement", "malformed_stored_event",
 ] as const;
 type ReviewCode = (typeof PAYMENT_REVIEW_CODES)[number];
 type AttemptStatus = "created" | "authorized" | "captured" | "failed" | "unknown";

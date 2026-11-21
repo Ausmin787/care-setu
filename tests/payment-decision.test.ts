@@ -64,6 +64,9 @@ for (const failedAttemptHoldsQuote of [false, true]) {
   }
 }
 describe("payment decision boundaries", () => {
+  it("review codes include malformed stored events", () => {
+    expect(PAYMENT_REVIEW_CODES).toContain("malformed_stored_event");
+  });
   it("delayed webhook after validity still settles an in-time attempt", () => {
     const input = fixture();
     expect(Date.parse(input.event.occurredAt)).toBeGreaterThan(input.quote.validUntil);

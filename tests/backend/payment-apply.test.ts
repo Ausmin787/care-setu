@@ -1,6 +1,6 @@
 import { randomUUID, randomBytes } from "node:crypto";
 import path from "node:path";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { PGlite } from "@electric-sql/pglite";
 import { Pool } from "pg";
 import { eq, sql } from "drizzle-orm";
@@ -97,6 +97,52 @@ for (const driver of ["pglite", "postgres"] as const) {
       }
     }, 30000);
     afterAll(async () => { if (close) await close(); });
+
+    async function seedMalformed(kind: "provider" | "timestamp") {
+      const item = await seed(db, facts({ attempt: { status: "failed", holdsQuote: false }, otherHoldingAttemptIds: ["attempt_b"] }));
+      if (kind === "provider") {
+        await db.update(paymentAttempts).set({ provider: "razorpay" }).where(eq(paymentAttempts.id, item.attemptId));
+        await db.update(gatewayEvents).set({ provider: "razorpay" }).where(eq(gatewayEvents.id, item.eventId));
+      } else {
+        await db.update(gatewayEvents).set({ occurredAt: sql`'10000-01-01 00:00:00+00'::timestamptz` }).where(eq(gatewayEvents.id, item.eventId));
+      }
+      return item;
+    }
+
+    it.each(["provider", "timestamp"] as const)("malformed stored %s ends dead without linking an unvalidated event or changing money", async kind => {
+      const item = await seedMalformed(kind);
+      const before = await snapshot(db, item);
+      const logs = (["log", "info", "warn", "error", "debug"] as const).map(method => vi.spyOn(console, method).mockImplementation(() => {}));
+      try {
+        await expect(applyPaymentEvent(db, item.eventId, item.token, item.input.policy)).resolves.toBe("dead");
+        const result = await snapshot(db, item);
+        expect(result.quote).toEqual(before.quote);
+        expect(result.attempts).toEqual(before.attempts);
+        expect(result.event).toEqual([{ ...before.event[0], status: "dead",
+          reviewCode: "malformed_stored_event", lastErrorCode: "malformed_stored_event",
+          processedAt: null, paymentAttemptId: null, claimToken: null, claimExpiresAt: null,
+          updatedAt: expect.any(Date) }]);
+        await expect(applyPaymentEvent(db, item.eventId, item.token, item.input.policy)).resolves.toBe("claim_lost");
+        expect(await snapshot(db, item)).toEqual(result);
+        for (const log of logs) expect(log).not.toHaveBeenCalled();
+      } finally {
+        for (const log of logs) log.mockRestore();
+      }
+    });
+
+    it.each(["expired", "wrong_token"] as const)("malformed stored provider with %s claim writes nothing", async condition => {
+      const item = await seedMalformed("provider");
+      if (condition === "expired") await db.update(gatewayEvents).set({ claimExpiresAt: sql`now() - interval '1 second'` }).where(eq(gatewayEvents.id, item.eventId));
+      const before = await snapshot(db, item);
+      const logs = (["log", "info", "warn", "error", "debug"] as const).map(method => vi.spyOn(console, method).mockImplementation(() => {}));
+      try {
+        await expect(applyPaymentEvent(db, item.eventId, condition === "wrong_token" ? randomUUID() : item.token, item.input.policy)).resolves.toBe("claim_lost");
+        expect(await snapshot(db, item)).toEqual(before);
+        for (const log of logs) expect(log).not.toHaveBeenCalled();
+      } finally {
+        for (const log of logs) log.mockRestore();
+      }
+    });
 
     for (const failedAttemptHoldsQuote of [false, true]) {
       for (const lateCaptureOnOpenQuote of ["review", "settle"] as const) {

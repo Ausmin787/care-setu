@@ -55,12 +55,18 @@ export async function applyPaymentEvent(
       const [failure] = await tx.select({ id: gatewayEvents.id }).from(gatewayEvents).where(and(
         eq(gatewayEvents.paymentAttemptId, attempt.id), eq(gatewayEvents.status, "processed"),
         eq(gatewayEvents.eventType, "payment.failed"))).limit(1);
-      const normalized = NormalizedGatewayEvent.parse({
-        provider: event.provider, eventId: event.providerEventId, type: event.eventType,
-        orderId: event.gatewayOrderId, paymentId: event.gatewayPaymentId,
-        amountPaise: fromDbAmount(event.amountPaise), currency: event.currency,
-        occurredAt: event.occurredAt.toISOString(), rawBodySha256: event.rawBodySha256,
-      });
+      let normalized: NormalizedGatewayEvent;
+      try {
+        normalized = NormalizedGatewayEvent.parse({
+          provider: event.provider, eventId: event.providerEventId, type: event.eventType,
+          orderId: event.gatewayOrderId, paymentId: event.gatewayPaymentId,
+          amountPaise: fromDbAmount(event.amountPaise), currency: event.currency,
+          occurredAt: event.occurredAt.toISOString(), rawBodySha256: event.rawBodySha256,
+        });
+      } catch {
+        // An unvalidated event must not be linked to an attempt.
+        return finish("dead", null, "malformed_stored_event");
+      }
       const decision = decidePayment({
         attempt: { status: attempt.status as PaymentDecisionInput["attempt"]["status"],
           holdsQuote: attempt.holdsQuote, settledQuote: attempt.settledQuote,

@@ -209,6 +209,27 @@ describe("readBoundedBytes", () => {
     });
   });
 
+  it.each(["reused", "distinct"] as const)("preserves bytes from %s chunk buffers", async (kind) => {
+    // Naive text() exposes no raw bytes; retaining reused chunks would return [66, 66].
+    const buffer = new Uint8Array(1);
+    let index = 0;
+    const body = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        if (index === 2) {
+          controller.close();
+          return;
+        }
+        const chunk = kind === "reused" ? buffer : new Uint8Array(1);
+        chunk[0] = 65 + index++;
+        controller.enqueue(chunk);
+      },
+    }, { highWaterMark: 0 });
+
+    await expect(readBoundedBytes({ headers: new Headers(), body }, { ...limits, maxBytes: 2 })).resolves.toEqual({
+      ok: true, bytes: Uint8Array.of(65, 66),
+    });
+  });
+
   it.each(["1001.0", "1001, 0", "+1001", "-1", "1e5", "Infinity", ""])(
     "ignores malformed Content-Length %j and enforces the counted cap", async (header) => {
       await expect(readBoundedBytes(source([new Uint8Array(1)], header), limits)).resolves.toEqual({

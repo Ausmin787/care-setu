@@ -55,7 +55,8 @@ export async function readBoundedBytes(
         void reader.cancel().catch(() => {});
         return { ok: false, reason: "too_large" };
       }
-      if (result.value.byteLength > 0) chunks.push(result.value);
+      // Own the bytes before the source can reuse its buffer on the next read.
+      if (result.value.byteLength > 0) chunks.push(new Uint8Array(result.value));
     }
   } finally {
     clearTimeout(timer);
